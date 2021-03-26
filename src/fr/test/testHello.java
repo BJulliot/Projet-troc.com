@@ -14,6 +14,7 @@ public class testHello {
 	public static void main(String[] args) {
 		System.out.println("Hello word");
 		System.out.println("Ceci est un test");
+		System.out.println("test JBbbbb");
 	}
 	
 }
