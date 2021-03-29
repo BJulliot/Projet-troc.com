@@ -35,7 +35,7 @@ public class NouvelUtilisateurServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Récupération des données saisies
+		// Récupération des données saisies dans le formulaire
 		request.setCharacterEncoding("UTF-8");
 		Utilisateur nouvelUtilisateur = new Utilisateur();
 		nouvelUtilisateur.setPseudo(request.getParameter("pseudo"));

@@ -4,13 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 import fr.eni.projet.troc.bo.Utilisateur;
+import fr.eni.projet.troc.exception.BusinessException;
 
 public class UtilisateurImpl implements UtilisateurDAO {
 	private static final String INSERT = "INSERT INTO utilisateurs (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur)"
 			+ "  VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 
 	@Override
-	public void create(Utilisateur utilisateur) throws Exception {
+	public void create(Utilisateur utilisateur) throws BusinessException {
 
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement requete = cnx.prepareStatement(INSERT);
