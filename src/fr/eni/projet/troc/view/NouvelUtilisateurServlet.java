@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.projet.troc.bll.UtilisateursManager;
 import fr.eni.projet.troc.bo.Utilisateur;
+import fr.eni.projet.troc.exception.BusinessException;
+import fr.eni.projet.troc.exception.Errors;
 
 /**
  * Servlet implementation class NouvelleListeServlet
@@ -53,12 +55,24 @@ public class NouvelUtilisateurServlet extends HttpServlet {
 		UtilisateursManager um = UtilisateursManager.getInstance();
 
 		try {
+			if (condition) {
+
+			}
 			um.create(nouvelUtilisateur);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (BusinessException be) {
+			be.printStackTrace();
+			request.setAttribute("errors", be.getErrors());
 		}
-		request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/nouvelUtilisateur.jsp").forward(request, response);
+	}
+
+	private boolean validerMotDePasseIdentique(String premierMotDePasse, String deuxiemeMotDePasse,
+			BusinessException be) {
+		if (premierMotDePasse != deuxiemeMotDePasse) {
+			be.addError(Errors.REGLE_UTILISATEUR_PWD_DIFFERENT_ERREUR);
+			return false;
+		}
+		return true;
 	}
 
 }

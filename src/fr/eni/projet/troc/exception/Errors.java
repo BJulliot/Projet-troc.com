@@ -24,6 +24,7 @@ public class Errors {
 	 * Echec le mail ne respecte pas les règles définies
 	 */
 	public static final String REGLE_UTILISATEUR_EMAIL_ERREUR = "L'adresse email est incorrecte et doit être sous la forme : exemple@nomdedomaine.com";
+
 	/**
 	 * Echec le mot de passe de l'utilisateur ne respecte pas les règles définies
 	 */
@@ -43,6 +44,11 @@ public class Errors {
 	 * Echec la ville de l'utilisateur ne respecte pas les règles définies
 	 */
 	public static final String REGLE_UTILISATEUR_VILLE_ERREUR = "La ville de l'utilisateur est obligatoire et ne doit pas dépasser 50 caractères";
+
+	/**
+	 * Echec le mot de passe de l'utilisateur ne respecte pas les règles définies
+	 */
+	public static final String REGLE_UTILISATEUR_PWD_DIFFERENT_ERREUR = "Les deux mots de passe doivent être identiques";
 
 // ANCIEN :
 // EXCEPTION D'ANNE-LISE :
