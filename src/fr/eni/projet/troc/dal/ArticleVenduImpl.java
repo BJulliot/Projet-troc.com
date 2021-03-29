@@ -43,8 +43,8 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement requete = cnx.prepareStatement(
 					"SELECT * FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie WHERE utilisateurs.no_utilisateur = ? AND categories.no_categorie = ?");
-			requete.setInt(1, idUtilisateur);
-			requete.setInt(2, idCategorie);
+			requete.setInt(1,  idUtilisateur);
+			requete.setInt(2,  idCategorie);
 			ResultSet rs = requete.executeQuery();
 
 			while (rs.next()) {

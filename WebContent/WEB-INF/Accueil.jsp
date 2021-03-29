@@ -18,7 +18,7 @@
 					${articles.nom} ${articles.description}
 					<p>Prix : ${articles.prixInitial} Points</p>
 					<p>Fin de l'enchère : ${articles.dateFinEnchere} </p>
-					<p>Vendeur : ${articles.noUtilisateur} </p>
+					<p>Vendeur : ${articles.noUtilisateur}</p>
 				</c:forEach>
 			</div>
 		</div>
