@@ -32,26 +32,27 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 		articleVendu.setDateFinEnchere(rs.getDate("date_fin_encheres").toLocalDate());
 		articleVendu.setPrixInitial(rs.getInt("prix_initial"));
 		articleVendu.setPrixVente(rs.getInt("prix_vente"));
-		articleVendu.setNoUtilisateur((Utilisateur) rs.getObject("no_utilisateur"));
-		articleVendu.setNoCategorie((Categorie) rs.getObject("no_categorie"));
+		articleVendu.setNoUtilisateur(rs.getInt("no_utilisateur"));
+		articleVendu.setNoCategorie(rs.getInt("no_categorie"));
 		return articleVendu;
 	}
 
 	@Override
 	public List<ArticleVendu> selectAll() throws Exception {
-		 List<ArticleVendu> articleVendus = new ArrayList<ArticleVendu>();
-	        try (Connection cnx = ConnectionProvider.getConnection()) {
-	            PreparedStatement requete = cnx.prepareStatement("SELECT * FROM articles_vendus");
-	            ResultSet rs = requete.executeQuery();
+		List<ArticleVendu> articleVendus = new ArrayList<ArticleVendu>();
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement requete = cnx.prepareStatement(
+					"SELECT * FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie");
+			ResultSet rs = requete.executeQuery();
 
-	            while (rs.next()) {
-	                articleVendus.add(itemBuilder(rs));
-	            }
-	        } catch (Exception e) {
+			while (rs.next()) {
+				articleVendus.add(itemBuilder(rs));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 
-	            throw new Exception();
-	        }
-	        return articleVendus;
+		}
+		return articleVendus;
 	}
 
 }

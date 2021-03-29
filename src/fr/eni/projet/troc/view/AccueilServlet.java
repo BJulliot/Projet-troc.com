@@ -23,9 +23,7 @@ public class AccueilServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String servletPath = request.getServletPath();
-		System.out.println("servletPath : " + servletPath);
 		try {
-			
 			List<ArticleVendu> articles = ArticlesVendusManager.getInstance().getAllArticleVendus();
 			request.setAttribute("articles", articles);
 		} catch (Exception e) {

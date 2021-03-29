@@ -20,12 +20,12 @@ public class ArticleVendu {
 	private LocalDate dateFinEnchere;
 	private int prixInitial;
 	private int prixVente;
-	private Utilisateur noUtilisateur;
-	private Categorie noCategorie;
+	private int noUtilisateur;
+	private int noCategorie;
 
 	public ArticleVendu(int noArticle, String nom, String description, LocalDate dateDebutEnchere,
-			LocalDate dateFinEnchere, int prixInitial, int prixVente, Utilisateur noUtilisateur,
-			Categorie noCategorie) {
+			LocalDate dateFinEnchere, int prixInitial, int prixVente, int noUtilisateur,
+			int noCategorie) {
 		super();
 		this.noArticle = noArticle;
 		this.nom = nom;
@@ -39,7 +39,7 @@ public class ArticleVendu {
 	}
 
 	public ArticleVendu(int noArticle, String nom, String description, LocalDate dateDebutEnchere,
-			LocalDate dateFinEnchere, Utilisateur noUtilisateur, Categorie noCategorie) {
+			LocalDate dateFinEnchere, int noUtilisateur, int noCategorie) {
 		super();
 		this.noArticle = noArticle;
 		this.nom = nom;
@@ -110,19 +110,19 @@ public class ArticleVendu {
 		this.prixVente = prixVente;
 	}
 
-	public Utilisateur getNoUtilisateur() {
+	public int getNoUtilisateur() {
 		return noUtilisateur;
 	}
 
-	public void setNoUtilisateur(Utilisateur noUtilisateur) {
+	public void setNoUtilisateur(int noUtilisateur) {
 		this.noUtilisateur = noUtilisateur;
 	}
 
-	public Categorie getNoCategorie() {
+	public int getNoCategorie() {
 		return noCategorie;
 	}
 
-	public void setNoCategorie(Categorie noCategorie) {
+	public void setNoCategorie(int noCategorie) {
 		this.noCategorie = noCategorie;
 	}
 
@@ -142,8 +142,8 @@ public class ArticleVendu {
 		result = prime * result + ((dateFinEnchere == null) ? 0 : dateFinEnchere.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + noArticle;
-		result = prime * result + ((noCategorie == null) ? 0 : noCategorie.hashCode());
-		result = prime * result + ((noUtilisateur == null) ? 0 : noUtilisateur.hashCode());
+		result = prime * result + noCategorie;
+		result = prime * result + noUtilisateur;
 		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
 		result = prime * result + prixInitial;
 		result = prime * result + prixVente;
@@ -176,15 +176,9 @@ public class ArticleVendu {
 			return false;
 		if (noArticle != other.noArticle)
 			return false;
-		if (noCategorie == null) {
-			if (other.noCategorie != null)
-				return false;
-		} else if (!noCategorie.equals(other.noCategorie))
+		if (noCategorie != other.noCategorie)
 			return false;
-		if (noUtilisateur == null) {
-			if (other.noUtilisateur != null)
-				return false;
-		} else if (!noUtilisateur.equals(other.noUtilisateur))
+		if (noUtilisateur != other.noUtilisateur)
 			return false;
 		if (nom == null) {
 			if (other.nom != null)
@@ -197,5 +191,7 @@ public class ArticleVendu {
 			return false;
 		return true;
 	}
+
+	
 
 }
