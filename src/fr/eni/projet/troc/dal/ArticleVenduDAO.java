@@ -6,5 +6,5 @@ import fr.eni.projet.troc.bo.ArticleVendu;
 
 public interface ArticleVenduDAO {
 
-		public List<ArticleVendu> selectAll() throws Exception;
+		public List<ArticleVendu> selectAll(int idUtilisateur, int idCategorie) throws Exception;
 }
