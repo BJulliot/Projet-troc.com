@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import fr.eni.projet.troc.bll.UtilisateursManager;
 import fr.eni.projet.troc.bo.Utilisateur;
 import fr.eni.projet.troc.exception.BusinessException;
-import fr.eni.projet.troc.exception.Errors;
 
 /**
  * Servlet implementation class NouvelleListeServlet
@@ -53,26 +52,13 @@ public class NouvelUtilisateurServlet extends HttpServlet {
 		nouvelUtilisateur.setAdministrateur(false);
 
 		UtilisateursManager um = UtilisateursManager.getInstance();
-
+		String confirmationMotDePasse = request.getParameter("confirmationMotDePasse");
 		try {
-			if (condition) {
-
-			}
-			um.create(nouvelUtilisateur);
+			um.create(nouvelUtilisateur, confirmationMotDePasse);
 		} catch (BusinessException be) {
 			be.printStackTrace();
 			request.setAttribute("errors", be.getErrors());
 		}
 		request.getRequestDispatcher("/WEB-INF/nouvelUtilisateur.jsp").forward(request, response);
 	}
-
-	private boolean validerMotDePasseIdentique(String premierMotDePasse, String deuxiemeMotDePasse,
-			BusinessException be) {
-		if (premierMotDePasse != deuxiemeMotDePasse) {
-			be.addError(Errors.REGLE_UTILISATEUR_PWD_DIFFERENT_ERREUR);
-			return false;
-		}
-		return true;
-	}
-
 }

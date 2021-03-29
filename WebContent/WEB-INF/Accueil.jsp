@@ -14,12 +14,12 @@
 		<h1 class="my-4">Liste des enchères</h1>
 		<div class="col-lg-4 col-md-4 col-sm-6 portfolio-item">
 			<div class="card h-100">
-				<c:forEach var="articles" items="${articles}">
-					${articles.nom} ${articles.description}
-					<p>Prix : ${articles.prixInitial} Points</p>
-					<p>Fin de l'enchère : ${articles.dateFinEnchere} </p>
-					<p>Vendeur : ${articles.noUtilisateur} </p>
-				</c:forEach>
+                <c:forEach var="articles" items="${articles}">
+                    ${articles.nom} ${articles.description}
+                    <p>Prix : ${articles.prixInitial} Points</p>
+                    <p>Fin de l'enchère : ${articles.dateFinEnchere} </p>
+                    <p>Vendeur : ${articles.noUtilisateur} </p>
+                </c:forEach>
 			</div>
 		</div>
 	</div>

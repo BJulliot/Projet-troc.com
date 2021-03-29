@@ -32,7 +32,7 @@ public class UtilisateursManager {
 		return instance;
 	}
 
-	public void create(Utilisateur utilisateur) throws BusinessException {
+	public void create(Utilisateur utilisateur, String confirmationMotDePasse) throws BusinessException {
 		BusinessException be = new BusinessException();
 		validerPseudo(utilisateur, be);
 		validerNom(utilisateur, be);
@@ -43,6 +43,7 @@ public class UtilisateursManager {
 		validerCodePostal(utilisateur, be);
 		validerVille(utilisateur, be);
 		validerMotDePasse(utilisateur, be);
+		validerMotDePasseIdentique(utilisateur, confirmationMotDePasse, be);
 
 		if (!be.hasErreurs()) {
 			utilisateurDAO.create(utilisateur);
@@ -58,8 +59,7 @@ public class UtilisateursManager {
 			return false;
 		}
 		if (!telephone.matches(Constants.PATTERN_TEL)) {
-			be.addError(
-					"Mot de passe doit contenir entre 8 et 12 caractères (1 chiffre, 1 majuscule, 1 caractère spécial)");
+			be.addError(Errors.REGLE_UTILISATEUR_TELEPHONE_ERREUR);
 			return false;
 		}
 		return true;
@@ -73,6 +73,16 @@ public class UtilisateursManager {
 		}
 		if (!pwd.matches(Constants.PATTERN_PWD)) {
 			be.addError(Errors.REGLE_UTILISATEUR_PWD_ERREUR);
+			return false;
+		}
+		return true;
+	}
+
+	private boolean validerMotDePasseIdentique(Utilisateur utilisateur, String confirmationMotDePasse,
+			BusinessException be) {
+		String pwd = utilisateur.getMotDePasses();
+		if (pwd != confirmationMotDePasse) {
+			be.addError(Errors.REGLE_UTILISATEUR_PWD_DIFFERENT_ERREUR);
 			return false;
 		}
 		return true;
