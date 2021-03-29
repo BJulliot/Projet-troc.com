@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.projet.troc.bll.UtilisateursManager;
+import fr.eni.projet.troc.bo.Utilisateur;
+
 /**
  * Servlet implementation class NouvelleListeServlet
  */
@@ -32,8 +35,30 @@ public class NouvelUtilisateurServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		// Récupération des données saisies
+		request.setCharacterEncoding("UTF-8");
+		Utilisateur nouvelUtilisateur = new Utilisateur();
+		nouvelUtilisateur.setPseudo(request.getParameter("pseudo"));
+		nouvelUtilisateur.setNom(request.getParameter("nom"));
+		nouvelUtilisateur.setPrenom(request.getParameter("prenom"));
+		nouvelUtilisateur.setEmail(request.getParameter("email"));
+		nouvelUtilisateur.setTelephone(request.getParameter("telephone"));
+		nouvelUtilisateur.setRue(request.getParameter("rue"));
+		nouvelUtilisateur.setCodePostal(request.getParameter("codePostal"));
+		nouvelUtilisateur.setVille(request.getParameter("ville"));
+		nouvelUtilisateur.setMotDePasses(request.getParameter("motDePasse"));
+		nouvelUtilisateur.setCredit(100);
+		nouvelUtilisateur.setAdministrateur(false);
 
-		request.getRequestDispatcher("/WEB-INF/index.jsp").forward(request, response);
+		UtilisateursManager um = UtilisateursManager.getInstance();
+
+		try {
+			um.create(nouvelUtilisateur);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
 	}
 
 }
