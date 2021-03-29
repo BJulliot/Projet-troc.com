@@ -11,46 +11,46 @@ package fr.eni.projet.troc.bo;
  * @date 29 mars 2021 - 11:36:47
  */
 public class Utilisateur {
-	private int no_utilisateur;
+	private int noUtilisateur;
 	private String pseudo;
 	private String nom;
 	private String prenom;
 	private String email;
 	private String telephone;
 	private String rue;
-	private String code_postal;
+	private String codePostal;
 	private String ville;
-	private String mot_de_passe;
+	private String motDePasses;
 	private int credit;
-	private boolean administrateur;
+	private boolean administrateur; 
+	
 
-	public Utilisateur() {
-		super();
-	}
-
-	public Utilisateur(int no_utilisateur, String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, String code_postal, String ville, String mot_de_passe, int credit, boolean administrateur) {
-		super();
-		this.no_utilisateur = no_utilisateur;
+	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
+			String rue, String codePostal, String ville, String motDePasses, int credit, boolean administrateur) {
+		this.noUtilisateur = noUtilisateur;
 		this.pseudo = pseudo;
 		this.nom = nom;
 		this.prenom = prenom;
 		this.email = email;
 		this.telephone = telephone;
 		this.rue = rue;
-		this.code_postal = code_postal;
+		this.codePostal = codePostal;
 		this.ville = ville;
-		this.mot_de_passe = mot_de_passe;
+		this.motDePasses = motDePasses;
 		this.credit = credit;
 		this.administrateur = administrateur;
 	}
 
-	public int getNo_utilisateur() {
-		return no_utilisateur;
+	public Utilisateur() {
+
 	}
 
-	public void setNo_utilisateur(int no_utilisateur) {
-		this.no_utilisateur = no_utilisateur;
+	public int getNoUtilisateur() {
+		return noUtilisateur;
+	}
+
+	public void setNoUtilisateur(int noUtilisateur) {
+		this.noUtilisateur = noUtilisateur;
 	}
 
 	public String getPseudo() {
@@ -101,12 +101,12 @@ public class Utilisateur {
 		this.rue = rue;
 	}
 
-	public String getCode_postal() {
-		return code_postal;
+	public String getCodePostal() {
+		return codePostal;
 	}
 
-	public void setCode_postal(String code_postal) {
-		this.code_postal = code_postal;
+	public void setCodePostal(String codePostal) {
+		this.codePostal = codePostal;
 	}
 
 	public String getVille() {
@@ -117,12 +117,12 @@ public class Utilisateur {
 		this.ville = ville;
 	}
 
-	public String getMot_de_passe() {
-		return mot_de_passe;
+	public String getMotDePasses() {
+		return motDePasses;
 	}
 
-	public void setMot_de_passe(String mot_de_passe) {
-		this.mot_de_passe = mot_de_passe;
+	public void setMotDePasses(String motDePasses) {
+		this.motDePasses = motDePasses;
 	}
 
 	public int getCredit() {
@@ -133,7 +133,7 @@ public class Utilisateur {
 		this.credit = credit;
 	}
 
-	public boolean getAdministrateur() {
+	public boolean isAdministrateur() {
 		return administrateur;
 	}
 
@@ -141,12 +141,103 @@ public class Utilisateur {
 		this.administrateur = administrateur;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public String toString() {
-		return "Utilisateur [no_utilisateur=" + no_utilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
-				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", code_postal="
-				+ code_postal + ", ville=" + ville + ", mot_de_passe=" + mot_de_passe + ", credit=" + credit
+		return "Utilisateur [noUtilisateur=" + noUtilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
+				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal="
+				+ codePostal + ", ville=" + ville + ", motDePasses=" + motDePasses + ", credit=" + credit
 				+ ", administrateur=" + administrateur + "]";
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + (administrateur ? 1231 : 1237);
+		result = prime * result + ((codePostal == null) ? 0 : codePostal.hashCode());
+		result = prime * result + credit;
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
+		result = prime * result + ((motDePasses == null) ? 0 : motDePasses.hashCode());
+		result = prime * result + noUtilisateur;
+		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
+		result = prime * result + ((prenom == null) ? 0 : prenom.hashCode());
+		result = prime * result + ((pseudo == null) ? 0 : pseudo.hashCode());
+		result = prime * result + ((rue == null) ? 0 : rue.hashCode());
+		result = prime * result + ((telephone == null) ? 0 : telephone.hashCode());
+		result = prime * result + ((ville == null) ? 0 : ville.hashCode());
+		return result;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Utilisateur other = (Utilisateur) obj;
+		if (administrateur != other.administrateur)
+			return false;
+		if (codePostal == null) {
+			if (other.codePostal != null)
+				return false;
+		} else if (!codePostal.equals(other.codePostal))
+			return false;
+		if (credit != other.credit)
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
+			return false;
+		if (motDePasses == null) {
+			if (other.motDePasses != null)
+				return false;
+		} else if (!motDePasses.equals(other.motDePasses))
+			return false;
+		if (noUtilisateur != other.noUtilisateur)
+			return false;
+		if (nom == null) {
+			if (other.nom != null)
+				return false;
+		} else if (!nom.equals(other.nom))
+			return false;
+		if (prenom == null) {
+			if (other.prenom != null)
+				return false;
+		} else if (!prenom.equals(other.prenom))
+			return false;
+		if (pseudo == null) {
+			if (other.pseudo != null)
+				return false;
+		} else if (!pseudo.equals(other.pseudo))
+			return false;
+		if (rue == null) {
+			if (other.rue != null)
+				return false;
+		} else if (!rue.equals(other.rue))
+			return false;
+		if (telephone == null) {
+			if (other.telephone != null)
+				return false;
+		} else if (!telephone.equals(other.telephone))
+			return false;
+		if (ville == null) {
+			if (other.ville != null)
+				return false;
+		} else if (!ville.equals(other.ville))
+			return false;
+		return true;
 	}
 
 }
