@@ -3,8 +3,11 @@
  */
 package fr.eni.projet.troc.dal;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.projet.troc.bo.ArticleVendu;
@@ -36,8 +39,19 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 
 	@Override
 	public List<ArticleVendu> selectAll() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		 List<ArticleVendu> articleVendus = new ArrayList<ArticleVendu>();
+	        try (Connection cnx = ConnectionProvider.getConnection()) {
+	            PreparedStatement requete = cnx.prepareStatement("SELECT * FROM articles_vendus");
+	            ResultSet rs = requete.executeQuery();
+
+	            while (rs.next()) {
+	                articleVendus.add(itemBuilder(rs));
+	            }
+	        } catch (Exception e) {
+
+	            throw new Exception();
+	        }
+	        return articleVendus;
 	}
 
 }
