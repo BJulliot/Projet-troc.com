@@ -78,7 +78,7 @@ public class UtilisateursManager {
 	}
 
 	private boolean validerMotDePasseIdentique(String motDePasse, String confirmationMotDePasse, BusinessException be) {
-		if (motDePasse != confirmationMotDePasse) {
+		if (!motDePasse.equals(confirmationMotDePasse)) {
 			be.addError(Errors.REGLE_UTILISATEUR_PWD_DIFFERENT_ERREUR);
 			return false;
 		}

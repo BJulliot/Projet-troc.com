@@ -33,7 +33,7 @@
 				</div>
 			</c:if>
         <div class="col-md-6 mx-auto">
-            <form action="./PoolConnectionServlet" method="post">
+            <form action="./ConnectionServlet" method="post">
                 <div class="form-group row">
                     <div class="col-sm-12">
                         <label for="pseudo">Pseudo</label>

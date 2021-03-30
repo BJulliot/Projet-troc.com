@@ -1,8 +1,6 @@
 package fr.eni.projet.troc.view;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,14 +11,13 @@ import javax.servlet.http.HttpSession;
 
 import fr.eni.projet.troc.bll.UtilisateursManager;
 import fr.eni.projet.troc.bo.Utilisateur;
-import fr.eni.projet.troc.dal.ConnectionProvider;
 import fr.eni.projet.troc.exception.BusinessException;
 
 /**
  * Servlet implementation class PoolConnectionServlet
  */
-@WebServlet("/PoolConnectionServlet")
-public class PoolConnectionServlet extends HttpServlet {
+@WebServlet("/ConnectionServlet")
+public class ConnectionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
@@ -34,7 +31,8 @@ public class PoolConnectionServlet extends HttpServlet {
 	}
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// Récupération de la saisie
 		request.setCharacterEncoding("UTF-8");
 		String pseudo = request.getParameter("pseudo");
@@ -43,29 +41,31 @@ public class PoolConnectionServlet extends HttpServlet {
 		System.out.println(motDePasse);
 		// Appelle a la BLL
 		try {
+			System.out.println("1");
 			Utilisateur utilisateur = UtilisateursManager.getInstance().validateConnection(pseudo, motDePasse);
 			// Transmettre les informations pour la page d'accueil
+			System.out.println("2");
 			HttpSession session = request.getSession();
+
+			System.out.println("3");
 			session.setAttribute("utilisateurEnSession", utilisateur);
 			request.setAttribute("utilisateur", utilisateur);
-			request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, resp);
+			request.getRequestDispatcher("/AccueilServlet").forward(request, response);
+
 		} catch (BusinessException be) {
 			be.printStackTrace();
 			request.setAttribute("errors", be.getErrors());
-			request.getRequestDispatcher("/WEB-INF/connexion.jsp").forward(request, resp);
+			request.getRequestDispatcher("/WEB-INF/connexion.jsp").forward(request, response);
 		}
 	}
 
 	/**
 	 * Méthode pour valider la configuration de la base de données
 	 */
-	private void testPoolConnection() {
-		try {
-			Connection cnx = ConnectionProvider.getConnection();
-			System.out.println("La connexion est " + (cnx.isClosed() ? "FERMEE" : "OUVERTE"));
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-
+	/*
+	 * private void testPoolConnection() { try { Connection cnx =
+	 * ConnectionProvider.getConnection(); System.out.println("La connexion est " +
+	 * (cnx.isClosed() ? "FERMEE" : "OUVERTE")); } catch (SQLException e) {
+	 * e.printStackTrace(); } }
+	 */
 }

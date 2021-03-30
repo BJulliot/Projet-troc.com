@@ -53,6 +53,8 @@ public class NouvelUtilisateurServlet extends HttpServlet {
 
 		UtilisateursManager um = UtilisateursManager.getInstance();
 		String confirmationMotDePasse = request.getParameter("confirmationMotDePasse");
+		System.out.println("mot de passe : " + nouvelUtilisateur.getMotDePasse());
+		System.out.println("confirmation : " + confirmationMotDePasse);
 		try {
 			um.create(nouvelUtilisateur, confirmationMotDePasse);
 			request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
