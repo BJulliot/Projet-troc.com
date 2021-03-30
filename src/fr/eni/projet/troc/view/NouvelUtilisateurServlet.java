@@ -61,6 +61,7 @@ public class NouvelUtilisateurServlet extends HttpServlet {
 		} catch (BusinessException be) {
 			be.printStackTrace();
 			request.setAttribute("errors", be.getErrors());
+			request.setAttribute("nouvelUtilisateur", nouvelUtilisateur);
 			request.getRequestDispatcher("/WEB-INF/nouvelUtilisateur.jsp").forward(request, response);
 		}
 	}

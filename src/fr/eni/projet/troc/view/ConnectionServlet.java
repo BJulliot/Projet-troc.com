@@ -41,13 +41,10 @@ public class ConnectionServlet extends HttpServlet {
 		System.out.println(motDePasse);
 		// Appelle a la BLL
 		try {
-			System.out.println("1");
 			Utilisateur utilisateur = UtilisateursManager.getInstance().validateConnection(pseudo, motDePasse);
 			// Transmettre les informations pour la page d'accueil
-			System.out.println("2");
 			HttpSession session = request.getSession();
 
-			System.out.println("3");
 			session.setAttribute("utilisateurEnSession", utilisateur);
 			request.setAttribute("utilisateur", utilisateur);
 			request.getRequestDispatcher("/AccueilServlet").forward(request, response);
