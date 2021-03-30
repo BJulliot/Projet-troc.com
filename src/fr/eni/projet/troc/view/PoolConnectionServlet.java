@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.eni.projet.troc.bll.UtilisateursManager;
 import fr.eni.projet.troc.bo.Utilisateur;
@@ -44,6 +45,8 @@ public class PoolConnectionServlet extends HttpServlet {
 		try {
 			Utilisateur utilisateur = UtilisateursManager.getInstance().validateConnection(pseudo, motDePasse);
 			// Transmettre les informations pour la page d'accueil
+			HttpSession session = request.getSession();
+			session.setAttribute("utilisateurEnSession", utilisateur);
 			request.setAttribute("utilisateur", utilisateur);
 			request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, resp);
 		} catch (BusinessException be) {

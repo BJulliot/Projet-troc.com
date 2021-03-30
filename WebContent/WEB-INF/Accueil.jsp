@@ -8,7 +8,7 @@
 <html>
 <%@include file="/WEB-INF/template/head.html"%>
 <body>
-	<%@include file="/WEB-INF/template/nav.html"%>
+	<%@include file="/WEB-INF/template/nav.jsp"%>
 
 	<div class="container">
 		<h1 class="my-4">Liste des enchères</h1>
