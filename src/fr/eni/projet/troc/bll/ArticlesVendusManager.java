@@ -22,8 +22,8 @@ public class ArticlesVendusManager {
 		return instance;
 	}
 	
-    public List<ArticleVendu> getAllArticleVendus(int idUtilisateur, int idCategorie) throws Exception {
-        return articleVenduDAO.selectAll(idUtilisateur, idCategorie);
+    public List<ArticleVendu> getAllArticleVendus() throws Exception {
+        return articleVenduDAO.selectAll();
     }
 	
 }

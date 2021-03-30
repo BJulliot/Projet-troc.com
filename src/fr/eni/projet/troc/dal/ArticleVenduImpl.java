@@ -38,13 +38,12 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 	}
 
 	@Override
-	public List<ArticleVendu> selectAll(int idUtilisateur, int idCategorie) throws Exception {
+	public List<ArticleVendu> selectAll() throws Exception {
 		List<ArticleVendu> articleVendus = new ArrayList<ArticleVendu>();
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement requete = cnx.prepareStatement(
-					"SELECT * FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie WHERE utilisateurs.no_utilisateur = ? AND categories.no_categorie = ?");
-			requete.setInt(1,  idUtilisateur);
-			requete.setInt(2,  idCategorie);
+					"SELECT * FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie");
+	
 			ResultSet rs = requete.executeQuery();
 
 			while (rs.next()) {
