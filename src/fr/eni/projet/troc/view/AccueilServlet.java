@@ -9,9 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-
-
 import fr.eni.projet.troc.bll.ArticlesVendusManager;
 import fr.eni.projet.troc.bll.CategorieManager;
 import fr.eni.projet.troc.bo.ArticleVendu;
@@ -30,46 +27,35 @@ public class AccueilServlet extends HttpServlet {
 		String Cat = request.getParameter("Categories");
 		request.setAttribute("Cat", Cat);
 		System.out.println(Cat);
-
 		try {
-			if(Cat == null) {
 			List<Categorie> categories = CategorieManager.getInstance().getCategorie();
 			request.setAttribute("categories", categories);
+
 			List<ArticleVendu> articles = ArticlesVendusManager.getInstance().getAllArticleVendus();
 			request.setAttribute("articles", articles);
-			}else if (Cat.equals("1")) {
-				List<Categorie> categories = CategorieManager.getInstance().getCategorie();
-				request.setAttribute("categories", categories);
-				List<ArticleVendu> articles = ArticlesVendusManager.getInstance().getAllArticleVendus();
-				request.setAttribute("articles", articles);
-			}else if (Cat.equals("2")) {
-				List<Categorie> categories = CategorieManager.getInstance().getCategorie();
-				request.setAttribute("categories", categories);
-				List<ArticleVendu> articles = ArticlesVendusManager.getInstance().getAllArticleVendus();
-				request.setAttribute("articles", articles);
-			}else if (Cat.equals("3")) {
-				List<Categorie> categories = CategorieManager.getInstance().getCategorie();
-				request.setAttribute("categories", categories);
-				List<ArticleVendu> articles = ArticlesVendusManager.getInstance().getAllArticleVendus();
-				request.setAttribute("articles", articles);
-			}else if (Cat.equals("4")) {
-				List<Categorie> categories = CategorieManager.getInstance().getCategorie();
-				request.setAttribute("categories", categories);
-				List<ArticleVendu> articles = ArticlesVendusManager.getInstance().getAllArticleVendus();
-				request.setAttribute("articles", articles);
-			}else {
-				List<Categorie> categories = CategorieManager.getInstance().getCategorie();
-				request.setAttribute("categories", categories);
-			}
+
+			ArticleVendu cateNum = ArticlesVendusManager.getInstance().getNoCategorie(Integer.parseInt(Cat));
+			request.setAttribute("cateNum", cateNum);
+			System.out.println(cateNum);
+
+//			if (Cat == null) {
+//				categories = CategorieManager.getInstance().getCategorie();
+//
+//				articles = ArticlesVendusManager.getInstance().getAllArticleVendus();
+//			}
+//			Categorie noCategorie = CategorieManager.getInstance().getNoCategorie(Integer.parseInt(Cat));
+//			request.setAttribute("noCategorie", noCategorie);
+//			System.out.println(noCategorie);
+
+//			ArticleVendu cateNum = ArticlesVendusManager.getInstance().getNoCategorie(Integer.parseInt(Cat));
+//			request.setAttribute("cateNum", cateNum);
+//			System.out.println(cateNum);
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
 	}
-
-
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

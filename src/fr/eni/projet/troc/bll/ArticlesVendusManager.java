@@ -3,6 +3,7 @@ package fr.eni.projet.troc.bll;
 import java.util.List;
 
 import fr.eni.projet.troc.bo.ArticleVendu;
+import fr.eni.projet.troc.bo.Categorie;
 import fr.eni.projet.troc.dal.ArticleVenduDAO;
 import fr.eni.projet.troc.dal.DAOFactory;
 
@@ -24,6 +25,10 @@ public class ArticlesVendusManager {
 	
     public List<ArticleVendu> getAllArticleVendus() throws Exception {
         return articleVenduDAO.selectAll();
+    }
+    
+    public ArticleVendu getNoCategorie(int noCategorie)throws Exception {
+    	return articleVenduDAO.selectById(noCategorie);
     }
 	
 }

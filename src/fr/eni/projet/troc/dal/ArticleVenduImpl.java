@@ -55,4 +55,27 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 		}
 		return articleVendus;
 	}
+
+	/**
+	* {@inheritDoc}
+	*/
+	@Override
+	public ArticleVendu selectById(int cateNum) throws Exception {
+		ArticleVendu articleVendus = null;
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement requete = cnx.prepareStatement(
+					"SELECT nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,GROUP_CONCAT(utilisateurs.pseudo SEPARATOR \" \") AS pseudo,GROUP_CONCAT(categories.libelle SEPARATOR \" \") AS libelle FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie WHERE categories.no_categorie = ?");
+			requete.setInt(1, cateNum);
+
+			ResultSet rs = requete.executeQuery();
+
+			while (rs.next()) {
+				articleVendus = (itemBuilder(rs));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return articleVendus;
+	}
 }

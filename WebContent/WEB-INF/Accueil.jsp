@@ -36,16 +36,26 @@
 				</div>
 			</div>
 			<div class="card h-100">
-			<c:choose>
-				<c:when test="${Cat == null}">
-					<c:forEach var="articles" items="${articles}" >
+	
+						<c:forEach var="articles" items="${articles}">
 					${articles.nom} ${articles.description}
 					<p>Prix : ${articles.prixInitial} Points</p>
-						<p>Fin de l'enchère : ${articles.dateFinEnchere}</p>
-						<p>Vendeur : ${articles.noUtilisateur}</p>
-					</c:forEach>
-				</c:when>
-				</c:choose>
+							<p>Fin de l'enchère : ${articles.dateFinEnchere}</p>
+							<p>Vendeur : ${articles.noUtilisateur}</p>
+							<p>cat : ${articles.noCategorie}</p>
+						</c:forEach>
+			
+					
+				<%-- 	<c:forEach var="cateNum" items="${cateNum}">
+					${cateNum.nom} ${cateNum.description}
+					<p>Prix : ${cateNum.prixInitial} Points</p>
+							<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
+							<p>Vendeur : ${cateNum.noUtilisateur}</p>
+							<p>cat : ${cateNum.noCategorie}</p>
+						</c:forEach> --%>
+					
+				
+			
 			</div>
 
 		</div>

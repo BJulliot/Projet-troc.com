@@ -16,4 +16,6 @@ import fr.eni.projet.troc.bo.Categorie;
 public interface CategorieDAO {
 
 	public List<Categorie> selectAll() throws Exception;
+	
+	public Categorie selectById(int noCategorie) throws Exception;
 }
