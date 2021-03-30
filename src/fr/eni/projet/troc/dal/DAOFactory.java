@@ -19,5 +19,9 @@ public class DAOFactory {
 	public static UtilisateurDAO getUtilisateurDAO() {
 		return new UtilisateurImpl();
 	}
+	
+	public static CategorieDAO getCategorieDAO() {
+		return new CategorieImpl();
+	}
 
 }

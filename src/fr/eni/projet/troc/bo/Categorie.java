@@ -8,40 +8,35 @@ public class Categorie {
 		this.noCategorie = noCategorie;
 		this.libelle = libelle;
 	}
-	
-	public Categorie() {
-		
-	}
 
+	public Categorie() {
+
+	}
 
 	public int getNoCategorie() {
 		return noCategorie;
 	}
 
-
 	public void setNoCategorie(int noCategorie) {
 		this.noCategorie = noCategorie;
 	}
-
 
 	public String getLibelle() {
 		return libelle;
 	}
 
-
 	public void setLibelle(String libelle) {
 		this.libelle = libelle;
 	}
 
-	
 	@Override
 	public String toString() {
 		return "Categorie [noCategorie=" + noCategorie + ", libelle=" + libelle + "]";
 	}
 
 	/**
-	* {@inheritDoc}
-	*/
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -52,8 +47,8 @@ public class Categorie {
 	}
 
 	/**
-	* {@inheritDoc}
-	*/
+	 * {@inheritDoc}
+	 */
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -72,6 +67,5 @@ public class Categorie {
 			return false;
 		return true;
 	}
-	
-	
+
 }

@@ -9,8 +9,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sun.org.apache.xml.internal.resolver.CatalogManager;
+
 import fr.eni.projet.troc.bll.ArticlesVendusManager;
+import fr.eni.projet.troc.bll.CategorieManager;
 import fr.eni.projet.troc.bo.ArticleVendu;
+import fr.eni.projet.troc.bo.Categorie;
 import fr.eni.projet.troc.bo.Utilisateur;
 
 
@@ -23,13 +27,12 @@ public class AccueilServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String servletPath = request.getServletPath();
 
 		try {
 			List<ArticleVendu> articles = ArticlesVendusManager.getInstance().getAllArticleVendus();
-			Utilisateur utilisateur = new Utilisateur();
 			request.setAttribute("articles", articles);
-			request.setAttribute("util",utilisateur);
+			List<Categorie> categories = CategorieManager.getInstance().getCategorie();
+			request.setAttribute("categories", categories);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

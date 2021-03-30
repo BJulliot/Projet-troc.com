@@ -32,7 +32,7 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 		articleVendu.setDateFinEnchere(rs.getDate("date_fin_encheres").toLocalDate());
 		articleVendu.setPrixInitial(rs.getInt("prix_initial"));
 		articleVendu.setPrixVente(rs.getInt("prix_vente"));
-		articleVendu.setNoUtilisateur(rs.getString("prenom"));
+		articleVendu.setNoUtilisateur(rs.getString("pseudo"));
 		articleVendu.setNoCategorie(rs.getString("libelle"));
 		return articleVendu;
 	}
@@ -42,7 +42,7 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 		List<ArticleVendu> articleVendus = new ArrayList<ArticleVendu>();
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement requete = cnx.prepareStatement(
-					"SELECT nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,GROUP_CONCAT(utilisateurs.prenom SEPARATOR \" \") AS prenom,GROUP_CONCAT(categories.libelle SEPARATOR \" \") AS libelle FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie GROUP BY articles_vendus.no_article");
+					"SELECT nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,GROUP_CONCAT(utilisateurs.pseudo SEPARATOR \" \") AS pseudo,GROUP_CONCAT(categories.libelle SEPARATOR \" \") AS libelle FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie GROUP BY articles_vendus.no_article");
 	
 			ResultSet rs = requete.executeQuery();
 
