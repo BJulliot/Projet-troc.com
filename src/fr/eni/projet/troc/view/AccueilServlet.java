@@ -9,15 +9,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.sun.org.apache.xml.internal.resolver.CatalogManager;
 
 import fr.eni.projet.troc.bll.ArticlesVendusManager;
 import fr.eni.projet.troc.bll.CategorieManager;
 import fr.eni.projet.troc.bo.ArticleVendu;
 import fr.eni.projet.troc.bo.Categorie;
-import fr.eni.projet.troc.bo.Utilisateur;
-
-
 
 /**
  * Servlet implementation class AccueilServlet
@@ -26,20 +22,47 @@ import fr.eni.projet.troc.bo.Utilisateur;
 public class AccueilServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		String Cat = request.getParameter("Categories");
+		request.setAttribute("Cat", Cat);
+		System.out.println(Cat);
 		try {
-			List<ArticleVendu> articles = ArticlesVendusManager.getInstance().getAllArticleVendus();
-			request.setAttribute("articles", articles);
+			if(Cat == null) {
 			List<Categorie> categories = CategorieManager.getInstance().getCategorie();
 			request.setAttribute("categories", categories);
+			List<ArticleVendu> articles = ArticlesVendusManager.getInstance().getAllArticleVendus();
+			request.setAttribute("articles", articles);
+			}else if (Cat.equals("1")) {
+				List<Categorie> categories = CategorieManager.getInstance().getCategorie();
+				request.setAttribute("categories", categories);
+				List<ArticleVendu> articles = ArticlesVendusManager.getInstance().getAllArticleVendus();
+				request.setAttribute("articles", articles);
+			}else if (Cat.equals("2")) {
+				List<Categorie> categories = CategorieManager.getInstance().getCategorie();
+				request.setAttribute("categories", categories);
+				List<ArticleVendu> articles = ArticlesVendusManager.getInstance().getAllArticleVendus();
+				request.setAttribute("articles", articles);
+			}else if (Cat.equals("3")) {
+				List<Categorie> categories = CategorieManager.getInstance().getCategorie();
+				request.setAttribute("categories", categories);
+				List<ArticleVendu> articles = ArticlesVendusManager.getInstance().getAllArticleVendus();
+				request.setAttribute("articles", articles);
+			}else if (Cat.equals("4")) {
+				List<Categorie> categories = CategorieManager.getInstance().getCategorie();
+				request.setAttribute("categories", categories);
+				List<ArticleVendu> articles = ArticlesVendusManager.getInstance().getAllArticleVendus();
+				request.setAttribute("articles", articles);
+			}else {
+				List<Categorie> categories = CategorieManager.getInstance().getCategorie();
+				request.setAttribute("categories", categories);
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
 	}
-
-
 
 }
