@@ -44,7 +44,7 @@ public class PoolConnectionServlet extends HttpServlet {
 		try {
 			Utilisateur utilisateur = UtilisateursManager.getInstance().validateConnection(pseudo, motDePasse);
 			// Transmettre les informations pour la page d'accueil
-			request.setAttribute("user", utilisateur);
+			request.setAttribute("utilisateur", utilisateur);
 			request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, resp);
 		} catch (BusinessException be) {
 			be.printStackTrace();
