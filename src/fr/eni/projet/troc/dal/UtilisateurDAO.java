@@ -5,4 +5,6 @@ import fr.eni.projet.troc.exception.BusinessException;
 
 public interface UtilisateurDAO {
 	public void create(Utilisateur utilisateur) throws BusinessException;
+
+	public Utilisateur find(String pseudo, String motDePasse) throws BusinessException;
 }

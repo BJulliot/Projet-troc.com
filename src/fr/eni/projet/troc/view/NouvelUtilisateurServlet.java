@@ -55,10 +55,11 @@ public class NouvelUtilisateurServlet extends HttpServlet {
 		String confirmationMotDePasse = request.getParameter("confirmationMotDePasse");
 		try {
 			um.create(nouvelUtilisateur, confirmationMotDePasse);
+			request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
 		} catch (BusinessException be) {
 			be.printStackTrace();
 			request.setAttribute("errors", be.getErrors());
+			request.getRequestDispatcher("/WEB-INF/nouvelUtilisateur.jsp").forward(request, response);
 		}
-		request.getRequestDispatcher("/WEB-INF/nouvelUtilisateur.jsp").forward(request, response);
 	}
 }

@@ -2,6 +2,8 @@ package fr.eni.projet.troc.dal;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import fr.eni.projet.troc.bo.Utilisateur;
 import fr.eni.projet.troc.exception.BusinessException;
@@ -9,6 +11,7 @@ import fr.eni.projet.troc.exception.BusinessException;
 public class UtilisateurImpl implements UtilisateurDAO {
 	private static final String INSERT = "INSERT INTO utilisateurs (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur)"
 			+ "  VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+	private static final String CONNECTION = "select pseudo, , mot_de_passe from utilisateurs where pseudo=? and mot_de_passe=?";
 
 	@Override
 	public void create(Utilisateur utilisateur) throws BusinessException {
@@ -34,4 +37,33 @@ public class UtilisateurImpl implements UtilisateurDAO {
 
 	}
 
+	public Utilisateur find(String pseudo, String motDePasse) throws BusinessException {
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement requete = cnx.prepareStatement(CONNECTION);
+			requete.setString(1, pseudo);
+			requete.setString(2, motDePasse);
+
+			ResultSet rs = requete.executeQuery();
+
+			if (rs.next()) {
+				Utilisateur utilisateur = new Utilisateur();
+				utilisateur.setPrenom(rs.getString("prenom"));
+				utilisateur.setNom(rs.getString("nom"));
+				utilisateur.setPseudo(rs.getString("pseudo"));
+				utilisateur.setMotDePasses(rs.getString("mot_de_passe"));
+				return utilisateur;
+			} else {
+				// Utilisateur non trouvé
+				BusinessException be = new BusinessException();
+				be.addError("Pseudo ou Mot de passe inconnu");
+				throw be;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			BusinessException be = new BusinessException();
+			be.addError("ERROR DB - " + e.getMessage());
+			throw be;
+		}
+
+	}
 }
