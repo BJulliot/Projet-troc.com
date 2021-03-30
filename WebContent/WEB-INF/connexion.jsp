@@ -11,6 +11,7 @@
 	<div class="container">
 		<div class="col-12">
 			<h2 class="my-5 text-center">Connexion</h2>
+			
 			<c:if test="${!empty errors}">
 				<div class="row">
 					<div class="col-lg-12 col-md-6 col-sm-6 portfolio-item">
@@ -54,5 +55,8 @@
     </div>
 </div>
 
+
+			<!-- Bootstrap core JavaScript -->
+		<%@include file="/WEB-INF/template/script.html"%>
 </body>
 </html>

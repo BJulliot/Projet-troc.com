@@ -47,7 +47,7 @@ public class NouvelUtilisateurServlet extends HttpServlet {
 		nouvelUtilisateur.setRue(request.getParameter("rue"));
 		nouvelUtilisateur.setCodePostal(request.getParameter("codePostal"));
 		nouvelUtilisateur.setVille(request.getParameter("ville"));
-		nouvelUtilisateur.setMotDePasses(request.getParameter("motDePasse"));
+		nouvelUtilisateur.setMotDePasse(request.getParameter("motDePasse"));
 		nouvelUtilisateur.setCredit(100);
 		nouvelUtilisateur.setAdministrateur(false);
 

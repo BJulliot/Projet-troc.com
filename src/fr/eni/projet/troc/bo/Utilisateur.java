@@ -20,13 +20,12 @@ public class Utilisateur {
 	private String rue;
 	private String codePostal;
 	private String ville;
-	private String motDePasses;
+	private String motDePasse;
 	private int credit;
-	private boolean administrateur; 
-	
+	private boolean administrateur;
 
 	public Utilisateur(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, String codePostal, String ville, String motDePasses, int credit, boolean administrateur) {
+			String rue, String codePostal, String ville, String motDePasse, int credit, boolean administrateur) {
 		this.noUtilisateur = noUtilisateur;
 		this.pseudo = pseudo;
 		this.nom = nom;
@@ -36,7 +35,7 @@ public class Utilisateur {
 		this.rue = rue;
 		this.codePostal = codePostal;
 		this.ville = ville;
-		this.motDePasses = motDePasses;
+		this.motDePasse = motDePasse;
 		this.credit = credit;
 		this.administrateur = administrateur;
 	}
@@ -117,12 +116,12 @@ public class Utilisateur {
 		this.ville = ville;
 	}
 
-	public String getMotDePasses() {
-		return motDePasses;
+	public String getMotDePasse() {
+		return motDePasse;
 	}
 
-	public void setMotDePasses(String motDePasses) {
-		this.motDePasses = motDePasses;
+	public void setMotDePasse(String motDePasse) {
+		this.motDePasse = motDePasse;
 	}
 
 	public int getCredit() {
@@ -148,7 +147,7 @@ public class Utilisateur {
 	public String toString() {
 		return "Utilisateur [noUtilisateur=" + noUtilisateur + ", pseudo=" + pseudo + ", nom=" + nom + ", prenom="
 				+ prenom + ", email=" + email + ", telephone=" + telephone + ", rue=" + rue + ", codePostal="
-				+ codePostal + ", ville=" + ville + ", motDePasses=" + motDePasses + ", credit=" + credit
+				+ codePostal + ", ville=" + ville + ", motDePasses=" + motDePasse + ", credit=" + credit
 				+ ", administrateur=" + administrateur + "]";
 	}
 
@@ -163,7 +162,7 @@ public class Utilisateur {
 		result = prime * result + ((codePostal == null) ? 0 : codePostal.hashCode());
 		result = prime * result + credit;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
-		result = prime * result + ((motDePasses == null) ? 0 : motDePasses.hashCode());
+		result = prime * result + ((motDePasse == null) ? 0 : motDePasse.hashCode());
 		result = prime * result + noUtilisateur;
 		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
 		result = prime * result + ((prenom == null) ? 0 : prenom.hashCode());
@@ -200,10 +199,10 @@ public class Utilisateur {
 				return false;
 		} else if (!email.equals(other.email))
 			return false;
-		if (motDePasses == null) {
-			if (other.motDePasses != null)
+		if (motDePasse == null) {
+			if (other.motDePasse != null)
 				return false;
-		} else if (!motDePasses.equals(other.motDePasses))
+		} else if (!motDePasse.equals(other.motDePasse))
 			return false;
 		if (noUtilisateur != other.noUtilisateur)
 			return false;

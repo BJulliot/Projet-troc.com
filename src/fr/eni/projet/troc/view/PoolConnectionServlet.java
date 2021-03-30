@@ -36,19 +36,20 @@ public class PoolConnectionServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
 		// Récupération de la saisie
 		request.setCharacterEncoding("UTF-8");
-		String login = request.getParameter("login");
-		String password = request.getParameter("password");
-
+		String pseudo = request.getParameter("pseudo");
+		String motDePasse = request.getParameter("motDePasse");
+		System.out.println(pseudo);
+		System.out.println(motDePasse);
 		// Appelle a la BLL
 		try {
-			Utilisateur utilisateur = UtilisateursManager.getInstance().validateConnection(login, password);
-			// Transmettre les informations pour la page de welcome
+			Utilisateur utilisateur = UtilisateursManager.getInstance().validateConnection(pseudo, motDePasse);
+			// Transmettre les informations pour la page d'accueil
 			request.setAttribute("user", utilisateur);
-			request.getRequestDispatcher("/WEB-INF/welcome.jsp").forward(request, resp);
-		} catch (BusinessException e) {
-			e.printStackTrace();
-			request.setAttribute("errors", e.getErrors());
-			request.getRequestDispatcher("/WEB-INF/poolConnectionForm.jsp").forward(request, resp);
+			request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, resp);
+		} catch (BusinessException be) {
+			be.printStackTrace();
+			request.setAttribute("errors", be.getErrors());
+			request.getRequestDispatcher("/WEB-INF/connexion.jsp").forward(request, resp);
 		}
 	}
 
