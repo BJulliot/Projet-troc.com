@@ -20,12 +20,12 @@ public class ArticleVendu {
 	private LocalDate dateFinEnchere;
 	private int prixInitial;
 	private int prixVente;
-	private int noUtilisateur;
-	private int noCategorie;
+	private String noUtilisateur;
+	private String noCategorie;
 
 	public ArticleVendu(int noArticle, String nom, String description, LocalDate dateDebutEnchere,
-			LocalDate dateFinEnchere, int prixInitial, int prixVente, int noUtilisateur,
-			int noCategorie) {
+			LocalDate dateFinEnchere, int prixInitial, int prixVente, String noUtilisateur,
+			String noCategorie) {
 		super();
 		this.noArticle = noArticle;
 		this.nom = nom;
@@ -39,7 +39,7 @@ public class ArticleVendu {
 	}
 
 	public ArticleVendu(int noArticle, String nom, String description, LocalDate dateDebutEnchere,
-			LocalDate dateFinEnchere, int noUtilisateur, int noCategorie) {
+			LocalDate dateFinEnchere, String noUtilisateur, String noCategorie) {
 		super();
 		this.noArticle = noArticle;
 		this.nom = nom;
@@ -110,19 +110,19 @@ public class ArticleVendu {
 		this.prixVente = prixVente;
 	}
 
-	public int getNoUtilisateur() {
+	public String getNoUtilisateur() {
 		return noUtilisateur;
 	}
 
-	public void setNoUtilisateur(int noUtilisateur) {
+	public void setNoUtilisateur(String noUtilisateur) {
 		this.noUtilisateur = noUtilisateur;
 	}
 
-	public int getNoCategorie() {
+	public String getNoCategorie() {
 		return noCategorie;
 	}
 
-	public void setNoCategorie(int noCategorie) {
+	public void setNoCategorie(String noCategorie) {
 		this.noCategorie = noCategorie;
 	}
 
@@ -134,63 +134,7 @@ public class ArticleVendu {
 				+ noCategorie + "]";
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((dateDebutEnchere == null) ? 0 : dateDebutEnchere.hashCode());
-		result = prime * result + ((dateFinEnchere == null) ? 0 : dateFinEnchere.hashCode());
-		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + noArticle;
-		result = prime * result + noCategorie;
-		result = prime * result + noUtilisateur;
-		result = prime * result + ((nom == null) ? 0 : nom.hashCode());
-		result = prime * result + prixInitial;
-		result = prime * result + prixVente;
-		return result;
-	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		ArticleVendu other = (ArticleVendu) obj;
-		if (dateDebutEnchere == null) {
-			if (other.dateDebutEnchere != null)
-				return false;
-		} else if (!dateDebutEnchere.equals(other.dateDebutEnchere))
-			return false;
-		if (dateFinEnchere == null) {
-			if (other.dateFinEnchere != null)
-				return false;
-		} else if (!dateFinEnchere.equals(other.dateFinEnchere))
-			return false;
-		if (description == null) {
-			if (other.description != null)
-				return false;
-		} else if (!description.equals(other.description))
-			return false;
-		if (noArticle != other.noArticle)
-			return false;
-		if (noCategorie != other.noCategorie)
-			return false;
-		if (noUtilisateur != other.noUtilisateur)
-			return false;
-		if (nom == null) {
-			if (other.nom != null)
-				return false;
-		} else if (!nom.equals(other.nom))
-			return false;
-		if (prixInitial != other.prixInitial)
-			return false;
-		if (prixVente != other.prixVente)
-			return false;
-		return true;
-	}
 
 	
 

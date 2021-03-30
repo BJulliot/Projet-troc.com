@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.projet.troc.bll.ArticlesVendusManager;
 import fr.eni.projet.troc.bo.ArticleVendu;
+import fr.eni.projet.troc.bo.Utilisateur;
 
 
 
@@ -26,7 +27,9 @@ public class AccueilServlet extends HttpServlet {
 
 		try {
 			List<ArticleVendu> articles = ArticlesVendusManager.getInstance().getAllArticleVendus();
+			Utilisateur utilisateur = new Utilisateur();
 			request.setAttribute("articles", articles);
+			request.setAttribute("util",utilisateur);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
