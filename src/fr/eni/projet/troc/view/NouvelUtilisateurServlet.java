@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import fr.eni.projet.troc.bll.UtilisateursManager;
 import fr.eni.projet.troc.bo.Utilisateur;
+import fr.eni.projet.troc.exception.BusinessException;
 
 /**
  * Servlet implementation class NouvelleListeServlet
@@ -51,14 +52,13 @@ public class NouvelUtilisateurServlet extends HttpServlet {
 		nouvelUtilisateur.setAdministrateur(false);
 
 		UtilisateursManager um = UtilisateursManager.getInstance();
-
+		String confirmationMotDePasse = request.getParameter("confirmationMotDePasse");
 		try {
-			um.create(nouvelUtilisateur);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			um.create(nouvelUtilisateur, confirmationMotDePasse);
+		} catch (BusinessException be) {
+			be.printStackTrace();
+			request.setAttribute("errors", be.getErrors());
 		}
-		request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/nouvelUtilisateur.jsp").forward(request, response);
 	}
-
 }
