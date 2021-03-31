@@ -40,7 +40,12 @@ public class ModifierUtilisateurServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Rï¿½cupï¿½ration des donnï¿½es saisies dans le formulaire
+		// Récupération infos de l'utilisateur en session:
+		HttpSession session = request.getSession();
+		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateurEnSession");
+
+		// Récupération et intégration des données saisies dans le formulaire
+		// modifierUtilisateur.jsp
 		request.setCharacterEncoding("UTF-8");
 		Utilisateur nouvelUtilisateur = new Utilisateur();
 		nouvelUtilisateur.setPseudo(request.getParameter("pseudo"));

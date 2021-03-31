@@ -74,7 +74,7 @@
 			<div class="container">
 				<div class="row">
 			    <div class="col-12 col-md-6">
-			       <form action="./ModifierUtilisateurServlet" method="post">
+			       <form action="./ModifierUtilisateurServlet" method="get">
 						<div class="text-center">
 							<button type="submit" class="btn btn-outline-secondary">Modifier compte</button>
 						</div>

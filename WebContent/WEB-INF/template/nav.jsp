@@ -3,7 +3,7 @@
 	<!-- Navigation -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top text-white">
 		<div class="container">
-			<a class="navbar-brand" href="#">ENI-Enchère</a>
+			<a class="navbar-brand" href="./AccueilServlet">ENI-Enchère</a>
 			
 			<%//Récupérer l'attribut userInSession sur la Session
 			Utilisateur utilisateurEnSession = (Utilisateur)session.getAttribute("utilisateurEnSession");

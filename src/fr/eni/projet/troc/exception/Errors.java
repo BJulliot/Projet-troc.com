@@ -59,5 +59,4 @@ public class Errors {
 	 * Echec général quand erreur non gérée Ã  l'insertion
 	 */
 	public static final String INSERT_UTILISATEUR_ECHEC = "Une erreur non gérée est survenue lors de l'enrgistrement des informations.";
-
 }

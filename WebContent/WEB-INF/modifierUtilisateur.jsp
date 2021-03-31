@@ -74,19 +74,27 @@
                         <input type="text" class="form-control" id="ville" name="ville" placeholder="Ville" value="${utilisateurEnSession.ville}" required>
                     </div>
                 </div>
+                <div class=" p-3 mb-2 bg-secondary">
                 <div class="form-group row">
                     <div class="col-sm-6">
-                        <label for="motDePasse">Mot de passe</label>
+                        <label class="text-white" for="motDePasse">Mot de passe actuel</label>
                         <input type="password" class="form-control" id="motDePasse" name="motDePasse" placeholder="Mot de passe" required>
                     </div>
+                </div>
+                <div class="form-group row">
                     <div class="col-sm-6">
-                        <label for="confirmationMotDePasse">Confirmation</label>
+                        <label class="text-white" for="nouveauMotDePasse">Nouveau mot de passe</label>
+                        <input type="password" class="form-control" id="nouveauMotDePasse" name="nouveauMotDePasse" placeholder="Nouveau mot de passe" required>
+                    </div>
+                    <div class="col-sm-6">
+                        <label class="text-white" for="confirmationMotDePasse">Confirmation</label>
                         <input type="password" class="form-control" id="confirmationMotDePasse" name="confirmationMotDePasse" placeholder="Confirmer le mot de passe" required>
                     </div>
                 </div>
+                </div>
                 <div class="text-center">
 	                <button type="submit" class="btn btn-secondary">Enregistrer modifications</button>
-	                <button type="button" href="index.jsp" class="btn btn-secondary">Annuler</button>
+	                <button type="button" href="./AccueilServlet" class="btn btn-secondary">Annuler</button>
             	</div>
             </form>
         </div>

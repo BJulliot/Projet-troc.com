@@ -17,7 +17,7 @@ public class UtilisateurImpl implements UtilisateurDAO {
 	public void create(Utilisateur utilisateur) throws BusinessException {
 
 		try (Connection cnx = ConnectionProvider.getConnection()) {
-			PreparedStatement requete = cnx.prepareStatement(INSERT);
+			PreparedStatement requete = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
 			requete.setString(1, utilisateur.getPseudo());
 			requete.setString(2, utilisateur.getNom());
 			requete.setString(3, utilisateur.getPrenom());
@@ -30,6 +30,15 @@ public class UtilisateurImpl implements UtilisateurDAO {
 			requete.setInt(10, utilisateur.getCredit());
 			requete.setBoolean(11, utilisateur.isAdministrateur());
 			requete.executeUpdate();
+			ResultSet rs = requete.getGeneratedKeys();
+			if (rs.next()) {
+				utilisateur.setNoUtilisateur(rs.getInt(1));
+			} else {
+				BusinessException be = new BusinessException();
+				be.addError(Errors.INSERT_UTILISATEUR_ECHEC);
+				throw be;
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			BusinessException be = new BusinessException();
