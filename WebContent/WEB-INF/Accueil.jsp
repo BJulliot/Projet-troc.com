@@ -12,12 +12,11 @@
 <body>
 	<%@include file="/WEB-INF/template/nav.jsp"%>
 
-	<div class="container">
+	<div class="container global">
 		<h1 class="my-4 text-center">Liste des enchères</h1>
-		<div class="col-lg-6 col-md-4 col-sm-6 portfolio-item">
-			<div class="col-lg-8 col-md-4 col-sm-6 portfolio-item">
+			<div class="col-lg-8 col-md-4 col-sm-6 portfolio-item formPlacement">
 				
-				<form action="./AccueilServlet" method="get">
+				<form action="./AccueilServlet" class="formSearch" method="get">
 					<div class="col-lg-12 col-md-4 col-sm-6 portfolio-item">
 					<h3 class="my-4">Filtres :</h3>
 						<input class="search-bar" type="search" id="search" name="search"
@@ -36,12 +35,13 @@
 					<input class="btn btn-primary" type="submit" value="Rechercher">
 				</form>
 			</div>
+			<div class="container articleContenus col-lg-6 col-md-4 col-sm-6 portfolio-item">
 			<c:choose>
 				<c:when test="${not empty search}">
 					<c:choose>
 						<c:when test="${fn:contains(nameArticle,search)}">
 							<c:forEach var="nameArticle" items="${nameArticle}">
-								<div class="card h-100">
+								<div class="card h-100 articleCase">
 
 									${nameArticle.nom} ${nameArticle.description}
 									<p>Prix : ${nameArticle.prixInitial} Points</p>
@@ -57,7 +57,7 @@
 				</c:when>
 				<c:when test="${Cat == null }">
 					<c:forEach var="articles" items="${articles}">
-						<div class="card h-100">
+						<div class="card h-100 articleCase">
 							${articles.nom} ${articles.description}
 							<p>Prix : ${articles.prixInitial} Points</p>
 							<p>Fin de l'enchère : ${articles.dateFinEnchere}</p>
@@ -72,7 +72,7 @@
 						</c:when>
 						<c:otherwise>
 							<c:forEach var="articles" items="${articles}">
-								<div class="card h-100">
+								<div class="card h-100 articleCase">
 									${articles.nom} ${articles.description}
 									<p>Prix : ${articles.prixInitial} Points</p>
 									<p>Fin de l'enchère : ${articles.dateFinEnchere}</p>
@@ -89,7 +89,7 @@
 						</c:when>
 						<c:otherwise>
 							<c:forEach var="cateNum" items="${cateNum}">
-								<div class="card h-100">
+								<div class="card h-100 articleCase">
 									${cateNum.nom} ${cateNum.description}
 									<p>Prix : ${cateNum.prixInitial} Points</p>
 									<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
@@ -106,7 +106,7 @@
 						</c:when>
 						<c:otherwise>
 							<c:forEach var="cateNum" items="${cateNum}">
-								<div class="card h-100">
+								<div class="card h-100 articleCase">
 									${cateNum.nom} ${cateNum.description}
 									<p>Prix : ${cateNum.prixInitial} Points</p>
 									<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
@@ -123,7 +123,7 @@
 						</c:when>
 						<c:otherwise>
 							<c:forEach var="cateNum" items="${cateNum}">
-								<div class="card h-100">
+								<div class="card h-100 articleCase">
 									${cateNum.nom} ${cateNum.description}
 									<p>Prix : ${cateNum.prixInitial} Points</p>
 									<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
@@ -140,7 +140,7 @@
 						</c:when>
 						<c:otherwise>
 							<c:forEach var="cateNum" items="${cateNum}">
-								<div class="card h-100">
+								<div class="card h-100 articleCase">
 									${cateNum.nom} ${cateNum.description}
 									<p>Prix : ${cateNum.prixInitial} Points</p>
 									<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
@@ -151,7 +151,8 @@
 					</c:choose>
 				</c:when>
 			</c:choose>
-		</div>
+			</div>
+		
 	</div>
 	<%@include file="/WEB-INF/template/script.html"%>
 </body>

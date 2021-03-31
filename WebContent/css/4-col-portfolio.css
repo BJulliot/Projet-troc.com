@@ -3,50 +3,70 @@
  * Copyright 2013-2017 Start Bootstrap
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-4-col-portfolio/blob/master/LICENSE)
  */
-
 body {
-  padding-top: 54px;
+	padding-top: 54px;
 }
 
-@media (min-width: 992px) {
-  body {
-    padding-top: 56px;
-  }
+@media ( min-width : 992px) {
+	body {
+		padding-top: 56px;
+	}
 }
 
 .portfolio-item {
-  margin-bottom: 30px;
+	margin-bottom: 30px;
 }
 
 .pagination {
-  margin-bottom: 30px;
+	margin-bottom: 30px;
 }
 
-.footer-demodule
-{
-	margin-top: 15px;
-}
-.demo
-{
+.footer-demodule {
 	margin-top: 15px;
 }
 
-.support
-{
+.demo {
+	margin-top: 15px;
+}
+
+.support {
 	float: right;
 }
-.obligatoire
-{
-	color:blue;
+
+.obligatoire {
+	color: blue;
 	font-weight: bolder;
 	font-size: larger;
 }
 
-[role=button], a, area, button, input:not([type=range]), label, select, summary, textarea {
-	border-radius:10px;
+[role=button], a, area, button, input:not([type=range]), label, select,
+	summary, textarea {
+	border-radius: 10px;
 }
 
-
-.search-bar{
+.search-bar {
 	width: 100%;
+}
+
+.formSearch {
+	text-align: center;
+}
+
+.articleContenus {
+	display: inline-block;
+	margin-top : 2%;
+}
+
+.articleCase {
+	text-align: center;
+	border-color: black;
+	margin-bottom: 2%;
+}
+
+.global{
+	text-align : center;
+}
+
+.formPlacement{
+	margin: auto;
 }
