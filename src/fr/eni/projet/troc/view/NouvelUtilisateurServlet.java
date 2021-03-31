@@ -57,7 +57,7 @@ public class NouvelUtilisateurServlet extends HttpServlet {
 		System.out.println("confirmation : " + confirmationMotDePasse);
 		try {
 			um.create(nouvelUtilisateur, confirmationMotDePasse);
-			request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
+			request.getRequestDispatcher("/AccueilServlet").forward(request, response);
 		} catch (BusinessException e) {
 			e.printStackTrace();
 			request.setAttribute("errors", e.getErrors());

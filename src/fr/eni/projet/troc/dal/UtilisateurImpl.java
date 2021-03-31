@@ -11,7 +11,7 @@ import fr.eni.projet.troc.exception.Errors;
 
 public class UtilisateurImpl implements UtilisateurDAO {
 	private static final String INSERT = "INSERT INTO utilisateurs (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
-	private static final String CONNECTION = "SELECT * from utilisateurs where pseudo=? and mot_de_passe=?";
+	private static final String CONNECTION = "SELECT * FROM utilisateurs WHERE mot_de_passe=? AND (pseudo=? OR email=?)";
 
 	@Override
 	public void create(Utilisateur utilisateur) throws BusinessException {
@@ -42,8 +42,9 @@ public class UtilisateurImpl implements UtilisateurDAO {
 	public Utilisateur find(String pseudo, String motDePasse) throws BusinessException {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement requete = cnx.prepareStatement(CONNECTION);
-			requete.setString(1, pseudo);
-			requete.setString(2, motDePasse);
+			requete.setString(1, motDePasse);
+			requete.setString(2, pseudo);
+			requete.setString(3, pseudo);
 
 			ResultSet rs = requete.executeQuery();
 

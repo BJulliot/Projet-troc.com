@@ -36,13 +36,13 @@
             <form action="./ConnectionServlet" method="post">
                 <div class="form-group row">
                     <div class="col-sm-12">
-                        <label for="pseudo">Pseudo</label>
+                        <label for="pseudo">Pseudo ou email :</label>
                         <input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="Pseudo" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-12">
-                        <label for="motDePasse">Mot de passe</label>
+                        <label for="motDePasse">Mot de passe :</label>
                         <input type="password" class="form-control" id="motDePasse" name="motDePasse" placeholder="Mot de passe" required>
                     </div>
                 </div>
