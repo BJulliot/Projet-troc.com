@@ -131,15 +131,7 @@
 						</c:choose>
 					</c:when>
 
-					<c:when test="${fn:contains(articles,search)}">
-						<c:forEach var="cateNum" items="${cateNum}">
-					${cateNum.nom} ${cateNum.description}
-					<p>Prix : ${cateNum.prixInitial} Points</p>
-							<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
-							<p>Vendeur : ${cateNum.noUtilisateur}</p>
-							<p>cat : ${cateNum.noCategorie}</p>
-						</c:forEach>
-					</c:when>>
+					
 				</c:choose>
 			</div>
 
