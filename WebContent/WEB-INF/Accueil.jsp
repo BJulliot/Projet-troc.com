@@ -23,22 +23,27 @@
 						<c:forEach var="categories" items="${categories}">
 							<option value="${categories.noCategorie}">${categories.libelle}</option>
 						</c:forEach>
-					</select> <input class="btn btn-primary" type="submit">
-				</form>
-			</div>
-
-			<div class="col-lg-5 col-md-4 col-sm-6 portfolio-item">
-
-				<form action="./AccueilServlet" method="get">
-					<input type="search" id="search" name="search"
+					</select> <input type="search" id="search" name="search"
 						placeholder="Recherche une enchère"> <input
 						class="btn btn-primary" type="submit">
 				</form>
 			</div>
 			<div class="card h-100">
 				<c:choose>
-					<c:when test="${Cat == null}">
-
+					<c:when test="${not empty search}">
+						<c:choose>
+							<c:when test="${fn:contains(nameArticle,search)}">
+								<c:forEach var="nameArticle" items="${nameArticle}">
+					${nameArticle.nom} ${nameArticle.description}
+					<p>Prix : ${nameArticle.prixInitial} Points</p>
+									<p>Fin de l'enchère : ${nameArticle.dateFinEnchere}</p>
+									<p>Vendeur : ${nameArticle.noUtilisateur}</p>
+									<p>cat : ${nameArticle.noCategorie}</p>
+								</c:forEach>
+							</c:when>
+						</c:choose>
+					</c:when>
+					<c:when test="${Cat == null }">
 						<c:forEach var="articles" items="${articles}">
 					${articles.nom} ${articles.description}
 					<p>Prix : ${articles.prixInitial} Points</p>
@@ -46,9 +51,8 @@
 							<p>Vendeur : ${articles.noUtilisateur}</p>
 							<p>cat : ${articles.noCategorie}</p>
 						</c:forEach>
-
 					</c:when>
-					<c:when test="${Cat == '0'}">
+					<c:when test="${Cat == '0' && empty search}">
 						<c:choose>
 							<c:when test="${empty articles }">
 								<p>Il n'y as pas d'enchère de ce type en cours</p>
@@ -64,7 +68,7 @@
 							</c:otherwise>
 						</c:choose>
 					</c:when>
-					<c:when test="${Cat == '1' }">
+					<c:when test="${Cat == '1' && empty search }">
 						<c:choose>
 							<c:when test="${empty cateNum }">
 								<p>Il n'y as pas d'enchère de ce type en cours</p>
@@ -80,8 +84,7 @@
 							</c:otherwise>
 						</c:choose>
 					</c:when>
-
-					<c:when test="${Cat == '2' }">
+					<c:when test="${Cat == '2' && empty search }">
 						<c:choose>
 							<c:when test="${empty cateNum}">
 								<p>Il n'y as pas d'enchère de ce type en cours</p>
@@ -97,8 +100,7 @@
 							</c:otherwise>
 						</c:choose>
 					</c:when>
-
-					<c:when test="${Cat == '3' }">
+					<c:when test="${Cat == '3' && empty search }">
 						<c:choose>
 							<c:when test="${empty cateNum }">
 								<p>Il n'y as pas d'enchère de ce type en cours</p>
@@ -114,7 +116,7 @@
 							</c:otherwise>
 						</c:choose>
 					</c:when>
-					<c:when test="${Cat == '4' }">
+					<c:when test="${Cat == '4' && empty search }">
 						<c:choose>
 							<c:when test="${empty cateNum }">
 								<p>Il n'y as pas d'enchère de ce type en cours</p>
@@ -130,15 +132,10 @@
 							</c:otherwise>
 						</c:choose>
 					</c:when>
-
-					
 				</c:choose>
 			</div>
-
 		</div>
 	</div>
-
 	<%@include file="/WEB-INF/template/script.html"%>
-
 </body>
 </html>

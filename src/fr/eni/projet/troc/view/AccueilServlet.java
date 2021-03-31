@@ -29,6 +29,7 @@ public class AccueilServlet extends HttpServlet {
 		request.setAttribute("search", search);
 		request.setAttribute("Cat", Cat);
 		System.out.println(Cat);
+		System.out.println(search);
 
 		try {
 			//Select all de categegories
@@ -43,7 +44,11 @@ public class AccueilServlet extends HttpServlet {
 			List<ArticleVendu> cateNum = ArticlesVendusManager.getInstance().getNoCategorie(Integer.parseInt(Cat));
 			request.setAttribute("cateNum", cateNum);
 			System.out.println(cateNum);
-
+			
+			List<ArticleVendu> nameArticle = ArticlesVendusManager.getInstance().getNomArticle(search);
+			request.setAttribute("nameArticle", nameArticle);
+			System.out.println(search);
+			System.out.println(nameArticle);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

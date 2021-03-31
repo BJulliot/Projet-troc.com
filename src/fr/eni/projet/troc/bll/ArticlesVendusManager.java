@@ -30,5 +30,9 @@ public class ArticlesVendusManager {
     public List<ArticleVendu> getNoCategorie(int noCategorie)throws Exception {
     	return articleVenduDAO.selectById(noCategorie);
     }
+    
+    public List<ArticleVendu> getNomArticle(String name) throws Exception{
+    	return articleVenduDAO.selectByName(name);
+    }
 	
 }
