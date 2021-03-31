@@ -40,41 +40,41 @@
                 <div class="form-group row">
                     <div class="col-sm-6">
                         <label for="pseudo">Pseudo</label>
-                        <input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="Pseudo"  required>
+                        <input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="Pseudo" value="${nouvelUtilisateur.pseudo}" required>
                     </div>
                     <div class="col-sm-6">
                         <label for="nom">Nom</label>
-                        <input type="text" class="form-control" id="nom" name="nom" placeholder="Nom"  required>
+                        <input type="text" class="form-control" id="nom" name="nom" placeholder="Nom" value="${nouvelUtilisateur.nom}" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-6">
                         <label for="prenom">Prénom</label>
-                        <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Prénom"  required>
+                        <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Prénom" value="${nouvelUtilisateur.prenom}" required>
                     </div>
                     <div class="col-sm-6">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Email"  required>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="${nouvelUtilisateur.email}" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-6">
                         <label for="telephone">Téléphone</label>
-                        <input type="tel" class="form-control" id="telephone" name="telephone" placeholder="Téléphone" >
+                        <input type="tel" class="form-control" id="telephone" name="telephone" placeholder="Téléphone" value="${nouvelUtilisateur.telephone}">
                     </div>
                 </div>
                 <div class="form-group row">
                 	<div class="col-sm-6">
                         <label for="rue">Adresse</label>
-                        <input type="text" class="form-control" id="rue" name="rue" placeholder="Adresse"  required>
+                        <input type="text" class="form-control" id="rue" name="rue" placeholder="Adresse" value="${nouvelUtilisateur.rue}" required>
                     </div>
                     <div class="col-sm-3">
                         <label for="codePostal">Code Postal</label>
-                        <input type="text" class="form-control" id="codePostal" name="codePostal" placeholder="Code Postal" required>
+                        <input type="text" class="form-control" id="codePostal" name="codePostal" placeholder="Code Postal" value="${nouvelUtilisateur.codePostal}"required>
                     </div>
                     <div class="col-sm-3">
                         <label for="ville">Ville</label>
-                        <input type="text" class="form-control" id="ville" name="ville" placeholder="Ville"  required>
+                        <input type="text" class="form-control" id="ville" name="ville" placeholder="Ville" value="${nouvelUtilisateur.ville}" required>
                     </div>
                 </div>
                 <div class="form-group row">
