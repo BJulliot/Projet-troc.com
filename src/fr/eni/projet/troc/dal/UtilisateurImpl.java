@@ -7,10 +7,10 @@ import java.sql.SQLException;
 
 import fr.eni.projet.troc.bo.Utilisateur;
 import fr.eni.projet.troc.exception.BusinessException;
+import fr.eni.projet.troc.exception.Errors;
 
 public class UtilisateurImpl implements UtilisateurDAO {
-	private static final String INSERT = "INSERT INTO utilisateurs (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur)"
-			+ "  VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+	private static final String INSERT = "INSERT INTO utilisateurs (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String CONNECTION = "SELECT * from utilisateurs where pseudo=? and mot_de_passe=?";
 
 	@Override
@@ -33,6 +33,9 @@ public class UtilisateurImpl implements UtilisateurDAO {
 
 		} catch (Exception e) {
 			e.printStackTrace();
+			BusinessException be = new BusinessException();
+			be.addError(Errors.INSERT_UTILISATEUR_ECHEC);
+			throw be;
 		}
 
 	}

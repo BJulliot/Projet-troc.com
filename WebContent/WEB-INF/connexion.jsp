@@ -6,7 +6,7 @@
 <html>
 		<%@include file="/WEB-INF/template/head.html"%>
 <body>
-		<%@include file="/WEB-INF/template/nav.html"%>
+		<%@include file="/WEB-INF/template/nav.jsp"%>
 
 	<div class="container">
 		<div class="col-12">

@@ -54,4 +54,10 @@ public class Errors {
 	 * Echec le mot de passe de l'utilisateur ne respecte pas les règles définies
 	 */
 	public static final String REGLE_UTILISATEUR_PWD_DIFFERENT_ERREUR = "Les deux mots de passe doivent être identiques.";
+
+	/**
+	 * Echec général quand erreur non gérée Ã  l'insertion
+	 */
+	public static final String INSERT_UTILISATEUR_ECHEC = "Une erreur non gérée est survenue lors de l'enrgistrement des informations.";
+
 }
