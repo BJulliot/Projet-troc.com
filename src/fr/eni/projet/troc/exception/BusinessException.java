@@ -7,12 +7,9 @@ public class BusinessException extends Exception {
 	private static final long serialVersionUID = 1L;
 
 	// Ensemble des messages d'erreur de l'application
-	private List<String> errors;
+	private List<String> errors = new ArrayList<String>();
 
 	public void addError(String error) {
-		if (errors == null) {
-			errors = new ArrayList<String>();
-		}
 		errors.add(error);
 	}
 
@@ -42,5 +39,4 @@ public class BusinessException extends Exception {
 	public boolean hasErreurs() {
 		return this.errors.size() > 0;
 	}
-
 }

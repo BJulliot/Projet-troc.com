@@ -30,7 +30,6 @@ public class UtilisateurImpl implements UtilisateurDAO {
 			requete.setInt(10, utilisateur.getCredit());
 			requete.setBoolean(11, utilisateur.isAdministrateur());
 			requete.executeUpdate();
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			BusinessException be = new BusinessException();
