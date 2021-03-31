@@ -25,7 +25,7 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 
 	public static ArticleVendu itemBuilder(ResultSet rs) throws SQLException {
 		ArticleVendu articleVendu = new ArticleVendu();
-	
+		articleVendu.setNoArticle(rs.getInt("no_article"));
 		articleVendu.setNom(rs.getString("nom_article"));
 		articleVendu.setDescription(rs.getString("description"));
 		articleVendu.setDateDebutEnchere(rs.getDate("date_debut_encheres").toLocalDate());
@@ -42,7 +42,7 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 		List<ArticleVendu> articleVendus = new ArrayList<ArticleVendu>();
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement requete = cnx.prepareStatement(
-					"SELECT nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,GROUP_CONCAT(utilisateurs.pseudo SEPARATOR \" \") AS pseudo,GROUP_CONCAT(categories.libelle SEPARATOR \" \") AS libelle FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie GROUP BY articles_vendus.no_article");
+					"SELECT no_article, nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,GROUP_CONCAT(utilisateurs.pseudo SEPARATOR \" \") AS pseudo,GROUP_CONCAT(categories.libelle SEPARATOR \" \") AS libelle FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie GROUP BY articles_vendus.no_article");
 	
 			ResultSet rs = requete.executeQuery();
 
@@ -60,17 +60,17 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 	* {@inheritDoc}
 	*/
 	@Override
-	public ArticleVendu selectById(int cateNum) throws Exception {
-		ArticleVendu articleVendus = null;
+	public List<ArticleVendu> selectById(int cateNum) throws Exception {
+		List<ArticleVendu> articleVendus = new ArrayList<ArticleVendu>();
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement requete = cnx.prepareStatement(
-					"SELECT nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,GROUP_CONCAT(utilisateurs.pseudo SEPARATOR \" \") AS pseudo,GROUP_CONCAT(categories.libelle SEPARATOR \" \") AS libelle FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie WHERE categories.no_categorie = ?");
+					"SELECT no_article, nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,GROUP_CONCAT(utilisateurs.pseudo SEPARATOR \" \") AS pseudo,GROUP_CONCAT(categories.libelle SEPARATOR \" \") AS libelle FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie WHERE categories.no_categorie = ?");
 			requete.setInt(1, cateNum);
 
 			ResultSet rs = requete.executeQuery();
 
 			while (rs.next()) {
-				articleVendus = (itemBuilder(rs));
+				articleVendus.add(itemBuilder(rs));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

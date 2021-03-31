@@ -35,7 +35,7 @@ public class CategorieManager {
         return categorieDAO.selectAll();
     }
     
-    public Categorie getNoCategorie(int noCategorie)throws Exception {
+    public List<Categorie> getNoCategorie(int noCategorie)throws Exception {
     	return categorieDAO.selectById(noCategorie);
     }
 	

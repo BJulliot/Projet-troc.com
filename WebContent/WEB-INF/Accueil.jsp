@@ -19,6 +19,7 @@
 				<form action="./AccueilServlet" method="get">
 					<select class="form-select" id="Categories" name="Categories"
 						aria-label="Default select example">
+						<option value="0" Selected>Toutes les enchères</option>
 						<c:forEach var="categories" items="${categories}">
 							<option value="${categories.noCategorie}">${categories.libelle}</option>
 						</c:forEach>
@@ -36,26 +37,63 @@
 				</div>
 			</div>
 			<div class="card h-100">
-	
-						<c:forEach var="articles" items="${articles}">
+			<c:if test="${Cat == null}">
+					<c:forEach var="articles" items="${articles}">
 					${articles.nom} ${articles.description}
 					<p>Prix : ${articles.prixInitial} Points</p>
-							<p>Fin de l'enchère : ${articles.dateFinEnchere}</p>
-							<p>Vendeur : ${articles.noUtilisateur}</p>
-							<p>cat : ${articles.noCategorie}</p>
-						</c:forEach>
-			
-					
-				<%-- 	<c:forEach var="cateNum" items="${cateNum}">
+						<p>Fin de l'enchère : ${articles.dateFinEnchere}</p>
+						<p>Vendeur : ${articles.noUtilisateur}</p>
+						<p>cat : ${articles.noCategorie}</p>
+					</c:forEach>
+				</c:if>
+				<c:if test="${Cat == '0'}">
+					<c:forEach var="articles" items="${articles}">
+					${articles.nom} ${articles.description}
+					<p>Prix : ${articles.prixInitial} Points</p>
+						<p>Fin de l'enchère : ${articles.dateFinEnchere}</p>
+						<p>Vendeur : ${articles.noUtilisateur}</p>
+						<p>cat : ${articles.noCategorie}</p>
+					</c:forEach>
+				</c:if>
+				<c:if test="${Cat == '1' }">
+					<c:forEach var="cateNum" items="${cateNum}">
 					${cateNum.nom} ${cateNum.description}
 					<p>Prix : ${cateNum.prixInitial} Points</p>
-							<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
-							<p>Vendeur : ${cateNum.noUtilisateur}</p>
-							<p>cat : ${cateNum.noCategorie}</p>
-						</c:forEach> --%>
-					
-				
-			
+						<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
+						<p>Vendeur : ${cateNum.noUtilisateur}</p>
+						<p>cat : ${cateNum.noCategorie}</p>
+					</c:forEach>
+				</c:if>
+
+				<c:if test="${Cat == '2' }">
+					<c:forEach var="cateNum" items="${cateNum}">
+					${cateNum.nom} ${cateNum.description}
+					<p>Prix : ${cateNum.prixInitial} Points</p>
+						<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
+						<p>Vendeur : ${cateNum.noUtilisateur}</p>
+						<p>cat : ${cateNum.noCategorie}</p>
+					</c:forEach>
+				</c:if>
+
+				<c:if test="${Cat == '3' }">
+					<c:forEach var="cateNum" items="${cateNum}">
+					${cateNum.nom} ${cateNum.description}
+					<p>Prix : ${cateNum.prixInitial} Points</p>
+						<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
+						<p>Vendeur : ${cateNum.noUtilisateur}</p>
+						<p>cat : ${cateNum.noCategorie}</p>
+					</c:forEach>
+				</c:if>
+				<c:if test="${Cat == '4' }">
+					<c:forEach var="cateNum" items="${cateNum}">
+					${cateNum.nom} ${cateNum.description}
+					<p>Prix : ${cateNum.prixInitial} Points</p>
+						<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
+						<p>Vendeur : ${cateNum.noUtilisateur}</p>
+						<p>cat : ${cateNum.noCategorie}</p>
+					</c:forEach>
+				</c:if>
+
 			</div>
 
 		</div>

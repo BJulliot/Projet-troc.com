@@ -53,15 +53,15 @@ public class CategorieImpl implements CategorieDAO {
 	* {@inheritDoc}
 	*/
 	@Override
-	public Categorie selectById(int noCategorie) throws Exception {
-		Categorie categories = null;
+	public List<Categorie> selectById(int noCategorie) throws Exception {
+		List<Categorie> categories = new ArrayList<Categorie>();
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement requete = cnx.prepareStatement("SELECT * FROM categories WHERE no_categorie = ?");
 			requete.setInt(1, noCategorie);
 			ResultSet rs = requete.executeQuery();
 
 			while (rs.next()) {
-				categories = (itemBuilder(rs));
+				categories.add(itemBuilder(rs));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

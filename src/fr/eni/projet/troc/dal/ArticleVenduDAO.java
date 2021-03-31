@@ -8,5 +8,5 @@ public interface ArticleVenduDAO {
 
 		public List<ArticleVendu> selectAll() throws Exception;
 		
-		public ArticleVendu selectById(int catNum) throws Exception;
+		public List<ArticleVendu> selectById(int catNum) throws Exception;
 }

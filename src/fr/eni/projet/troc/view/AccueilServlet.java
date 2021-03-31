@@ -27,29 +27,20 @@ public class AccueilServlet extends HttpServlet {
 		String Cat = request.getParameter("Categories");
 		request.setAttribute("Cat", Cat);
 		System.out.println(Cat);
+
 		try {
+			//Select all de categegories
 			List<Categorie> categories = CategorieManager.getInstance().getCategorie();
 			request.setAttribute("categories", categories);
 
+			//Select All article 
 			List<ArticleVendu> articles = ArticlesVendusManager.getInstance().getAllArticleVendus();
 			request.setAttribute("articles", articles);
-
-			ArticleVendu cateNum = ArticlesVendusManager.getInstance().getNoCategorie(Integer.parseInt(Cat));
+			
+			//Select article by id
+			List<ArticleVendu> cateNum = ArticlesVendusManager.getInstance().getNoCategorie(Integer.parseInt(Cat));
 			request.setAttribute("cateNum", cateNum);
 			System.out.println(cateNum);
-
-//			if (Cat == null) {
-//				categories = CategorieManager.getInstance().getCategorie();
-//
-//				articles = ArticlesVendusManager.getInstance().getAllArticleVendus();
-//			}
-//			Categorie noCategorie = CategorieManager.getInstance().getNoCategorie(Integer.parseInt(Cat));
-//			request.setAttribute("noCategorie", noCategorie);
-//			System.out.println(noCategorie);
-
-//			ArticleVendu cateNum = ArticlesVendusManager.getInstance().getNoCategorie(Integer.parseInt(Cat));
-//			request.setAttribute("cateNum", cateNum);
-//			System.out.println(cateNum);
 
 		} catch (Exception e) {
 			e.printStackTrace();

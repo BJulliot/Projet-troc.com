@@ -27,7 +27,7 @@ public class ArticlesVendusManager {
         return articleVenduDAO.selectAll();
     }
     
-    public ArticleVendu getNoCategorie(int noCategorie)throws Exception {
+    public List<ArticleVendu> getNoCategorie(int noCategorie)throws Exception {
     	return articleVenduDAO.selectById(noCategorie);
     }
 	

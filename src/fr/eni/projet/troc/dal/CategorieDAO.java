@@ -17,5 +17,5 @@ public interface CategorieDAO {
 
 	public List<Categorie> selectAll() throws Exception;
 	
-	public Categorie selectById(int noCategorie) throws Exception;
+	public List<Categorie> selectById(int noCategorie) throws Exception;
 }
