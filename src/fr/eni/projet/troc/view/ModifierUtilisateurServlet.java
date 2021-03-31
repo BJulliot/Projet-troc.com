@@ -16,7 +16,7 @@ import fr.eni.projet.troc.exception.BusinessException;
 /**
  * Servlet implementation class NouvelleListeServlet
  */
-@WebServlet("/NouvelUtilisateurServlet")
+@WebServlet("/ModifierUtilisateurServlet")
 public class ModifierUtilisateurServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -40,7 +40,7 @@ public class ModifierUtilisateurServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Récupération des données saisies dans le formulaire
+		// Rï¿½cupï¿½ration des donnï¿½es saisies dans le formulaire
 		request.setCharacterEncoding("UTF-8");
 		Utilisateur nouvelUtilisateur = new Utilisateur();
 		nouvelUtilisateur.setPseudo(request.getParameter("pseudo"));

@@ -16,13 +16,15 @@
 		<h1 class="my-4 text-center">Liste des enchères</h1>
 		<div class="col-lg-6 col-md-4 col-sm-6 portfolio-item">
 			<div class="col-lg-8 col-md-4 col-sm-6 portfolio-item">
-				<h2 class="my-4">Filtres :</h2>
+				
 				<form action="./AccueilServlet" method="get">
 					<div class="col-lg-12 col-md-4 col-sm-6 portfolio-item">
+					<h3 class="my-4">Filtres :</h3>
 						<input class="search-bar" type="search" id="search" name="search"
-							placeholder="Recherche une enchère">
+							placeholder="Rechercher une enchère">
 					</div>
 					<div class="col-lg-12 col-md-4 col-sm-6 portfolio-item">
+					<h3 class="my-4">Catégorie :</h3>
 						<select class="form-select" id="Categories" name="Categories"
 							aria-label="Default select example">
 							<option value="0" Selected>Toutes les catégories</option>
@@ -31,7 +33,7 @@
 							</c:forEach>
 						</select>
 					</div>
-					<input class="btn btn-primary" type="submit">
+					<input class="btn btn-primary" type="submit" value="Rechercher">
 				</form>
 			</div>
 			<c:choose>

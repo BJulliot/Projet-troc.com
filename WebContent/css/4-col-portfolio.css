@@ -45,3 +45,8 @@ body {
 [role=button], a, area, button, input:not([type=range]), label, select, summary, textarea {
 	border-radius:10px;
 }
+
+
+.search-bar{
+	width: 100%;
+}
