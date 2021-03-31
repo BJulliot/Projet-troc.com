@@ -29,12 +29,11 @@
 
 			<div class="col-lg-5 col-md-4 col-sm-6 portfolio-item">
 
-				<div class="input-group">
-					<input type="search" class="form-control rounded"
-						placeholder="Rechercher une enchère" aria-label="Search"
-						aria-describedby="search-addon" />
-					<button type="button" class="btn btn-outline-primary">Rechercher</button>
-				</div>
+				<form action="./AccueilServlet" method="get">
+					<input type="search" id="search" name="search"
+						placeholder="Recherche une enchère"> <input
+						class="btn btn-primary" type="submit">
+				</form>
 			</div>
 			<div class="card h-100">
 				<c:choose>
@@ -132,6 +131,15 @@
 						</c:choose>
 					</c:when>
 
+					<c:when test="${fn:contains(articles,search)}">
+						<c:forEach var="cateNum" items="${cateNum}">
+					${cateNum.nom} ${cateNum.description}
+					<p>Prix : ${cateNum.prixInitial} Points</p>
+							<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
+							<p>Vendeur : ${cateNum.noUtilisateur}</p>
+							<p>cat : ${cateNum.noCategorie}</p>
+						</c:forEach>
+					</c:when>>
 				</c:choose>
 			</div>
 

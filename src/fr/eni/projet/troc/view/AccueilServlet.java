@@ -25,6 +25,8 @@ public class AccueilServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		String Cat = request.getParameter("Categories");
+		String search = request.getParameter("search");
+		request.setAttribute("search", search);
 		request.setAttribute("Cat", Cat);
 		System.out.println(Cat);
 
@@ -51,15 +53,30 @@ public class AccueilServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+
+		String Cat = request.getParameter("Categories");
+		String search = request.getParameter("search");
+		request.setAttribute("search", search);
+		request.setAttribute("Cat", Cat);
+		System.out.println(Cat);
+
 		try {
-			List<ArticleVendu> articles = ArticlesVendusManager.getInstance().getAllArticleVendus();
-			request.setAttribute("articles", articles);
+			//Select all de categegories
 			List<Categorie> categories = CategorieManager.getInstance().getCategorie();
 			request.setAttribute("categories", categories);
+
+			//Select All article 
+			List<ArticleVendu> articles = ArticlesVendusManager.getInstance().getAllArticleVendus();
+			request.setAttribute("articles", articles);
+			
+			//Select article by id
+			List<ArticleVendu> cateNum = ArticlesVendusManager.getInstance().getNoCategorie(Integer.parseInt(Cat));
+			request.setAttribute("cateNum", cateNum);
+			System.out.println(cateNum);
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		request.getRequestDispatcher("/WEB-INF/Accueil.jsp").forward(request, response);
 	}
 
