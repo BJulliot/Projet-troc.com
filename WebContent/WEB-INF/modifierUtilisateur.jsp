@@ -33,7 +33,7 @@
 			</c:if>
 			
         <div class="col-md-10 mx-auto">
-            <form action="./NouvelUtilisateurServlet" method="post">
+            <form action="./ModifierUtilisateurServlet" method="post">
                 <div class="form-group row">
                     <div class="col-sm-6">
                         <label for="pseudo">Pseudo</label>
@@ -96,8 +96,8 @@
                 <div class="form-group mb-2">
                 	<button type="" class="btn btn-secondary">Crédit : ${utilisateurEnSession.credit}</button>
                 </div>
-                       
-                <div class="text-center">
+				
+                <div class="text-center mb-2">
 	                <button type="submit" class="btn btn-secondary">Enregistrer modifications</button>
 	                <button type="button" href="./AccueilServlet" class="btn btn-secondary">Annuler</button>
             	</div>

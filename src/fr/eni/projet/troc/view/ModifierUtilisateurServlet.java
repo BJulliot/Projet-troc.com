@@ -65,11 +65,24 @@ public class ModifierUtilisateurServlet extends HttpServlet {
 		try {
 			um.update(noUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, ancienMotDePasse,
 					nouveauMotDePasse, confirmationMotDePasse);
+			// on set les nouvelles infos à l'utilisateur en session :
+			utilisateur.setPseudo(pseudo);
+			utilisateur.setNom(nom);
+			utilisateur.setPrenom(prenom);
+			utilisateur.setEmail(email);
+			utilisateur.setTelephone(telephone);
+			utilisateur.setRue(rue);
+			utilisateur.setCodePostal(codePostal);
+			utilisateur.setVille(ville);
+			utilisateur.setMotDePasse(nouveauMotDePasse);
+			// on les transmets vers session
+			session.setAttribute("utilisateurEnSession", utilisateur);
+
 			request.getRequestDispatcher("/AccueilServlet").forward(request, response);
 		} catch (BusinessException e) {
 			e.printStackTrace();
 			request.setAttribute("errors", e.getErrors());
-			request.getRequestDispatcher("/WEB-INF/nouvelUtilisateur.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/modifierUtilisateur.jsp").forward(request, response);
 		}
 	}
 }

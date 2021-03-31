@@ -12,7 +12,9 @@ import fr.eni.projet.troc.exception.Errors;
 public class UtilisateurImpl implements UtilisateurDAO {
 	private static final String INSERT = "INSERT INTO utilisateurs (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String CONNECTION = "SELECT * FROM utilisateurs WHERE mot_de_passe=? AND (pseudo=? OR email=?)";
-	private static final String GETUTILISATEURPASSWORD = "SELECT mot_de_passe FROM utilisateurs WHERE no_utilisateur=?";
+	private static final String GET_UTILISATEUR_PASSWORD = "SELECT mot_de_passe FROM utilisateurs WHERE no_utilisateur=?";
+	private static final String UPDATE_UTILISATEUR = "UPDATE utilisateurs SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, "
+			+ " code_postal=?, ville=?, mot_de_passe=? WHERE no_utilisateur=?";
 
 	@Override
 	public void create(Utilisateur utilisateur) throws BusinessException {
@@ -97,13 +99,14 @@ public class UtilisateurImpl implements UtilisateurDAO {
 		String result;
 
 		try (Connection cnx = ConnectionProvider.getConnection()) {
-			PreparedStatement requete = cnx.prepareStatement(GETUTILISATEURPASSWORD);
+			PreparedStatement requete = cnx.prepareStatement(GET_UTILISATEUR_PASSWORD);
 			requete.setInt(1, noUtilisateur);
 
 			ResultSet rs = requete.executeQuery();
 
 			if (rs.next()) {
 				result = rs.getString("mot_de_passe");
+				System.out.println("ancien mot de passe en BDD : " + result);
 				return result;
 			} else {
 				// Utilisateur non trouvé
@@ -115,6 +118,32 @@ public class UtilisateurImpl implements UtilisateurDAO {
 			e.printStackTrace();
 			BusinessException be = new BusinessException();
 			be.addError("ERROR DB - " + e.getMessage());
+			throw be;
+		}
+	}
+
+	@Override
+	public void update(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
+			String rue, String codePostal, String ville, String nouveauMotDePasse) throws BusinessException {
+
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement requete = cnx.prepareStatement(UPDATE_UTILISATEUR);
+			requete.setString(1, pseudo);
+			requete.setString(2, prenom);
+			requete.setString(3, prenom);
+			requete.setString(4, email);
+			requete.setString(5, telephone);
+			requete.setString(6, rue);
+			requete.setString(7, codePostal);
+			requete.setString(8, ville);
+			requete.setString(9, nouveauMotDePasse);
+			requete.setInt(10, noUtilisateur);
+			requete.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException be = new BusinessException();
+			be.addError(Errors.INSERT_UTILISATEUR_ECHEC);
 			throw be;
 		}
 	}

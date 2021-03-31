@@ -55,7 +55,7 @@ public class UtilisateursManager {
 
 	public void update(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String codePostal, String ville, String ancienMotDePasse, String nouveauMotDePasse,
-			String confirmationMotDePasse) {
+			String confirmationMotDePasse) throws BusinessException {
 		BusinessException be = new BusinessException();
 		validerPseudo(pseudo, be);
 		validerNom(nom, be);
@@ -65,12 +65,13 @@ public class UtilisateursManager {
 		validerRue(rue, be);
 		validerCodePostal(codePostal, be);
 		validerVille(ville, be);
-		validerAncienMotDePasseBDD(ancienMotDePasse, be);
+		validerAncienMotDePasseBDD(ancienMotDePasse, noUtilisateur, be);
 		validerMotDePasse(nouveauMotDePasse, be);
 		validerMotDePasseIdentique(nouveauMotDePasse, confirmationMotDePasse, be);
 
 		if (!be.hasErreurs()) {
-			utilisateurDAO.update(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone, String rue, String codePostal, String ville, String nouveauMotDePasse);
+			utilisateurDAO.update(noUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville,
+					nouveauMotDePasse);
 		} else {
 			throw be;
 		}
@@ -88,18 +89,23 @@ public class UtilisateursManager {
 		return true;
 	}
 
-	private boolean validerAncienMotDePasseBDD(String ancienMotDePasse, int noUtilisateur, BusinessException be)
-			throws BusinessException {
+	private boolean validerAncienMotDePasseBDD(String ancienMotDePasse, int noUtilisateur, BusinessException be) {
 		if (ancienMotDePasse == null) {
 			be.addError("L'ancien mot de passe ne peut pas être nul");
 			return false;
 		}
-		if (utilisateurDAO.getPasswordBynoUtilisateur(noUtilisateur) != ancienMotDePasse) {
-			be.addError(Errors.REGLE_UTILISATEUR_ANCIEN_PWD_ERREUR);
-			return false;
-		} else {
-			return true;
+		try {
+			if (!(utilisateurDAO.getPasswordBynoUtilisateur(noUtilisateur).equals(ancienMotDePasse))) {
+				be.addError(Errors.REGLE_UTILISATEUR_ANCIEN_PWD_ERREUR);
+				return false;
+			} else {
+				return true;
+			}
+		} catch (BusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		return true;
 	}
 
 	private boolean validerMotDePasse(String motDePasse, BusinessException be) {
