@@ -6,10 +6,10 @@
 			<a class="navbar-brand" href="#">ENI-Enchère</a>
 			
 			<%//Récupérer l'attribut userInSession sur la Session
-			Utilisateur utilisateur = (Utilisateur)session.getAttribute("utilisateurEnSession");
+			Utilisateur utilisateurEnSession = (Utilisateur)session.getAttribute("utilisateurEnSession");
 			%>
 			<c:choose>
-    		<c:when test="${utilisateur != null}">
+    		<c:when test="${utilisateurEnSession != null}">
 				<div class="text-end">
 					<a class="btn btn-outline-light me-2" href="./AfficherEncheresServlet" type="button">Enchères</a>
 					<a class="btn btn-outline-light me-2" href="./VendreArticleServlet" type="button">Vendre un objet</a>

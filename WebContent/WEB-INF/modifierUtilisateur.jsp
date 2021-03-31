@@ -11,7 +11,7 @@
 
 	<div class="container">
 		<div class="col-12">
-			<h2 class="my-5 text-center">Nouveau profil</h2>
+			<h2 class="my-5 text-center">Modifier votre profil</h2>
 			<c:if test="${!empty errors}">
 				<div class="row">
 					<div class="col-lg-12 col-md-6 col-sm-6 portfolio-item">
@@ -32,49 +32,46 @@
 				</div>
 			</c:if>
 			
-			<%//Récupérer l'attribut userInSession sur la Session
-			Utilisateur nouvelUtilisateur = (Utilisateur)request.getAttribute("nouvelUtilisateur");
-			%>
         <div class="col-md-10 mx-auto">
             <form action="./NouvelUtilisateurServlet" method="post">
                 <div class="form-group row">
                     <div class="col-sm-6">
                         <label for="pseudo">Pseudo</label>
-                        <input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="Pseudo" value="${nouvelUtilisateur.pseudo}" required>
+                        <input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="Pseudo" value="${utilisateurEnSession.pseudo}" required>
                     </div>
                     <div class="col-sm-6">
                         <label for="nom">Nom</label>
-                        <input type="text" class="form-control" id="nom" name="nom" placeholder="Nom" value="${nouvelUtilisateur.nom}" required>
+                        <input type="text" class="form-control" id="nom" name="nom" placeholder="Nom" value="${utilisateurEnSession.nom}" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-6">
                         <label for="prenom">Prénom</label>
-                        <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Prénom" value="${nouvelUtilisateur.prenom}" required>
+                        <input type="text" class="form-control" id="prenom" name="prenom" placeholder="Prénom" value="${utilisateurEnSession.prenom}" required>
                     </div>
                     <div class="col-sm-6">
                         <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="${nouvelUtilisateur.email}" required>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Email" value="${utilisateurEnSession.email}" required>
                     </div>
                 </div>
                 <div class="form-group row">
                     <div class="col-sm-6">
                         <label for="telephone">Téléphone</label>
-                        <input type="tel" class="form-control" id="telephone" name="telephone" placeholder="Téléphone" value="${nouvelUtilisateur.telephone}">
+                        <input type="tel" class="form-control" id="telephone" name="telephone" placeholder="Téléphone" value="${utilisateurEnSession.telephone}">
                     </div>
                 </div>
                 <div class="form-group row">
                 	<div class="col-sm-6">
                         <label for="rue">Adresse</label>
-                        <input type="text" class="form-control" id="rue" name="rue" placeholder="Adresse" value="${nouvelUtilisateur.rue}" required>
+                        <input type="text" class="form-control" id="rue" name="rue" placeholder="Adresse" value="${utilisateurEnSession.rue}" required>
                     </div>
                     <div class="col-sm-3">
                         <label for="codePostal">Code Postal</label>
-                        <input type="text" class="form-control" id="codePostal" name="codePostal" placeholder="Code Postal" value="${nouvelUtilisateur.codePostal}"required>
+                        <input type="text" class="form-control" id="codePostal" name="codePostal" placeholder="Code Postal" value="${utilisateurEnSession.codePostal}"required>
                     </div>
                     <div class="col-sm-3">
                         <label for="ville">Ville</label>
-                        <input type="text" class="form-control" id="ville" name="ville" placeholder="Ville" value="${nouvelUtilisateur.ville}" required>
+                        <input type="text" class="form-control" id="ville" name="ville" placeholder="Ville" value="${utilisateurEnSession.ville}" required>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -88,7 +85,7 @@
                     </div>
                 </div>
                 <div class="text-center">
-	                <button type="submit" class="btn btn-secondary">Créer</button>
+	                <button type="submit" class="btn btn-secondary">Enregistrer modifications</button>
 	                <button type="button" href="index.jsp" class="btn btn-secondary">Annuler</button>
             	</div>
             </form>
