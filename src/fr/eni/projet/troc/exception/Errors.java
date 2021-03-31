@@ -36,6 +36,11 @@ public class Errors {
 	public static final String REGLE_UTILISATEUR_PWD_ERREUR = "Le mot de passe doit contenir entre 8 et 12 caractères (1 chiffre, 1 majuscule, 1 caractère spécial).";
 
 	/**
+	 * Echec le mot de passe de l'utilisateur ne respecte pas les règles définies
+	 */
+	public static final String REGLE_UTILISATEUR_ANCIEN_PWD_ERREUR = "Le mot de passe de passe saisi n'est pas le même que l'ancien.";
+
+	/**
 	 * Echec la rue de l'utilisateur ne respecte pas les règles définies
 	 */
 	public static final String REGLE_UTILISATEUR_RUE_ERREUR = "L'adresse de l'utilisateur est obligatoire et ne doit pas dépasser 30 caractères.";
@@ -59,4 +64,9 @@ public class Errors {
 	 * Echec général quand erreur non gérée Ã  l'insertion
 	 */
 	public static final String INSERT_UTILISATEUR_ECHEC = "Une erreur non gérée est survenue lors de l'enrgistrement des informations.";
+
+	/**
+	 * Echec récupération du mot de passe en BDD
+	 */
+	public static final String SELECT_PASSWORD_UTILISATEUR_ECHEC = "Une erreur non gérée est survenue lors de la récupération du mot de passe.";
 }

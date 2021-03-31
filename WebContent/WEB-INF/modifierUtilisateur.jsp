@@ -77,8 +77,8 @@
                 <div class=" p-3 mb-2 bg-secondary">
                 <div class="form-group row">
                     <div class="col-sm-6">
-                        <label class="text-white" for="motDePasse">Mot de passe actuel</label>
-                        <input type="password" class="form-control" id="motDePasse" name="motDePasse" placeholder="Mot de passe" required>
+                        <label class="text-white" for="ancienMotDePasse">Mot de passe actuel</label>
+                        <input type="password" class="form-control" id="ancienMotDePasse" name="ancienMotDePasse" placeholder="Ancien mot de passe" required>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -92,6 +92,11 @@
                     </div>
                 </div>
                 </div>
+                
+                <div class="form-group mb-2">
+                	<button type="" class="btn btn-secondary">Crédit : ${utilisateurEnSession.credit}</button>
+                </div>
+                       
                 <div class="text-center">
 	                <button type="submit" class="btn btn-secondary">Enregistrer modifications</button>
 	                <button type="button" href="./AccueilServlet" class="btn btn-secondary">Annuler</button>

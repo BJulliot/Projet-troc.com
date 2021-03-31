@@ -47,30 +47,28 @@ public class ModifierUtilisateurServlet extends HttpServlet {
 		// Récupération et intégration des données saisies dans le formulaire
 		// modifierUtilisateur.jsp
 		request.setCharacterEncoding("UTF-8");
-		Utilisateur nouvelUtilisateur = new Utilisateur();
-		nouvelUtilisateur.setPseudo(request.getParameter("pseudo"));
-		nouvelUtilisateur.setNom(request.getParameter("nom"));
-		nouvelUtilisateur.setPrenom(request.getParameter("prenom"));
-		nouvelUtilisateur.setEmail(request.getParameter("email"));
-		nouvelUtilisateur.setTelephone(request.getParameter("telephone"));
-		nouvelUtilisateur.setRue(request.getParameter("rue"));
-		nouvelUtilisateur.setCodePostal(request.getParameter("codePostal"));
-		nouvelUtilisateur.setVille(request.getParameter("ville"));
-		nouvelUtilisateur.setMotDePasse(request.getParameter("motDePasse"));
-		nouvelUtilisateur.setCredit(100);
-		nouvelUtilisateur.setAdministrateur(false);
-
 		UtilisateursManager um = UtilisateursManager.getInstance();
+		int noUtilisateur = utilisateur.getNoUtilisateur();
+		String pseudo = request.getParameter("pseudo");
+		String nom = request.getParameter("nom");
+		String prenom = request.getParameter("prenom");
+		String email = request.getParameter("email");
+		String telephone = request.getParameter("telephone");
+		String rue = request.getParameter("rue");
+		String codePostal = request.getParameter("codePostal");
+		String ville = request.getParameter("ville");
+
+		String ancienMotDePasse = request.getParameter("ancienMotDePasse");
+		String nouveauMotDePasse = request.getParameter("nouveauMotDePasse");
 		String confirmationMotDePasse = request.getParameter("confirmationMotDePasse");
-		System.out.println("mot de passe : " + nouvelUtilisateur.getMotDePasse());
-		System.out.println("confirmation : " + confirmationMotDePasse);
+
 		try {
-			um.create(nouvelUtilisateur, confirmationMotDePasse);
+			um.update(noUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, ancienMotDePasse,
+					nouveauMotDePasse, confirmationMotDePasse);
 			request.getRequestDispatcher("/AccueilServlet").forward(request, response);
 		} catch (BusinessException e) {
 			e.printStackTrace();
 			request.setAttribute("errors", e.getErrors());
-			request.setAttribute("nouvelUtilisateur", nouvelUtilisateur);
 			request.getRequestDispatcher("/WEB-INF/nouvelUtilisateur.jsp").forward(request, response);
 		}
 	}

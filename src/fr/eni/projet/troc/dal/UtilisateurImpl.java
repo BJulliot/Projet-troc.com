@@ -12,6 +12,7 @@ import fr.eni.projet.troc.exception.Errors;
 public class UtilisateurImpl implements UtilisateurDAO {
 	private static final String INSERT = "INSERT INTO utilisateurs (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String CONNECTION = "SELECT * FROM utilisateurs WHERE mot_de_passe=? AND (pseudo=? OR email=?)";
+	private static final String GETUTILISATEURPASSWORD = "SELECT mot_de_passe FROM utilisateurs WHERE no_utilisateur=?";
 
 	@Override
 	public void create(Utilisateur utilisateur) throws BusinessException {
@@ -90,5 +91,31 @@ public class UtilisateurImpl implements UtilisateurDAO {
 		utilisateur.setCredit(rs.getInt("credit"));
 		utilisateur.setAdministrateur(rs.getBoolean("administrateur"));
 		return utilisateur;
+	}
+
+	public String getPasswordBynoUtilisateur(int noUtilisateur) throws BusinessException {
+		String result;
+
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement requete = cnx.prepareStatement(GETUTILISATEURPASSWORD);
+			requete.setInt(1, noUtilisateur);
+
+			ResultSet rs = requete.executeQuery();
+
+			if (rs.next()) {
+				result = rs.getString("mot_de_passe");
+				return result;
+			} else {
+				// Utilisateur non trouvé
+				BusinessException be = new BusinessException();
+				be.addError(Errors.SELECT_PASSWORD_UTILISATEUR_ECHEC);
+				throw be;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			BusinessException be = new BusinessException();
+			be.addError("ERROR DB - " + e.getMessage());
+			throw be;
+		}
 	}
 }

@@ -53,6 +53,29 @@ public class UtilisateursManager {
 		}
 	}
 
+	public void update(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
+			String rue, String codePostal, String ville, String ancienMotDePasse, String nouveauMotDePasse,
+			String confirmationMotDePasse) {
+		BusinessException be = new BusinessException();
+		validerPseudo(pseudo, be);
+		validerNom(nom, be);
+		validerPrenom(prenom, be);
+		validerEmail(email, be);
+		validerTelephone(telephone, be);
+		validerRue(rue, be);
+		validerCodePostal(codePostal, be);
+		validerVille(ville, be);
+		validerAncienMotDePasseBDD(ancienMotDePasse, be);
+		validerMotDePasse(nouveauMotDePasse, be);
+		validerMotDePasseIdentique(nouveauMotDePasse, confirmationMotDePasse, be);
+
+		if (!be.hasErreurs()) {
+			utilisateurDAO.update(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone, String rue, String codePostal, String ville, String nouveauMotDePasse);
+		} else {
+			throw be;
+		}
+	}
+
 	private boolean validerTelephone(String telephone, BusinessException be) {
 		if (telephone == null) {
 			be.addError("Le numéro de téléphone est obligatoire");
@@ -63,6 +86,20 @@ public class UtilisateursManager {
 			return false;
 		}
 		return true;
+	}
+
+	private boolean validerAncienMotDePasseBDD(String ancienMotDePasse, int noUtilisateur, BusinessException be)
+			throws BusinessException {
+		if (ancienMotDePasse == null) {
+			be.addError("L'ancien mot de passe ne peut pas être nul");
+			return false;
+		}
+		if (utilisateurDAO.getPasswordBynoUtilisateur(noUtilisateur) != ancienMotDePasse) {
+			be.addError(Errors.REGLE_UTILISATEUR_ANCIEN_PWD_ERREUR);
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	private boolean validerMotDePasse(String motDePasse, BusinessException be) {

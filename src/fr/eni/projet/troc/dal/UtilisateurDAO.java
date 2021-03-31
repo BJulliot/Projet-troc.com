@@ -7,4 +7,6 @@ public interface UtilisateurDAO {
 	public void create(Utilisateur utilisateur) throws BusinessException;
 
 	public Utilisateur find(String pseudo, String motDePasse) throws BusinessException;
+
+	public String getPasswordBynoUtilisateur(int noUtilisateur) throws BusinessException;
 }
