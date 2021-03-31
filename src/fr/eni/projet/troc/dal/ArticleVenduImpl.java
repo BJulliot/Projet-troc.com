@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.projet.troc.bo.ArticleVendu;
-import fr.eni.projet.troc.bo.Categorie;
-import fr.eni.projet.troc.bo.Utilisateur;
 
 /**
  * Classe en charge
@@ -43,7 +41,7 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement requete = cnx.prepareStatement(
 					"SELECT no_article, nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,GROUP_CONCAT(utilisateurs.pseudo SEPARATOR \" \") AS pseudo,GROUP_CONCAT(categories.libelle SEPARATOR \" \") AS libelle FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie GROUP BY articles_vendus.no_article");
-	
+
 			ResultSet rs = requete.executeQuery();
 
 			while (rs.next()) {
@@ -57,8 +55,8 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 	}
 
 	/**
-	* {@inheritDoc}
-	*/
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<ArticleVendu> selectById(int cateNum) throws Exception {
 		List<ArticleVendu> articleVendus = new ArrayList<ArticleVendu>();
@@ -80,20 +78,17 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 	}
 
 	/**
-	* {@inheritDoc}
-	*/
+	 * {@inheritDoc}
+	 */
 	@Override
 	public List<ArticleVendu> selectByName(String name) throws Exception {
 		List<ArticleVendu> articleVendus = new ArrayList<ArticleVendu>();
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement requete = cnx.prepareStatement(
-<<<<<<< HEAD
 					"SELECT no_article, nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,GROUP_CONCAT(utilisateurs.pseudo SEPARATOR \" \") AS pseudo,GROUP_CONCAT(categories.libelle SEPARATOR \" \") AS libelle FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie WHERE nom_article LIKE '%' ? '%'");
-=======
-					"SELECT no_article, nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,GROUP_CONCAT(utilisateurs.pseudo SEPARATOR \" \") AS pseudo,GROUP_CONCAT(categories.libelle SEPARATOR \" \") AS libelle FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie WHERE nom_article LIKE %?% ");
->>>>>>> 7a77b85 (afficher profil utilisateur)
+
 			requete.setString(1, name);
-			
+
 			ResultSet rs = requete.executeQuery();
 
 			while (rs.next()) {
@@ -105,6 +100,5 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 		}
 		return articleVendus;
 	}
-	
-	
+
 }
