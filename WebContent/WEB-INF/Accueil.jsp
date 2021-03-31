@@ -37,63 +37,102 @@
 				</div>
 			</div>
 			<div class="card h-100">
-			<c:if test="${Cat == null}">
-					<c:forEach var="articles" items="${articles}">
+				<c:choose>
+					<c:when test="${Cat == null}">
+
+						<c:forEach var="articles" items="${articles}">
 					${articles.nom} ${articles.description}
 					<p>Prix : ${articles.prixInitial} Points</p>
-						<p>Fin de l'enchère : ${articles.dateFinEnchere}</p>
-						<p>Vendeur : ${articles.noUtilisateur}</p>
-						<p>cat : ${articles.noCategorie}</p>
-					</c:forEach>
-				</c:if>
-				<c:if test="${Cat == '0'}">
-					<c:forEach var="articles" items="${articles}">
+							<p>Fin de l'enchère : ${articles.dateFinEnchere}</p>
+							<p>Vendeur : ${articles.noUtilisateur}</p>
+							<p>cat : ${articles.noCategorie}</p>
+						</c:forEach>
+
+					</c:when>
+					<c:when test="${Cat == '0'}">
+						<c:choose>
+							<c:when test="${empty articles }">
+								<p>Il n'y as pas d'enchère de ce type en cours</p>
+							</c:when>
+							<c:otherwise>
+								<c:forEach var="articles" items="${articles}">
 					${articles.nom} ${articles.description}
 					<p>Prix : ${articles.prixInitial} Points</p>
-						<p>Fin de l'enchère : ${articles.dateFinEnchere}</p>
-						<p>Vendeur : ${articles.noUtilisateur}</p>
-						<p>cat : ${articles.noCategorie}</p>
-					</c:forEach>
-				</c:if>
-				<c:if test="${Cat == '1' }">
-					<c:forEach var="cateNum" items="${cateNum}">
+									<p>Fin de l'enchère : ${articles.dateFinEnchere}</p>
+									<p>Vendeur : ${articles.noUtilisateur}</p>
+									<p>cat : ${articles.noCategorie}</p>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</c:when>
+					<c:when test="${Cat == '1' }">
+						<c:choose>
+							<c:when test="${empty cateNum }">
+								<p>Il n'y as pas d'enchère de ce type en cours</p>
+							</c:when>
+							<c:otherwise>
+								<c:forEach var="cateNum" items="${cateNum}">
 					${cateNum.nom} ${cateNum.description}
 					<p>Prix : ${cateNum.prixInitial} Points</p>
-						<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
-						<p>Vendeur : ${cateNum.noUtilisateur}</p>
-						<p>cat : ${cateNum.noCategorie}</p>
-					</c:forEach>
-				</c:if>
+									<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
+									<p>Vendeur : ${cateNum.noUtilisateur}</p>
+									<p>cat : ${cateNum.noCategorie}</p>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</c:when>
 
-				<c:if test="${Cat == '2' }">
-					<c:forEach var="cateNum" items="${cateNum}">
+					<c:when test="${Cat == '2' }">
+						<c:choose>
+							<c:when test="${empty cateNum}">
+								<p>Il n'y as pas d'enchère de ce type en cours</p>
+							</c:when>
+							<c:otherwise>
+								<c:forEach var="cateNum" items="${cateNum}">
 					${cateNum.nom} ${cateNum.description}
 					<p>Prix : ${cateNum.prixInitial} Points</p>
-						<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
-						<p>Vendeur : ${cateNum.noUtilisateur}</p>
-						<p>cat : ${cateNum.noCategorie}</p>
-					</c:forEach>
-				</c:if>
+									<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
+									<p>Vendeur : ${cateNum.noUtilisateur}</p>
+									<p>cat : ${cateNum.noCategorie}</p>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</c:when>
 
-				<c:if test="${Cat == '3' }">
-					<c:forEach var="cateNum" items="${cateNum}">
+					<c:when test="${Cat == '3' }">
+						<c:choose>
+							<c:when test="${empty cateNum }">
+								<p>Il n'y as pas d'enchère de ce type en cours</p>
+							</c:when>
+							<c:otherwise>
+								<c:forEach var="cateNum" items="${cateNum}">
 					${cateNum.nom} ${cateNum.description}
 					<p>Prix : ${cateNum.prixInitial} Points</p>
-						<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
-						<p>Vendeur : ${cateNum.noUtilisateur}</p>
-						<p>cat : ${cateNum.noCategorie}</p>
-					</c:forEach>
-				</c:if>
-				<c:if test="${Cat == '4' }">
-					<c:forEach var="cateNum" items="${cateNum}">
+									<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
+									<p>Vendeur : ${cateNum.noUtilisateur}</p>
+									<p>cat : ${cateNum.noCategorie}</p>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</c:when>
+					<c:when test="${Cat == '4' }">
+						<c:choose>
+							<c:when test="${empty cateNum }">
+								<p>Il n'y as pas d'enchère de ce type en cours</p>
+							</c:when>
+							<c:otherwise>
+								<c:forEach var="cateNum" items="${cateNum}">
 					${cateNum.nom} ${cateNum.description}
 					<p>Prix : ${cateNum.prixInitial} Points</p>
-						<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
-						<p>Vendeur : ${cateNum.noUtilisateur}</p>
-						<p>cat : ${cateNum.noCategorie}</p>
-					</c:forEach>
-				</c:if>
+									<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
+									<p>Vendeur : ${cateNum.noUtilisateur}</p>
+									<p>cat : ${cateNum.noCategorie}</p>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
+					</c:when>
 
+				</c:choose>
 			</div>
 
 		</div>
