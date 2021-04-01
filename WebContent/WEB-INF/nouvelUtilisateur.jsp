@@ -11,7 +11,7 @@
 
 	<div class="container">
 		<div class="col-12">
-			<h2 class="my-5 text-center">Nouveau profil</h2>
+			<h2 class="my-3 text-center">Nouveau profil</h2>
 			<c:if test="${!empty errors}">
 				<div class="row">
 					<div class="col-lg-12 col-md-6 col-sm-6 portfolio-item">

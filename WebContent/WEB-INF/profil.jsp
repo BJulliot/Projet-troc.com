@@ -10,7 +10,7 @@
 	<%@include file="/WEB-INF/template/nav.jsp"%>
 
 	<div class="container">
-		<h2 class="my-5 text-center">Profil</h2>
+		<h2 class="my-3 text-center">Profil</h2>
 		<c:if test="${!empty errors}">
 			<div class="row">
 				<div class="col-lg-12 col-md-6 col-sm-6 portfolio-item">
@@ -71,26 +71,44 @@
 				</tbody>
 			</table>
 
-			<div class="container">
-				<div class="row">
-					<div class="col-12 col-md-6">
-						<form action="./ModifierUtilisateurServlet" method="get">
-							<div class="text-center">
-								<button type="submit" class="btn btn-outline-secondary">Modifier
-									compte</button>
+
+			<c:choose>
+				<c:when test="${utilisateurEnSession.pseudo == utilisateur.pseudo}">
+					<div class="container">
+						<div class="row">
+							<div class="col-12 col-md-6">
+								<form action="./ModifierUtilisateurServlet" method="get">
+									<div class="text-center">
+										<button type="submit" class="btn btn-outline-secondary">Modifier
+											compte</button>
+									</div>
+								</form>
 							</div>
-						</form>
-					</div>
-					<div class="col-12 col-md-6">
-						<form action="./SupprimerUtilisateurServlet" method="post">
-							<div class="text-center">
-								<button type="submit" class="btn btn-outline-danger"
-									onclick="return confirm('Confirmer la suppression du compte utilisateur ${utilisateurEnSession.pseudo}?')">Supprimer</button>
+							<div class="col-12 col-md-6">
+								<form action="./SupprimerUtilisateurServlet" method="post">
+									<div class="text-center">
+										<button type="submit" class="btn btn-outline-danger"
+											onclick="return confirm('Confirmer la suppression du compte utilisateur ${utilisateurEnSession.pseudo}?')">Supprimer</button>
+									</div>
+								</form>
 							</div>
-						</form>
+						</div>
 					</div>
-				</div>
-			</div>
+				</c:when>
+				<c:otherwise>
+					<div class="container">
+						<div class="row text-center">
+							<div class="col-12 col-md-12">
+								<div class="text-center">
+									<a href="./AccueilServlet"><button type="button"
+											class="btn btn-outline-secondary">Retour accueil</button></a>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</div>
 </body>
