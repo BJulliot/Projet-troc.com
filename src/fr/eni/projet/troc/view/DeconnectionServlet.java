@@ -44,6 +44,6 @@ public class DeconnectionServlet extends HttpServlet {
 			System.out.println(utilisateur);
 		}
 
-		request.getRequestDispatcher("./AccueilServlet").forward(request, response);
+		request.getRequestDispatcher("/AccueilServlet").forward(request, response);
 	}
 }

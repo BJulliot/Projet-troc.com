@@ -77,6 +77,10 @@ public class UtilisateursManager {
 		}
 	}
 
+	public void delete(int noUtilisateur) {
+		utilisateurDAO.delete(noUtilisateur);
+	}
+
 	private boolean validerTelephone(String telephone, BusinessException be) {
 		if (telephone == null) {
 			be.addError("Le numéro de téléphone est obligatoire");

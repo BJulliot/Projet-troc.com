@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import fr.eni.projet.troc.dal.ConnectionProvider;
 import fr.eni.projet.troc.bo.Utilisateur;
 import fr.eni.projet.troc.exception.BusinessException;
 import fr.eni.projet.troc.exception.Errors;
@@ -13,8 +14,8 @@ public class UtilisateurImpl implements UtilisateurDAO {
 	private static final String INSERT = "INSERT INTO utilisateurs (pseudo,nom,prenom,email,telephone,rue,code_postal,ville,mot_de_passe,credit,administrateur) VALUES (?,?,?,?,?,?,?,?,?,?,?)";
 	private static final String CONNECTION = "SELECT * FROM utilisateurs WHERE mot_de_passe=? AND (pseudo=? OR email=?)";
 	private static final String GET_UTILISATEUR_PASSWORD = "SELECT mot_de_passe FROM utilisateurs WHERE no_utilisateur=?";
-	private static final String UPDATE_UTILISATEUR = "UPDATE utilisateurs SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, "
-			+ " code_postal=?, ville=?, mot_de_passe=? WHERE no_utilisateur=?";
+	private static final String UPDATE_UTILISATEUR = "UPDATE utilisateurs SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=? WHERE no_utilisateur=?";
+	private static final String DELETE_UTILISATEUR = "DELETE FROM utilisateurs where no_utilisateur=?";
 
 	@Override
 	public void create(Utilisateur utilisateur) throws BusinessException {
@@ -146,5 +147,21 @@ public class UtilisateurImpl implements UtilisateurDAO {
 			be.addError(Errors.INSERT_UTILISATEUR_ECHEC);
 			throw be;
 		}
+	}
+
+	@Override
+	public void delete(int noUtilisateur){
+			try (Connection cnx = ConnectionProvider.getConnection()) {
+				PreparedStatement stmt = cnx.prepareStatement(DELETE_UTILISATEUR);
+				stmt.setInt(1, noUtilisateur);
+				stmt.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+				BusinessException be = new BusinessException();
+				be.addError(Errors.SUPPRESSION_UTILISATEUR_ERREUR);
+				throw be;
+			}
+
+		}		
 	}
 }

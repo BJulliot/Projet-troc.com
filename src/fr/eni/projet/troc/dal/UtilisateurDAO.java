@@ -12,4 +12,6 @@ public interface UtilisateurDAO {
 
 	public void update(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
 			String rue, String codePostal, String ville, String nouveauMotDePasse) throws BusinessException;
+
+	public void delete(int noUtilisateur);
 }

@@ -99,7 +99,8 @@
 				
                 <div class="text-center mb-2">
 	                <button type="submit" class="btn btn-secondary">Enregistrer modifications</button>
-	                <button type="button" href="./AccueilServlet" class="btn btn-secondary">Annuler</button>
+	                <button type="button" href="./AccueilServlet" class="btn btn-secondary" onclick="return confirm('etes vous sur de vouloir supprimer')"
+	                >Annuler</button>
             	</div>
             </form>
         </div>

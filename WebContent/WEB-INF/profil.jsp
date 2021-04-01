@@ -83,7 +83,8 @@
 			    <div class="col-12 col-md-6">
 			    	<form action="./SupprimerUtilisateurServlet" method="post">
 						<div class="text-center">
-							<button type="submit" class="btn btn-outline-danger">Supprimer</button>
+							<button type="submit" class="btn btn-outline-danger" onclick="return confirm('etes vous sur de vouloir supprimer')"
+							>Supprimer</button>
 			            </div>
 					</form>
 			    </div>

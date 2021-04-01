@@ -69,4 +69,10 @@ public class Errors {
 	 * Echec récupération du mot de passe en BDD
 	 */
 	public static final String SELECT_PASSWORD_UTILISATEUR_ECHEC = "Une erreur non gérée est survenue lors de la récupération du mot de passe.";
+
+	/**
+	 * Echec récupération du mot de passe en BDD
+	 */
+	public static final String SUPPRESSION_UTILISATEUR_ERREUR = "Une erreur non gérée est survenue lors de la suppresion de l'utilisateur.";
+
 }
