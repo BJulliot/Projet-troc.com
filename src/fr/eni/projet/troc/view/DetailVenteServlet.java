@@ -1,6 +1,7 @@
 package fr.eni.projet.troc.view;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import fr.eni.projet.troc.bll.ArticlesVendusManager;
+import fr.eni.projet.troc.bll.EnchereManager;
 import fr.eni.projet.troc.bll.RetraitManager;
 import fr.eni.projet.troc.bo.ArticleVendu;
 import fr.eni.projet.troc.bo.Enchere;
@@ -59,10 +61,30 @@ public class DetailVenteServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		String id = request.getParameter("a");		
+		System.out.println(id);
+
 		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateurEnSession");		
 		request.setCharacterEncoding("UTF-8");
 		Enchere enchere = new Enchere();
-
+		enchere.setMontantEnchere(Integer.parseInt(request.getParameter("prixEnchere")));
+		EnchereManager em = EnchereManager.getInstance();
+		int noUtilisateur = utilisateur.getNoUtilisateur();
+		enchere.setNoUtilisateur(noUtilisateur);
+	
+		LocalDateTime date_enchere = LocalDateTime.now();
+		enchere.setDateEnchere(date_enchere);
+		
+		id = String.valueOf(enchere.getNoArticle());
+		enchere.setNoArticle(Integer.parseInt(id));
+		
+		
+		try {
+			em.create(enchere);
+			request.getRequestDispatcher("/WEB-INF/detailVente.jsp").forward(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 

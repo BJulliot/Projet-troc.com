@@ -33,6 +33,7 @@
 	<form action="./DetailVenteServlet" method="post">
 	<label>Ma proposition</label>
 	<input type="number" name="prixEnchere" id="prixEnchere">
+	<input type="submit" value="Valider enchere">
 	</form>
 	
 	
