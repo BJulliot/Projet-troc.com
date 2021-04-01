@@ -13,7 +13,7 @@
 				<div class="text-end">
 					<a class="btn btn-outline-light me-2" href="./AfficherEncheresServlet" type="button">Enchères</a>
 					<a class="btn btn-outline-light me-2" href="./VendreArticleServlet" type="button">Vendre un objet</a>
-					<a class="btn btn-outline-light me-2" href="./AfficherProfilUtilisateurServlet" type="button">Mon profil</a>
+					<a class="btn btn-outline-light me-2" href="./AfficherProfilUtilisateurServlet?u=${utilisateurEnSession.pseudo}" type="button">Mon profil</a>
 					<a class="btn btn-outline-light me-2" href="./DeconnectionServlet" type="button">Déconnexion</a>
 				</div>
 			</c:when>   

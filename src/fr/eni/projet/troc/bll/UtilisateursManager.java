@@ -100,6 +100,10 @@ public class UtilisateursManager {
 		utilisateurDAO.delete(noUtilisateur);
 	}
 
+	public Utilisateur selectByPseudo(String pseudo) throws BusinessException {
+		return utilisateurDAO.selectByPseudo(pseudo);
+	}
+
 	private boolean validerTelephone(String telephone, BusinessException be) {
 		if (telephone == null) {
 			be.addError("Le numéro de téléphone est obligatoire");

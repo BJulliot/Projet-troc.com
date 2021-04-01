@@ -16,6 +16,7 @@ public class UtilisateurImpl implements UtilisateurDAO {
 	private static final String UPDATE_UTILISATEUR = "UPDATE utilisateurs SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=? WHERE no_utilisateur=?";
 	private static final String DELETE_UTILISATEUR = "DELETE FROM utilisateurs where no_utilisateur=?";
 	private static final String GET_UTILISATEUR_PSEUDO = "SELECT pseudo FROM utilisateurs WHERE pseudo=?";
+	private static final String GET_UTILISATEUR_BY_PSEUDO = "SELECT * FROM utilisateurs WHERE pseudo=?";
 
 	@Override
 	public void create(Utilisateur utilisateur) throws BusinessException {
@@ -57,6 +58,31 @@ public class UtilisateurImpl implements UtilisateurDAO {
 			requete.setString(1, motDePasse);
 			requete.setString(2, pseudo);
 			requete.setString(3, pseudo);
+
+			ResultSet rs = requete.executeQuery();
+
+			if (rs.next()) {
+				Utilisateur utilisateur = utilisateurBuilder(rs);
+				return utilisateur;
+			} else {
+				// Utilisateur non trouvé en BDD
+				BusinessException be = new BusinessException();
+				be.addError(Errors.SELECT_UTILISATEUR_ECHEC);
+				throw be;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			BusinessException be = new BusinessException();
+			be.addError("ERROR DB - " + e.getMessage());
+			throw be;
+		}
+
+	}
+
+	public Utilisateur selectByPseudo(String pseudo) throws BusinessException {
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement requete = cnx.prepareStatement(GET_UTILISATEUR_BY_PSEUDO);
+			requete.setString(1, pseudo);
 
 			ResultSet rs = requete.executeQuery();
 

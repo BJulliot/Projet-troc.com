@@ -82,7 +82,7 @@ public class Errors {
 	/**
 	 * Echec général quand erreur non gérée Ã  l'insertion
 	 */
-	public static final String INSERT_UTILISATEUR_ECHEC = "Une erreur non gérée est survenue lors de l'enrgistrement des informations.";
+	public static final String INSERT_UTILISATEUR_ECHEC = "Une erreur non gérée est survenue lors de l'enregistrement des informations.";
 
 	/**
 	 * Echec récupération du mot de passe en BDD
@@ -94,4 +94,8 @@ public class Errors {
 	 */
 	public static final String SUPPRESSION_UTILISATEUR_ERREUR = "Une erreur non gérée est survenue lors de la suppresion de l'utilisateur.";
 
+	/**
+	 * Echec récupération de l'utilisateur en BDD
+	 */
+	public static final String SELECT_UTILISATEUR_ECHEC = "Une erreur non gérée est survenue lors de la récupération de l'utilisateur en BDD.";
 }

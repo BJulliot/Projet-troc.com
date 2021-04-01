@@ -36,37 +36,37 @@
 				<thead>
 					<tr>
 						<th scope="col">Pseudo</th>
-						<th scope="col">${utilisateurEnSession.pseudo}</th>
+						<th scope="col">${utilisateur.pseudo}</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<td>Nom :</td>
-						<td>${utilisateurEnSession.nom}</td>
+						<td>${utilisateur.nom}</td>
 					</tr>
 					<tr>
 						<td>Prenom :</td>
-						<td>${utilisateurEnSession.prenom}</td>
+						<td>${utilisateur.prenom}</td>
 					</tr>
 					<tr>
 						<td>Email :</td>
-						<td>${utilisateurEnSession.email}</td>
+						<td>${utilisateur.email}</td>
 					</tr>
 					<tr>
 						<td>Telephone :</td>
-						<td>${utilisateurEnSession.telephone}</td>
+						<td>${utilisateur.telephone}</td>
 					</tr>
 					<tr>
 						<td>Adresse :</td>
-						<td>${utilisateurEnSession.rue}</td>
+						<td>${utilisateur.rue}</td>
 					</tr>
 					<tr>
 						<td>Code postal :</td>
-						<td>${utilisateurEnSession.codePostal}</td>
+						<td>${utilisateur.codePostal}</td>
 					</tr>
 					<tr>
 						<td>Ville :</td>
-						<td>${utilisateurEnSession.ville}</td>
+						<td>${utilisateur.ville}</td>
 					</tr>
 				</tbody>
 			</table>

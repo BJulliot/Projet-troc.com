@@ -17,4 +17,6 @@ public interface UtilisateurDAO {
 
 	public boolean isPseudoUnique(String pseudo) throws BusinessException;
 
+	public Utilisateur selectByPseudo(String pseudo) throws BusinessException;
+
 }

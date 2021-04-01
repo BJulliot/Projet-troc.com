@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import fr.eni.projet.troc.bll.UtilisateursManager;
 import fr.eni.projet.troc.bo.Utilisateur;
+import fr.eni.projet.troc.exception.BusinessException;
 
 /**
  * Servlet implementation class NouvelleListeServlet
@@ -24,9 +26,19 @@ public class AfficherProfilUtilisateurServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String pseudo = request.getParameter("u");
+		System.out.println(pseudo);
+
+		Utilisateur utilisateur = new Utilisateur();
+		try {
+			utilisateur = UtilisateursManager.getInstance().selectByPseudo(pseudo);
+		} catch (BusinessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 		HttpSession session = request.getSession();
-		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateurEnSession");
-		session.setAttribute("utilisateurEnSession", utilisateur);
+		session.setAttribute("utilisateur", utilisateur);
 
 		request.getRequestDispatcher("/WEB-INF/profil.jsp").forward(request, response);
 
