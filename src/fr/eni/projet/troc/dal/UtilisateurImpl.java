@@ -15,7 +15,7 @@ public class UtilisateurImpl implements UtilisateurDAO {
 	private static final String GET_UTILISATEUR_PASSWORD = "SELECT mot_de_passe FROM utilisateurs WHERE no_utilisateur=?";
 	private static final String UPDATE_UTILISATEUR = "UPDATE utilisateurs SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=? WHERE no_utilisateur=?";
 	private static final String DELETE_UTILISATEUR = "DELETE FROM utilisateurs where no_utilisateur=?";
-	private static final String GET_UTILISATEUR_PSEUDO = "SELECT pseudo FROM utilisateurs";
+	private static final String GET_UTILISATEUR_PSEUDO = "SELECT pseudo FROM utilisateurs WHERE pseudo=?";
 
 	@Override
 	public void create(Utilisateur utilisateur) throws BusinessException {
@@ -168,6 +168,7 @@ public class UtilisateurImpl implements UtilisateurDAO {
 		boolean result = true;
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement requete = cnx.prepareStatement(GET_UTILISATEUR_PSEUDO);
+			requete.setString(1, pseudo);
 			ResultSet rs = requete.executeQuery();
 			if (rs.next()) {
 				result = false;
@@ -180,4 +181,5 @@ public class UtilisateurImpl implements UtilisateurDAO {
 		}
 		return result;
 	}
+
 }

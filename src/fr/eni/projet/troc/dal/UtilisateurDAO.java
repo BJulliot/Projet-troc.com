@@ -16,4 +16,5 @@ public interface UtilisateurDAO {
 	public void delete(int noUtilisateur) throws BusinessException;
 
 	public boolean isPseudoUnique(String pseudo) throws BusinessException;
+
 }

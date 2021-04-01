@@ -55,9 +55,9 @@ public class UtilisateursManager {
 		}
 	}
 
-	public void update(int noUtilisateur, String pseudo, String nom, String prenom, String email, String telephone,
-			String rue, String codePostal, String ville, String ancienMotDePasse, String nouveauMotDePasse,
-			String confirmationMotDePasse) throws BusinessException {
+	public void update(int noUtilisateur, String ancienPseudo, String pseudo, String nom, String prenom, String email,
+			String telephone, String rue, String codePostal, String ville, String ancienMotDePasse,
+			String nouveauMotDePasse, String confirmationMotDePasse) throws BusinessException {
 		BusinessException be = new BusinessException();
 		validerPseudo(pseudo, be);
 		validerNom(nom, be);
@@ -70,6 +70,8 @@ public class UtilisateursManager {
 		validerAncienMotDePasseBDD(ancienMotDePasse, noUtilisateur, be);
 		validerMotDePasse(nouveauMotDePasse, be);
 		validerMotDePasseIdentique(nouveauMotDePasse, confirmationMotDePasse, be);
+		isNouveauMotDePasseDifferent(ancienMotDePasse, nouveauMotDePasse, be);
+		isPseudoUniqueUpdate(ancienPseudo, pseudo, be);
 
 		if (!be.hasErreurs()) {
 			utilisateurDAO.update(noUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville,
@@ -77,6 +79,15 @@ public class UtilisateursManager {
 		} else {
 			throw be;
 		}
+	}
+
+	private boolean isNouveauMotDePasseDifferent(String ancienMotDePasse, String nouveauMotDePasse,
+			BusinessException be) {
+		if ((ancienMotDePasse.equals(nouveauMotDePasse))) {
+			be.addError(Errors.REGLE_UTILISATEUR_NEW_PWD_MUST_BE_DIFFERENT_ERREUR);
+			return false;
+		}
+		return true;
 	}
 
 	public void delete(int noUtilisateur) throws BusinessException {
@@ -97,7 +108,7 @@ public class UtilisateursManager {
 
 	private boolean validerAncienMotDePasseBDD(String ancienMotDePasse, int noUtilisateur, BusinessException be) {
 		if (ancienMotDePasse == null) {
-			be.addError("L'ancien mot de passe ne peut pas être nul");
+			be.addError(Errors.REGLE_UTILISATEUR_PWD_NULL_ERREUR);
 			return false;
 		}
 		try {
@@ -116,7 +127,7 @@ public class UtilisateursManager {
 
 	private boolean validerMotDePasse(String motDePasse, BusinessException be) {
 		if (motDePasse == null) {
-			be.addError("Le mot de passe est obligatoire");
+			be.addError(Errors.REGLE_UTILISATEUR_PWD_NULL_ERREUR);
 			return false;
 		}
 		if (!motDePasse.matches(Constants.PATTERN_PWD)) {
@@ -177,6 +188,18 @@ public class UtilisateursManager {
 		} else {
 			return true;
 		}
+	}
+
+	private boolean isPseudoUniqueUpdate(String pseudo, String ancienPseudo, BusinessException be)
+			throws BusinessException {
+		if (pseudo.equals(ancienPseudo)) {
+			return true;
+		} else if (!utilisateurDAO.isPseudoUnique(pseudo)) {
+
+			be.addError(Errors.REGLE_UTILISATEUR_PSEUDO_ALREADY_IN_DB_ERREUR);
+			return false;
+		}
+		return false;
 	}
 
 	private boolean validerRue(String rue, BusinessException be) {

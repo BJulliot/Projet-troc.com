@@ -7,12 +7,22 @@ public class Errors {
 	/**
 	 * Echec le pseudo de l'utilisateur est déjà en BDD
 	 */
-	public static final String REGLE_UTILISATEUR_PSEUDO_ALREADY_IN_DB_ERREUR = "Le pseudo de l'utilisateur est déjà utilisé";
+	public static final String REGLE_UTILISATEUR_PSEUDO_ALREADY_IN_DB_ERREUR = "Le pseudo de l'utilisateur est déjà utilisé.";
 
 	/**
 	 * Echec le pseudo de l'utilisateur ne respecte pas les règles définies
 	 */
-	public static final String REGLE_UTILISATEUR_PSEUDO_NULL_ERREUR = "Le pseudo de l'utilisateur est obligatoire et est composé d'au moins 4 caractères..";
+	public static final String REGLE_UTILISATEUR_PSEUDO_NULL_ERREUR = "Le pseudo de l'utilisateur est obligatoire et est composé d'au moins 4 caractères.";
+
+	/**
+	 * Echec le pseudo de l'utilisateur ne respecte pas les règles définies
+	 */
+	public static final String REGLE_UTILISATEUR_PWD_NULL_ERREUR = "Le mot de passe de l'utilisateur ne peut pas être nul.";
+
+	/**
+	 * Echec le pseudo de l'utilisateur ne respecte pas les règles définies
+	 */
+	public static final String REGLE_UTILISATEUR_NEW_PWD_MUST_BE_DIFFERENT_ERREUR = "Le nouveau mot de passe doit être différent de l'ancien.";
 
 	/**
 	 * Echec le nom de l'utilisateur ne respecte pas les règles définies
@@ -32,7 +42,7 @@ public class Errors {
 	/**
 	 * Echec le mail ne respecte pas les règles définies
 	 */
-	public static final String REGLE_UTILISATEUR_EMAIL_ERREUR = "L'adresse email est incorrecte et doit être sous la forme : exemple@nomdedomaine.com.";
+	public static final String REGLE_UTILISATEUR_EMAIL_ERREUR = "L'adresse email est incorrecte et doit être sous la forme : exemple@nomdedomaine.com";
 
 	/**
 	 * Echec le mail ne respecte pas les règles définies

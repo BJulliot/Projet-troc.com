@@ -49,6 +49,7 @@ public class ModifierUtilisateurServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		UtilisateursManager um = UtilisateursManager.getInstance();
 		int noUtilisateur = utilisateur.getNoUtilisateur();
+		String ancienPseudo = utilisateur.getPseudo();
 		String pseudo = request.getParameter("pseudo");
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");
@@ -63,8 +64,8 @@ public class ModifierUtilisateurServlet extends HttpServlet {
 		String confirmationMotDePasse = request.getParameter("confirmationMotDePasse");
 
 		try {
-			um.update(noUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville, ancienMotDePasse,
-					nouveauMotDePasse, confirmationMotDePasse);
+			um.update(noUtilisateur, ancienPseudo, pseudo, nom, prenom, email, telephone, rue, codePostal, ville,
+					ancienMotDePasse, nouveauMotDePasse, confirmationMotDePasse);
 			// on set les nouvelles infos à l'utilisateur en session :
 			utilisateur.setPseudo(pseudo);
 			utilisateur.setNom(nom);
