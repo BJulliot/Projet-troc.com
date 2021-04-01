@@ -18,26 +18,28 @@
 		<p>Categorie : ${article.nomCategorie}</p>
 		<p>Mise a prix ${article.prixInitial} Points</p>
 		<p>Fin de l'enchère : ${article.dateFinEnchere}</p>
-		<c:forEach var="retrait" items="${retrait}" >
+		<c:forEach var="retrait" items="${retrait}">
 		${retrait.rue}
 		${retrait.codePostal}
 		${retrait.ville}
 	</c:forEach>
-		<a href="<%=application.getContextPath()%>/AfficherProfilUtilisateurServlet?u=${article.pseudoUtilisateur}">
-		<p>Vendeur : ${article.pseudoUtilisateur}</p>
+		<a
+			href="<%=application.getContextPath()%>/AfficherProfilUtilisateurServlet?u=${article.pseudoUtilisateur}">
+			<p>Vendeur : ${article.pseudoUtilisateur}</p>
 		</a>
 	</c:forEach>
-	
-	
-	
-	<form action="./DetailVenteServlet" method="post">
-	<label>Ma proposition</label>
-	<input type="number" name="prixEnchere" id="prixEnchere">
-	<input type="submit" value="Valider enchere">
-	</form>
-	
-	
 
+
+
+	<form action="./DetailVenteServlet" method="post">
+		<label>Ma proposition</label> <input type="number" name="prixEnchere"
+			id="prixEnchere"> <input type="submit"
+			value="Valider enchere">
+	</form>
+
+
+
+	<!-- Bootstrap core JavaScript -->
 	<%@include file="/WEB-INF/template/script.html"%>
 </body>
 </html>

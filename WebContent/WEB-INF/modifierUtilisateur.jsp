@@ -89,33 +89,33 @@
 					<div class=" p-3 mb-2 bg-secondary">
 						<div class="form-group row align-items-center">
 							<div class="col-sm-6">
-								<label class="text-white" for="ancienMotDePasse">Mot de
-									passe actuel</label> <input type="password" class="form-control"
+								<label class="text-white" for="ancienMotDePasse">Valider
+									les modifications</label> <input type="password" class="form-control"
 									id="ancienMotDePasse" name="ancienMotDePasse"
 									placeholder="Mot de passe actuel" required>
 							</div>
+						</div>
+						<div class="form-group row">
 							<div class="col-sm-6 text-center">
-								<button class="btn btn-secondary align-items-center" type="button"
-									data-toggle="collapse"
-									data-target="#changementMotDePasse"
-									aria-expanded="false"
-									aria-controls="changementMotDePasse"
-									>Changer de mot de passe?</button>
+								<button class="btn btn-secondary" type="button"
+									data-toggle="collapse" data-target="#changementMotDePasse"
+									aria-expanded="false" aria-controls="changementMotDePasse">Changer
+									de mot de passe?</button>
 							</div>
 						</div>
-												
+
 						<div class="form-group row collapse" id="changementMotDePasse">
-							<div class="col-sm-5">
+							<div class="col-sm-6">
 								<label class="text-white" for="nouveauMotDePasse">Nouveau
 									mot de passe</label> <input type="password" class="form-control"
 									id="nouveauMotDePasse" name="nouveauMotDePasse"
-									placeholder="Nouveau mot de passe" >
+									placeholder="Nouveau mot de passe">
 							</div>
-							<div class="col-sm-5">
+							<div class="col-sm-6">
 								<label class="text-white" for="confirmationMotDePasse">Confirmation</label>
 								<input type="password" class="form-control"
 									id="confirmationMotDePasse" name="confirmationMotDePasse"
-									placeholder="Confirmer le mot de passe" >
+									placeholder="Confirmer le mot de passe">
 							</div>
 						</div>
 					</div>
@@ -139,7 +139,6 @@
 
 </body>
 
-	<!-- Bootstrap core JavaScript -->
-	<script src="vendor/jquery/jquery.min.js"></script>
-	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- Bootstrap core JavaScript -->
+<%@include file="/WEB-INF/template/script.html"%>
 </html>

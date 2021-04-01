@@ -184,6 +184,7 @@
 		</div>
 
 	</div>
+	<!-- Bootstrap core JavaScript -->
 	<%@include file="/WEB-INF/template/script.html"%>
 </body>
 </html>
