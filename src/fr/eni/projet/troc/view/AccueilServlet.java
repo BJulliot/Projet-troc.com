@@ -47,8 +47,7 @@ public class AccueilServlet extends HttpServlet {
 			
 			List<ArticleVendu> nameArticle = ArticlesVendusManager.getInstance().getNomArticle(search);
 			request.setAttribute("nameArticle", nameArticle);
-			System.out.println(search);
-			System.out.println(nameArticle);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

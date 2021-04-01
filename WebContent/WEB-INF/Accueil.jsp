@@ -46,7 +46,7 @@
 									${nameArticle.nom} ${nameArticle.description}
 									<p>Prix : ${nameArticle.prixInitial} Points</p>
 									<p>Fin de l'enchère : ${nameArticle.dateFinEnchere}</p>
-									<p>Vendeur : ${nameArticle.noUtilisateur}</p>
+									<p>Vendeur : ${nameArticle.pseudoUtilisateur}</p>
 								</div>
 							</c:forEach>
 						</c:when>
@@ -61,7 +61,7 @@
 							${articles.nom} ${articles.description}
 							<p>Prix : ${articles.prixInitial} Points</p>
 							<p>Fin de l'enchère : ${articles.dateFinEnchere}</p>
-							<p>Vendeur : ${articles.noUtilisateur}</p>
+							<p>Vendeur : ${articles.pseudoUtilisateur}</p>
 						</div>
 					</c:forEach>
 				</c:when>
@@ -76,7 +76,7 @@
 									${articles.nom} ${articles.description}
 									<p>Prix : ${articles.prixInitial} Points</p>
 									<p>Fin de l'enchère : ${articles.dateFinEnchere}</p>
-									<p>Vendeur : ${articles.noUtilisateur}</p>
+									<p>Vendeur : ${articles.pseudoUtilisateur}</p>
 								</div>
 							</c:forEach>
 						</c:otherwise>
@@ -93,7 +93,7 @@
 									${cateNum.nom} ${cateNum.description}
 									<p>Prix : ${cateNum.prixInitial} Points</p>
 									<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
-									<p>Vendeur : ${cateNum.noUtilisateur}</p>
+									<p>Vendeur : ${cateNum.pseudoUtilisateur}</p>
 								</div>
 							</c:forEach>
 						</c:otherwise>
@@ -110,7 +110,7 @@
 									${cateNum.nom} ${cateNum.description}
 									<p>Prix : ${cateNum.prixInitial} Points</p>
 									<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
-									<p>Vendeur : ${cateNum.noUtilisateur}</p>
+									<p>Vendeur : ${cateNum.pseudoUtilisateur}</p>
 								</div>
 							</c:forEach>
 						</c:otherwise>
@@ -127,7 +127,7 @@
 									${cateNum.nom} ${cateNum.description}
 									<p>Prix : ${cateNum.prixInitial} Points</p>
 									<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
-									<p>Vendeur : ${cateNum.noUtilisateur}</p>
+									<p>Vendeur : ${cateNum.pseudoUtilisateur}</p>
 								</div>
 							</c:forEach>
 						</c:otherwise>
@@ -144,7 +144,7 @@
 									${cateNum.nom} ${cateNum.description}
 									<p>Prix : ${cateNum.prixInitial} Points</p>
 									<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
-									<p>Vendeur : ${cateNum.noUtilisateur}</p>
+									<p>Vendeur : ${cateNum.pseudoUtilisateur}</p>
 								</div>
 							</c:forEach>
 						</c:otherwise>
