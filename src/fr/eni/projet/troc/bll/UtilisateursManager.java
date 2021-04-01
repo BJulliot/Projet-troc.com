@@ -68,16 +68,22 @@ public class UtilisateursManager {
 		validerCodePostal(codePostal, be);
 		validerVille(ville, be);
 		validerAncienMotDePasseBDD(ancienMotDePasse, noUtilisateur, be);
-		validerMotDePasse(nouveauMotDePasse, be);
-		validerMotDePasseIdentique(nouveauMotDePasse, confirmationMotDePasse, be);
-		isNouveauMotDePasseDifferent(ancienMotDePasse, nouveauMotDePasse, be);
+		if (!(nouveauMotDePasse == null)) {
+			validerMotDePasse(nouveauMotDePasse, be);
+			validerMotDePasseIdentique(nouveauMotDePasse, confirmationMotDePasse, be);
+			isNouveauMotDePasseDifferent(ancienMotDePasse, nouveauMotDePasse, be);
+		}
+
 		isPseudoUniqueUpdate(ancienPseudo, pseudo, be);
 
 		if (!be.hasErreurs()) {
-			utilisateurDAO.update(noUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville,
-					nouveauMotDePasse);
-		} else {
-			throw be;
+			if ((nouveauMotDePasse == null)) {
+				utilisateurDAO.update(noUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville,
+						ancienMotDePasse);
+			} else if (!(nouveauMotDePasse == null)) {
+				utilisateurDAO.update(noUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville,
+						nouveauMotDePasse);
+			}
 		}
 	}
 
