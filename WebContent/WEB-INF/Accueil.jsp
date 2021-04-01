@@ -14,40 +14,45 @@
 
 	<div class="container global">
 		<h1 class="my-4 text-center">Liste des enchères</h1>
-			<div class="col-lg-8 col-md-4 col-sm-6 portfolio-item formPlacement">
-				
-				<form action="./AccueilServlet" class="formSearch" method="get">
-					<div class="col-lg-12 col-md-4 col-sm-6 portfolio-item">
+		<div class="col-lg-8 col-md-4 col-sm-6 portfolio-item formPlacement">
+
+			<form action="./AccueilServlet" class="formSearch" method="get">
+				<div class="col-lg-12 col-md-4 col-sm-6 portfolio-item">
 					<h3 class="my-4">Filtres :</h3>
-						<input class="search-bar" type="search" id="search" name="search"
-							placeholder="Rechercher une enchère">
-					</div>
-					<div class="col-lg-12 col-md-4 col-sm-6 portfolio-item">
+					<input class="search-bar" type="search" id="search" name="search"
+						placeholder="Rechercher une enchère">
+				</div>
+				<div class="col-lg-12 col-md-4 col-sm-6 portfolio-item">
 					<h3 class="my-4">Catégorie :</h3>
-						<select class="form-select" id="Categories" name="Categories"
-							aria-label="Default select example">
-							<option value="0" Selected>Toutes les catégories</option>
-							<c:forEach var="categories" items="${categories}">
-								<option value="${categories.noCategorie}">${categories.libelle}</option>
-							</c:forEach>
-						</select>
-					</div>
-					<input class="btn btn-primary" type="submit" value="Rechercher">
-				</form>
-			</div>
-			<div class="container articleContenus col-lg-6 col-md-4 col-sm-6 portfolio-item">
+					<select class="form-select" id="Categories" name="Categories"
+						aria-label="Default select example">
+						<option value="0" Selected>Toutes les catégories</option>
+						<c:forEach var="categories" items="${categories}">
+							<option value="${categories.noCategorie}">${categories.libelle}</option>
+						</c:forEach>
+					</select>
+				</div>
+				<input class="btn btn-primary" type="submit" value="Rechercher">
+			</form>
+		</div>
+
+		<div
+			class="container articleContenus col-lg-6 col-md-4 col-sm-6 portfolio-item">
 			<c:choose>
 				<c:when test="${not empty search}">
 					<c:choose>
 						<c:when test="${fn:contains(nameArticle,search)}">
 							<c:forEach var="nameArticle" items="${nameArticle}">
-								<div class="card h-100 articleCase">
+								<a class="lienEnchere"
+									href="<%=application.getContextPath()%>/DetailVenteServlet">
+									<div class="card h-100 articleCase">
 
-									${nameArticle.nom} ${nameArticle.description}
-									<p>Prix : ${nameArticle.prixInitial} Points</p>
-									<p>Fin de l'enchère : ${nameArticle.dateFinEnchere}</p>
-									<p>Vendeur : ${nameArticle.pseudoUtilisateur}</p>
-								</div>
+										${nameArticle.nom}
+										<p>Prix : ${nameArticle.prixInitial} Points</p>
+										<p>Fin de l'enchère : ${nameArticle.dateFinEnchere}</p>
+										<p>Vendeur : ${nameArticle.pseudoUtilisateur}</p>
+									</div>
+								</a>
 							</c:forEach>
 						</c:when>
 						<c:when test="${!fn:contains(nameArticle,search)}">
@@ -57,12 +62,17 @@
 				</c:when>
 				<c:when test="${Cat == null }">
 					<c:forEach var="articles" items="${articles}">
-						<div class="card h-100 articleCase">
-							${articles.nom} ${articles.description}
-							<p>Prix : ${articles.prixInitial} Points</p>
-							<p>Fin de l'enchère : ${articles.dateFinEnchere}</p>
-							<p>Vendeur : ${articles.pseudoUtilisateur}</p>
-						</div>
+						<a class="lienEnchere"
+							href="<%=application.getContextPath()%>/DetailVenteServlet?a=${articles.noArticle}">
+
+							<div class="card h-100 articleCase">
+
+								${articles.nom}
+								<p>Prix : ${articles.prixInitial} Points</p>
+								<p>Fin de l'enchère : ${articles.dateFinEnchere}</p>
+								<p>Vendeur : ${articles.pseudoUtilisateur}</p>
+							</div>
+						</a>
 					</c:forEach>
 				</c:when>
 				<c:when test="${Cat == '0' && empty search}">
@@ -72,12 +82,16 @@
 						</c:when>
 						<c:otherwise>
 							<c:forEach var="articles" items="${articles}">
-								<div class="card h-100 articleCase">
-									${articles.nom} ${articles.description}
-									<p>Prix : ${articles.prixInitial} Points</p>
-									<p>Fin de l'enchère : ${articles.dateFinEnchere}</p>
-									<p>Vendeur : ${articles.pseudoUtilisateur}</p>
-								</div>
+								<a class="lienEnchere"
+									href="<%=application.getContextPath()%>/DetailVenteServlet?a=${articles.noArticle}">
+
+									<div class="card h-100 articleCase">
+										${articles.nom}
+										<p>Prix : ${articles.prixInitial} Points</p>
+										<p>Fin de l'enchère : ${articles.dateFinEnchere}</p>
+										<p>Vendeur : ${articles.pseudoUtilisateur}</p>
+									</div>
+								</a>
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
@@ -89,12 +103,16 @@
 						</c:when>
 						<c:otherwise>
 							<c:forEach var="cateNum" items="${cateNum}">
-								<div class="card h-100 articleCase">
-									${cateNum.nom} ${cateNum.description}
-									<p>Prix : ${cateNum.prixInitial} Points</p>
-									<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
-									<p>Vendeur : ${cateNum.pseudoUtilisateur}</p>
-								</div>
+								<a class="lienEnchere"
+									href="<%=application.getContextPath()%>/DetailVenteServlet?a=${articles.noArticle}">
+
+									<div class="card h-100 articleCase">
+										${cateNum.nom}
+										<p>Prix : ${cateNum.prixInitial} Points</p>
+										<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
+										<p>Vendeur : ${cateNum.pseudoUtilisateur}</p>
+									</div>
+								</a>
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
@@ -106,12 +124,16 @@
 						</c:when>
 						<c:otherwise>
 							<c:forEach var="cateNum" items="${cateNum}">
-								<div class="card h-100 articleCase">
-									${cateNum.nom} ${cateNum.description}
-									<p>Prix : ${cateNum.prixInitial} Points</p>
-									<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
-									<p>Vendeur : ${cateNum.pseudoUtilisateur}</p>
-								</div>
+								<a class="lienEnchere"
+									href="<%=application.getContextPath()%>/DetailVenteServlet?a=${articles.noArticle}">
+
+									<div class="card h-100 articleCase">
+										${cateNum.nom}
+										<p>Prix : ${cateNum.prixInitial} Points</p>
+										<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
+										<p>Vendeur : ${cateNum.pseudoUtilisateur}</p>
+									</div>
+								</a>
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
@@ -123,12 +145,16 @@
 						</c:when>
 						<c:otherwise>
 							<c:forEach var="cateNum" items="${cateNum}">
-								<div class="card h-100 articleCase">
-									${cateNum.nom} ${cateNum.description}
-									<p>Prix : ${cateNum.prixInitial} Points</p>
-									<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
-									<p>Vendeur : ${cateNum.pseudoUtilisateur}</p>
-								</div>
+								<a class="lienEnchere"
+									href="<%=application.getContextPath()%>/DetailVenteServlet?a=${articles.noArticle}">
+
+									<div class="card h-100 articleCase">
+										${cateNum.nom}
+										<p>Prix : ${cateNum.prixInitial} Points</p>
+										<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
+										<p>Vendeur : ${cateNum.pseudoUtilisateur}</p>
+									</div>
+								</a>
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
@@ -140,19 +166,23 @@
 						</c:when>
 						<c:otherwise>
 							<c:forEach var="cateNum" items="${cateNum}">
-								<div class="card h-100 articleCase">
-									${cateNum.nom} ${cateNum.description}
-									<p>Prix : ${cateNum.prixInitial} Points</p>
-									<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
-									<p>Vendeur : ${cateNum.pseudoUtilisateur}</p>
-								</div>
+								<a class="lienEnchere"
+									href="<%=application.getContextPath()%>/DetailVenteServlet?a=${articles.noArticle}">
+
+									<div class="card h-100 articleCase">
+										${cateNum.nom}
+										<p>Prix : ${cateNum.prixInitial} Points</p>
+										<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
+										<p>Vendeur : ${cateNum.pseudoUtilisateur}</p>
+									</div>
+								</a>
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
 				</c:when>
 			</c:choose>
-			</div>
-		
+		</div>
+
 	</div>
 	<%@include file="/WEB-INF/template/script.html"%>
 </body>

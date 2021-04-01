@@ -79,3 +79,13 @@ body {
 	display: grid;
 	margin-bottom: 5%
 }
+
+.lienEnchere{
+	color: inherit;
+	text-decoration: none;
+}
+
+.lienEnchere:hover {
+	text-decoration: none;
+	color: inherit;
+}

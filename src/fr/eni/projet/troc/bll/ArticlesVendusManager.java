@@ -32,7 +32,7 @@ public class ArticlesVendusManager {
     }
     
     public List<ArticleVendu> getNoCategorie(int noCategorie)throws Exception {
-    	return articleVenduDAO.selectById(noCategorie);
+    	return articleVenduDAO.selectByIdCat(noCategorie);
     }
     
     public List<ArticleVendu> getNomArticle(String name) throws Exception{
@@ -41,6 +41,10 @@ public class ArticlesVendusManager {
     
   public void create(ArticleVendu articleVendu,Retrait retrait) throws Exception{
 	  articleVenduDAO.create(articleVendu,retrait);
+  }
+  
+  public ArticleVendu getArticleId(int id) throws Exception{
+	 return articleVenduDAO.selectById(id);
   }
 	
 }

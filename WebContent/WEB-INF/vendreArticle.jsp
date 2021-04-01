@@ -41,7 +41,10 @@
 					<label>Ville :</label> <input type="text" name="ville" id="ville"
 						required="required" value="${utilisateurEnSession.ville}">
 				</fieldset>
+				<div class="boutonArticle">
 				<input class="btn btn-primary" type="submit" value="Enregistrer">
+				<input class="btn btn-primary" type="reset" value="Annuler"> 
+				</div>
 			</form>
 		</div>
 	</div>

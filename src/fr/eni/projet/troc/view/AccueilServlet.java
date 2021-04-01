@@ -40,7 +40,7 @@ public class AccueilServlet extends HttpServlet {
 			List<ArticleVendu> articles = ArticlesVendusManager.getInstance().getAllArticleVendus();
 			request.setAttribute("articles", articles);
 			
-			//Select article by id
+			//Select article by id de la categorie
 			List<ArticleVendu> cateNum = ArticlesVendusManager.getInstance().getNoCategorie(Integer.parseInt(Cat));
 			request.setAttribute("cateNum", cateNum);
 			System.out.println(cateNum);

@@ -60,7 +60,7 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 	 * {@inheritDoc}
 	 */
 	@Override
-	public List<ArticleVendu> selectById(int cateNum) throws Exception {
+	public List<ArticleVendu> selectByIdCat(int cateNum) throws Exception {
 		List<ArticleVendu> articleVendus = new ArrayList<ArticleVendu>();
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement requete = cnx.prepareStatement(
@@ -145,6 +145,29 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	/**
+	* {@inheritDoc}
+	*/
+	@Override
+	public ArticleVendu selectById(int id) throws Exception {
+		ArticleVendu articleVendu = null;
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement requete = cnx.prepareStatement(
+					"SELECT no_article, nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,pseudo,libelle FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie WHERE no_article = ?");
+			requete.setInt(1, id);
+
+			ResultSet rs = requete.executeQuery();
+
+			while (rs.next()) {
+				articleVendu = (itemBuilder(rs));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return articleVendu;
 	}
 }
 
