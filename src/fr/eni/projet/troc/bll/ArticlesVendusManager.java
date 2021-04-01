@@ -1,11 +1,8 @@
 package fr.eni.projet.troc.bll;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 import fr.eni.projet.troc.bo.ArticleVendu;
-import fr.eni.projet.troc.bo.Categorie;
 import fr.eni.projet.troc.bo.Retrait;
 import fr.eni.projet.troc.dal.ArticleVenduDAO;
 import fr.eni.projet.troc.dal.DAOFactory;

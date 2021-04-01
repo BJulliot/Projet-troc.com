@@ -7,17 +7,21 @@ public class Enchere {
 	private int noEnchere;
 	private LocalDateTime dateEnchere;
 	private int montantEnchere;
-	private ArticleVendu noArticle;
-	private Utilisateur noUtilisateur;
+	private int noArticle;
+	private int noUtilisateur;
 
-	public Enchere(int noEnchere, LocalDateTime dateEnchere, int montantEnchere, ArticleVendu noArticle,
-			Utilisateur noUtilisateur) {
+	public Enchere(int noEnchere, LocalDateTime dateEnchere, int montantEnchere, int noArticle,
+			int noUtilisateur) {
 		super();
 		this.noEnchere = noEnchere;
 		this.dateEnchere = dateEnchere;
 		this.montantEnchere = montantEnchere;
 		this.noArticle = noArticle;
 		this.noUtilisateur = noUtilisateur;
+	}
+	
+	public Enchere() {
+		
 	}
 
 	public int getNoEnchere() {
@@ -44,19 +48,19 @@ public class Enchere {
 		this.montantEnchere = montantEnchere;
 	}
 
-	public ArticleVendu getNoArticle() {
+	public int getNoArticle() {
 		return noArticle;
 	}
 
-	public void setNoArticle(ArticleVendu noArticle) {
+	public void setNoArticle(int noArticle) {
 		this.noArticle = noArticle;
 	}
 
-	public Utilisateur getNoUtilisateur() {
+	public int getNoUtilisateur() {
 		return noUtilisateur;
 	}
 
-	public void setNoUtilisateur(Utilisateur noUtilisateur) {
+	public void setNoUtilisateur(int noUtilisateur) {
 		this.noUtilisateur = noUtilisateur;
 	}
 
@@ -66,47 +70,6 @@ public class Enchere {
 				+ ", noArticle=" + noArticle + ", noUtilisateur=" + noUtilisateur + "]";
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((dateEnchere == null) ? 0 : dateEnchere.hashCode());
-		result = prime * result + montantEnchere;
-		result = prime * result + ((noArticle == null) ? 0 : noArticle.hashCode());
-		result = prime * result + noEnchere;
-		result = prime * result + ((noUtilisateur == null) ? 0 : noUtilisateur.hashCode());
-		return result;
-	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Enchere other = (Enchere) obj;
-		if (dateEnchere == null) {
-			if (other.dateEnchere != null)
-				return false;
-		} else if (!dateEnchere.equals(other.dateEnchere))
-			return false;
-		if (montantEnchere != other.montantEnchere)
-			return false;
-		if (noArticle == null) {
-			if (other.noArticle != null)
-				return false;
-		} else if (!noArticle.equals(other.noArticle))
-			return false;
-		if (noEnchere != other.noEnchere)
-			return false;
-		if (noUtilisateur == null) {
-			if (other.noUtilisateur != null)
-				return false;
-		} else if (!noUtilisateur.equals(other.noUtilisateur))
-			return false;
-		return true;
-	}
 
 }

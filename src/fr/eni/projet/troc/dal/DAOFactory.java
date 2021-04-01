@@ -23,5 +23,13 @@ public class DAOFactory {
 	public static CategorieDAO getCategorieDAO() {
 		return new CategorieImpl();
 	}
+	
+	public static RetraitDAO geRetraitDAO() {
+		return new RetraitImpl();
+	}
+	
+	public static EnchereDAO getEnchereDAO() {
+		return new EnchereImpl();
+	}
 
 }
