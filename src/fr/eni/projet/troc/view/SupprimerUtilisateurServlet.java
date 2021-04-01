@@ -42,14 +42,19 @@ public class SupprimerUtilisateurServlet extends HttpServlet {
 		// Rï¿½cupï¿½ration du numero utilisateur avant suppresion :
 		request.setCharacterEncoding("UTF-8");
 		UtilisateursManager um = UtilisateursManager.getInstance();
+		System.out.println("post delete");
+		System.out.println("numero utilisateur en session = " + utilisateur.getNoUtilisateur());
 
 		try {
 			um.delete(utilisateur.getNoUtilisateur());
-			request.getRequestDispatcher("/DeconnectionServlet").forward(request, response);
+			System.out.println("supprimé");
+
+			session.invalidate();
+			request.getRequestDispatcher("/AccueilServlet").forward(request, response);
 		} catch (BusinessException e) {
 			e.printStackTrace();
 			request.setAttribute("errors", e.getErrors());
-			request.getRequestDispatcher("/WEB-INF/modifierUtilisateur.jsp").forward(request, response);
+			request.getRequestDispatcher("/AfficherProfilUtilisateurServlet").forward(request, response);
 		}
 	}
 }

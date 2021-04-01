@@ -4,6 +4,15 @@ package fr.eni.projet.troc.exception;
  * Les codes disponibles sont entre 20000 et 29999
  */
 public class Errors {
+	/**
+	 * Echec le pseudo de l'utilisateur est déjà en BDD
+	 */
+	public static final String REGLE_UTILISATEUR_PSEUDO_ALREADY_IN_DB_ERREUR = "Le pseudo de l'utilisateur est déjà utilisé";
+
+	/**
+	 * Echec le pseudo de l'utilisateur ne respecte pas les règles définies
+	 */
+	public static final String REGLE_UTILISATEUR_PSEUDO_NULL_ERREUR = "Le pseudo de l'utilisateur est obligatoire et est composé d'au moins 4 caractères..";
 
 	/**
 	 * Echec le nom de l'utilisateur ne respecte pas les règles définies
@@ -18,7 +27,7 @@ public class Errors {
 	/**
 	 * Echec le pseudo de l'utilisateur ne respecte pas les règles définies
 	 */
-	public static final String REGLE_UTILISATEUR_PSEUDO_ERREUR = "Le pseudo de l'utilisateur est obligatoire et ne doit pas dépasser 30 caractères.";
+	public static final String REGLE_UTILISATEUR_PSEUDO_ERREUR = "Le pseudo de l'utilisateur est obligatoire et ne doit pas dépasser 30 caractères alpha.";
 
 	/**
 	 * Echec le mail ne respecte pas les règles définies

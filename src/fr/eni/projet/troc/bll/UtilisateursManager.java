@@ -35,6 +35,7 @@ public class UtilisateursManager {
 
 	public void create(Utilisateur utilisateur, String confirmationMotDePasse) throws BusinessException {
 		BusinessException be = new BusinessException();
+
 		validerPseudo(utilisateur.getPseudo(), be);
 		validerNom(utilisateur.getNom(), be);
 		validerPrenom(utilisateur.getPrenom(), be);
@@ -45,6 +46,7 @@ public class UtilisateursManager {
 		validerVille(utilisateur.getVille(), be);
 		validerMotDePasse(utilisateur.getMotDePasse(), be);
 		validerMotDePasseIdentique(utilisateur.getMotDePasse(), confirmationMotDePasse, be);
+		isPseudoUnique(utilisateur.getPseudo(), be);
 
 		if (!be.hasErreurs()) {
 			utilisateurDAO.create(utilisateur);
@@ -77,7 +79,7 @@ public class UtilisateursManager {
 		}
 	}
 
-	public void delete(int noUtilisateur) {
+	public void delete(int noUtilisateur) throws BusinessException {
 		utilisateurDAO.delete(noUtilisateur);
 	}
 
@@ -166,6 +168,15 @@ public class UtilisateursManager {
 			return false;
 		}
 		return true;
+	}
+
+	private boolean isPseudoUnique(String pseudo, BusinessException be) throws BusinessException {
+		if (!utilisateurDAO.isPseudoUnique(pseudo)) {
+			be.addError(Errors.REGLE_UTILISATEUR_PSEUDO_ALREADY_IN_DB_ERREUR);
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	private boolean validerRue(String rue, BusinessException be) {

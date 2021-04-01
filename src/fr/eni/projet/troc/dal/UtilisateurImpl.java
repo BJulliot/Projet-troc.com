@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import fr.eni.projet.troc.dal.ConnectionProvider;
 import fr.eni.projet.troc.bo.Utilisateur;
 import fr.eni.projet.troc.exception.BusinessException;
 import fr.eni.projet.troc.exception.Errors;
@@ -16,10 +15,10 @@ public class UtilisateurImpl implements UtilisateurDAO {
 	private static final String GET_UTILISATEUR_PASSWORD = "SELECT mot_de_passe FROM utilisateurs WHERE no_utilisateur=?";
 	private static final String UPDATE_UTILISATEUR = "UPDATE utilisateurs SET pseudo=?, nom=?, prenom=?, email=?, telephone=?, rue=?, code_postal=?, ville=?, mot_de_passe=? WHERE no_utilisateur=?";
 	private static final String DELETE_UTILISATEUR = "DELETE FROM utilisateurs where no_utilisateur=?";
+	private static final String GET_UTILISATEUR_PSEUDO = "SELECT pseudo FROM utilisateurs";
 
 	@Override
 	public void create(Utilisateur utilisateur) throws BusinessException {
-
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement requete = cnx.prepareStatement(INSERT, PreparedStatement.RETURN_GENERATED_KEYS);
 			requete.setString(1, utilisateur.getPseudo());
@@ -150,18 +149,35 @@ public class UtilisateurImpl implements UtilisateurDAO {
 	}
 
 	@Override
-	public void delete(int noUtilisateur){
-			try (Connection cnx = ConnectionProvider.getConnection()) {
-				PreparedStatement stmt = cnx.prepareStatement(DELETE_UTILISATEUR);
-				stmt.setInt(1, noUtilisateur);
-				stmt.executeUpdate();
-			} catch (Exception e) {
-				e.printStackTrace();
-				BusinessException be = new BusinessException();
-				be.addError(Errors.SUPPRESSION_UTILISATEUR_ERREUR);
-				throw be;
-			}
+	public void delete(int noUtilisateur) throws BusinessException {
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement requete = cnx.prepareStatement(DELETE_UTILISATEUR);
+			requete.setInt(1, noUtilisateur);
+			requete.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException be = new BusinessException();
+			be.addError(Errors.SUPPRESSION_UTILISATEUR_ERREUR);
+			throw be;
+		}
 
-		}		
+	}
+
+	@Override
+	public boolean isPseudoUnique(String pseudo) throws BusinessException {
+		boolean result = true;
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement requete = cnx.prepareStatement(GET_UTILISATEUR_PSEUDO);
+			ResultSet rs = requete.executeQuery();
+			if (rs.next()) {
+				result = false;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			BusinessException be = new BusinessException();
+			be.addError("ERROR DB - " + e.getMessage());
+			throw be;
+		}
+		return result;
 	}
 
