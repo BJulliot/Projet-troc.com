@@ -35,11 +35,11 @@ public class SupprimerUtilisateurServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Récupération infos de l'utilisateur en session:
+		// Rï¿½cupï¿½ration infos de l'utilisateur en session:
 		HttpSession session = request.getSession();
 		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateurEnSession");
 
-		// Récupération du numero utilisateur avant suppresion :
+		// Rï¿½cupï¿½ration du numero utilisateur avant suppresion :
 		request.setCharacterEncoding("UTF-8");
 		UtilisateursManager um = UtilisateursManager.getInstance();
 

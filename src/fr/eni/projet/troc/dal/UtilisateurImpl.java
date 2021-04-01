@@ -65,7 +65,7 @@ public class UtilisateurImpl implements UtilisateurDAO {
 				Utilisateur utilisateur = utilisateurBuilder(rs);
 				return utilisateur;
 			} else {
-				// Utilisateur non trouvé
+				// Utilisateur non trouvï¿½
 				BusinessException be = new BusinessException();
 				be.addError("Pseudo ou Mot de passe inconnu");
 				throw be;
@@ -110,7 +110,7 @@ public class UtilisateurImpl implements UtilisateurDAO {
 				System.out.println("ancien mot de passe en BDD : " + result);
 				return result;
 			} else {
-				// Utilisateur non trouvé
+				// Utilisateur non trouvï¿½
 				BusinessException be = new BusinessException();
 				be.addError(Errors.SELECT_PASSWORD_UTILISATEUR_ECHEC);
 				throw be;
@@ -164,4 +164,4 @@ public class UtilisateurImpl implements UtilisateurDAO {
 
 		}		
 	}
-}
+

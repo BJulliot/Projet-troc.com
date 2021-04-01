@@ -70,3 +70,12 @@ body {
 .formPlacement{
 	margin: auto;
 }
+
+.FormAjoutArticle{
+	display: grid;
+}
+
+.fieldArticle{
+	display: grid;
+	margin-bottom: 5%
+}
