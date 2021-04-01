@@ -1,6 +1,7 @@
 package fr.eni.projet.troc.view;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,7 +27,7 @@ public class DetailVenteServlet extends HttpServlet {
 		String id = request.getParameter("a");
 	System.out.println(id);
 		try {
-			ArticleVendu article = ArticlesVendusManager.getInstance().getArticleId(Integer.parseInt(id));
+			List<ArticleVendu> article = ArticlesVendusManager.getInstance().getArticleId(Integer.parseInt(id));
 			request.setAttribute("article", article);
 			System.out.println(article);
 		} catch (NumberFormatException e) {

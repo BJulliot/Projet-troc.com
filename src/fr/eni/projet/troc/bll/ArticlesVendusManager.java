@@ -43,7 +43,7 @@ public class ArticlesVendusManager {
 	  articleVenduDAO.create(articleVendu,retrait);
   }
   
-  public ArticleVendu getArticleId(int id) throws Exception{
+  public List<ArticleVendu> getArticleId(int id) throws Exception{
 	 return articleVenduDAO.selectById(id);
   }
 	

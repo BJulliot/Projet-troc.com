@@ -151,8 +151,8 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 	* {@inheritDoc}
 	*/
 	@Override
-	public ArticleVendu selectById(int id) throws Exception {
-		ArticleVendu articleVendu = null;
+	public List<ArticleVendu> selectById(int id) throws Exception {
+		List<ArticleVendu> articleVendu = new ArrayList<ArticleVendu>();
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement requete = cnx.prepareStatement(
 					"SELECT no_article, nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,pseudo,libelle FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie WHERE no_article = ?");
@@ -161,7 +161,7 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 			ResultSet rs = requete.executeQuery();
 
 			while (rs.next()) {
-				articleVendu = (itemBuilder(rs));
+				articleVendu.add(itemBuilder(rs));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
