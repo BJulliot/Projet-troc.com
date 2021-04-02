@@ -49,12 +49,15 @@
 						</div>
 					</div>
 					<div class="text-center">
-						<button type="button" href="./AccueilServlet"
-							class="btn btn-outline-secondary">Annuler</button>
 						<button type="submit" class="btn btn-outline-dark">Se
 							connecter</button>
 					</div>
 				</form>
+				<div class="text-center">
+					<a class="btn btn-outline-secondary"
+						href="./NouvelUtilisateurServlet" type="button">Créer un
+						compte</a>
+				</div>
 			</div>
 		</div>
 	</div>
