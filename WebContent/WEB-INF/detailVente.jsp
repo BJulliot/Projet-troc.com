@@ -10,6 +10,25 @@
 	<%@include file="/WEB-INF/template/nav.jsp"%>
 
 	<h1 class="my-4 text-center">Details vente</h1>
+	<c:if test="${!empty errors}">
+		<div class="row">
+			<div class="col-lg-12 col-md-6 col-sm-6 portfolio-item">
+				<div class="card h-100">
+					<div class="card-body">
+
+						<div class="alert alert-danger" role="alert">
+							<h2>Erreur!</h2>
+							<ul>
+								<c:forEach var="msg" items="${errors}">
+									<li>${msg}</li>
+								</c:forEach>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</c:if>
 
 	<c:forEach var="article" items="${article}">
 		

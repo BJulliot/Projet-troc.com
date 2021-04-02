@@ -12,6 +12,7 @@ import java.util.List;
 
 import fr.eni.projet.troc.bo.ArticleVendu;
 import fr.eni.projet.troc.bo.Retrait;
+import fr.eni.projet.troc.exception.BusinessException;
 
 
 /**
@@ -180,7 +181,7 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 	
 	
 	@Override
-	public ArticleVendu selectByIdSell(int id) throws Exception {
+	public ArticleVendu selectByIdSell(int id) throws BusinessException {
 		ArticleVendu articleVendu = null;
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement requete = cnx.prepareStatement(

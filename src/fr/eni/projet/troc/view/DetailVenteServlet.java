@@ -18,6 +18,7 @@ import fr.eni.projet.troc.bo.ArticleVendu;
 import fr.eni.projet.troc.bo.Enchere;
 import fr.eni.projet.troc.bo.Retrait;
 import fr.eni.projet.troc.bo.Utilisateur;
+import fr.eni.projet.troc.exception.BusinessException;
 
 /**
  * Servlet implementation class DetailVenteServlet
@@ -60,9 +61,6 @@ public class DetailVenteServlet extends HttpServlet {
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		String enchereNoArticle = (String) session.getAttribute("noArticleEnchere");
-
-		System.out.println(enchereNoArticle);
-
 		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateurEnSession");
 		request.setCharacterEncoding("UTF-8");
 		Enchere enchere = new Enchere();
@@ -81,12 +79,11 @@ public class DetailVenteServlet extends HttpServlet {
 			ArticleVendu articleVendu = EnchereManager.getInstance().selectByIdSell(Integer.parseInt(enchereNoArticle));
 			System.out.println("AHHHHHH LE PRIIIX"+ articleVendu);
 			em.create(enchere);
-			
 			request.getRequestDispatcher("/AccueilServlet").forward(request, response);
-		} catch (Exception e) {
+		} catch (BusinessException e) {
 			e.printStackTrace();
+			request.setAttribute("errors", e.getErrors());
 		}
 
 	}
-
 }

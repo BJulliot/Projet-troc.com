@@ -12,6 +12,7 @@ import java.util.List;
 
 import fr.eni.projet.troc.bo.ArticleVendu;
 import fr.eni.projet.troc.bo.Enchere;
+import fr.eni.projet.troc.exception.BusinessException;
 
 /**
  * Classe en charge
@@ -34,7 +35,7 @@ public class EnchereImpl implements EnchereDAO {
 	}
 
 	@Override
-	public void create(Enchere enchere) throws Exception {
+	public void create(Enchere enchere) throws BusinessException {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			cnx.setAutoCommit(false);
 			PreparedStatement requete = cnx.prepareStatement(

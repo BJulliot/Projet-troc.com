@@ -5,6 +5,7 @@ package fr.eni.projet.troc.dal;
 
 
 import fr.eni.projet.troc.bo.Enchere;
+import fr.eni.projet.troc.exception.BusinessException;
 
 
 /**
@@ -15,7 +16,7 @@ import fr.eni.projet.troc.bo.Enchere;
  */
 public interface EnchereDAO {
 	
-	public void create(Enchere enchere) throws Exception;
+	public void create(Enchere enchere) throws BusinessException;
 
 	
 	public Enchere selectById(int id) throws Exception;
