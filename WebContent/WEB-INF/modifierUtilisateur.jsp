@@ -86,36 +86,37 @@
 								value="${utilisateurEnSession.ville}" required>
 						</div>
 					</div>
-					<div class=" p-3 mb-2 bg-secondary">
-						<div class="form-group row align-items-center">
-							<div class="col-sm-6">
-								<label class="text-white" for="ancienMotDePasse">Valider
-									les modifications</label> <input type="password" class="form-control"
-									id="ancienMotDePasse" name="ancienMotDePasse"
-									placeholder="Mot de passe actuel" required>
+					<div class="col-12 d-flex justify-content-center text-center">
+						<div class="col-sm-6 p-2 bg-secondary">
+							<div class="form-group align-items-center">
+								<div class="col-sm-12">
+									<label class="text-white" for="ancienMotDePasse">Valider
+										les modifications</label> <input type="password" class="form-control"
+										id="ancienMotDePasse" name="ancienMotDePasse"
+										placeholder="Mot de passe actuel" required>
+								</div>
 							</div>
-						</div>
-						<div class="form-group row">
-							<div class="col-sm-6 text-center">
-								<button class="btn btn-secondary" type="button"
+
+							<div class="col-sm-12 text-center">
+								<button class="btn btn-secondary " type="button"
 									data-toggle="collapse" data-target="#changementMotDePasse"
 									aria-expanded="false" aria-controls="changementMotDePasse">Changer
 									de mot de passe?</button>
 							</div>
-						</div>
 
-						<div class="form-group row collapse" id="changementMotDePasse">
-							<div class="col-sm-6">
-								<label class="text-white" for="nouveauMotDePasse">Nouveau
-									mot de passe</label> <input type="password" class="form-control"
-									id="nouveauMotDePasse" name="nouveauMotDePasse"
-									placeholder="Nouveau mot de passe">
-							</div>
-							<div class="col-sm-6">
-								<label class="text-white" for="confirmationMotDePasse">Confirmation</label>
-								<input type="password" class="form-control"
-									id="confirmationMotDePasse" name="confirmationMotDePasse"
-									placeholder="Confirmer le mot de passe">
+							<div class="form-group collapse" id="changementMotDePasse">
+								<div class="col-sm-12">
+									<label class="text-white" for="nouveauMotDePasse">Nouveau
+										mot de passe</label> <input type="password" class="form-control"
+										id="nouveauMotDePasse" name="nouveauMotDePasse"
+										placeholder="Nouveau mot de passe">
+								</div>
+								<div class="col-sm-12">
+									<label class="text-white" for="confirmationMotDePasse">Confirmation</label>
+									<input type="password" class="form-control"
+										id="confirmationMotDePasse" name="confirmationMotDePasse"
+										placeholder="Confirmer le mot de passe">
+								</div>
 							</div>
 						</div>
 					</div>
