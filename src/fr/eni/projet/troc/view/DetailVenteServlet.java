@@ -43,6 +43,7 @@ public class DetailVenteServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateurEnSession");
 			session.setAttribute("utilisateurEnSession", utilisateur);
+			session.setAttribute("noArticleEnchere", id);
 			
 			
 		} catch (NumberFormatException e) {
@@ -61,8 +62,9 @@ public class DetailVenteServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		String id = request.getParameter("a");		
-		System.out.println(id);
+		String enchereNoArticle = (String) session.getAttribute("noArticleEnchere");	
+		
+		System.out.println(enchereNoArticle);
 
 		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateurEnSession");		
 		request.setCharacterEncoding("UTF-8");
@@ -75,13 +77,12 @@ public class DetailVenteServlet extends HttpServlet {
 		LocalDateTime date_enchere = LocalDateTime.now();
 		enchere.setDateEnchere(date_enchere);
 		
-		id = String.valueOf(enchere.getNoArticle());
-		enchere.setNoArticle(Integer.parseInt(id));
+		enchere.setNoArticle(Integer.parseInt(enchereNoArticle));
 		
 		
 		try {
 			em.create(enchere);
-			request.getRequestDispatcher("/WEB-INF/detailVente.jsp").forward(request, response);
+			request.getRequestDispatcher("/AccueilServlet").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

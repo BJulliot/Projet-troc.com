@@ -43,15 +43,30 @@
 					<c:choose>
 						<c:when test="${fn:contains(nameArticle,search)}">
 							<c:forEach var="nameArticle" items="${nameArticle}">
-								<a class="lienEnchere"
-									href="<%=application.getContextPath()%>/DetailVenteServlet?a=${nameArticle.noArticle}">
-									<div class="card h-100 articleCase">
-										${nameArticle.nom}
-										<p>Prix : ${nameArticle.prixInitial} Points</p>
-										<p>Fin de l'enchère : ${nameArticle.dateFinEnchere}</p>
-										<p>Vendeur : ${nameArticle.pseudoUtilisateur}</p>
-									</div>
-								</a>
+								<c:choose>
+									<c:when test="${utilisateurEnSession == null}">
+										<a class="lienEnchere"
+											href="<%=application.getContextPath()%>/ConnectionServlet">
+											<div class="card h-100 articleCase">
+												${nameArticle.nom}
+												<p>Prix : ${nameArticle.prixInitial} Points</p>
+												<p>Fin de l'enchère : ${nameArticle.dateFinEnchere}</p>
+												<p>Vendeur : ${nameArticle.pseudoUtilisateur}</p>
+											</div>
+										</a>
+									</c:when>
+									<c:otherwise>
+										<a class="lienEnchere"
+											href="<%=application.getContextPath()%>/DetailVenteServlet?a=${nameArticle.noArticle}">
+											<div class="card h-100 articleCase">
+												${nameArticle.nom}
+												<p>Prix : ${nameArticle.prixInitial} Points</p>
+												<p>Fin de l'enchère : ${nameArticle.dateFinEnchere}</p>
+												<p>Vendeur : ${nameArticle.pseudoUtilisateur}</p>
+											</div>
+										</a>
+									</c:otherwise>
+								</c:choose>
 							</c:forEach>
 						</c:when>
 						<c:when test="${!fn:contains(nameArticle,search)}">
@@ -61,17 +76,32 @@
 				</c:when>
 				<c:when test="${Cat == null }">
 					<c:forEach var="articles" items="${articles}">
-						<a class="lienEnchere"
-							href="<%=application.getContextPath()%>/DetailVenteServlet?a=${articles.noArticle}">
+						<c:choose>
+							<c:when test="${utilisateurEnSession == null}">
+								<a class="lienEnchere"
+									href="<%=application.getContextPath()%>/ConnectionServlet">
+									<div class="card h-100 articleCase">
+										${articles.nom}
+										<p>Prix : ${articles.prixInitial} Points</p>
+										<p>Fin de l'enchère : ${articles.dateFinEnchere}</p>
+										<p>Vendeur : ${articles.pseudoUtilisateur}</p>
+									</div>
+								</a>
+							</c:when>
+							<c:otherwise>
+								<a class="lienEnchere"
+									href="<%=application.getContextPath()%>/DetailVenteServlet?a=${articles.noArticle}">
 
-							<div class="card h-100 articleCase">
+									<div class="card h-100 articleCase">
 
-								${articles.nom}
-								<p>Prix : ${articles.prixInitial} Points</p>
-								<p>Fin de l'enchère : ${articles.dateFinEnchere}</p>
-								<p>Vendeur : ${articles.pseudoUtilisateur}</p>
-							</div>
-						</a>
+										${articles.nom}
+										<p>Prix : ${articles.prixInitial} Points</p>
+										<p>Fin de l'enchère : ${articles.dateFinEnchere}</p>
+										<p>Vendeur : ${articles.pseudoUtilisateur}</p>
+									</div>
+								</a>
+							</c:otherwise>
+						</c:choose>
 					</c:forEach>
 				</c:when>
 				<c:when test="${Cat == '0' && empty search}">
@@ -81,16 +111,31 @@
 						</c:when>
 						<c:otherwise>
 							<c:forEach var="articles" items="${articles}">
-								<a class="lienEnchere"
-									href="<%=application.getContextPath()%>/DetailVenteServlet?a=${articles.noArticle}">
+								<c:choose>
+									<c:when test="${utilisateurEnSession == null}">
+										<a class="lienEnchere"
+											href="<%=application.getContextPath()%>/ConnectionServlet">
+											<div class="card h-100 articleCase">
+												${articles.nom}
+												<p>Prix : ${articles.prixInitial} Points</p>
+												<p>Fin de l'enchère : ${articles.dateFinEnchere}</p>
+												<p>Vendeur : ${articles.pseudoUtilisateur}</p>
+											</div>
+										</a>
+									</c:when>
+									<c:otherwise>
+										<a class="lienEnchere"
+											href="<%=application.getContextPath()%>/DetailVenteServlet?a=${articles.noArticle}">
 
-									<div class="card h-100 articleCase">
-										${articles.nom}
-										<p>Prix : ${articles.prixInitial} Points</p>
-										<p>Fin de l'enchère : ${articles.dateFinEnchere}</p>
-										<p>Vendeur : ${articles.pseudoUtilisateur}</p>
-									</div>
-								</a>
+											<div class="card h-100 articleCase">
+												${articles.nom}
+												<p>Prix : ${articles.prixInitial} Points</p>
+												<p>Fin de l'enchère : ${articles.dateFinEnchere}</p>
+												<p>Vendeur : ${articles.pseudoUtilisateur}</p>
+											</div>
+										</a>
+									</c:otherwise>
+								</c:choose>
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
@@ -102,16 +147,31 @@
 						</c:when>
 						<c:otherwise>
 							<c:forEach var="cateNum" items="${cateNum}">
-								<a class="lienEnchere"
-									href="<%=application.getContextPath()%>/DetailVenteServlet?a=${cateNum.noArticle}">
+								<c:choose>
+									<c:when test="${utilisateurEnSession == null}">
+										<a class="lienEnchere"
+											href="<%=application.getContextPath()%>/ConnectionServlet">
+											<div class="card h-100 articleCase">
+												${cateNum.nom}
+												<p>Prix : ${cateNum.prixInitial} Points</p>
+												<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
+												<p>Vendeur : ${cateNum.pseudoUtilisateur}</p>
+											</div>
+										</a>
+									</c:when>
+									<c:otherwise>
+										<a class="lienEnchere"
+											href="<%=application.getContextPath()%>/DetailVenteServlet?a=${cateNum.noArticle}">
 
-									<div class="card h-100 articleCase">
-										${cateNum.nom}
-										<p>Prix : ${cateNum.prixInitial} Points</p>
-										<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
-										<p>Vendeur : ${cateNum.pseudoUtilisateur}</p>
-									</div>
-								</a>
+											<div class="card h-100 articleCase">
+												${cateNum.nom}
+												<p>Prix : ${cateNum.prixInitial} Points</p>
+												<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
+												<p>Vendeur : ${cateNum.pseudoUtilisateur}</p>
+											</div>
+										</a>
+									</c:otherwise>
+								</c:choose>
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
@@ -123,16 +183,31 @@
 						</c:when>
 						<c:otherwise>
 							<c:forEach var="cateNum" items="${cateNum}">
-								<a class="lienEnchere"
-									href="<%=application.getContextPath()%>/DetailVenteServlet?a=${cateNum.noArticle}">
+								<c:choose>
+									<c:when test="${utilisateurEnSession == null}">
+										<a class="lienEnchere"
+											href="<%=application.getContextPath()%>/ConnectionServlet">
+											<div class="card h-100 articleCase">
+												${cateNum.nom}
+												<p>Prix : ${cateNum.prixInitial} Points</p>
+												<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
+												<p>Vendeur : ${cateNum.pseudoUtilisateur}</p>
+											</div>
+										</a>
+									</c:when>
+									<c:otherwise>
+										<a class="lienEnchere"
+											href="<%=application.getContextPath()%>/DetailVenteServlet?a=${cateNum.noArticle}">
 
-									<div class="card h-100 articleCase">
-										${cateNum.nom}
-										<p>Prix : ${cateNum.prixInitial} Points</p>
-										<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
-										<p>Vendeur : ${cateNum.pseudoUtilisateur}</p>
-									</div>
-								</a>
+											<div class="card h-100 articleCase">
+												${cateNum.nom}
+												<p>Prix : ${cateNum.prixInitial} Points</p>
+												<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
+												<p>Vendeur : ${cateNum.pseudoUtilisateur}</p>
+											</div>
+										</a>
+									</c:otherwise>
+								</c:choose>
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
@@ -144,16 +219,31 @@
 						</c:when>
 						<c:otherwise>
 							<c:forEach var="cateNum" items="${cateNum}">
-								<a class="lienEnchere"
-									href="<%=application.getContextPath()%>/DetailVenteServlet?a=${cateNum.noArticle}">
+								<c:choose>
+									<c:when test="${utilisateurEnSession == null}">
+										<a class="lienEnchere"
+											href="<%=application.getContextPath()%>/ConnectionServlet">
+											<div class="card h-100 articleCase">
+												${cateNum.nom}
+												<p>Prix : ${cateNum.prixInitial} Points</p>
+												<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
+												<p>Vendeur : ${cateNum.pseudoUtilisateur}</p>
+											</div>
+										</a>
+									</c:when>
+									<c:otherwise>
+										<a class="lienEnchere"
+											href="<%=application.getContextPath()%>/DetailVenteServlet?a=${cateNum.noArticle}">
 
-									<div class="card h-100 articleCase">
-										${cateNum.nom}
-										<p>Prix : ${cateNum.prixInitial} Points</p>
-										<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
-										<p>Vendeur : ${cateNum.pseudoUtilisateur}</p>
-									</div>
-								</a>
+											<div class="card h-100 articleCase">
+												${cateNum.nom}
+												<p>Prix : ${cateNum.prixInitial} Points</p>
+												<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
+												<p>Vendeur : ${cateNum.pseudoUtilisateur}</p>
+											</div>
+										</a>
+									</c:otherwise>
+								</c:choose>
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
@@ -165,16 +255,31 @@
 						</c:when>
 						<c:otherwise>
 							<c:forEach var="cateNum" items="${cateNum}">
-								<a class="lienEnchere"
-									href="<%=application.getContextPath()%>/DetailVenteServlet?a=${cateNum.noArticle}">
+								<c:choose>
+									<c:when test="${utilisateurEnSession == null}">
+										<a class="lienEnchere"
+											href="<%=application.getContextPath()%>/ConnectionServlet">
+											<div class="card h-100 articleCase">
+												${cateNum.nom}
+												<p>Prix : ${cateNum.prixInitial} Points</p>
+												<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
+												<p>Vendeur : ${cateNum.pseudoUtilisateur}</p>
+											</div>
+										</a>
+									</c:when>
+									<c:otherwise>
+										<a class="lienEnchere"
+											href="<%=application.getContextPath()%>/DetailVenteServlet?a=${cateNum.noArticle}">
 
-									<div class="card h-100 articleCase">
-										${cateNum.nom}
-										<p>Prix : ${cateNum.prixInitial} Points</p>
-										<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
-										<p>Vendeur : ${cateNum.pseudoUtilisateur}</p>
-									</div>
-								</a>
+											<div class="card h-100 articleCase">
+												${cateNum.nom}
+												<p>Prix : ${cateNum.prixInitial} Points</p>
+												<p>Fin de l'enchère : ${cateNum.dateFinEnchere}</p>
+												<p>Vendeur : ${cateNum.pseudoUtilisateur}</p>
+											</div>
+										</a>
+									</c:otherwise>
+								</c:choose>
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>

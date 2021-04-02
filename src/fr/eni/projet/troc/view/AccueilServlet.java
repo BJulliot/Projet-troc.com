@@ -8,11 +8,13 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import fr.eni.projet.troc.bll.ArticlesVendusManager;
 import fr.eni.projet.troc.bll.CategorieManager;
 import fr.eni.projet.troc.bo.ArticleVendu;
 import fr.eni.projet.troc.bo.Categorie;
+import fr.eni.projet.troc.bo.Utilisateur;
 
 /**
  * Servlet implementation class AccueilServlet
@@ -30,6 +32,9 @@ public class AccueilServlet extends HttpServlet {
 		request.setAttribute("Cat", Cat);
 		System.out.println(Cat);
 		System.out.println(search);
+		HttpSession session = request.getSession();
+		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateurEnSession");
+		session.setAttribute("utilisateurEnSession", utilisateur);
 
 		try {
 			//Select all de categegories
