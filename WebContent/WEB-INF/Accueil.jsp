@@ -39,11 +39,15 @@
 		<div
 			class="container articleContenus col-lg-6 col-md-4 col-sm-6 portfolio-item">
 			<c:choose>
+				<!-- 				Test quand on cherche par mot cle, si le nom de l'article est present on l'affiche sinon on affiche un message 
+ -->
 				<c:when test="${not empty search}">
 					<c:choose>
 						<c:when test="${fn:contains(nameArticle,search)}">
 							<c:forEach var="nameArticle" items="${nameArticle}">
 								<c:choose>
+									<!-- 								Si le user est pas connecte, et qu'il clique pour voir un article il est redirige vers la page de connection
+ -->
 									<c:when test="${utilisateurEnSession == null}">
 										<a class="lienEnchere"
 											href="<%=application.getContextPath()%>/ConnectionServlet">
@@ -56,7 +60,8 @@
 										</a>
 									</c:when>
 									<c:otherwise>
-										<a class="lienEnchere"
+<!-- 									Si le user est connecté il est redirigé vers la page de description de l'article ou il pourra faire une enchere
+ -->										<a class="lienEnchere"
 											href="<%=application.getContextPath()%>/DetailVenteServlet?a=${nameArticle.noArticle}">
 											<div class="card h-100 articleCase">
 												${nameArticle.nom}
@@ -74,6 +79,8 @@
 						</c:when>
 					</c:choose>
 				</c:when>
+				<!-- 				En fonction du numéro de catégorie on recupere les article avec ce meme numero, null = page de base, 0=tout les articles 1=informatique
+ -->
 				<c:when test="${Cat == null }">
 					<c:forEach var="articles" items="${articles}">
 						<c:choose>
@@ -286,7 +293,6 @@
 				</c:when>
 			</c:choose>
 		</div>
-
 	</div>
 	<!-- Bootstrap core JavaScript -->
 	<%@include file="/WEB-INF/template/script.html"%>

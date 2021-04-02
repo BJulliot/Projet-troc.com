@@ -8,8 +8,8 @@
 
 <body>
 	<%@include file="/WEB-INF/template/nav.jsp"%>
-
-	<h1 class="my-4 text-center">Details vente</h1>
+<!-- affichage erreur
+ -->	<h1 class="my-4 text-center">Details vente</h1>
 	<c:if test="${!empty errors}">
 		<div class="row">
 			<div class="col-lg-12 col-md-6 col-sm-6 portfolio-item">
@@ -29,7 +29,9 @@
 			</div>
 		</div>
 	</c:if>
-
+	
+<!-- 	On appelle l'article en fonction du numéro d'article qu'on a recupere via l'url
+ -->
 	<c:forEach var="article" items="${article}">
 		
 		${article.nom}
@@ -43,7 +45,8 @@
 		${retrait.codePostal}
 		${retrait.ville}
 	</c:forEach>
-		<a
+<!-- 	Sert a afficher le profil de l'utilisateur
+ -->		<a
 			href="<%=application.getContextPath()%>/AfficherProfilUtilisateurServlet?u=${article.pseudoUtilisateur}">
 			<p>Vendeur : ${article.pseudoUtilisateur}</p>
 		</a>
