@@ -18,4 +18,7 @@ public interface ArticleVenduDAO {
 		public void create(ArticleVendu articleVendu,Retrait retrait) throws Exception;
 
 		public List<ArticleVendu> selectById(int id) throws Exception;
+		
+		public ArticleVendu selectByIdSell(int id) throws Exception ;
+
 }

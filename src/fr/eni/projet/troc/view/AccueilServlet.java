@@ -30,8 +30,6 @@ public class AccueilServlet extends HttpServlet {
 		String search = request.getParameter("search");
 		request.setAttribute("search", search);
 		request.setAttribute("Cat", Cat);
-		System.out.println(Cat);
-		System.out.println(search);
 		HttpSession session = request.getSession();
 		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateurEnSession");
 		session.setAttribute("utilisateurEnSession", utilisateur);
@@ -48,7 +46,6 @@ public class AccueilServlet extends HttpServlet {
 			//Select article by id de la categorie
 			List<ArticleVendu> cateNum = ArticlesVendusManager.getInstance().getNoCategorie(Integer.parseInt(Cat));
 			request.setAttribute("cateNum", cateNum);
-			System.out.println(cateNum);
 			
 			List<ArticleVendu> nameArticle = ArticlesVendusManager.getInstance().getNomArticle(search);
 			request.setAttribute("nameArticle", nameArticle);
@@ -67,7 +64,6 @@ public class AccueilServlet extends HttpServlet {
 		String search = request.getParameter("search");
 		request.setAttribute("search", search);
 		request.setAttribute("Cat", Cat);
-		System.out.println(Cat);
 
 		try {
 			//Select all de categegories
@@ -81,7 +77,6 @@ public class AccueilServlet extends HttpServlet {
 			//Select article by id
 			List<ArticleVendu> cateNum = ArticlesVendusManager.getInstance().getNoCategorie(Integer.parseInt(Cat));
 			request.setAttribute("cateNum", cateNum);
-			System.out.println(cateNum);
 
 		} catch (Exception e) {
 			e.printStackTrace();

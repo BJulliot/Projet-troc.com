@@ -36,6 +36,13 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 		articleVendu.setNomCategorie(rs.getString("libelle"));
 		return articleVendu;
 	}
+	
+	
+	public static ArticleVendu itemBuilderSell(ResultSet rs) throws SQLException {
+		ArticleVendu articleVendu = new ArticleVendu();
+		articleVendu.setPrixVente(rs.getInt("prix_vente"));
+		return articleVendu;
+	}
 
 	@Override
 	public List<ArticleVendu> selectAll() throws Exception {
@@ -162,6 +169,28 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 
 			while (rs.next()) {
 				articleVendu.add(itemBuilder(rs));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return articleVendu;
+	}
+	
+	
+	
+	@Override
+	public ArticleVendu selectByIdSell(int id) throws Exception {
+		ArticleVendu articleVendu = null;
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement requete = cnx.prepareStatement(
+					"SELECT prix_vente from articles_vendus WHERE no_article = ?");
+			requete.setInt(1, id);
+
+			ResultSet rs = requete.executeQuery();
+
+			while (rs.next()) {
+				articleVendu = (itemBuilderSell(rs));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

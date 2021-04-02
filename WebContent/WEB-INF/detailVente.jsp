@@ -16,6 +16,7 @@
 		${article.nom}
 		<p>Description : ${article.description}</p>
 		<p>Categorie : ${article.nomCategorie}</p>
+		<p>Meilleur offre : ${article.prixVente} points</p>
 		<p>Mise a prix ${article.prixInitial} Points</p>
 		<p>Fin de l'enchère : ${article.dateFinEnchere}</p>
 		<c:forEach var="retrait" items="${retrait}">

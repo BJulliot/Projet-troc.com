@@ -19,8 +19,6 @@ import fr.eni.projet.troc.bo.Enchere;
 import fr.eni.projet.troc.bo.Retrait;
 import fr.eni.projet.troc.bo.Utilisateur;
 
-
-
 /**
  * Servlet implementation class DetailVenteServlet
  */
@@ -28,24 +26,24 @@ import fr.eni.projet.troc.bo.Utilisateur;
 public class DetailVenteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	String id = request.getParameter("a");
-	System.out.println(id);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String id = request.getParameter("a");
+		System.out.println(id);
 		try {
 			List<ArticleVendu> article = ArticlesVendusManager.getInstance().getArticleId(Integer.parseInt(id));
 			request.setAttribute("article", article);
+			
 			List<Retrait> retrait = RetraitManager.getInstance().getRetraitId(Integer.parseInt(id));
 			request.setAttribute("retrait", retrait);
 			System.out.println(article);
-			
 			HttpSession session = request.getSession();
 			Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateurEnSession");
 			session.setAttribute("utilisateurEnSession", utilisateur);
 			session.setAttribute("noArticleEnchere", id);
 			
-			
+
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -53,42 +51,42 @@ public class DetailVenteServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		request.getRequestDispatcher("/WEB-INF/detailVente.jsp").forward(request, response);
 	}
-	
-	
 
 	@Override
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		String enchereNoArticle = (String) session.getAttribute("noArticleEnchere");	
-		
+		String enchereNoArticle = (String) session.getAttribute("noArticleEnchere");
+
 		System.out.println(enchereNoArticle);
 
-		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateurEnSession");		
+		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateurEnSession");
 		request.setCharacterEncoding("UTF-8");
 		Enchere enchere = new Enchere();
-		enchere.setMontantEnchere(Integer.parseInt(request.getParameter("prixEnchere")));
+		String montantEnchere = request.getParameter("prixEnchere");
+		enchere.setMontantEnchere(Integer.parseInt(montantEnchere));
 		EnchereManager em = EnchereManager.getInstance();
 		int noUtilisateur = utilisateur.getNoUtilisateur();
 		enchere.setNoUtilisateur(noUtilisateur);
-	
+
 		LocalDateTime date_enchere = LocalDateTime.now();
 		enchere.setDateEnchere(date_enchere);
-		
+
 		enchere.setNoArticle(Integer.parseInt(enchereNoArticle));
-		
-		
+
 		try {
+			ArticleVendu articleVendu = EnchereManager.getInstance().selectByIdSell(Integer.parseInt(enchereNoArticle));
+			System.out.println("AHHHHHH LE PRIIIX"+ articleVendu);
 			em.create(enchere);
+			
 			request.getRequestDispatcher("/AccueilServlet").forward(request, response);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-
-
 
 }
