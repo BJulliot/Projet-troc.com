@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,11 +40,28 @@ public class ConnectionServlet extends HttpServlet {
 		String motDePasse = request.getParameter("motDePasse");
 		System.out.println(pseudo);
 		System.out.println(motDePasse);
+
+		System.out.println(request.getParameter("cookieConnexion"));
+
 		// Appelle a la BLL
 		try {
 			Utilisateur utilisateur = UtilisateursManager.getInstance().validateConnection(pseudo, motDePasse);
 			// Transmettre les informations pour la page d'accueil
 			HttpSession session = request.getSession();
+
+			// cookie qui garde le pseudo et mdp de l'utilisateur :
+			System.out.println(request.getParameter("cookieConnexion"));
+			if (request.getParameter("cookieConnexion") != null) {
+				// map des cookies
+				Cookie[] cookie = request.getCookies();
+				Cookie infoUtilisateurPseudo = new Cookie("infoUtilisateurPseudo", pseudo);
+				Cookie infoUtilisateurMotDePasse = new Cookie("infoUtilisateurMotDePasse", motDePasse);
+				response.addCookie(infoUtilisateurPseudo);
+				response.addCookie(infoUtilisateurMotDePasse);
+			}
+
+			// temps avant desactivation de la session
+			session.setMaxInactiveInterval(10);
 
 			session.setAttribute("utilisateurEnSession", utilisateur);
 			request.setAttribute("utilisateur", utilisateur);
@@ -56,13 +74,4 @@ public class ConnectionServlet extends HttpServlet {
 		}
 	}
 
-	/**
-	 * Méthode pour valider la configuration de la base de données
-	 */
-	/*
-	 * private void testPoolConnection() { try { Connection cnx =
-	 * ConnectionProvider.getConnection(); System.out.println("La connexion est " +
-	 * (cnx.isClosed() ? "FERMEE" : "OUVERTE")); } catch (SQLException e) {
-	 * e.printStackTrace(); } }
-	 */
 }
