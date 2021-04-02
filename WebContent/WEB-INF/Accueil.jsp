@@ -44,9 +44,8 @@
 						<c:when test="${fn:contains(nameArticle,search)}">
 							<c:forEach var="nameArticle" items="${nameArticle}">
 								<a class="lienEnchere"
-									href="<%=application.getContextPath()%>/DetailVenteServlet">
+									href="<%=application.getContextPath()%>/DetailVenteServlet?a=${nameArticle.noArticle}">
 									<div class="card h-100 articleCase">
-
 										${nameArticle.nom}
 										<p>Prix : ${nameArticle.prixInitial} Points</p>
 										<p>Fin de l'enchère : ${nameArticle.dateFinEnchere}</p>
@@ -104,7 +103,7 @@
 						<c:otherwise>
 							<c:forEach var="cateNum" items="${cateNum}">
 								<a class="lienEnchere"
-									href="<%=application.getContextPath()%>/DetailVenteServlet?a=${articles.noArticle}">
+									href="<%=application.getContextPath()%>/DetailVenteServlet?a=${cateNum.noArticle}">
 
 									<div class="card h-100 articleCase">
 										${cateNum.nom}
@@ -125,7 +124,7 @@
 						<c:otherwise>
 							<c:forEach var="cateNum" items="${cateNum}">
 								<a class="lienEnchere"
-									href="<%=application.getContextPath()%>/DetailVenteServlet?a=${articles.noArticle}">
+									href="<%=application.getContextPath()%>/DetailVenteServlet?a=${cateNum.noArticle}">
 
 									<div class="card h-100 articleCase">
 										${cateNum.nom}
@@ -146,7 +145,7 @@
 						<c:otherwise>
 							<c:forEach var="cateNum" items="${cateNum}">
 								<a class="lienEnchere"
-									href="<%=application.getContextPath()%>/DetailVenteServlet?a=${articles.noArticle}">
+									href="<%=application.getContextPath()%>/DetailVenteServlet?a=${cateNum.noArticle}">
 
 									<div class="card h-100 articleCase">
 										${cateNum.nom}
@@ -167,7 +166,7 @@
 						<c:otherwise>
 							<c:forEach var="cateNum" items="${cateNum}">
 								<a class="lienEnchere"
-									href="<%=application.getContextPath()%>/DetailVenteServlet?a=${articles.noArticle}">
+									href="<%=application.getContextPath()%>/DetailVenteServlet?a=${cateNum.noArticle}">
 
 									<div class="card h-100 articleCase">
 										${cateNum.nom}
