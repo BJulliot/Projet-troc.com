@@ -1,6 +1,6 @@
 <%@page import="fr.eni.projet.troc.bo.Utilisateur"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
@@ -49,9 +49,9 @@
 					</div>
 					<div class="form-group row">
 						<div class="col-sm-6">
-							<label for="prenom">Prénom</label> <input type="text"
+							<label for="prenom">PrÃ©nom</label> <input type="text"
 								class="form-control" id="prenom" name="prenom"
-								placeholder="Prénom" value="${utilisateurEnSession.prenom}"
+								placeholder="PrÃ©nom" value="${utilisateurEnSession.prenom}"
 								required>
 						</div>
 						<div class="col-sm-6">
@@ -62,9 +62,9 @@
 					</div>
 					<div class="form-group row">
 						<div class="col-sm-6">
-							<label for="telephone">Téléphone</label> <input type="tel"
+							<label for="telephone">TÃ©lÃ©phone</label> <input type="tel"
 								class="form-control" id="telephone" name="telephone"
-								placeholder="Téléphone"
+								placeholder="TÃ©lÃ©phone"
 								value="${utilisateurEnSession.telephone}">
 						</div>
 					</div>
@@ -121,7 +121,7 @@
 					</div>
 
 					<div class="form-group mb-2">
-						<button type="" class="btn btn-secondary">Crédit :
+						<button type="" class="btn btn-secondary">CrÃ©dit :
 							${utilisateurEnSession.credit}</button>
 					</div>
 

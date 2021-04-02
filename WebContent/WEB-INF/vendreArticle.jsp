@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
@@ -21,16 +21,16 @@
 					: </label>
 				<textarea style="resize: none" name=description id="description" required
 					placeholder="Description de l'article"></textarea>
-					<label>Catégorie : </label>
+					<label>CatÃ©gorie : </label>
 				<select class="form-select" id="cateVente" name="cateVente"
 					aria-label="Default select example">
 					<c:forEach var="categories" items="${categories}">
 						<option value="${categories.noCategorie}">${categories.libelle}</option>
 					</c:forEach>
 				</select> <label>Mise a prix : </label> <input type="number" name="prix"
-					id="prix" required value="50"> <label>Début de
-					l'enchère : </label> <input type="date" name="dateDebut" id="dateDebut"
-					required> <label>Fin de l'enchère : </label> <input
+					id="prix" required value="50"> <label>DÃ©but de
+					l'enchÃ¨re : </label> <input type="date" name="dateDebut" id="dateDebut"
+					required> <label>Fin de l'enchÃ¨re : </label> <input
 					type="date" name="dateFin" id="dateFin" required>
 				<fieldset class="fieldArticle">
 					<legend>Retrait</legend>

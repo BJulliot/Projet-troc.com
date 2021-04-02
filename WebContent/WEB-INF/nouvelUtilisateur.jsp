@@ -1,6 +1,6 @@
 <%@page import="fr.eni.projet.troc.bo.Utilisateur"%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!DOCTYPE html>
@@ -33,7 +33,7 @@
 			</c:if>
 
 			<%
-				//Récupérer l'attribut userInSession sur la Session
+				//RÃ©cupÃ©rer l'attribut userInSession sur la Session
 			Utilisateur nouvelUtilisateur = (Utilisateur) request.getAttribute("nouvelUtilisateur");
 			%>
 			<div class="col-md-10 mx-auto">
@@ -53,9 +53,9 @@
 					</div>
 					<div class="form-group row">
 						<div class="col-sm-6">
-							<label for="prenom">Prénom</label> <input type="text"
+							<label for="prenom">PrÃ©nom</label> <input type="text"
 								class="form-control" id="prenom" name="prenom"
-								placeholder="Prénom" value="${nouvelUtilisateur.prenom}"
+								placeholder="PrÃ©nom" value="${nouvelUtilisateur.prenom}"
 								required>
 						</div>
 						<div class="col-sm-6">
@@ -66,9 +66,9 @@
 					</div>
 					<div class="form-group row">
 						<div class="col-sm-6">
-							<label for="telephone">Téléphone</label> <input type="tel"
+							<label for="telephone">TÃ©lÃ©phone</label> <input type="tel"
 								class="form-control" id="telephone" name="telephone"
-								placeholder="Téléphone" value="${nouvelUtilisateur.telephone}">
+								placeholder="TÃ©lÃ©phone" value="${nouvelUtilisateur.telephone}">
 						</div>
 					</div>
 					<div class="form-group row">
@@ -103,7 +103,7 @@
 						</div>
 					</div>
 					<div class="text-center">
-						<button type="submit" class="btn btn-secondary">Créer</button>
+						<button type="submit" class="btn btn-secondary">CrÃ©er</button>
 						<button type="button" href="index.jsp" class="btn btn-secondary">Annuler</button>
 					</div>
 				</form>
