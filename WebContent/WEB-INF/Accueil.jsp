@@ -11,7 +11,6 @@
 <%@include file="/WEB-INF/template/head.html"%>
 <body>
 	<%@include file="/WEB-INF/template/nav.jsp"%>
-
 <c:if test="${!empty errors}">
 				<div class="row">
 					<div class="col-lg-12 col-md-6 col-sm-6 portfolio-item">

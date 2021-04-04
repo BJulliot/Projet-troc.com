@@ -6,8 +6,7 @@ Utilisateur utilisateurEnSession = (Utilisateur) session.getAttribute("utilisate
 %>
 <!-- Navigation -->
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top text-white justify-content-between">
-	<a class="navbar-brand" href="./AccueilServlet">Jean-Bastien, Auction&Sales</a>
-
+<a class="navbar-brand" href="./AccueilServlet">Jean-Bastien, Auction&Sales</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarSupportedContent"
 		aria-controls="navbarSupportedContent" aria-expanded="false"
