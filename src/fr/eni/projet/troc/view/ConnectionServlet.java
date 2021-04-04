@@ -61,7 +61,7 @@ public class ConnectionServlet extends HttpServlet {
 			}
 
 			// temps avant desactivation de la session
-			session.setMaxInactiveInterval(10);
+			session.setMaxInactiveInterval(10 * 60);
 
 			session.setAttribute("utilisateurEnSession", utilisateur);
 			request.setAttribute("utilisateur", utilisateur);

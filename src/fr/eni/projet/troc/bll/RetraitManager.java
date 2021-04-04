@@ -11,13 +11,13 @@ import fr.eni.projet.troc.dal.RetraitDAO;
 
 /**
  * Classe en charge
+ * 
  * @author Bastien
  * @version Troc.com - v1.0
  * @date 1 avr. 2021 - 15:15:04
  */
 public class RetraitManager {
 
-	
 	private RetraitDAO retraitDAO;
 	private static RetraitManager instance;
 
@@ -31,10 +31,13 @@ public class RetraitManager {
 		}
 		return instance;
 	}
-	
-	
-	 public List<Retrait> getRetraitId(int id) throws Exception{
-		 return retraitDAO.selectById(id);
-	  }
-	
+
+	public List<Retrait> getRetraitId(int id) throws Exception {
+		return retraitDAO.selectById(id);
+	}
+
+	public Retrait selectRetraitById(int idArticle) throws Exception {
+		return retraitDAO.selectRetraitById(idArticle);
+	}
+
 }

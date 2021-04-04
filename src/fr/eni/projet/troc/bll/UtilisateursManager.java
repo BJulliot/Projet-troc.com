@@ -116,7 +116,7 @@ public class UtilisateursManager {
 		return true;
 	}
 
-	private boolean validerAncienMotDePasseBDD(String ancienMotDePasse, int noUtilisateur, BusinessException be) {
+	public boolean validerAncienMotDePasseBDD(String ancienMotDePasse, int noUtilisateur, BusinessException be) {
 		if (ancienMotDePasse == null) {
 			be.addError(Errors.REGLE_UTILISATEUR_PWD_NULL_ERREUR);
 			return false;

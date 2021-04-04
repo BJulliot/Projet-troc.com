@@ -2,7 +2,6 @@ package fr.eni.projet.troc.view;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -30,20 +29,18 @@ public class DetailVenteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String id = request.getParameter("a");
-		System.out.println(id);
+		String idArticle = request.getParameter("a");
+		System.out.println(idArticle);
 		try {
-			List<ArticleVendu> article = ArticlesVendusManager.getInstance().getArticleId(Integer.parseInt(id));
+			ArticleVendu article = ArticlesVendusManager.getInstance().selectArticleById(Integer.parseInt(idArticle));
 			request.setAttribute("article", article);
-			
-			List<Retrait> retrait = RetraitManager.getInstance().getRetraitId(Integer.parseInt(id));
+
+			Retrait retrait = RetraitManager.getInstance().selectRetraitById(Integer.parseInt(idArticle));
 			request.setAttribute("retrait", retrait);
 			System.out.println(article);
 			HttpSession session = request.getSession();
-			Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateurEnSession");
-			session.setAttribute("utilisateurEnSession", utilisateur);
-			session.setAttribute("noArticleEnchere", id);
-			
+			session.setAttribute("noArticleEnchere", idArticle);
+			System.out.println("utilisateur en session : " + session.getAttribute("utilisateurEnSession"));
 
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
@@ -77,7 +74,6 @@ public class DetailVenteServlet extends HttpServlet {
 
 		try {
 			ArticleVendu articleVendu = EnchereManager.getInstance().selectByIdSell(Integer.parseInt(enchereNoArticle));
-			System.out.println("AHHHHHH LE PRIIIX"+ articleVendu);
 			em.create(enchere);
 			request.getRequestDispatcher("/AccueilServlet").forward(request, response);
 		} catch (BusinessException e) {

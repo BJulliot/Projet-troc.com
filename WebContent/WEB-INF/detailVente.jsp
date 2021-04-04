@@ -8,8 +8,10 @@
 
 <body>
 	<%@include file="/WEB-INF/template/nav.jsp"%>
-<!-- affichage erreur
- -->	<h1 class="my-4 text-center">Details vente</h1>
+
+
+	<!-- affichage erreur
+ -->
 	<c:if test="${!empty errors}">
 		<div class="row">
 			<div class="col-lg-12 col-md-6 col-sm-6 portfolio-item">
@@ -29,37 +31,74 @@
 			</div>
 		</div>
 	</c:if>
-	
-<!-- 	On appelle l'article en fonction du numéro d'article qu'on a recupere via l'url
- -->
-	<c:forEach var="article" items="${article}">
-		
-		${article.nom}
+
+	<c:choose>
+		<c:when
+			test="${article.pseudoUtilisateur == utilisateurEnSession.pseudo}">
+			<h2 class="my-3 text-center">Votre annonce</h2>
+		</c:when>
+		<c:otherwise>
+			<h2 class="my-3 text-center">Détails de l'annonce</h2>
+		</c:otherwise>
+	</c:choose>
+
+	<!-- 	On appelle l'article en fonction du numéro d'article qu'on a recupere via l'url -->
+
+	<div class="container">
+		<h3>${article.nom}</h3>
 		<p>Description : ${article.description}</p>
 		<p>Categorie : ${article.nomCategorie}</p>
 		<p>Meilleur offre : ${article.prixVente} points</p>
 		<p>Mise a prix ${article.prixInitial} Points</p>
 		<p>Fin de l'enchère : ${article.dateFinEnchere}</p>
-		<c:forEach var="retrait" items="${retrait}">
-		${retrait.rue}
-		${retrait.codePostal}
-		${retrait.ville}
-	</c:forEach>
-<!-- 	Sert a afficher le profil de l'utilisateur
- -->		<a
+		<p>Retrait : ${retrait.rue} ${retrait.codePostal} ${retrait.ville}</p>
+
+
+		<!-- 	Sert a afficher le profil de l'utilisateur -->
+		<a
 			href="<%=application.getContextPath()%>/AfficherProfilUtilisateurServlet?u=${article.pseudoUtilisateur}">
 			<p>Vendeur : ${article.pseudoUtilisateur}</p>
 		</a>
-	</c:forEach>
 
+		<!-- Popose d'enchérir seulement si l'utilisateur ne possède pas l'annonce : -->
+		<c:choose>
+			<c:when
+				test="${article.pseudoUtilisateur == utilisateurEnSession.pseudo}">
+			</c:when>
+			<c:otherwise>
+				<form class="form-outline" action="./DetailVenteServlet"
+					method="post">
+					<label class="form-label" for="prixEnchere">Ma proposition</label>
+					<input type="number" name="prixEnchere" id="prixEnchere"> <input
+						type="submit" value="Valider enchere">
+				</form>
+			</c:otherwise>
+		</c:choose>
 
+	</div>
+	<!-- Popose d'enchérir seulement si l'utilisateur ne possède pas l'annonce : -->
+	<c:choose>
+		<c:when
+			test="${article.pseudoUtilisateur == utilisateurEnSession.pseudo}">
+			<div class="container">
+				<div class="row text-center">
+					<div class="col-12">
+						<a class="lienEnchere"
+							href="<%=application.getContextPath()%>/ModifierAnnonceServlet?a=${article.noArticle}">
+							<div class="text-center">
+								<button type="submit" class="btn btn-outline-secondary">Modifier
+									l'annonce</button>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
 
-	<form action="./DetailVenteServlet" method="post">
-		<label>Ma proposition</label> <input type="number" name="prixEnchere"
-			id="prixEnchere"> <input type="submit"
-			value="Valider enchere">
-	</form>
+		</c:when>
+		<c:otherwise>
 
+		</c:otherwise>
+	</c:choose>
 
 
 	<!-- Bootstrap core JavaScript -->

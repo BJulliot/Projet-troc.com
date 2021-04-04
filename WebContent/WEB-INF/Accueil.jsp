@@ -12,6 +12,26 @@
 <body>
 	<%@include file="/WEB-INF/template/nav.jsp"%>
 
+<c:if test="${!empty errors}">
+				<div class="row">
+					<div class="col-lg-12 col-md-6 col-sm-6 portfolio-item">
+						<div class="card h-100">
+							<div class="card-body">
+
+								<div class="alert alert-danger" role="alert">
+									<h2>Erreur!</h2>
+									<ul>
+										<c:forEach var="msg" items="${errors}">
+											<li>${msg}</li>
+										</c:forEach>
+									</ul>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</c:if>
+
 	<div class="container global">
 		<h1 class="my-4 text-center">Liste des enchères</h1>
 		<div class="col-lg-8 col-md-4 col-sm-6 portfolio-item formPlacement">
@@ -39,15 +59,13 @@
 		<div
 			class="container articleContenus col-lg-6 col-md-4 col-sm-6 portfolio-item">
 			<c:choose>
-				<!-- 				Test quand on cherche par mot cle, si le nom de l'article est present on l'affiche sinon on affiche un message 
- -->
+			<%-- Test quand on cherche par mot cle, si le nom de l'article est present on l'affiche sinon on affiche un message --%>
 				<c:when test="${not empty search}">
 					<c:choose>
 						<c:when test="${fn:contains(nameArticle,search)}">
 							<c:forEach var="nameArticle" items="${nameArticle}">
 								<c:choose>
-									<!-- 								Si le user est pas connecte, et qu'il clique pour voir un article il est redirige vers la page de connection
- -->
+									<%-- Si le user est pas connecte, et qu'il clique pour voir un article il est redirige vers la page de connection --%>
 									<c:when test="${utilisateurEnSession == null}">
 										<a class="lienEnchere"
 											href="<%=application.getContextPath()%>/ConnectionServlet">
@@ -60,8 +78,8 @@
 										</a>
 									</c:when>
 									<c:otherwise>
-<!-- 									Si le user est connecté il est redirigé vers la page de description de l'article ou il pourra faire une enchere
- -->										<a class="lienEnchere"
+										<%-- Si le user est connecté il est redirigé vers la page de description de l'article ou il pourra faire une enchere --%>
+										<a class="lienEnchere"
 											href="<%=application.getContextPath()%>/DetailVenteServlet?a=${nameArticle.noArticle}">
 											<div class="card h-100 articleCase">
 												${nameArticle.nom}
@@ -79,8 +97,7 @@
 						</c:when>
 					</c:choose>
 				</c:when>
-				<!-- 				En fonction du numéro de catégorie on recupere les article avec ce meme numero, null = page de base, 0=tout les articles 1=informatique
- -->
+				<%-- En fonction du numéro de catégorie on recupere les article avec ce meme numero, null = page de base, 0=tout les articles 1=informatique --%>
 				<c:when test="${Cat == null }">
 					<c:forEach var="articles" items="${articles}">
 						<c:choose>
