@@ -49,6 +49,7 @@ public class ModifierUtilisateurServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		UtilisateursManager um = UtilisateursManager.getInstance();
 		int noUtilisateur = utilisateur.getNoUtilisateur();
+		System.out.println("numero utilisateur : " + noUtilisateur);
 		String ancienPseudo = utilisateur.getPseudo();
 		String pseudo = request.getParameter("pseudo");
 		String nom = request.getParameter("nom");

@@ -85,7 +85,7 @@
 				<c:when test="${utilisateurEnSession.pseudo == utilisateur.pseudo}">
 					<div class="container">
 						<div class="row">
-							<div class="col-12 col-md-6">
+							<div class="col-12 col-md-6 mb-2">
 								<form action="./ModifierUtilisateurServlet" method="get">
 									<div class="text-center">
 										<button type="submit" class="btn btn-outline-secondary">Modifier
@@ -107,7 +107,7 @@
 				<c:otherwise>
 					<div class="container">
 						<div class="row text-center">
-							<div class="col-12 col-md-12">
+							<div class="col-12 col-md-12 ">
 								<div class="text-center">
 									<a href="./AccueilServlet"><button type="button"
 											class="btn btn-outline-secondary">Retour accueil</button></a>

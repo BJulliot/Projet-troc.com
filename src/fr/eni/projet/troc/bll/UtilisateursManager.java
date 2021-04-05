@@ -117,22 +117,23 @@ public class UtilisateursManager {
 	}
 
 	public boolean validerAncienMotDePasseBDD(String ancienMotDePasse, int noUtilisateur, BusinessException be) {
+		boolean result = true;
 		if (ancienMotDePasse == null) {
 			be.addError(Errors.REGLE_UTILISATEUR_PWD_NULL_ERREUR);
-			return false;
+			result = false;
 		}
 		try {
 			if (!(utilisateurDAO.getPasswordBynoUtilisateur(noUtilisateur).equals(ancienMotDePasse))) {
 				be.addError(Errors.REGLE_UTILISATEUR_ANCIEN_PWD_ERREUR);
-				return false;
+				result = false;
 			} else {
-				return true;
+				result = true;
 			}
 		} catch (BusinessException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return true;
+		return result;
 	}
 
 	private boolean validerMotDePasse(String motDePasse, BusinessException be) {

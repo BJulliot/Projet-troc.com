@@ -12,7 +12,7 @@
 
 	<div class="container col-lg-10 col-md-10 col-sm-12 portfolio-item ">
 		<h2 class="my-4 text-center">Nouvelle vente</h2>
-		<div class="col-md-8 mx-auto">
+		<div class="col-lg-10 col-md-10 col-sm-12 mx-auto">
 
 			<form class="FormAjoutArticle" action="./VendreArticleServlet"
 				method="post">

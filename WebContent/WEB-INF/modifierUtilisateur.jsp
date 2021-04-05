@@ -9,8 +9,8 @@
 <body>
 	<%@include file="/WEB-INF/template/nav.jsp"%>
 
-	<div class="container">
-		<div class="col-12">
+	<div class="col-lg-12 col-md-12 col-sm-12 container">
+		<div class="col-lg-10 col-md-10 col-sm-12">
 			<h2 class="my-3 text-center">Modifier votre profil</h2>
 			<c:if test="${!empty errors}">
 				<div class="row">
@@ -32,7 +32,7 @@
 				</div>
 			</c:if>
 
-			<div class="col-md-10 mx-auto">
+			<div class="col-lg-8 col-md-10 col-sm-12 mx-auto">
 				<form action="./ModifierUtilisateurServlet" method="post">
 					<div class="form-group row">
 						<div class="col-sm-6">
@@ -69,25 +69,25 @@
 						</div>
 					</div>
 					<div class="form-group row">
-						<div class="col-sm-6">
+						<div class="col-lg-6 col-md-12 col-sm-12">
 							<label for="rue">Adresse</label> <input type="text"
 								class="form-control" id="rue" name="rue" placeholder="Adresse"
 								value="${utilisateurEnSession.rue}" required>
 						</div>
-						<div class="col-sm-3">
+						<div class="col-lg-3 col-md-6 col-sm-12">
 							<label for="codePostal">Code Postal</label> <input type="text"
 								class="form-control" id="codePostal" name="codePostal"
 								placeholder="Code Postal"
 								value="${utilisateurEnSession.codePostal}" required>
 						</div>
-						<div class="col-sm-3">
+						<div class="col-lg-3 col-md-6 col-sm-12">
 							<label for="ville">Ville</label> <input type="text"
 								class="form-control" id="ville" name="ville" placeholder="Ville"
 								value="${utilisateurEnSession.ville}" required>
 						</div>
 					</div>
 					<div class="col-12 d-flex justify-content-center text-center">
-						<div class="col-sm-6 p-2 bg-secondary">
+						<div class="col-lg-6 col-md-8 col-sm-10 col-xs-10 p-2 bg-secondary mb-2">
 							<div class="form-group align-items-center">
 								<div class="col-sm-12">
 									<label class="text-white" for="ancienMotDePasse">Valider
@@ -121,7 +121,7 @@
 						</div>
 					</div>
 
-					<div class="form-group mb-2">
+					<div class="form-group text-center mb-2">
 						<button type="" class="btn btn-secondary">Crédit :
 							${utilisateurEnSession.credit}</button>
 					</div>

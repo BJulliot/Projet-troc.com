@@ -123,7 +123,6 @@ public class UtilisateurImpl implements UtilisateurDAO {
 
 	public String getPasswordBynoUtilisateur(int noUtilisateur) throws BusinessException {
 		String result;
-
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement requete = cnx.prepareStatement(GET_UTILISATEUR_PASSWORD);
 			requete.setInt(1, noUtilisateur);

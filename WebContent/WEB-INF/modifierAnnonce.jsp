@@ -32,7 +32,7 @@
 				</div>
 			</c:if>
 
-			<div class="col-md-8 mx-auto">
+			<div class="col-lg-10 col-md-10 col-sm-12 mx-auto">
 				<form action="ModifierAnnonceServlet" method="post">
 					<h5>Article :</h5>
 					<div class="form-group row">
@@ -104,7 +104,8 @@
 								value="${utilisateurEnSession.ville}" required>
 						</div>
 					</div>
-					<div class="col-12 d-flex justify-content-center text-center">
+					
+					<div class="col-12 d-flex justify-content-center text-center mb-3">
 						<div class="col-sm-6 p-2 bg-secondary">
 							<div class="form-group align-items-center">
 								<div class="col-sm-12">

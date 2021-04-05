@@ -9,8 +9,8 @@
 <body>
 	<%@include file="/WEB-INF/template/nav.jsp"%>
 
-	<div class="container">
-		<div class="col-12">
+	<div class="col-lg-12 col-md-12 col-sm-12 container">
+		<div class="col-lg-10 col-md-10 col-sm-12">
 			<h2 class="my-3 text-center">Nouveau profil</h2>
 			<c:if test="${!empty errors}">
 				<div class="row">
@@ -36,7 +36,7 @@
 				//Récupérer l'attribut userInSession sur la Session
 			Utilisateur nouvelUtilisateur = (Utilisateur) request.getAttribute("nouvelUtilisateur");
 			%>
-			<div class="col-md-10 mx-auto">
+			<div class="col-lg-10 col-md-10 col-sm-12 mx-auto">
 				<form action="./NouvelUtilisateurServlet" method="post">
 					<div class="form-group row">
 						<div class="col-sm-6">
@@ -72,18 +72,18 @@
 						</div>
 					</div>
 					<div class="form-group row">
-						<div class="col-sm-6">
+						<div class="col-lg-6 col-md-12 col-sm-12">
 							<label for="rue">Adresse</label> <input type="text"
 								class="form-control" id="rue" name="rue" placeholder="Adresse"
 								value="${nouvelUtilisateur.rue}" required>
 						</div>
-						<div class="col-sm-3">
+						<div class="col-lg-3 col-md-6 col-sm-12">
 							<label for="codePostal">Code Postal</label> <input type="text"
 								class="form-control" id="codePostal" name="codePostal"
 								placeholder="Code Postal"
 								value="${nouvelUtilisateur.codePostal}" required>
 						</div>
-						<div class="col-sm-3">
+						<div class="col-lg-3 col-md-6 col-sm-12">
 							<label for="ville">Ville</label> <input type="text"
 								class="form-control" id="ville" name="ville" placeholder="Ville"
 								value="${nouvelUtilisateur.ville}" required>

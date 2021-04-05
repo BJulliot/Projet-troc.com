@@ -64,7 +64,6 @@ public class ConnectionServlet extends HttpServlet {
 			session.setMaxInactiveInterval(10 * 60);
 
 			session.setAttribute("utilisateurEnSession", utilisateur);
-			request.setAttribute("utilisateur", utilisateur);
 			request.getRequestDispatcher("/AccueilServlet").forward(request, response);
 
 		} catch (BusinessException be) {
