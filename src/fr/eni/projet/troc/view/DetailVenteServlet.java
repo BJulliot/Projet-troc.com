@@ -30,17 +30,13 @@ public class DetailVenteServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		String idArticle = request.getParameter("a");
-		System.out.println(idArticle);
 		try {
 			ArticleVendu article = ArticlesVendusManager.getInstance().selectArticleById(Integer.parseInt(idArticle));
 			request.setAttribute("article", article);
-
 			Retrait retrait = RetraitManager.getInstance().selectRetraitById(Integer.parseInt(idArticle));
 			request.setAttribute("retrait", retrait);
-			System.out.println(article);
 			HttpSession session = request.getSession();
 			session.setAttribute("noArticleEnchere", idArticle);
-			System.out.println("utilisateur en session : " + session.getAttribute("utilisateurEnSession"));
 
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
@@ -70,7 +66,7 @@ public class DetailVenteServlet extends HttpServlet {
 		LocalDateTime date_enchere = LocalDateTime.now();
 		enchere.setDateEnchere(date_enchere);
 
-		enchere.setNoArticle(Integer.parseInt(enchereNoArticle));
+
 
 		try {
 			ArticleVendu articleVendu = EnchereManager.getInstance().selectByIdSell(Integer.parseInt(enchereNoArticle));
@@ -79,6 +75,8 @@ public class DetailVenteServlet extends HttpServlet {
 		} catch (BusinessException e) {
 			e.printStackTrace();
 			request.setAttribute("errors", e.getErrors());
+			String idArticle = enchereNoArticle;
+			doGet(request, response);
 		}
 
 	}

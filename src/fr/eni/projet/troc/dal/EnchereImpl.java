@@ -110,5 +110,27 @@ public class EnchereImpl implements EnchereDAO {
 
 	}
 
+	/**
+	* {@inheritDoc}
+	*/
+	@Override
+	public Enchere selectByUser(int id) throws Exception {
+		Enchere enchere = new Enchere();
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement requete = cnx.prepareStatement(
+					"SELECT no_utilisateur FROM encheres WHERE no_article = ?");
+			requete.setInt(1, id);
+			ResultSet rs = requete.executeQuery();
+			if (rs.next()) {
+				enchere = itemBuilder(rs);
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+		return enchere;
+
+	}
+
 
 }

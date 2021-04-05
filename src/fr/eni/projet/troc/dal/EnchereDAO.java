@@ -22,4 +22,6 @@ public interface EnchereDAO {
 	public Enchere selectById(int id) throws Exception;
 
 	public Enchere selectByArticle(int id) throws Exception;
+	
+	public Enchere selectByUser(int id) throws Exception;
 }

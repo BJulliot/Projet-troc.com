@@ -51,10 +51,15 @@ public class EnchereManager {
 	public void getEnchereId(int id) throws Exception {
 		enchereDAO.selectById(id);
 	}
+	
+	public Enchere getEnchereUser(int id) throws Exception{
+		return enchereDAO.selectByUser(id);
+	}
 
 	public ArticleVendu selectByIdSell(int id) throws BusinessException {
 		return articleVenduDAO.selectByIdSell(id);
 	}
+	
 
 	public boolean enchereOK(int idArticle, int prixEnchere, BusinessException be) throws BusinessException {
 		ArticleVendu ArticleAncienPrix = selectByIdSell(idArticle);

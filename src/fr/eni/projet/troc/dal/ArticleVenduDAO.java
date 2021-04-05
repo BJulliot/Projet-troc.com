@@ -24,4 +24,5 @@ public interface ArticleVenduDAO {
 
 	public void update(ArticleVendu articleAModifier, Retrait retrait) throws BusinessException;
 
+	public List<ArticleVendu> selectByIdUser(int id) throws Exception;
 }

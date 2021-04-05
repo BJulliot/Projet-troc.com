@@ -91,17 +91,17 @@
 						<div class="col-sm-6">
 							<label for="rue">Adresse</label> <input type="text"
 								class="form-control" id="rue" name="rue" placeholder="Adresse"
-								value="${retrait.rue}" required>
+								value="${utilisateurEnSession.rue}" required>
 						</div>
 						<div class="col-sm-3">
 							<label for="codePostal">Code Postal</label> <input type="text"
 								class="form-control" id="codePostal" name="codePostal"
-								placeholder="Code Postal" value="${retrait.codePostal}" required>
+								placeholder="Code Postal" value="${utilisateurEnSession.codePostal}" required>
 						</div>
 						<div class="col-sm-3">
 							<label for="ville">Ville</label> <input type="text"
 								class="form-control" id="ville" name="ville" placeholder="Ville"
-								value="${retrait.ville}" required>
+								value="${utilisateurEnSession.ville}" required>
 						</div>
 					</div>
 					<div class="col-12 d-flex justify-content-center text-center">

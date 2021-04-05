@@ -4,6 +4,7 @@ import java.util.List;
 
 import fr.eni.projet.troc.bo.ArticleVendu;
 import fr.eni.projet.troc.bo.Retrait;
+import fr.eni.projet.troc.bo.Utilisateur;
 import fr.eni.projet.troc.dal.ArticleVenduDAO;
 import fr.eni.projet.troc.dal.DAOFactory;
 import fr.eni.projet.troc.exception.BusinessException;
@@ -44,6 +45,10 @@ public class ArticlesVendusManager {
 
 	public List<ArticleVendu> getArticleId(int idArticle) throws Exception {
 		return articleVenduDAO.selectById(idArticle);
+	}
+	
+	public List<ArticleVendu> getArticleIdUser(int idUser)throws Exception{
+		return articleVenduDAO.selectByIdUser(idUser);
 	}
 
 	public ArticleVendu selectArticleById(int idArticle) throws Exception {

@@ -10,6 +10,18 @@
 	<%@include file="/WEB-INF/template/nav.jsp"%>
 
 
+
+	<c:choose>
+		<c:when
+			test="${article.pseudoUtilisateur == utilisateurEnSession.pseudo}">
+			<h2 class="my-3 text-center">Votre annonce</h2>
+		</c:when>
+		<c:otherwise>
+			<h2 class="my-3 text-center">Détails de l'annonce</h2>
+			
+		</c:otherwise>
+	</c:choose>
+	
 	<!-- affichage erreur
  -->
 	<c:if test="${!empty errors}">
@@ -31,16 +43,6 @@
 			</div>
 		</div>
 	</c:if>
-
-	<c:choose>
-		<c:when
-			test="${article.pseudoUtilisateur == utilisateurEnSession.pseudo}">
-			<h2 class="my-3 text-center">Votre annonce</h2>
-		</c:when>
-		<c:otherwise>
-			<h2 class="my-3 text-center">Détails de l'annonce</h2>
-		</c:otherwise>
-	</c:choose>
 
 	<!-- 	On appelle l'article en fonction du numéro d'article qu'on a recupere via l'url -->
 
