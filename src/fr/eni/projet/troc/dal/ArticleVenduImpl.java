@@ -43,12 +43,19 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 		return articleVendu;
 	}
 
+	/**
+	 * Item builder pour le select sur le prix de l'enchere
+	 */
 	public static ArticleVendu itemBuilderSell(ResultSet rs) throws SQLException {
 		ArticleVendu articleVendu = new ArticleVendu();
 		articleVendu.setPrixVente(rs.getInt("prix_vente"));
 		return articleVendu;
 	}
 
+	/**
+	 * Permet de recupere une liste de tout les articles
+	* {@inheritDoc}
+	 */
 	@Override
 	public List<ArticleVendu> selectAll() throws Exception {
 		List<ArticleVendu> articleVendus = new ArrayList<ArticleVendu>();
@@ -69,6 +76,7 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 	}
 
 	/**
+	 * Liste de tous les articles en fonction de la catégorie
 	 * {@inheritDoc}
 	 */
 	@Override
@@ -92,6 +100,7 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 	}
 
 	/**
+	 * Select de tous les articles en fonction du nom de l'article recherche
 	 * {@inheritDoc}
 	 */
 	@Override
@@ -117,7 +126,7 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 
 	/**
 	 * {@inheritDoc}
-	 * 
+	 * Permet de creer un article avec le lieux de retrait en meme temps 
 	 * @throws Exception
 	 */
 	@Override
@@ -161,6 +170,7 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 	}
 
 	/**
+	 * Permet de retourne un article en fonction de l'ID de l'article
 	 * {@inheritDoc}
 	 */
 	@Override
@@ -185,7 +195,10 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 	
 	
 	
-
+/**
+ * Permet de recupere le prix de vente de l'article si une enchere est faite
+* {@inheritDoc}
+ */
 	@Override
 	public ArticleVendu selectByIdSell(int id) throws BusinessException {
 		ArticleVendu articleVendu = null;
@@ -206,6 +219,11 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 		return articleVendu;
 	}
 
+	
+	/**
+	 * Meme version que le select en fonction du numero d'article mais sans liste
+	* {@inheritDoc}
+	 */
 	@Override
 	public ArticleVendu selectArticleById(int idArticle) {
 		ArticleVendu articleVendu = new ArticleVendu();
@@ -226,6 +244,11 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 		return articleVendu;
 	}
 
+	
+	/**
+	 * Permet d'update l'article et le retrait quand on veux modifier un article mit en vente
+	* {@inheritDoc}
+	 */
 	@Override
 	public void update(ArticleVendu articleAModifier, Retrait retrait) throws BusinessException {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
@@ -258,6 +281,7 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 	}
 
 	/**
+	 * Permet de recuperer une liste d'article d'un meme utilisateur
 	* {@inheritDoc}
 	*/
 	@Override

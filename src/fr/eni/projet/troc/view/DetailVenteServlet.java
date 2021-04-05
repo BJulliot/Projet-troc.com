@@ -28,9 +28,14 @@ public class DetailVenteServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		/**
+		 * On recupere le parametre passer en URL
+		 */
 		String idArticle = request.getParameter("a");
 		try {
+			/**
+			 * On recupere l'article et l'adresse de retrait en fonction du parametre de l'URL recupere qui nous donne l'ID de l'article sur lequel le user a cliqué
+			 */
 			ArticleVendu article = ArticlesVendusManager.getInstance().selectArticleById(Integer.parseInt(idArticle));
 			request.setAttribute("article", article);
 			Retrait retrait = RetraitManager.getInstance().selectRetraitById(Integer.parseInt(idArticle));
@@ -52,6 +57,11 @@ public class DetailVenteServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
+		/**
+		 * On recupere les données en session , pour la création de l'enchere, on recupere le l'id de l'user en session, la date du moment, le montant recupere dans le 
+		 * formulaire de la page 
+		 */
 		HttpSession session = request.getSession();
 		String enchereNoArticle = (String) session.getAttribute("noArticleEnchere");
 		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateurEnSession");
@@ -73,6 +83,7 @@ public class DetailVenteServlet extends HttpServlet {
 			em.create(enchere);
 			request.getRequestDispatcher("/AccueilServlet").forward(request, response);
 		} catch (BusinessException e) {
+			//todo
 			e.printStackTrace();
 			request.setAttribute("errors", e.getErrors());
 			String idArticle = enchereNoArticle;

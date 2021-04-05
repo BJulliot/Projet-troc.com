@@ -34,6 +34,11 @@ public class EnchereImpl implements EnchereDAO {
 		return enchere;
 	}
 
+	
+	/**
+	 * Permet de créer une enchère et en meme temps de update la table articles pour modifier le prix de vente qui deviendra le montant de l'enchère
+	* {@inheritDoc}
+	 */
 	@Override
 	public void create(Enchere enchere) throws BusinessException {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
@@ -69,6 +74,7 @@ public class EnchereImpl implements EnchereDAO {
 	}
 
 	/**
+	 * On recupere une enchere en fonction de son ID
 	 * {@inheritDoc}
 	 */
 	@Override
@@ -91,7 +97,10 @@ public class EnchereImpl implements EnchereDAO {
 	
 	
 	
-	
+	/**
+	 * On recupere une enchere en fonction de l'id de l'article
+	* {@inheritDoc}
+	 */
 	public Enchere selectByArticle(int id) throws Exception {
 		Enchere enchere = null;
 		try (Connection cnx = ConnectionProvider.getConnection()) {
@@ -111,6 +120,7 @@ public class EnchereImpl implements EnchereDAO {
 	}
 
 	/**
+	 * On recupere une enchere en fonction de l'id de l'utilisateur
 	* {@inheritDoc}
 	*/
 	@Override

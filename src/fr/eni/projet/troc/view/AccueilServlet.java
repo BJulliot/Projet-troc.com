@@ -27,26 +27,16 @@ public class AccueilServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String Cat = request.getParameter("Categories");
-		String search = request.getParameter("search");
-		request.setAttribute("search", search);
-		request.setAttribute("Cat", Cat);
-		HttpSession session = request.getSession();
-		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateurEnSession");
-		session.setAttribute("utilisateurEnSession", utilisateur);
-
 		try {
-	
-			// Select all de categegories
+
+			// Select all de categegories pour avoir la liste des categorie dans le menu deroulant
 			List<Categorie> categories = CategorieManager.getInstance().getCategorie();
 			request.setAttribute("categories", categories);
 
-			// Select All article
+			// Select All article pour lister tout les articles au moment du lancement de la page d'accueil
 			List<ArticleVendu> articles = ArticlesVendusManager.getInstance().getAllArticleVendus();
 			request.setAttribute("articles", articles);
-		
-			
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -56,6 +46,9 @@ public class AccueilServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+	/**
+	 * On recupere toutes les infos du formulaire pour ensuite pouvoir les afficher en fonction des données récupérées
+	 */
 		String Cat = request.getParameter("Categories");
 		String search = request.getParameter("search");
 		String mesAnnonces = request.getParameter("voirAnnonce");
@@ -68,21 +61,33 @@ public class AccueilServlet extends HttpServlet {
 
 		try {
 
-			// Select all de categegories
+			/**
+			 *  Select all de categegories pour afficher le choix des categorie
+			 */
 			List<Categorie> categories = CategorieManager.getInstance().getCategorie();
 			request.setAttribute("categories", categories);
-			// Select All article
+			/**
+			 *  Select All article si le user veux tous les articles
+			 */
 			List<ArticleVendu> articles = ArticlesVendusManager.getInstance().getAllArticleVendus();
 			request.setAttribute("articles", articles);
 
-			// Select article by id
+			// Select article by id pour pemmettre au user d'afficher des articles en fonctions de leurs categories
 			List<ArticleVendu> cateNum = ArticlesVendusManager.getInstance().getNoCategorie(Integer.parseInt(Cat));
 			request.setAttribute("cateNum", cateNum);
 
+			/**
+			 * Select par nom d'objet, le user peux chercher le nom d'un objet et tout les objet ou ce nom sera present lui sera retourné
+			 */
 			List<ArticleVendu> nameArticle = ArticlesVendusManager.getInstance().getNomArticle(search);
 			request.setAttribute("nameArticle", nameArticle);
 
-			List<ArticleVendu> articleIdUser = ArticlesVendusManager.getInstance().getArticleIdUser(utilisateur.getNoUtilisateur());
+			
+			/**
+			 * Permet de SELECT l'article en fonction du user qui a crée l'article
+			 */
+			List<ArticleVendu> articleIdUser = ArticlesVendusManager.getInstance()
+					.getArticleIdUser(utilisateur.getNoUtilisateur());
 			request.setAttribute("articleIdUser", articleIdUser);
 		} catch (Exception e) {
 			e.printStackTrace();

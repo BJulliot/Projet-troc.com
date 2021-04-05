@@ -57,6 +57,7 @@
 					</div>
 				
 					<h5>Retrait :</h5>
+					<!-- On recupere l'adresse deja mise en BDD -->
 					<div class="form-group row">
 						<div class="col-sm-12 col-lg-6">
 							<label for="rue">Adresse</label> <input type="text"
@@ -87,6 +88,7 @@
 
 
 </body>
+<!-- Script qui permet de mettre le calendrier a la date du jour et empeche de selectionner une date anterieure -->
 <script type="text/javascript">
 	let today = new Date().toISOString().substr(0, 10);
 	document.querySelector("#dateDebut").value = today;

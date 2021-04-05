@@ -50,7 +50,15 @@
 		<h3>${article.nom}</h3>
 		<p>Description : ${article.description}</p>
 		<p>Categorie : ${article.nomCategorie}</p>
-		<p>Meilleur offre : ${article.prixVente} points</p>
+		<!-- Si il n'y a pas d'offre, on affiche un message qui le precise -->
+		<c:choose>
+		<c:when test="${article.prixVente == 0}">
+		<p>Meilleure offre  : Pas d'enchère pour le moment</p>
+		</c:when>
+		<c:otherwise>
+		<p>Meilleure offre : ${article.prixVente} points</p>
+		</c:otherwise>
+		</c:choose>
 		<p>Mise a prix ${article.prixInitial} Points</p>
 		<p>Fin de l'enchère : ${article.dateFinEnchere}</p>
 		<p>Retrait : ${retrait.rue} ${retrait.codePostal} ${retrait.ville}</p>

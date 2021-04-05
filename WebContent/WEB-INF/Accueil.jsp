@@ -11,25 +11,25 @@
 <%@include file="/WEB-INF/template/head.html"%>
 <body>
 	<%@include file="/WEB-INF/template/nav.jsp"%>
-<c:if test="${!empty errors}">
-				<div class="row">
-					<div class="col-lg-12 col-md-6 col-sm-6 portfolio-item">
-						<div class="card h-100">
-							<div class="card-body">
+	<c:if test="${!empty errors}">
+		<div class="row">
+			<div class="col-lg-12 col-md-6 col-sm-6 portfolio-item">
+				<div class="card h-100">
+					<div class="card-body">
 
-								<div class="alert alert-danger" role="alert">
-									<h2>Erreur!</h2>
-									<ul>
-										<c:forEach var="msg" items="${errors}">
-											<li>${msg}</li>
-										</c:forEach>
-									</ul>
-								</div>
-							</div>
+						<div class="alert alert-danger" role="alert">
+							<h2>Erreur!</h2>
+							<ul>
+								<c:forEach var="msg" items="${errors}">
+									<li>${msg}</li>
+								</c:forEach>
+							</ul>
 						</div>
 					</div>
 				</div>
-			</c:if>
+			</div>
+		</div>
+	</c:if>
 
 	<div class="container global">
 		<h1 class="my-4 text-center">Liste des enchères</h1>
@@ -50,41 +50,51 @@
 							<option value="${categories.noCategorie}">${categories.libelle}</option>
 						</c:forEach>
 					</select>
-					<label>Voir mes ventes en cours : </label>
-					<input type="checkbox" id="voirAnnonce" name="voirAnnonce">
+					<!-- Si l'utilisateur n'est pas connecte, il ne pourra pas clique sur la checkbox, sinon il pourra cliquer et voirs les enchère qui lui appartiennent -->
+					<c:choose>
+						<c:when test="${utilisateurEnSession == null}">
+							<label>Voir mes ventes en cours : </label>
+							<input type="checkbox" id="voirAnnonce" name="voirAnnonce"
+								disabled="disabled">
+						</c:when>
+						<c:otherwise>
+							<label>Voir mes ventes en cours : </label>
+							<input type="checkbox" id="voirAnnonce" name="voirAnnonce">
+						</c:otherwise>
+					</c:choose>
 				</div>
 				<input class="btn btn-primary" type="submit" value="Rechercher">
-				
+
 			</form>
 		</div>
 
 		<div
 			class="container articleContenus col-lg-6 col-md-4 col-sm-6 portfolio-item">
 			<c:choose>
-			
-			<c:when test="${mesAnnonces == 'on' }">
-			<c:forEach var="articleIdUser" items="${articleIdUser}">
-								<c:choose>
-									<%-- Si le user est pas connecte, et qu'il clique pour voir un article il est redirige vers la page de connection --%>
-									<c:when test="${utilisateurEnSession == null}">
-									<p>Vous n'etes pas connecte ! </p>
-									</c:when>
-									<c:otherwise>
-										<%-- Si le user est connecté il est redirigé vers la page de description de l'article ou il pourra faire une enchere --%>
-										<a class="lienEnchere"
-											href="<%=application.getContextPath()%>/DetailVenteServlet?a=${articleIdUser.noArticle}">
-											<div class="card h-100 articleCase">
-												${articleIdUser.nom}
-												<p>Prix : ${articleIdUser.prixInitial} Points</p>
-												<p>Fin de l'enchère : ${articleIdUser.dateFinEnchere}</p>
-												<p>Vendeur : ${articleIdUser.pseudoUtilisateur}</p>
-											</div>
-										</a>
-									</c:otherwise>
-								</c:choose>
-							</c:forEach>
-			</c:when>
-			<%-- Test quand on cherche par mot cle, si le nom de l'article est present on l'affiche sinon on affiche un message --%>
+				<%-- Si la checkbox est coche au moment du submit, on va récupere la liste des enchere du user connecte  --%>
+				<c:when test="${mesAnnonces == 'on' }">
+					<c:forEach var="articleIdUser" items="${articleIdUser}">
+						<c:choose>
+							<%-- Si le user est pas connecte, et qu'il clique pour voir un article il est redirige vers la page de connection --%>
+							<c:when test="${utilisateurEnSession == null}">
+								<p>Vous n'etes pas connecte !</p>
+							</c:when>
+							<c:otherwise>
+								<%-- Si le user est connecté il est redirigé vers la page de description de l'article ou il pourra faire une enchere --%>
+								<a class="lienEnchere"
+									href="<%=application.getContextPath()%>/DetailVenteServlet?a=${articleIdUser.noArticle}">
+									<div class="card h-100 articleCase">
+										${articleIdUser.nom}
+										<p>Prix : ${articleIdUser.prixInitial} Points</p>
+										<p>Fin de l'enchère : ${articleIdUser.dateFinEnchere}</p>
+										<p>Vendeur : ${articleIdUser.pseudoUtilisateur}</p>
+									</div>
+								</a>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+				</c:when>
+				<%-- Test quand on cherche par mot cle, si le nom de l'article est present on l'affiche sinon on affiche un message --%>
 				<c:when test="${not empty search}">
 					<c:choose>
 						<c:when test="${fn:contains(nameArticle,search)}">
