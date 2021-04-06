@@ -47,6 +47,7 @@
 	<!-- 	On appelle l'article en fonction du numéro d'article qu'on a recupere via l'url -->
 
 	<div class="container">
+	
 		<h3>${article.nom}</h3>
 		<p>Description : ${article.description}</p>
 		<p>Categorie : ${article.nomCategorie}</p>
@@ -79,7 +80,7 @@
 				<form class="form-outline" action="./DetailVenteServlet"
 					method="post">
 					<label class="form-label" for="prixEnchere">Ma proposition</label>
-					<input type="number" name="prixEnchere" id="prixEnchere"> <input
+					<input type="number" name="prixEnchere" id="prixEnchere" required="required" value="${article.prixVente + 1}" min="${article.prixVente +1}"> <input
 						type="submit" value="Valider enchere">
 				</form>
 			</c:otherwise>
