@@ -3,6 +3,8 @@
  */
 package fr.eni.projet.troc.bll;
 
+import java.util.List;
+
 import fr.eni.projet.troc.bo.Utilisateur;
 import fr.eni.projet.troc.dal.DAOFactory;
 import fr.eni.projet.troc.dal.UtilisateurDAO;
@@ -59,7 +61,7 @@ public class UtilisateursManager {
 			String telephone, String rue, String codePostal, String ville, String ancienMotDePasse,
 			String nouveauMotDePasse, String confirmationMotDePasse) throws BusinessException {
 		BusinessException be = new BusinessException();
-		
+
 		validerPseudo(pseudo, be);
 		validerNom(nom, be);
 		validerPrenom(prenom, be);
@@ -105,6 +107,10 @@ public class UtilisateursManager {
 
 	public Utilisateur selectByPseudo(String pseudo) throws BusinessException {
 		return utilisateurDAO.selectByPseudo(pseudo);
+	}
+
+	public List<Utilisateur> selectAll() throws BusinessException {
+		return utilisateurDAO.selectAll();
 	}
 
 	private boolean validerTelephone(String telephone, BusinessException be) {

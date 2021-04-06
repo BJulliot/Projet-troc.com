@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import fr.eni.projet.troc.bo.Utilisateur;
 import fr.eni.projet.troc.exception.BusinessException;
@@ -17,6 +19,7 @@ public class UtilisateurImpl implements UtilisateurDAO {
 	private static final String DELETE_UTILISATEUR = "DELETE FROM utilisateurs where no_utilisateur=?";
 	private static final String GET_UTILISATEUR_PSEUDO = "SELECT pseudo FROM utilisateurs WHERE pseudo=?";
 	private static final String GET_UTILISATEUR_BY_PSEUDO = "SELECT * FROM utilisateurs WHERE pseudo=?";
+	private static final String SELECT_ALL_UTILISATEUR = "SELECT * FROM utilisateurs";
 
 	@Override
 	public void create(Utilisateur utilisateur) throws BusinessException {
@@ -101,7 +104,6 @@ public class UtilisateurImpl implements UtilisateurDAO {
 			be.addError("ERROR DB - " + e.getMessage());
 			throw be;
 		}
-
 	}
 
 	private Utilisateur utilisateurBuilder(ResultSet rs) throws SQLException {
@@ -145,6 +147,27 @@ public class UtilisateurImpl implements UtilisateurDAO {
 			be.addError("ERROR DB - " + e.getMessage());
 			throw be;
 		}
+	}
+
+	@Override
+	public List<Utilisateur> selectAll() throws BusinessException {
+		List<Utilisateur> liste = new ArrayList<>();
+
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement requete = cnx.prepareStatement(SELECT_ALL_UTILISATEUR);
+			ResultSet rs = requete.executeQuery();
+
+			while (rs.next()) {
+				Utilisateur utilisateur = utilisateurBuilder(rs);
+				liste.add(utilisateur);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			BusinessException be = new BusinessException();
+			be.addError("ERROR DB - " + e.getMessage());
+			throw be;
+		}
+		return liste;
 	}
 
 	@Override
@@ -206,5 +229,4 @@ public class UtilisateurImpl implements UtilisateurDAO {
 		}
 		return result;
 	}
-
 }
