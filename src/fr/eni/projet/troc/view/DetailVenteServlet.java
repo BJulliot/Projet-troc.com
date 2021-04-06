@@ -90,9 +90,7 @@ public class DetailVenteServlet extends HttpServlet {
 			// todo
 			e.printStackTrace();
 			request.setAttribute("errors", e.getErrors());
-			request.getRequestDispatcher("/WEB-INF/detailVente.jsp").forward(request, response);
-
-
+			doGet(request, response);
 		}
 
 	}
