@@ -31,7 +31,7 @@
 		</div>
 	</c:if>
 
-	<div class="container global">
+	<div class="container global col-sm-12">
 		<h1 class="my-4 text-center">Liste des enchères</h1>
 		<div class="col-lg-8 col-md-4 col-sm-6 portfolio-item formPlacement">
 
