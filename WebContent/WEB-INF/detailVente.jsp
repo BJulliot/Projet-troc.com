@@ -4,7 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <!DOCTYPE html>
 <html>
-<%@include file="/WEB-INF/template/head.html"%>
+<%@include file="/WEB-INF/template/head.jsp"%>
 
 <body>
 	<%@include file="/WEB-INF/template/nav.jsp"%>

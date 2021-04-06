@@ -8,7 +8,7 @@
 
 <!DOCTYPE html>
 <html>
-<%@include file="/WEB-INF/template/head.html"%>
+<%@include file="/WEB-INF/template/head.jsp"%>
 <body>
 	<%@include file="/WEB-INF/template/nav.jsp"%>
 	<c:if test="${!empty errors}">
@@ -32,7 +32,7 @@
 	</c:if>
 
 	<div class="container global col-sm-12">
-		<h1 class="my-4 text-center">Liste des enchères bkjlgqsdlvqs</h1>
+		<h1 class="my-4 text-center">Liste des enchères</h1>
 		<div class="col-lg-8 col-md-4 col-sm-6 portfolio-item formPlacement">
 
 			<form action="./AccueilServlet" class="formSearch" method="post">

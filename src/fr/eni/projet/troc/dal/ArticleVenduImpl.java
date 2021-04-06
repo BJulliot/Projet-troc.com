@@ -200,8 +200,8 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 * {@inheritDoc}
  */
 	@Override
-	public ArticleVendu selectByIdSell(int id) throws BusinessException {
-		ArticleVendu articleVendu = null;
+	public int selectByIdSell(int id) throws BusinessException {
+		int prixVente = 0;
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement requete = cnx
 					.prepareStatement("SELECT prix_vente from articles_vendus WHERE no_article = ?");
@@ -209,14 +209,14 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 
 			ResultSet rs = requete.executeQuery();
 
-			while (rs.next()) {
-				articleVendu = (itemBuilderSell(rs));
+			if (rs.next()) {
+				prixVente = rs.getInt("prix_vente");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 
 		}
-		return articleVendu;
+		return prixVente;
 	}
 
 	

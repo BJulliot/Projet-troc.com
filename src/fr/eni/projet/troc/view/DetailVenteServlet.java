@@ -18,6 +18,7 @@ import fr.eni.projet.troc.bo.Enchere;
 import fr.eni.projet.troc.bo.Retrait;
 import fr.eni.projet.troc.bo.Utilisateur;
 import fr.eni.projet.troc.exception.BusinessException;
+import jdk.internal.misc.FileSystemOption;
 
 /**
  * Servlet implementation class DetailVenteServlet
@@ -31,10 +32,12 @@ public class DetailVenteServlet extends HttpServlet {
 		/**
 		 * On recupere le parametre passer en URL
 		 */
+	
 		String idArticle = request.getParameter("a");
 		try {
 			/**
-			 * On recupere l'article et l'adresse de retrait en fonction du parametre de l'URL recupere qui nous donne l'ID de l'article sur lequel le user a cliqué
+			 * On recupere l'article et l'adresse de retrait en fonction du parametre de
+			 * l'URL recupere qui nous donne l'ID de l'article sur lequel le user a cliqué
 			 */
 			ArticleVendu article = ArticlesVendusManager.getInstance().selectArticleById(Integer.parseInt(idArticle));
 			request.setAttribute("article", article);
@@ -57,11 +60,13 @@ public class DetailVenteServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		/**
-		 * On recupere les données en session , pour la création de l'enchere, on recupere le l'id de l'user en session, la date du moment, le montant recupere dans le 
-		 * formulaire de la page 
+		 * On recupere les données en session , pour la création de l'enchere, on
+		 * recupere le l'id de l'user en session, la date du moment, le montant recupere
+		 * dans le formulaire de la page
 		 */
+
 		HttpSession session = request.getSession();
 		String enchereNoArticle = (String) session.getAttribute("noArticleEnchere");
 		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateurEnSession");
@@ -72,22 +77,22 @@ public class DetailVenteServlet extends HttpServlet {
 		EnchereManager em = EnchereManager.getInstance();
 		int noUtilisateur = utilisateur.getNoUtilisateur();
 		enchere.setNoUtilisateur(noUtilisateur);
-
+		enchere.setNoArticle(Integer.parseInt(enchereNoArticle));
 		LocalDateTime date_enchere = LocalDateTime.now();
 		enchere.setDateEnchere(date_enchere);
 
-
-
 		try {
-			ArticleVendu articleVendu = EnchereManager.getInstance().selectByIdSell(Integer.parseInt(enchereNoArticle));
+			int articleVendu = EnchereManager.getInstance().selectByIdSell(Integer.parseInt(enchereNoArticle));
+			System.out.println(enchereNoArticle);
 			em.create(enchere);
 			request.getRequestDispatcher("/AccueilServlet").forward(request, response);
 		} catch (BusinessException e) {
-			//todo
+			// todo
 			e.printStackTrace();
 			request.setAttribute("errors", e.getErrors());
-			String idArticle = enchereNoArticle;
-			doGet(request, response);
+			request.getRequestDispatcher("/WEB-INF/detailVente.jsp").forward(request, response);
+
+
 		}
 
 	}

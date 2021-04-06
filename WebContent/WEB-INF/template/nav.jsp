@@ -6,8 +6,10 @@ Utilisateur utilisateurEnSession = (Utilisateur) session.getAttribute("utilisate
 %>
 <!-- Navigation -->
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top text-white justify-content-between">
+ <img  src="<%=getServletContext().getContextPath()%>/images/JB_logo.gif" width="3%" alt="Logo" />
 <a class="navbar-brand" href="./AccueilServlet">Jean-Bastien, Auction&Sales</a>
-	<button class="navbar-toggler" type="button" data-toggle="collapse"
+ 	
+  <button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarSupportedContent"
 		aria-controls="navbarSupportedContent" aria-expanded="false"
 		aria-label="Toggle navigation">

@@ -110,7 +110,7 @@ public class Errors {
 	/**
 	 * EnchÃ¨re trop basse
 	 */
-	public static final String INSERT_ENCHERE_ECHEC = "Vous ne pouvez pas faire une enchére inferieur a l'enchére en cours";
+	public static final String INSERT_ENCHERE_ECHEC = "Vous ne pouvez pas faire une enchère inferieur a l'enchère en cours";
 
-	public static final String REGLE_ARTICLE_UPDATE_PRIX = "Vous ne pouvez pas mettre un prix supérieur au prix de l'enchére en cours";
+	public static final String REGLE_ARTICLE_UPDATE_PRIX = "Vous ne pouvez pas mettre un prix supérieur au prix de l'enchère en cours";
 }

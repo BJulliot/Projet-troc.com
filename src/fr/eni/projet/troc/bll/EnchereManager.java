@@ -51,19 +51,19 @@ public class EnchereManager {
 	public void getEnchereId(int id) throws Exception {
 		enchereDAO.selectById(id);
 	}
-	
-	public Enchere getEnchereUser(int id) throws Exception{
+
+	public Enchere getEnchereUser(int id) throws Exception {
 		return enchereDAO.selectByUser(id);
 	}
 
-	public ArticleVendu selectByIdSell(int id) throws BusinessException {
+	public int selectByIdSell(int id) throws BusinessException {
 		return articleVenduDAO.selectByIdSell(id);
 	}
-	
 
 	public boolean enchereOK(int idArticle, int prixEnchere, BusinessException be) throws BusinessException {
-		ArticleVendu ArticleAncienPrix = selectByIdSell(idArticle);
-		if (ArticleAncienPrix.getPrixVente() >= prixEnchere) {
+		int ArticleAncienPrix = selectByIdSell(idArticle);
+		if (ArticleAncienPrix>= prixEnchere) {
+			System.out.println("Apres le if" + ArticleAncienPrix);
 			be.addError(Errors.INSERT_ENCHERE_ECHEC);
 			System.out.println("Prix pas bon");
 			return false;

@@ -18,7 +18,7 @@ public interface ArticleVenduDAO {
 
 	public List<ArticleVendu> selectById(int id) throws Exception;
 
-	public ArticleVendu selectByIdSell(int id) throws BusinessException;
+	public int selectByIdSell(int id) throws BusinessException;
 
 	public ArticleVendu selectArticleById(int idArticle);
 
