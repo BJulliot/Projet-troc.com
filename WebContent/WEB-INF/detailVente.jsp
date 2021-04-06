@@ -18,10 +18,10 @@
 		</c:when>
 		<c:otherwise>
 			<h2 class="my-3 text-center">Détails de l'annonce</h2>
-			
+
 		</c:otherwise>
 	</c:choose>
-	
+
 	<!-- affichage erreur
  -->
 	<c:if test="${!empty errors}">
@@ -47,18 +47,18 @@
 	<!-- 	On appelle l'article en fonction du numéro d'article qu'on a recupere via l'url -->
 
 	<div class="container">
-	
+
 		<h3>${article.nom}</h3>
 		<p>Description : ${article.description}</p>
 		<p>Categorie : ${article.nomCategorie}</p>
 		<!-- Si il n'y a pas d'offre, on affiche un message qui le precise -->
 		<c:choose>
-		<c:when test="${article.prixVente == 0}">
-		<p>Meilleure offre  : Pas d'enchère pour le moment</p>
-		</c:when>
-		<c:otherwise>
-		<p>Meilleure offre : ${article.prixVente} points</p>
-		</c:otherwise>
+			<c:when test="${article.prixVente == 0}">
+				<p>Meilleure offre : Pas d'enchère pour le moment</p>
+			</c:when>
+			<c:otherwise>
+				<p>Meilleure offre : ${article.prixVente} points</p>
+			</c:otherwise>
 		</c:choose>
 		<p>Mise a prix ${article.prixInitial} Points</p>
 		<p>Fin de l'enchère : ${article.dateFinEnchere}</p>
@@ -80,8 +80,20 @@
 				<form class="form-outline" action="./DetailVenteServlet"
 					method="post">
 					<label class="form-label" for="prixEnchere">Ma proposition</label>
-					<input type="number" name="prixEnchere" id="prixEnchere" required="required" value="${article.prixVente + 1}" min="${article.prixVente +1}"> <input
-						type="submit" value="Valider enchere">
+					<c:choose>
+						<c:when test="${article.prixVente == 0}">
+							<input type="number" name="prixEnchere" id="prixEnchere"
+								required="required" value="${article.prixInitial + 1}"
+								min="${article.prixInitial +1}">
+						</c:when>
+						<c:otherwise>
+							<input type="number" name="prixEnchere" id="prixEnchere"
+								required="required" value="${article.prixVente + 1}"
+								min="${article.prixVente +1}">
+						</c:otherwise>
+					</c:choose>
+					<input type="submit" value="Valider enchere">
+
 				</form>
 			</c:otherwise>
 		</c:choose>
