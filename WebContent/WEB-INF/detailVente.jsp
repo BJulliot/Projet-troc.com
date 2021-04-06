@@ -80,7 +80,7 @@
 				<form class="form-outline" action="./DetailVenteServlet"
 					method="post">
 					<label class="form-label" for="prixEnchere">Ma proposition</label>
-					<input type="number" name="prixEnchere" id="prixEnchere" required="required" value="${article.prixVente}" min="${article.prixVente}"> <input
+					<input type="number" name="prixEnchere" id="prixEnchere" required="required" value="${article.prixVente + 1}" min="${article.prixVente +1}"> <input
 						type="submit" value="Valider enchere">
 				</form>
 			</c:otherwise>
