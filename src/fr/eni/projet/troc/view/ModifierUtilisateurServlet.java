@@ -2,6 +2,7 @@ package fr.eni.projet.troc.view;
 
 import java.io.IOException;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,7 +32,6 @@ public class ModifierUtilisateurServlet extends HttpServlet {
 		session.setAttribute("utilisateurEnSession", utilisateur);
 
 		request.getRequestDispatcher("/WEB-INF/modifierUtilisateur.jsp").forward(request, response);
-
 	}
 
 	/**
@@ -40,6 +40,7 @@ public class ModifierUtilisateurServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		// Récupération infos de l'utilisateur en session:
 		HttpSession session = request.getSession();
 		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateurEnSession");
@@ -47,7 +48,6 @@ public class ModifierUtilisateurServlet extends HttpServlet {
 		// Récupération et intégration des données saisies dans le formulaire
 		// modifierUtilisateur.jsp
 		request.setCharacterEncoding("UTF-8");
-		UtilisateursManager um = UtilisateursManager.getInstance();
 		int noUtilisateur = utilisateur.getNoUtilisateur();
 		System.out.println("numero utilisateur : " + noUtilisateur);
 		String ancienPseudo = utilisateur.getPseudo();
@@ -62,11 +62,13 @@ public class ModifierUtilisateurServlet extends HttpServlet {
 
 		String ancienMotDePasse = request.getParameter("ancienMotDePasse");
 		String nouveauMotDePasse = request.getParameter("nouveauMotDePasse");
-		String confirmationMotDePasse = request.getParameter("confirmationMotDePasse");
-
+		String confirmationMotDePasse = request.getParameter("confirmationMotDePasse");	
+		
 		try {
+			UtilisateursManager um = UtilisateursManager.getInstance();
 			um.update(noUtilisateur, ancienPseudo, pseudo, nom, prenom, email, telephone, rue, codePostal, ville,
 					ancienMotDePasse, nouveauMotDePasse, confirmationMotDePasse);
+			
 			// on set les nouvelles infos à l'utilisateur en session :
 			utilisateur.setPseudo(pseudo);
 			utilisateur.setNom(nom);
@@ -76,15 +78,20 @@ public class ModifierUtilisateurServlet extends HttpServlet {
 			utilisateur.setRue(rue);
 			utilisateur.setCodePostal(codePostal);
 			utilisateur.setVille(ville);
-			utilisateur.setMotDePasse(nouveauMotDePasse);
+			
+			if (nouveauMotDePasse != null) {
+				utilisateur.setMotDePasse(nouveauMotDePasse);
+			}
 			// on les transmets vers session
 			session.setAttribute("utilisateurEnSession", utilisateur);
 
 			request.getRequestDispatcher("/AccueilServlet").forward(request, response);
+
 		} catch (BusinessException e) {
 			e.printStackTrace();
 			request.setAttribute("errors", e.getErrors());
-			request.getRequestDispatcher("/WEB-INF/modifierUtilisateur.jsp").forward(request, response);
+			request.getRequestDispatcher("/AccueilServlet").forward(request, response);
 		}
+		
 	}
 }

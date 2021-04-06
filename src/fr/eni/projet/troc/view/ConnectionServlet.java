@@ -27,7 +27,6 @@ public class ConnectionServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// testPoolConnection();
 		request.getRequestDispatcher("/WEB-INF/connexion.jsp").forward(request, response);
 	}
 

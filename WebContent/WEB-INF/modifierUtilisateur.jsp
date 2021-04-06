@@ -14,7 +14,7 @@
 			<h2 class="my-3 text-center">Modifier votre profil</h2>
 			<c:if test="${!empty errors}">
 				<div class="row">
-					<div class="col-lg-12 col-md-6 col-sm-6 portfolio-item">
+					<div class="col-lg-12 col-md-12 col-sm-12 portfolio-item">
 						<div class="card h-100">
 							<div class="card-body">
 

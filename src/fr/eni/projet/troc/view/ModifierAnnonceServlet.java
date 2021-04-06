@@ -76,7 +76,6 @@ public class ModifierAnnonceServlet extends HttpServlet {
 		Retrait retrait = null;
 
 		try {
-
 			try {
 				articleAModifier = ArticlesVendusManager.getInstance().selectArticleById(Integer.parseInt(idArticle));
 			} catch (Exception e) {
@@ -114,7 +113,6 @@ public class ModifierAnnonceServlet extends HttpServlet {
 		} catch (BusinessException e) {
 			e.printStackTrace();
 			request.setAttribute("errors", e.getErrors());
-
 			request.getRequestDispatcher("/AccueilServlet").forward(request, response);
 
 		}
