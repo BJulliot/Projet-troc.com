@@ -59,6 +59,7 @@ public class UtilisateursManager {
 			String telephone, String rue, String codePostal, String ville, String ancienMotDePasse,
 			String nouveauMotDePasse, String confirmationMotDePasse) throws BusinessException {
 		BusinessException be = new BusinessException();
+		
 		validerPseudo(pseudo, be);
 		validerNom(nom, be);
 		validerPrenom(prenom, be);
@@ -68,7 +69,7 @@ public class UtilisateursManager {
 		validerCodePostal(codePostal, be);
 		validerVille(ville, be);
 		validerAncienMotDePasseBDD(ancienMotDePasse, noUtilisateur, be);
-		if (!(nouveauMotDePasse == null)) {
+		if (!(nouveauMotDePasse.equals(""))) {
 			validerMotDePasse(nouveauMotDePasse, be);
 			validerMotDePasseIdentique(nouveauMotDePasse, confirmationMotDePasse, be);
 			isNouveauMotDePasseDifferent(ancienMotDePasse, nouveauMotDePasse, be);
@@ -77,13 +78,15 @@ public class UtilisateursManager {
 		isPseudoUniqueUpdate(ancienPseudo, pseudo, be);
 
 		if (!be.hasErreurs()) {
-			if ((nouveauMotDePasse == null)) {
+			if ((nouveauMotDePasse.equals(""))) {
 				utilisateurDAO.update(noUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville,
 						ancienMotDePasse);
-			} else if (!(nouveauMotDePasse == null)) {
+			} else if (!(nouveauMotDePasse.equals(""))) {
 				utilisateurDAO.update(noUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville,
 						nouveauMotDePasse);
 			}
+		} else {
+			throw be;
 		}
 	}
 
@@ -105,7 +108,7 @@ public class UtilisateursManager {
 	}
 
 	private boolean validerTelephone(String telephone, BusinessException be) {
-		if (telephone == null) {
+		if (telephone.trim().equals("")) {
 			be.addError("Le numéro de téléphone est obligatoire");
 			return false;
 		}
@@ -118,7 +121,7 @@ public class UtilisateursManager {
 
 	public boolean validerAncienMotDePasseBDD(String ancienMotDePasse, int noUtilisateur, BusinessException be) {
 		boolean result = true;
-		if (ancienMotDePasse == null) {
+		if (ancienMotDePasse.trim().equals("")) {
 			be.addError(Errors.REGLE_UTILISATEUR_PWD_NULL_ERREUR);
 			result = false;
 		}
@@ -130,14 +133,13 @@ public class UtilisateursManager {
 				result = true;
 			}
 		} catch (BusinessException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return result;
 	}
 
 	private boolean validerMotDePasse(String motDePasse, BusinessException be) {
-		if (motDePasse == null) {
+		if (motDePasse.trim().equals("")) {
 			be.addError(Errors.REGLE_UTILISATEUR_PWD_NULL_ERREUR);
 			return false;
 		}
@@ -157,7 +159,7 @@ public class UtilisateursManager {
 	}
 
 	private boolean validerEmail(String email, BusinessException be) {
-		if (email == null) {
+		if (email.trim().equals("")) {
 			be.addError("L'email est obligatoire");
 			return false;
 		}
@@ -169,7 +171,7 @@ public class UtilisateursManager {
 	}
 
 	private boolean validerNom(String nom, BusinessException be) {
-		if (nom == null || nom.trim().isEmpty() || nom.trim().length() > 30) {
+		if (nom.trim().equals("") || nom.trim().length() > 30) {
 			be.addError(Errors.REGLE_UTILISATEUR_NOM_ERREUR);
 			return false;
 		}
@@ -177,7 +179,7 @@ public class UtilisateursManager {
 	}
 
 	private boolean validerPrenom(String prenom, BusinessException be) {
-		if (prenom == null || prenom.trim().isEmpty() || prenom.trim().length() > 30) {
+		if (prenom.trim().equals("") || prenom.trim().length() > 30) {
 			be.addError(Errors.REGLE_UTILISATEUR_PRENOM_ERREUR);
 			return false;
 		}
@@ -185,7 +187,7 @@ public class UtilisateursManager {
 	}
 
 	private boolean validerPseudo(String pseudo, BusinessException be) {
-		if (pseudo == null || pseudo.trim().isEmpty() || pseudo.trim().length() > 30) {
+		if (pseudo.trim().equals("") || pseudo.trim().length() > 30) {
 			be.addError(Errors.REGLE_UTILISATEUR_PSEUDO_ERREUR);
 			return false;
 		}
@@ -214,7 +216,7 @@ public class UtilisateursManager {
 	}
 
 	private boolean validerRue(String rue, BusinessException be) {
-		if (rue == null || rue.trim().isEmpty() || rue.trim().length() > 30) {
+		if (rue.trim().equals("") || rue.trim().length() > 30) {
 			be.addError(Errors.REGLE_UTILISATEUR_RUE_ERREUR);
 			return false;
 		}
@@ -222,7 +224,7 @@ public class UtilisateursManager {
 	}
 
 	private boolean validerCodePostal(String codePostal, BusinessException be) {
-		if (codePostal == null || codePostal.trim().isEmpty() || codePostal.trim().length() > 10) {
+		if (codePostal.trim().equals("") || codePostal.trim().length() > 10) {
 			be.addError(Errors.REGLE_UTILISATEUR_CODE_POSTAL_ERREUR);
 			return false;
 		}
@@ -230,7 +232,7 @@ public class UtilisateursManager {
 	}
 
 	private boolean validerVille(String ville, BusinessException be) {
-		if (ville == null || ville.trim().isEmpty() || ville.trim().length() > 50) {
+		if (ville.trim().equals("") || ville.trim().length() > 50) {
 			be.addError(Errors.REGLE_UTILISATEUR_VILLE_ERREUR);
 			return false;
 		}
