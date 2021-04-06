@@ -1,5 +1,7 @@
 package fr.eni.projet.troc.dal;
 
+import java.util.List;
+
 import fr.eni.projet.troc.bo.Utilisateur;
 import fr.eni.projet.troc.exception.BusinessException;
 
@@ -18,5 +20,7 @@ public interface UtilisateurDAO {
 	public boolean isPseudoUnique(String pseudo) throws BusinessException;
 
 	public Utilisateur selectByPseudo(String pseudo) throws BusinessException;
+
+	public List<Utilisateur> selectAll() throws BusinessException;
 
 }

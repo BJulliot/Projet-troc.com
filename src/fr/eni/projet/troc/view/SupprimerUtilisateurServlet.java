@@ -35,7 +35,8 @@ public class SupprimerUtilisateurServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// Rï¿½cupï¿½ration infos de l'utilisateur en session:
+
+		// Récupérration infos de l'utilisateur en session:
 		HttpSession session = request.getSession();
 		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateurEnSession");
 
