@@ -61,20 +61,27 @@ public class EnchereImpl implements EnchereDAO {
 
 			rs.close();
 			requete.close();
-
+			/**
+			 * Update le prix de vente de l'article suite a la création de l'enchère
+			 */
 			requete = cnx.prepareStatement("UPDATE articles_vendus SET prix_vente = ? WHERE no_article = ?");
 			requete.setInt(1, enchere.getMontantEnchere());
 			requete.setInt(2, enchere.getNoArticle());
 			requete.executeUpdate();
 			rs.close();
 			requete.close();
-			
+			/**
+			 * Update le nombre de crédit de la personne qui vient d'enchérir en lui les enlevant
+			 */
 			requete = cnx.prepareStatement("UPDATE utilisateurs SET credit = (credit - ?) WHERE no_utilisateur = ?");
 			requete.setInt(1, enchere.getMontantEnchere());
 			requete.setInt(2, enchere.getNoUtilisateur());
 			requete.executeUpdate();
 			rs.close();
 			requete.close();
+			/**
+			 * Update le nombre de crédit de la personne qui vient d'etre battu en lui redonnant ses crédits
+			 */
 			requete = cnx.prepareStatement("UPDATE utilisateurs SET credit = credit + (SELECT * FROM (SELECT encheres.montant_enchere FROM utilisateurs INNER JOIN encheres ON encheres.no_utilisateur = utilisateurs.no_utilisateur WHERE no_article = ? order by encheres.montant_enchere DESC LIMIT 1,1)tmp2) WHERE no_utilisateur = (SELECT * FROM (SELECT utilisateurs.no_utilisateur FROM utilisateurs INNER JOIN encheres ON encheres.no_utilisateur = utilisateurs.no_utilisateur WHERE no_article = ? order by encheres.montant_enchere DESC LIMIT 1,1)tmp)");
 			requete.setInt(1, enchere.getNoArticle());
 			requete.setInt(2, enchere.getNoArticle());
