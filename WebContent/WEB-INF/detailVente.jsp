@@ -85,62 +85,89 @@
 						<c:when
 							test="${utilisateurEnSession.credit lt article.prixInitial || utilisateurEnSession.credit lt article.prixVente}">
 							<input type="number" name="prixEnchere" id="prixEnchere"
-								required="required"
-								
-								min="${article.prixVente +1}"
+								required="required" min="${article.prixVente +1}"
 								max="${utilisateurEnSession.credit}">
-								<input type="submit" onClick='return confirmSubmit()'
-						value="Valider enchere" disabled="disabled">
-						<p>Vous n'avez pas assez de crédit pour participer à cette enchère</p>
+							<input type="submit" onClick='return confirmSubmit()'
+								value="Valider enchere" disabled="disabled">
+							<p>Vous n'avez pas assez de crédit pour participer à cette
+								enchère</p>
 						</c:when>
 						<c:when test="${article.prixVente == 0}">
 							<input type="number" name="prixEnchere" id="prixEnchere"
 								required="required" value="${article.prixInitial + 1}"
 								min="${article.prixInitial +1}"
 								max="${utilisateurEnSession.credit}">
-								<input type="submit" onClick='return confirmSubmit()'
-						value="Valider enchere">
+							<input type="submit" onClick='return confirmSubmit()'
+								value="Valider enchere">
 						</c:when>
 						<c:otherwise>
 							<input type="number" name="prixEnchere" id="prixEnchere"
 								required="required" value="${article.prixVente + 1}"
 								min="${article.prixVente +1}"
 								max="${utilisateurEnSession.credit}">
-								<input type="submit" onClick='return confirmSubmit()'
-						value="Valider enchere">
+							<input type="submit" onClick='return confirmSubmit()'
+								value="Valider enchere">
 						</c:otherwise>
 					</c:choose>
-					
+
 
 				</form>
 			</c:otherwise>
 		</c:choose>
 
 	</div>
-	<!-- Popose d'enchérir seulement si l'utilisateur ne possède pas l'annonce : -->
+	<!-- Propose d'enchérir seulement si l'utilisateur ne possède pas l'annonce : -->
+	<div class="container text-center">
+	
 	<c:choose>
 		<c:when
 			test="${article.pseudoUtilisateur == utilisateurEnSession.pseudo}">
-			<div class="container">
-				<div class="row text-center">
-					<div class="col-12">
-						<a class="lienEnchere"
-							href="<%=application.getContextPath()%>/ModifierAnnonceServlet?a=${article.noArticle}">
-							<div class="text-center">
-								<button type="submit" class="btn btn-outline-secondary">Modifier
-									l'annonce</button>
+			<c:choose>
+				<c:when test="${article.dateDebutEnchere < dateDuJour}">
+					<div class="container">
+						<div class="row text-center">
+							<div class="col-12">
+								<a class="lienEnchere"
+									href="<%=application.getContextPath()%>/ModifierAnnonceServlet?a=${article.noArticle}">
+									<div class="text-center">
+										<button type="submit" class="btn btn-outline-secondary">Modifier
+											l'annonce</button>
+									</div>
+								</a>
 							</div>
-						</a>
+						</div>
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div class="container text-center align-items-center">
+							<div class="col-8 align-items-center">
+								<div class="col-lg-18 col-md-8 col-sm-12 text-center alert alert-warning">
+									<p>Vous ne pouvez plus modifier l'annonce car les enchères ont déjà commencées. déso.</p>
+								</div>
+							</div>
+					</div>
+
+				</c:otherwise>
+			</c:choose>
+
+			<%-- <c:when test="${article.dateDebutEnchere == utilisateurEnSession.pseudo}">
+				<div class="container">
+					<div class="row text-center">
+						<div class="col-12">
+							<a class="lienEnchere"
+								href="<%=application.getContextPath()%>/ModifierAnnonceServlet?a=${article.noArticle}">
+								<div class="text-center">
+									<button type="submit" class="btn btn-outline-secondary">Modifier
+										l'annonce</button>
+								</div>
+							</a>
+						</div>
 					</div>
 				</div>
-			</div>
-
+			</c:when> --%>
 		</c:when>
-		<c:otherwise>
-
-		</c:otherwise>
 	</c:choose>
-
+	</div>
 
 	<!-- Bootstrap core JavaScript -->
 	<%@include file="/WEB-INF/template/script.html"%>

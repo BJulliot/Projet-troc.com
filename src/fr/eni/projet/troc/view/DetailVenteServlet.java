@@ -1,6 +1,7 @@
 package fr.eni.projet.troc.view;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.servlet.ServletException;
@@ -58,6 +59,9 @@ public class DetailVenteServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 
+		LocalDate dateDuJour = LocalDate.now();
+		request.setAttribute("dateDuJour", dateDuJour);
+		
 		request.getRequestDispatcher("/WEB-INF/detailVente.jsp").forward(request, response);
 	}
 
