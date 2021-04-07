@@ -35,9 +35,9 @@
 		</c:if>
 
 		<!-- Affichage de tous les utilisateurs avec la possibilité : d'afficher, de supprimer -->
-		<div class="mx-auto col-lg-12 col-md-6 col-sm-6 portfolio-item">
+		<div class="mx-auto col-lg-12 col-md-12 col-sm-12 portfolio-item">
 			<div class="card h-100">
-				<div class="card-body">
+				<div class="card-body col-lg-12 col-md-12 col-sm-12">
 					<!-- Si la liste est vide on dit qu'il n'y a pas d'utilisateurs -->
 					<c:choose>
 						<c:when test="${empty listeUtilisateur}">
@@ -117,12 +117,10 @@
 										<tr>
 											<td colspan="5">
 												<div class="collapse" id="annonce${utilisateur.noUtilisateur}">
-												
 												<c:forEach var="article" items="${listeArticles}">
-												
 													<c:choose>
 														<c:when test="${article.noUtilisateur == utilisateur.noUtilisateur}">
-															<div class="list-group-item list-group-item-action list-group-item-secondary">
+															<div class="list-group-item-action list-group-item-secondary">
 																<a class="lienEnchere" href="<%=application.getContextPath()%>/DetailVenteServlet?a=${article.noArticle}"><h5>${article.nom}</h5></a>
 															</div>
 														</c:when>
