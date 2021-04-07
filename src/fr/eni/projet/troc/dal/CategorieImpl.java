@@ -10,7 +10,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import fr.eni.projet.troc.bo.ArticleVendu;
 import fr.eni.projet.troc.bo.Categorie;
 
 /**

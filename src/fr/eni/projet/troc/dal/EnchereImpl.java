@@ -3,16 +3,12 @@
  */
 package fr.eni.projet.troc.dal;
 
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
-import fr.eni.projet.troc.bo.ArticleVendu;
 import fr.eni.projet.troc.bo.Enchere;
-import fr.eni.projet.troc.bo.Utilisateur;
 import fr.eni.projet.troc.exception.BusinessException;
 import fr.eni.projet.troc.exception.Errors;
 
@@ -25,7 +21,7 @@ import fr.eni.projet.troc.exception.Errors;
  */
 public class EnchereImpl implements EnchereDAO {
 
-	private static final String DELETE_ENCHERES_BY_NO_UTILISATEUR = "DELETE * FROM encheres WHERE no_utilisateur = ?";
+	private static final String DELETE_ENCHERES_BY_NO_UTILISATEUR = "DELETE FROM encheres WHERE no_utilisateur = ?";
 
 	
 	public static Enchere itemBuilder(ResultSet rs) throws SQLException {
@@ -163,7 +159,7 @@ public class EnchereImpl implements EnchereDAO {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement requete = cnx.prepareStatement(DELETE_ENCHERES_BY_NO_UTILISATEUR);
 			requete.setInt(1, noUtilisateur);
-			requete.executeQuery();
+			requete.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
 			BusinessException be = new BusinessException();

@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 
 import fr.eni.projet.troc.bll.ArticlesVendusManager;
 import fr.eni.projet.troc.bll.EnchereManager;
-import fr.eni.projet.troc.bll.RetraitManager;
 import fr.eni.projet.troc.bll.UtilisateursManager;
 import fr.eni.projet.troc.bo.Utilisateur;
 import fr.eni.projet.troc.exception.BusinessException;
@@ -42,15 +41,17 @@ public class SupprimerUtilisateurServlet extends HttpServlet {
 				UtilisateursManager.getInstance().delete(noUtilisateur);
 				System.out.println("Utilisateur "+noUtilisateur+" supprimé");
 				
-//				// suppresion articlesVendus selon noUtilisateur :
-//				ArticlesVendusManager.getInstance().deleteBynoUtilisateur(noUtilisateur);
-//				System.out.println("Articles liés à utilisateur "+noUtilisateur+" supprimés");
+				// suppresion articlesVendus selon noUtilisateur :
+				ArticlesVendusManager.getInstance().deleteBynoUtilisateur(noUtilisateur);
+				System.out.println("Articles liés à utilisateur "+noUtilisateur+" supprimés");
+				
 //				// suppresion retrait selon noUtilisateur :
 //				RetraitManager.getInstance().deleteBynoUtilisateur(noUtilisateur);
 //				System.out.println("Retraits liés à utilisateur "+noUtilisateur+" supprimés");
-//				// suppresion enchères noUtilisateur :
-//				EnchereManager.getInstance().deleteBynoUtilisateur(noUtilisateur);
-//				System.out.println("Enchères liées à utilisateur "+noUtilisateur+" supprimés");
+				
+				// suppresion enchères noUtilisateur :
+				EnchereManager.getInstance().deleteBynoUtilisateur(noUtilisateur);
+				System.out.println("Enchères liées à utilisateur "+noUtilisateur+" supprimés");
 				
 				// redirection vers espace admin :
 				request.getRequestDispatcher("/AfficherEspaceAdmin").forward(request, response);
