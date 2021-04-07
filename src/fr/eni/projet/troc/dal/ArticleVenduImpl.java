@@ -74,6 +74,30 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 		}
 		return articleVendus;
 	}
+	
+	/**
+	 * Permet de recupere une liste de tous les articles encore en vente aujourd'hui
+	* {@inheritDoc}
+	 */
+	@Override
+	public List<ArticleVendu> selectAllArticlesStillInSell() throws Exception {
+		List<ArticleVendu> articleVendus = new ArrayList<ArticleVendu>();
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement requete = cnx.prepareStatement(
+					"SELECT no_article, nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,pseudo,libelle, articles_vendus.no_utilisateur FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie WHERE date_fin_encheres >= NOW() GROUP BY articles_vendus.no_article");
+
+			ResultSet rs = requete.executeQuery();
+
+			while (rs.next()) {
+				articleVendus.add(itemBuilder(rs));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return articleVendus;
+	}
+
 
 	/**
 	 * Liste de tous les articles en fonction de la catégorie
@@ -84,7 +108,7 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 		List<ArticleVendu> articleVendus = new ArrayList<ArticleVendu>();
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement requete = cnx.prepareStatement(
-					"SELECT no_article, nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,pseudo,libelle, articles_vendus.no_utilisateur FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie WHERE categories.no_categorie = ?");
+					"SELECT no_article, nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,pseudo,libelle, articles_vendus.no_utilisateur FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie WHERE categories.no_categorie = ? AND date_fin_encheres >= NOW()");
 			requete.setInt(1, cateNum);
 
 			ResultSet rs = requete.executeQuery();
@@ -108,7 +132,7 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 		List<ArticleVendu> articleVendus = new ArrayList<ArticleVendu>();
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement requete = cnx.prepareStatement(
-					"SELECT no_article, nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente, articles_vendus.no_utilisateur, GROUP_CONCAT(utilisateurs.pseudo SEPARATOR \" \") AS pseudo,GROUP_CONCAT(categories.libelle SEPARATOR \" \") AS libelle FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie WHERE nom_article LIKE '%' ? '%'");
+					"SELECT no_article, nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente, articles_vendus.no_utilisateur, GROUP_CONCAT(utilisateurs.pseudo SEPARATOR \" \") AS pseudo,GROUP_CONCAT(categories.libelle SEPARATOR \" \") AS libelle FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie WHERE date_fin_encheres >= NOW() AND nom_article LIKE '%' ? '%'");
 
 			requete.setString(1, name);
 

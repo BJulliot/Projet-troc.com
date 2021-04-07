@@ -25,4 +25,10 @@ public interface ArticleVenduDAO {
 	public void update(ArticleVendu articleAModifier, Retrait retrait) throws BusinessException;
 
 	public List<ArticleVendu> selectByIdUser(int id) throws Exception;
+
+	/**
+	 * Permet de recupere une liste de tous les articles encore en vente aujourd'hui
+	* {@inheritDoc}
+	 */
+	List<ArticleVendu> selectAllArticlesStillInSell() throws Exception;
 }

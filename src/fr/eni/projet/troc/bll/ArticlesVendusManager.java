@@ -30,6 +30,11 @@ public class ArticlesVendusManager {
 
 		return articleVenduDAO.selectAll();
 	}
+	
+	public List<ArticleVendu> getAllArticleVendusStillInSell() throws Exception {
+
+		return articleVenduDAO.selectAllArticlesStillInSell();
+	}
 
 	public List<ArticleVendu> getNoCategorie(int noCategorie) throws Exception {
 		return articleVenduDAO.selectByIdCat(noCategorie);
