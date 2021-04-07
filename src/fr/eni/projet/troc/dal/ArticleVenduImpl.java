@@ -132,11 +132,9 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 		List<ArticleVendu> articleVendus = new ArrayList<ArticleVendu>();
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement requete = cnx.prepareStatement(
-<<<<<<< HEAD
-					"SELECT  no_article, nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente, articles_vendus.no_utilisateur, GROUP_CONCAT(utilisateurs.pseudo SEPARATOR \" \") AS pseudo,GROUP_CONCAT(categories.libelle SEPARATOR \" \") AS libelle FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie WHERE nom_article LIKE '%' ? '%'");
-=======
+
 					"SELECT no_article, nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente, articles_vendus.no_utilisateur, GROUP_CONCAT(utilisateurs.pseudo SEPARATOR \" \") AS pseudo,GROUP_CONCAT(categories.libelle SEPARATOR \" \") AS libelle FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie WHERE date_fin_encheres >= NOW() AND nom_article LIKE '%' ? '%'");
->>>>>>> e30b1b6ba5a9053f02451ff242a396167cd3dcf3
+
 
 			requete.setString(1, name);
 

@@ -97,7 +97,8 @@
 				<%-- Test quand on cherche par mot cle, si le nom de l'article est present on l'affiche sinon on affiche un message --%>
 				<c:when test="${not empty search}">
 					<c:choose>
-						<c:when test="${fn:contains(nameArticle,search)}">
+					
+						<c:when test="${fn:containsIgnoreCase(nameArticle,search)}">
 							<c:forEach var="nameArticle" items="${nameArticle}">
 								<c:choose>
 									<%-- Si le user est pas connecte, et qu'il clique pour voir un article il est redirige vers la page de connection --%>
