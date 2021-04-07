@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import fr.eni.projet.troc.bll.ArticlesVendusManager;
 import fr.eni.projet.troc.bll.UtilisateursManager;
+import fr.eni.projet.troc.bo.ArticleVendu;
 import fr.eni.projet.troc.bo.Utilisateur;
 import fr.eni.projet.troc.exception.BusinessException;
 
@@ -31,9 +33,17 @@ public class AfficherEspaceAdmin extends HttpServlet {
 			List<Utilisateur> listeUtilisateur = UtilisateursManager.getInstance().selectAll();
 			// injecter dans la requête pour les transmettre à l'affichage
 			request.setAttribute("listeUtilisateur", listeUtilisateur);
+			
+			/**
+			 *  Select All article si le user veux tous les articles encore en vente
+			 */
+			List<ArticleVendu> listeArticles = ArticlesVendusManager.getInstance().getAllArticleVendus();
+			request.setAttribute("listeArticles", listeArticles);
 		} catch (BusinessException e) {
 			e.printStackTrace();
 			request.setAttribute("errors", e.getErrors());
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
 		// Redirection
