@@ -24,5 +24,12 @@ public interface EnchereDAO {
 	public Enchere selectByArticle(int id) throws Exception;
 	
 	public Enchere selectByUser(int id) throws Exception;
+
+
+	/**
+	 * Permet de supprimer tous les enchères liés à un meme utilisateur
+	* {@inheritDoc}
+	*/
+	void deleteBynoUtilisateur(int noUtilisateur) throws BusinessException;
 	
 }

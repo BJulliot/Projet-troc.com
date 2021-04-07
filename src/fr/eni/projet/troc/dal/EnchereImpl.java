@@ -14,6 +14,7 @@ import fr.eni.projet.troc.bo.ArticleVendu;
 import fr.eni.projet.troc.bo.Enchere;
 import fr.eni.projet.troc.bo.Utilisateur;
 import fr.eni.projet.troc.exception.BusinessException;
+import fr.eni.projet.troc.exception.Errors;
 
 /**
  * Classe en charge
@@ -24,6 +25,9 @@ import fr.eni.projet.troc.exception.BusinessException;
  */
 public class EnchereImpl implements EnchereDAO {
 
+	private static final String DELETE_ENCHERES_BY_NO_UTILISATEUR = "DELETE * FROM encheres WHERE no_utilisateur = ?";
+
+	
 	public static Enchere itemBuilder(ResultSet rs) throws SQLException {
 		Enchere enchere = new Enchere();
 		enchere.setNoEnchere(rs.getInt("no_enchere"));
@@ -143,7 +147,23 @@ public class EnchereImpl implements EnchereDAO {
 
 	}
 
-
+	/**
+	 * Permet de supprimer tous les enchères liés à un meme utilisateur
+	* {@inheritDoc}
+	*/
+	@Override
+	public void deleteBynoUtilisateur(int noUtilisateur) throws BusinessException {
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement requete = cnx.prepareStatement(DELETE_ENCHERES_BY_NO_UTILISATEUR);
+			requete.setInt(1, noUtilisateur);
+			requete.executeQuery();
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException be = new BusinessException();
+			be.addError(Errors.SUPPRESSION_UTILISATEUR_ERREUR);
+			throw be;
+		}
+	}
 
 	
 	

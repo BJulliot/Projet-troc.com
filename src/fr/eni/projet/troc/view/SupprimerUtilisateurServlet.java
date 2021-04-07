@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import fr.eni.projet.troc.bll.ArticlesVendusManager;
+import fr.eni.projet.troc.bll.EnchereManager;
+import fr.eni.projet.troc.bll.RetraitManager;
 import fr.eni.projet.troc.bll.UtilisateursManager;
 import fr.eni.projet.troc.bo.Utilisateur;
 import fr.eni.projet.troc.exception.BusinessException;
@@ -35,12 +38,26 @@ public class SupprimerUtilisateurServlet extends HttpServlet {
 			int noUtilisateur = Integer.parseInt(request.getParameter("u"));
 			System.out.println("noUtilisateur = " + noUtilisateur);
 			try {
+				// suppresion utilisateur selon noUtilisateur :
 				UtilisateursManager.getInstance().delete(noUtilisateur);
 				System.out.println("Utilisateur "+noUtilisateur+" supprimé");
-				request.getRequestDispatcher("/AccueilServlet").forward(request, response);
-			} catch (BusinessException e) {
-				e.printStackTrace();
-				request.setAttribute("errors", e.getErrors());
+				
+//				// suppresion articlesVendus selon noUtilisateur :
+//				ArticlesVendusManager.getInstance().deleteBynoUtilisateur(noUtilisateur);
+//				System.out.println("Articles liés à utilisateur "+noUtilisateur+" supprimés");
+//				// suppresion retrait selon noUtilisateur :
+//				RetraitManager.getInstance().deleteBynoUtilisateur(noUtilisateur);
+//				System.out.println("Retraits liés à utilisateur "+noUtilisateur+" supprimés");
+//				// suppresion enchères noUtilisateur :
+//				EnchereManager.getInstance().deleteBynoUtilisateur(noUtilisateur);
+//				System.out.println("Enchères liées à utilisateur "+noUtilisateur+" supprimés");
+				
+				// redirection vers espace admin :
+				request.getRequestDispatcher("/AfficherEspaceAdmin").forward(request, response);
+				
+			} catch (BusinessException be) {
+				be.printStackTrace();
+				request.setAttribute("errors", be.getErrors());
 				request.getRequestDispatcher("/AfficherEspaceAdmin").forward(request, response);
 			}
 		}

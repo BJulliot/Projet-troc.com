@@ -8,6 +8,7 @@ import java.util.List;
 import fr.eni.projet.troc.bo.Retrait;
 import fr.eni.projet.troc.dal.DAOFactory;
 import fr.eni.projet.troc.dal.RetraitDAO;
+import fr.eni.projet.troc.exception.BusinessException;
 
 /**
  * Classe en charge
@@ -40,4 +41,8 @@ public class RetraitManager {
 		return retraitDAO.selectRetraitById(idArticle);
 	}
 
+	public void deleteBynoUtilisateur(int noUtilisateur) throws BusinessException {
+		retraitDAO.deleteBynoUtilisateur(noUtilisateur);
+	}
+	
 }
