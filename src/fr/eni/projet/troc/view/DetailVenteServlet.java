@@ -33,7 +33,9 @@ public class DetailVenteServlet extends HttpServlet {
 		/**
 		 * On recupere le parametre passer en URL
 		 */
-	
+		HttpSession session = request.getSession();
+		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateurEnSession");
+		session.setAttribute("utilisateurEnSession", utilisateur);
 		String idArticle = request.getParameter("a");
 		try {
 			/**
@@ -46,8 +48,8 @@ public class DetailVenteServlet extends HttpServlet {
 			request.setAttribute("retrait", retrait);		
 			Utilisateur user = UtilisateursManager.getInstance().selectUserEnchere();
 			request.setAttribute("UserEnchere", user);
-			HttpSession session = request.getSession();
-			session.setAttribute("noArticleEnchere", idArticle);
+			HttpSession session2 = request.getSession();
+			session2.setAttribute("noArticleEnchere", idArticle);
 
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
