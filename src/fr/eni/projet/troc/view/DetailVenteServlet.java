@@ -19,7 +19,6 @@ import fr.eni.projet.troc.bo.Enchere;
 import fr.eni.projet.troc.bo.Retrait;
 import fr.eni.projet.troc.bo.Utilisateur;
 import fr.eni.projet.troc.exception.BusinessException;
-import jdk.internal.misc.FileSystemOption;
 
 /**
  * Servlet implementation class DetailVenteServlet
