@@ -16,7 +16,9 @@ import fr.eni.projet.troc.exception.BusinessException;
 /**
  * Servlet implementation class NouvelleListeServlet
  */
-@WebServlet("/SupprimerUtilisateurServlet")
+
+//@WebServlet("/SupprimerUtilisateurServlet")
+@WebServlet(urlPatterns = { "/supprimerUtilisateur" })
 public class SupprimerUtilisateurServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -26,7 +28,22 @@ public class SupprimerUtilisateurServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		String servletPath = request.getServletPath();
+		System.out.println("servlet path est : " + servletPath);
+		
+		if (servletPath.contains("supprimerUtilisateur")) {
+			int noUtilisateur = Integer.parseInt(request.getParameter("u"));
+			System.out.println("noUtilisateur = " + noUtilisateur);
+			try {
+				UtilisateursManager.getInstance().delete(noUtilisateur);
+				System.out.println("Utilisateur "+noUtilisateur+" supprimé");
+				request.getRequestDispatcher("/AccueilServlet").forward(request, response);
+			} catch (BusinessException e) {
+				e.printStackTrace();
+				request.setAttribute("errors", e.getErrors());
+				request.getRequestDispatcher("/AfficherEspaceAdmin").forward(request, response);
+			}
+		}
 	}
 
 	/**
