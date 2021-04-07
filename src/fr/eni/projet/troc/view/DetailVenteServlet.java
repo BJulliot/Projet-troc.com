@@ -1,6 +1,7 @@
 package fr.eni.projet.troc.view;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.servlet.ServletException;
@@ -13,12 +14,12 @@ import javax.servlet.http.HttpSession;
 import fr.eni.projet.troc.bll.ArticlesVendusManager;
 import fr.eni.projet.troc.bll.EnchereManager;
 import fr.eni.projet.troc.bll.RetraitManager;
+import fr.eni.projet.troc.bll.UtilisateursManager;
 import fr.eni.projet.troc.bo.ArticleVendu;
 import fr.eni.projet.troc.bo.Enchere;
 import fr.eni.projet.troc.bo.Retrait;
 import fr.eni.projet.troc.bo.Utilisateur;
 import fr.eni.projet.troc.exception.BusinessException;
-import jdk.internal.misc.FileSystemOption;
 
 /**
  * Servlet implementation class DetailVenteServlet
@@ -32,7 +33,9 @@ public class DetailVenteServlet extends HttpServlet {
 		/**
 		 * On recupere le parametre passer en URL
 		 */
-	
+		HttpSession session = request.getSession();
+		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateurEnSession");
+		session.setAttribute("utilisateurEnSession", utilisateur);
 		String idArticle = request.getParameter("a");
 		try {
 			/**
@@ -42,9 +45,11 @@ public class DetailVenteServlet extends HttpServlet {
 			ArticleVendu article = ArticlesVendusManager.getInstance().selectArticleById(Integer.parseInt(idArticle));
 			request.setAttribute("article", article);
 			Retrait retrait = RetraitManager.getInstance().selectRetraitById(Integer.parseInt(idArticle));
-			request.setAttribute("retrait", retrait);
-			HttpSession session = request.getSession();
-			session.setAttribute("noArticleEnchere", idArticle);
+			request.setAttribute("retrait", retrait);		
+			Utilisateur user = UtilisateursManager.getInstance().selectUserEnchere(Integer.parseInt(idArticle));
+			request.setAttribute("UserEnchere", user);
+			HttpSession session2 = request.getSession();
+			session2.setAttribute("noArticleEnchere", idArticle);
 
 		} catch (NumberFormatException e) {
 			// TODO Auto-generated catch block
@@ -54,6 +59,9 @@ public class DetailVenteServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 
+		LocalDate dateDuJour = LocalDate.now();
+		request.setAttribute("dateDuJour", dateDuJour);
+		
 		request.getRequestDispatcher("/WEB-INF/detailVente.jsp").forward(request, response);
 	}
 

@@ -59,6 +59,10 @@ public class EnchereManager {
 	public int selectByIdSell(int id) throws BusinessException {
 		return articleVenduDAO.selectByIdSell(id);
 	}
+	
+	public void deleteBynoUtilisateur(int noUtilisateur) throws BusinessException {
+		enchereDAO.deleteBynoUtilisateur(noUtilisateur);
+	}
 
 	public boolean enchereOK(int idArticle, int prixEnchere, BusinessException be) throws BusinessException {
 		int ArticleAncienPrix = selectByIdSell(idArticle);

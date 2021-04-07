@@ -6,6 +6,7 @@ package fr.eni.projet.troc.dal;
 import java.util.List;
 
 import fr.eni.projet.troc.bo.Retrait;
+import fr.eni.projet.troc.exception.BusinessException;
 
 /**
  * Classe en charge
@@ -19,5 +20,11 @@ public interface RetraitDAO {
 	public List<Retrait> selectById(int id) throws Exception;
 
 	public Retrait selectRetraitById(int idArticle);
+
+	/**
+	 * Permet de supprimer tous les retraits liés à un même utilisateur
+	* {@inheritDoc}
+	*/
+	void deleteBynoUtilisateur(int noUtilisateur) throws BusinessException;
 
 }

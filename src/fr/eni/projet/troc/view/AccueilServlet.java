@@ -1,7 +1,6 @@
 package fr.eni.projet.troc.view;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -34,7 +33,7 @@ public class AccueilServlet extends HttpServlet {
 			request.setAttribute("categories", categories);
 
 			// Select All article pour lister tout les articles au moment du lancement de la page d'accueil
-			List<ArticleVendu> articles = ArticlesVendusManager.getInstance().getAllArticleVendus();
+			List<ArticleVendu> articles = ArticlesVendusManager.getInstance().getAllArticleVendusStillInSell();
 			request.setAttribute("articles", articles);
 
 		} catch (Exception e) {
@@ -67,9 +66,9 @@ public class AccueilServlet extends HttpServlet {
 			List<Categorie> categories = CategorieManager.getInstance().getCategorie();
 			request.setAttribute("categories", categories);
 			/**
-			 *  Select All article si le user veux tous les articles
+			 *  Select All article si le user veux tous les articles encore en vente
 			 */
-			List<ArticleVendu> articles = ArticlesVendusManager.getInstance().getAllArticleVendus();
+			List<ArticleVendu> articles = ArticlesVendusManager.getInstance().getAllArticleVendusStillInSell();
 			request.setAttribute("articles", articles);
 
 			// Select article by id pour pemmettre au user d'afficher des articles en fonctions de leurs categories

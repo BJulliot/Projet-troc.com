@@ -3,16 +3,14 @@
  */
 package fr.eni.projet.troc.dal;
 
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.List;
 
-import fr.eni.projet.troc.bo.ArticleVendu;
 import fr.eni.projet.troc.bo.Enchere;
 import fr.eni.projet.troc.exception.BusinessException;
+import fr.eni.projet.troc.exception.Errors;
 
 /**
  * Classe en charge
@@ -23,6 +21,9 @@ import fr.eni.projet.troc.exception.BusinessException;
  */
 public class EnchereImpl implements EnchereDAO {
 
+	private static final String DELETE_ENCHERES_BY_NO_UTILISATEUR = "DELETE FROM encheres WHERE no_utilisateur = ?";
+
+	
 	public static Enchere itemBuilder(ResultSet rs) throws SQLException {
 		Enchere enchere = new Enchere();
 		enchere.setNoEnchere(rs.getInt("no_enchere"));
@@ -60,9 +61,29 @@ public class EnchereImpl implements EnchereDAO {
 
 			rs.close();
 			requete.close();
-
+			/**
+			 * Update le prix de vente de l'article suite a la création de l'enchère
+			 */
 			requete = cnx.prepareStatement("UPDATE articles_vendus SET prix_vente = ? WHERE no_article = ?");
 			requete.setInt(1, enchere.getMontantEnchere());
+			requete.setInt(2, enchere.getNoArticle());
+			requete.executeUpdate();
+			rs.close();
+			requete.close();
+			/**
+			 * Update le nombre de crédit de la personne qui vient d'enchérir en lui les enlevant
+			 */
+			requete = cnx.prepareStatement("UPDATE utilisateurs SET credit = (credit - ?) WHERE no_utilisateur = ?");
+			requete.setInt(1, enchere.getMontantEnchere());
+			requete.setInt(2, enchere.getNoUtilisateur());
+			requete.executeUpdate();
+			rs.close();
+			requete.close();
+			/**
+			 * Update le nombre de crédit de la personne qui vient d'etre battu en lui redonnant ses crédits
+			 */
+			requete = cnx.prepareStatement("UPDATE utilisateurs SET credit = credit + (SELECT * FROM (SELECT encheres.montant_enchere FROM utilisateurs INNER JOIN encheres ON encheres.no_utilisateur = utilisateurs.no_utilisateur WHERE no_article = ? order by encheres.montant_enchere DESC LIMIT 1,1)tmp2) WHERE no_utilisateur = (SELECT * FROM (SELECT utilisateurs.no_utilisateur FROM utilisateurs INNER JOIN encheres ON encheres.no_utilisateur = utilisateurs.no_utilisateur WHERE no_article = ? order by encheres.montant_enchere DESC LIMIT 1,1)tmp)");
+			requete.setInt(1, enchere.getNoArticle());
 			requete.setInt(2, enchere.getNoArticle());
 			requete.executeUpdate();
 			rs.close();
@@ -141,6 +162,28 @@ public class EnchereImpl implements EnchereDAO {
 		return enchere;
 
 	}
+
+	/**
+	 * Permet de supprimer tous les enchères liés à un meme utilisateur
+	* {@inheritDoc}
+	*/
+	@Override
+	public void deleteBynoUtilisateur(int noUtilisateur) throws BusinessException {
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement requete = cnx.prepareStatement(DELETE_ENCHERES_BY_NO_UTILISATEUR);
+			requete.setInt(1, noUtilisateur);
+			requete.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException be = new BusinessException();
+			be.addError(Errors.SUPPRESSION_UTILISATEUR_ERREUR);
+			throw be;
+		}
+	}
+
+	
+	
+	
 
 
 }

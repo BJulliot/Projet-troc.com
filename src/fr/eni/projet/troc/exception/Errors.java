@@ -93,15 +93,31 @@ public class Errors {
 	public static final String UPDATE_ARTICLE_ECHEC = "Une erreur non gérée est survenue lors de la mise à jour de l'annonce.";
 
 	/**
-	 * Echec rï¿½cupï¿½ration du mot de passe en BDD
+	 * Echec récupération du mot de passe en BDD
 	 */
 	public static final String SELECT_PASSWORD_UTILISATEUR_ECHEC = "Une erreur non gérée est survenue lors de la récupération du mot de passe.";
 
 	/**
-	 * Echec rï¿½cupï¿½ration du mot de passe en BDD
+	 * Echec lors de la suppression de l'utilisateur en BDD
 	 */
 	public static final String SUPPRESSION_UTILISATEUR_ERREUR = "Une erreur non gérée est survenue lors de la suppresion de l'utilisateur.";
 
+	/**
+	 * Echec lors de la suppression de l'utilisateur en BDD
+	 */
+	public static final String SUPPRESSION_ARTICLE_ERREUR = "Une erreur non gérée est survenue lors de la suppresion de l'article.";
+
+	/**
+	 * Echec lors de la suppression de l'enchere en BDD
+	 */
+	public static final String SUPPRESSION_ENCHERE_ERREUR = "Une erreur non gérée est survenue lors de la suppresion de l'enchere en BDD.";
+
+	/**
+	 * Echec lors de la suppression du retrait en BDD
+	 */
+	public static final String SUPPRESSION_RETRAIT_ERREUR = "Une erreur non gérée est survenue lors de la suppresion du retrait en BDD.";
+
+	
 	/**
 	 * Echec rï¿½cupï¿½ration de l'utilisateur en BDD
 	 */

@@ -12,13 +12,10 @@ import javax.servlet.http.HttpSession;
 
 import fr.eni.projet.troc.bll.ArticlesVendusManager;
 import fr.eni.projet.troc.bll.CategorieManager;
-import fr.eni.projet.troc.bll.EnchereManager;
 import fr.eni.projet.troc.bo.ArticleVendu;
 import fr.eni.projet.troc.bo.Categorie;
-import fr.eni.projet.troc.bo.Enchere;
 import fr.eni.projet.troc.bo.Retrait;
 import fr.eni.projet.troc.bo.Utilisateur;
-import fr.eni.projet.troc.exception.BusinessException;
 
 /**
  * Servlet implementation class VendreArticleServlet

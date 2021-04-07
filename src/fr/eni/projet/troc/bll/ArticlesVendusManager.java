@@ -31,6 +31,11 @@ public class ArticlesVendusManager {
 		return articleVenduDAO.selectAll();
 	}
 
+	public List<ArticleVendu> getAllArticleVendusStillInSell() throws Exception {
+
+		return articleVenduDAO.selectAllArticlesStillInSell();
+	}
+
 	public List<ArticleVendu> getNoCategorie(int noCategorie) throws Exception {
 		return articleVenduDAO.selectByIdCat(noCategorie);
 	}
@@ -43,11 +48,15 @@ public class ArticlesVendusManager {
 		articleVenduDAO.create(articleVendu, retrait);
 	}
 
+	public void deleteBynoUtilisateur(int noUtilisateur) throws BusinessException {
+		articleVenduDAO.deleteBynoUtilisateur(noUtilisateur);
+	}
+
 	public List<ArticleVendu> getArticleId(int idArticle) throws Exception {
 		return articleVenduDAO.selectById(idArticle);
 	}
-	
-	public List<ArticleVendu> getArticleIdUser(int idUser)throws Exception{
+
+	public List<ArticleVendu> getArticleIdUser(int idUser) throws Exception {
 		return articleVenduDAO.selectByIdUser(idUser);
 	}
 

@@ -122,7 +122,7 @@
 					</div>
 
 					<div class="form-group text-center mb-2">
-						<button type="" class="btn btn-secondary">Crédit :
+						<button class="btn btn-secondary">Crédit :
 							${utilisateurEnSession.credit}</button>
 					</div>
 
