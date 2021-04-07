@@ -57,8 +57,8 @@ public class UtilisateursManager {
 		}
 	}
 	
-	public Utilisateur selectUserEnchere() throws Exception {
-		return utilisateurDAO.selectEnchereByPseudo();
+	public Utilisateur selectUserEnchere(int idArticle) throws Exception {
+		return utilisateurDAO.selectEnchereByPseudo(idArticle);
 	}
 
 	public void update(int noUtilisateur, String ancienPseudo, String pseudo, String nom, String prenom, String email,

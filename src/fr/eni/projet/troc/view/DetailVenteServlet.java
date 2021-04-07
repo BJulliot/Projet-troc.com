@@ -46,7 +46,7 @@ public class DetailVenteServlet extends HttpServlet {
 			request.setAttribute("article", article);
 			Retrait retrait = RetraitManager.getInstance().selectRetraitById(Integer.parseInt(idArticle));
 			request.setAttribute("retrait", retrait);		
-			Utilisateur user = UtilisateursManager.getInstance().selectUserEnchere();
+			Utilisateur user = UtilisateursManager.getInstance().selectUserEnchere(Integer.parseInt(idArticle));
 			request.setAttribute("UserEnchere", user);
 			HttpSession session2 = request.getSession();
 			session2.setAttribute("noArticleEnchere", idArticle);

@@ -21,7 +21,7 @@ public interface UtilisateurDAO {
 
 	public Utilisateur selectByPseudo(String pseudo) throws BusinessException;
 	
-	public Utilisateur selectEnchereByPseudo()throws Exception;
+	public Utilisateur selectEnchereByPseudo(int idArticle)throws Exception;
 
 	public List<Utilisateur> selectAll() throws BusinessException;
 
