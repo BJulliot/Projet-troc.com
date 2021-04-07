@@ -135,8 +135,7 @@
 																</div>
 															</c:when>
 															<c:otherwise>
-																<div
-																	class="list-group-item-action list-group-item-secondary">
+																<div class="list-group-item-action list-group-item-secondary">
 																	<p>Cet utilisateur n'a pas d'annonce</p>
 																</div>
 															</c:otherwise>

@@ -56,7 +56,7 @@ public class UtilisateursManager {
 			throw be;
 		}
 	}
-	
+
 	public Utilisateur selectUserEnchere(int idArticle) throws Exception {
 		return utilisateurDAO.selectEnchereByPseudo(idArticle);
 	}
@@ -144,6 +144,27 @@ public class UtilisateursManager {
 			}
 		} catch (BusinessException e) {
 			e.printStackTrace();
+		}
+		return result;
+	}
+
+	public boolean validerEmailEnBDD(String email) throws BusinessException {
+		boolean result = false;
+		if (email.trim().equals("")) {
+			be.addError(Errors.REGLE_UTILISATEUR_EMAIL_ERREUR);
+			result = false;
+		}
+		try {
+			if (!(utilisateurDAO.validerEmailEnBDD(email))) {
+				be.addError(Errors.REGLE_UTILISATEUR_ANCIEN_EMAIL_ERREUR);
+				result = false;
+			} else {
+				result = true;
+			}
+		} catch (BusinessException e) {
+			e.printStackTrace();
+			throw e;
+
 		}
 		return result;
 	}

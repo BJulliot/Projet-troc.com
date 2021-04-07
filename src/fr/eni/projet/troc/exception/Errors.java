@@ -62,6 +62,12 @@ public class Errors {
 	public static final String REGLE_UTILISATEUR_ANCIEN_PWD_ERREUR = "Le mot de passe de passe saisi n'est pas le même que l'ancien.";
 
 	/**
+	 * Echec le mot de passe de l'utilisateur ne respecte pas les rï¿½gles
+	 * dï¿½finies
+	 */
+	public static final String REGLE_UTILISATEUR_ANCIEN_EMAIL_ERREUR = "L'email saisi n'existe pas dans notre base de donnée.";
+
+	/**
 	 * Echec la rue de l'utilisateur ne respecte pas les rï¿½gles dï¿½finies
 	 */
 	public static final String REGLE_UTILISATEUR_RUE_ERREUR = "L'adresse de l'utilisateur est obligatoire et ne doit pas dï¿½passer 30 caractères.";
@@ -117,7 +123,6 @@ public class Errors {
 	 */
 	public static final String SUPPRESSION_RETRAIT_ERREUR = "Une erreur non gérée est survenue lors de la suppresion du retrait en BDD.";
 
-	
 	/**
 	 * Echec rï¿½cupï¿½ration de l'utilisateur en BDD
 	 */

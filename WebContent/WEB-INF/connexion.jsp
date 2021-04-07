@@ -40,12 +40,12 @@
 								class="form-control" id="pseudo" name="pseudo"
 								placeholder="Pseudo" required
 								value="<%Cookie[] cookiesTab = request.getCookies();
-										if (cookiesTab != null) {
-											for (Cookie cookie : cookiesTab) {
-												if (cookie.getName().equals("infoUtilisateurPseudo")) {
-													out.println(cookie.getValue());
-												}
-											}
+if (cookiesTab != null) {
+	for (Cookie cookie : cookiesTab) {
+		if (cookie.getName().equals("infoUtilisateurPseudo")) {
+			out.println(cookie.getValue());
+		}
+	}
 }%>">
 
 						</div>
@@ -80,12 +80,14 @@
 						href="./NouvelUtilisateurServlet" type="button">Créer un
 						compte</a>
 				</div>
+				<div class="mt-3 text-center">
+					<a class="lienConnexion" href="./RecupererMotDePasseServlet">Mot de passe oublié?</a>
+				</div>
 			</div>
 		</div>
-	</div>
 
 
-	<!-- Bootstrap core JavaScript -->
-	<%@include file="/WEB-INF/template/script.html"%>
+		<!-- Bootstrap core JavaScript -->
+		<%@include file="/WEB-INF/template/script.html"%>
 </body>
 </html>

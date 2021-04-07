@@ -243,15 +243,26 @@ public class UtilisateurImpl implements UtilisateurDAO {
 				user.setPseudo(rs.getString("pseudo"));
 			}
 		} catch (Exception e) {
-
 			e.printStackTrace();
 		}
 		return user;
 	}
+
+	@Override
+	public boolean validerEmailEnBDD(String email) throws BusinessException {
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement requete = cnx.prepareStatement("SELECT no_utilisateur FROM utilisateurs WHERE email = ?");
+			requete.setString(1, email);
+			ResultSet rs = requete.executeQuery();
+			if (rs.next()) {
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException be = new BusinessException();
+			be.addError(Errors.SUPPRESSION_UTILISATEUR_ERREUR);
+			throw be;
+		}
+		return false;
+	}
 }
-
-
-
-
-
-

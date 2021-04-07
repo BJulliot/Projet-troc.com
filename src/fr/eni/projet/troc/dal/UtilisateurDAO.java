@@ -20,9 +20,11 @@ public interface UtilisateurDAO {
 	public boolean isPseudoUnique(String pseudo) throws BusinessException;
 
 	public Utilisateur selectByPseudo(String pseudo) throws BusinessException;
-	
-	public Utilisateur selectEnchereByPseudo(int idArticle)throws Exception;
+
+	public Utilisateur selectEnchereByPseudo(int idArticle) throws Exception;
 
 	public List<Utilisateur> selectAll() throws BusinessException;
+
+	public boolean validerEmailEnBDD(String email) throws BusinessException;
 
 }
