@@ -72,6 +72,13 @@ public class EnchereImpl implements EnchereDAO {
 			requete.executeUpdate();
 			rs.close();
 			requete.close();
+			
+			requete = cnx.prepareStatement("UPDATE utilisateurs SET credit = (credit - ?) WHERE no_utilisateur = ?");
+			requete.setInt(1, enchere.getMontantEnchere());
+			requete.setInt(2, enchere.getNoUtilisateur());
+			requete.executeUpdate();
+			rs.close();
+			requete.close();
 			cnx.commit();
 		} catch (Exception e) {
 			e.printStackTrace();
