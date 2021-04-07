@@ -50,9 +50,9 @@
 								<thead>
 									<tr>
 										<th scope="col">Pseudo</th>
-										<th scope="col">Prénom</th>
-										<th scope="col">Nom</th>
-										<th scope="col">Détails</th>
+										<th scope="col">Prénom NOM</th>
+										<th scope="col">Détails utilisateur</th>
+										<th scope="col">Voir ses annonces</th>
 										<th scope="col">Supprimer</th>
 									</tr>
 								</thead>
@@ -61,15 +61,22 @@
 									<c:forEach var="utilisateur" items="${listeUtilisateur}">
 										<tr>
 											<td>${utilisateur.pseudo}</td>
-											<td>${utilisateur.prenom}</td>
-											<td>${utilisateur.nom}</td>
+											<td>${utilisateur.prenom} ${utilisateur.nom.toUpperCase()}</td>
 											<td>
 												<button class="btn btn-secondary" type="button"
-													data-toggle="collapse"
-													data-target="#detail${utilisateur.noUtilisateur}"
-													aria-expanded="false"
-													aria-controls="detaildetail${utilisateur.noUtilisateur}">détail</button>
+													data-toggle="collapse" data-target="#detail${utilisateur.noUtilisateur}"
+													aria-expanded="false" aria-controls="detail${utilisateur.noUtilisateur}">
+													détails utilisateur</button>
 											</td>
+											<td>
+												<button class="btn btn-secondary" type="button"
+													data-toggle="collapse" data-target="#annonce${utilisateur.noUtilisateur}"
+													aria-expanded="false" aria-controls="annonce${utilisateur.noUtilisateur}">
+													voir ses annonces</button>
+											
+												
+											</td>
+											
 											<td>
 												<form action="./SupprimerUtilisateurServlet" method="post">
 													<button type="submit" class="btn btn-outline-danger"
@@ -84,8 +91,7 @@
 										<!-- détails utilisateur -->
 										<tr>
 											<td colspan="5">
-												<div class="collapse"
-													id="detail${utilisateur.noUtilisateur}">
+												<div class="collapse" id="detail${utilisateur.noUtilisateur}">
 													<div
 														class="list-group-item list-group-item-action list-group-item-secondary">
 														<h5>Contact :</h5>
@@ -103,6 +109,25 @@
 														<h5>Confidentiel :</h5>
 														motDePasse : ${utilisateur.motDePasse}
 													</div>
+												</div>
+											</td>
+										</tr>
+										
+										<!-- détails annonce de l'utilisateur -->
+										<tr>
+											<td colspan="5">
+												<div class="collapse" id="annonce${utilisateur.noUtilisateur}">
+												
+												<c:forEach var="article" items="${listeArticles}">
+												
+													<c:choose>
+														<c:when test="${article.noUtilisateur == utilisateur.noUtilisateur}">
+															<div class="list-group-item list-group-item-action list-group-item-secondary">
+																<a class="lienEnchere" href="<%=application.getContextPath()%>/DetailVenteServlet?a=${article.noArticle}"><h5>${article.nom}</h5></a>
+															</div>
+														</c:when>
+													</c:choose>
+												</c:forEach>
 												</div>
 											</td>
 										</tr>

@@ -67,7 +67,7 @@ public class AccueilServlet extends HttpServlet {
 			List<Categorie> categories = CategorieManager.getInstance().getCategorie();
 			request.setAttribute("categories", categories);
 			/**
-			 *  Select All article si le user veux tous les articles
+			 *  Select All article si le user veux tous les articles encore en vente
 			 */
 			List<ArticleVendu> articles = ArticlesVendusManager.getInstance().getAllArticleVendusStillInSell();
 			request.setAttribute("articles", articles);
