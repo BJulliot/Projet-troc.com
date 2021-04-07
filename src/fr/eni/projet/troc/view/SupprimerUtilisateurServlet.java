@@ -36,33 +36,33 @@ public class SupprimerUtilisateurServlet extends HttpServlet {
 		if (servletPath.contains("supprimerUtilisateur")) {
 			int noUtilisateur = Integer.parseInt(request.getParameter("u"));
 			System.out.println("noUtilisateur = " + noUtilisateur);
-			try {
-				// suppresion utilisateur selon noUtilisateur :
-				UtilisateursManager.getInstance().delete(noUtilisateur);
-				System.out.println("Utilisateur "+noUtilisateur+" supprimé");
-				
-				// suppresion articlesVendus selon noUtilisateur :
-				ArticlesVendusManager.getInstance().deleteBynoUtilisateur(noUtilisateur);
-				System.out.println("Articles liés à utilisateur "+noUtilisateur+" supprimés");
-				
-//				// suppresion retrait selon noUtilisateur :
-//				RetraitManager.getInstance().deleteBynoUtilisateur(noUtilisateur);
-//				System.out.println("Retraits liés à utilisateur "+noUtilisateur+" supprimés");
-				
-				// suppresion enchères noUtilisateur :
-				EnchereManager.getInstance().deleteBynoUtilisateur(noUtilisateur);
-				System.out.println("Enchères liées à utilisateur "+noUtilisateur+" supprimés");
-				
-				// redirection vers espace admin :
-				request.getRequestDispatcher("/AfficherEspaceAdmin").forward(request, response);
-				
-			} catch (BusinessException be) {
-				be.printStackTrace();
-				request.setAttribute("errors", be.getErrors());
-				request.getRequestDispatcher("/AfficherEspaceAdmin").forward(request, response);
-			}
-		}
-	}
+//			try {
+//				// suppresion utilisateur selon noUtilisateur :
+//				UtilisateursManager.getInstance().delete(noUtilisateur);
+//				System.out.println("Utilisateur "+noUtilisateur+" supprimé");
+//				
+//				// suppresion articlesVendus selon noUtilisateur :
+//				ArticlesVendusManager.getInstance().deleteBynoUtilisateur(noUtilisateur);
+//				System.out.println("Articles liés à utilisateur "+noUtilisateur+" supprimés");
+//				
+////				// suppresion retrait selon noUtilisateur :
+////				RetraitManager.getInstance().deleteBynoUtilisateur(noUtilisateur);
+////				System.out.println("Retraits liés à utilisateur "+noUtilisateur+" supprimés");
+//				
+//				// suppresion enchères noUtilisateur :
+//				EnchereManager.getInstance().deleteBynoUtilisateur(noUtilisateur);
+//				System.out.println("Enchères liées à utilisateur "+noUtilisateur+" supprimés");
+//				
+//				// redirection vers espace admin :
+//				request.getRequestDispatcher("/AfficherEspaceAdmin").forward(request, response);
+//				
+//			} catch (BusinessException be) {
+//				be.printStackTrace();
+//				request.setAttribute("errors", be.getErrors());
+//				request.getRequestDispatcher("/AfficherEspaceAdmin").forward(request, response);
+//			}
+//		}
+	}}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
