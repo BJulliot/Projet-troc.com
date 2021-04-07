@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import fr.eni.projet.troc.bll.ArticlesVendusManager;
 import fr.eni.projet.troc.bll.EnchereManager;
 import fr.eni.projet.troc.bll.RetraitManager;
+import fr.eni.projet.troc.bll.UtilisateursManager;
 import fr.eni.projet.troc.bo.ArticleVendu;
 import fr.eni.projet.troc.bo.Enchere;
 import fr.eni.projet.troc.bo.Retrait;
@@ -42,7 +43,9 @@ public class DetailVenteServlet extends HttpServlet {
 			ArticleVendu article = ArticlesVendusManager.getInstance().selectArticleById(Integer.parseInt(idArticle));
 			request.setAttribute("article", article);
 			Retrait retrait = RetraitManager.getInstance().selectRetraitById(Integer.parseInt(idArticle));
-			request.setAttribute("retrait", retrait);
+			request.setAttribute("retrait", retrait);		
+			Utilisateur user = UtilisateursManager.getInstance().selectUserEnchere();
+			request.setAttribute("UserEnchere", user);
 			HttpSession session = request.getSession();
 			session.setAttribute("noArticleEnchere", idArticle);
 

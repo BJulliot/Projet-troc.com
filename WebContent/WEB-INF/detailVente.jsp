@@ -57,7 +57,7 @@
 				<p>Meilleure offre : Pas d'enchère pour le moment</p>
 			</c:when>
 			<c:otherwise>
-				<p>Meilleure offre : ${article.prixVente} points</p>
+				<p>Meilleure offre : ${article.prixVente} points par ${UserEnchere.pseudo}</p>
 			</c:otherwise>
 		</c:choose>
 		<p>Mise a prix ${article.prixInitial} Points</p>
@@ -92,7 +92,7 @@
 								min="${article.prixVente +1}">
 						</c:otherwise>
 					</c:choose>
-					<input type="submit" value="Valider enchere">
+					<input type="submit" onClick='return confirmSubmit()' value="Valider enchere">
 
 				</form>
 			</c:otherwise>
@@ -127,4 +127,17 @@
 	<!-- Bootstrap core JavaScript -->
 	<%@include file="/WEB-INF/template/script.html"%>
 </body>
+<script LANGUAGE="JavaScript">
+
+function confirmSubmit()
+{
+	 var inputVal = document.getElementById("prixEnchere").value;
+var agree=confirm("Voulez vous valider votre enchère de : " + inputVal + " points ? " );
+if (agree)
+ return true ;
+else
+ return false ;
+}
+
+</script>
 </html>

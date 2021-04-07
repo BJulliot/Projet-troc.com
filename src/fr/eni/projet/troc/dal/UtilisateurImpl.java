@@ -229,4 +229,21 @@ public class UtilisateurImpl implements UtilisateurDAO {
 		}
 		return result;
 	}
+
+	@Override
+	public Utilisateur selectEnchereByPseudo() throws Exception {
+		Utilisateur user = new Utilisateur();
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement requete = cnx.prepareStatement(
+					"SELECT utilisateurs.pseudo,encheres.montant_enchere FROM utilisateurs INNER JOIN encheres ON encheres.no_utilisateur = utilisateurs.no_utilisateur where encheres.montant_enchere=(SELECT MAX(encheres.montant_enchere) FROM encheres)");
+			ResultSet rs = requete.executeQuery();
+			if (rs.next()) {
+				user.setPseudo(rs.getString("pseudo"));
+			}
+		} catch (Exception e) {
+
+			e.printStackTrace();
+		}
+		return user;
+	}
 }

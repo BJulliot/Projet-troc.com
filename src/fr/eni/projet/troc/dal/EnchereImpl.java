@@ -12,6 +12,7 @@ import java.util.List;
 
 import fr.eni.projet.troc.bo.ArticleVendu;
 import fr.eni.projet.troc.bo.Enchere;
+import fr.eni.projet.troc.bo.Utilisateur;
 import fr.eni.projet.troc.exception.BusinessException;
 
 /**
@@ -141,6 +142,12 @@ public class EnchereImpl implements EnchereDAO {
 		return enchere;
 
 	}
+
+
+
+	
+	
+	
 
 
 }
