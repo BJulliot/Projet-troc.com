@@ -83,7 +83,7 @@
 					<label class="form-label" for="prixEnchere">Ma proposition</label>
 					<c:choose>
 						<c:when
-							test="${utilisateurEnSession.credit lt article.prixInitial || utilisateurEnSession.credit lt article.prixVente}">
+							test="${utilisateurEnSession.credit le article.prixInitial || utilisateurEnSession.credit le article.prixVente}">
 							<input type="number" name="prixEnchere" id="prixEnchere"
 								required="required"
 								
