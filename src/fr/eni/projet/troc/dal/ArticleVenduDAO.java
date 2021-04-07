@@ -31,4 +31,10 @@ public interface ArticleVenduDAO {
 	* {@inheritDoc}
 	 */
 	List<ArticleVendu> selectAllArticlesStillInSell() throws Exception;
+
+	/**
+	 * Permet de recuperer une liste d'article d'un meme utilisateur
+	* {@inheritDoc}
+	*/
+	void deleteBynoUtilisateur(int noUtilisateur) throws BusinessException;
 }

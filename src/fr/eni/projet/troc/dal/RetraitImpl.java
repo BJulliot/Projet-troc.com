@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import fr.eni.projet.troc.bo.Retrait;
+import fr.eni.projet.troc.exception.BusinessException;
+import fr.eni.projet.troc.exception.Errors;
 
 /**
  * Classe en charge
@@ -20,7 +22,10 @@ import fr.eni.projet.troc.bo.Retrait;
  * @date 1 avr. 2021 - 15:14:56
  */
 public class RetraitImpl implements RetraitDAO {
+	
+	private static final String DELETE_RETRAITS_BY_NO_UTILISATEUR = "DELETE * FROM retraits WHERE no_utilisateur = ?";
 
+	
 	public static Retrait itemBuilder(ResultSet rs) throws SQLException {
 		Retrait retrait = new Retrait();
 		retrait.setNoArticles(rs.getInt("no_article"));
@@ -70,4 +75,22 @@ public class RetraitImpl implements RetraitDAO {
 		return retrait;
 	}
 
+	/**
+	 * Permet de supprimer tous les retraits liés à un même utilisateur
+	* {@inheritDoc}
+	*/
+	@Override
+	public void deleteBynoUtilisateur(int noUtilisateur) throws BusinessException {
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement requete = cnx.prepareStatement(DELETE_RETRAITS_BY_NO_UTILISATEUR);
+			requete.setInt(1, noUtilisateur);
+			requete.executeQuery();
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException be = new BusinessException();
+			be.addError(Errors.SUPPRESSION_RETRAIT_ERREUR);
+			throw be;
+		}
+	}
+	
 }

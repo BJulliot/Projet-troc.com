@@ -26,6 +26,8 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 
 	private static final String UPDATE_ARTICLE = "UPDATE articles_vendus SET nom_article=?, description=?, date_debut_encheres=?, date_fin_encheres=?, prix_initial=?, no_categorie=? WHERE no_article =?";
 	private static final String UPDATE_RETRAIT = "UPDATE retraits SET rue=?, code_postal=?, ville=? WHERE no_article =?";
+	private static final String DELETE_ARTICLES_BY_NO_UTILISATEUR = "DELETE * FROM articles_vendus WHERE no_utilisateur = ?"
+			+ "";
 
 	public static ArticleVendu itemBuilder(ResultSet rs) throws SQLException {
 		ArticleVendu articleVendu = new ArticleVendu();
@@ -328,5 +330,23 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 
 		}
 		return articleVendu;
+	}
+	
+	/**
+	 * Permet de supprimer tous les articles d'un meme utilisateur
+	* {@inheritDoc}
+	*/
+	@Override
+	public void deleteBynoUtilisateur(int noUtilisateur) throws BusinessException {
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement requete = cnx.prepareStatement(DELETE_ARTICLES_BY_NO_UTILISATEUR);
+			requete.setInt(1, noUtilisateur);
+			requete.executeQuery();
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException be = new BusinessException();
+			be.addError(Errors.SUPPRESSION_UTILISATEUR_ERREUR);
+			throw be;
+		}
 	}
 }
