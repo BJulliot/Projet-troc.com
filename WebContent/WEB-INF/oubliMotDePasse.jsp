@@ -10,7 +10,10 @@
 
 	<div class="container">
 		<div class="col-12">
-		<!-- gestion des erreurs : -->
+
+			<h2 class="my-5 text-center">Mot de passe oublié?</h2>
+
+			<!-- gestion des erreurs : -->
 			<c:if test="${!empty errors}">
 				<div class="row">
 					<div class="col-lg-12 col-md-6 col-sm-6 portfolio-item">
@@ -40,8 +43,9 @@
 								<div class="alert alert-success" role="alert">
 									<h2>Well done!</h2>
 									<ul>
-									<c:forEach var="msg" items="${victories}">
-											<h5>Nous venons de vous envoyer un mail pour réinitialiser votre mot de passe.</h5>
+										<c:forEach var="msg" items="${victories}">
+											<h5>Nous venons de vous envoyer un mail pour
+												réinitialiser votre mot de passe.</h5>
 										</c:forEach>
 									</ul>
 								</div>
@@ -51,18 +55,19 @@
 					</div>
 				</div>
 			</c:if>
-			
-			<h2 class="my-5 text-center">Mot de passe oublié?</h2>
+
 			<h5 class="my-3 text-center">Saisissez votre mail :</h5>
 			<div class="col-md-6 mx-auto">
 				<form action="./RecupererMotDePasseServlet" method="post">
 					<div class="form-group row">
-							<label for="email">Email :</label>
-							<input type="text" class="form-control" id="email" name="email" placeholder="prenom.nom@nomdedomaine.com" required>
-						</div>
-				
+						<label for="email">Email :</label> <input type="text"
+							class="form-control" id="email" name="email"
+							placeholder="prenom.nom@nomdedomaine.com" required>
+					</div>
+
 					<div class="text-center mt-3 mb-1">
-						<button type="submit" class="btn btn-outline-dark">Récupérer mon mot de passe</button>
+						<button type="submit" class="btn btn-outline-dark">Récupérer
+							mon mot de passe</button>
 					</div>
 				</form>
 			</div>

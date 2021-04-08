@@ -177,7 +177,7 @@
 	<!-- Bootstrap core JavaScript -->
 	<%@include file="/WEB-INF/template/script.html"%>
 </body>
-<script LANGUAGE="JavaScript">
+<script>
 	function confirmSubmit() {
 		var inputVal = document.getElementById("prixEnchere").value;
 		var agree = confirm("Voulez vous valider votre enchère de : "
