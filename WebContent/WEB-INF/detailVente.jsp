@@ -180,11 +180,7 @@
 		</c:choose>
 	</div>
 		</c:otherwise>
-	</c:choose>
-
-
-	<!-- Propose d'enchérir seulement si l'utilisateur ne possède pas l'annonce : -->
-	
+	</c:choose>	
 
 	<!-- Bootstrap core JavaScript -->
 	<%@include file="/WEB-INF/template/script.html"%>

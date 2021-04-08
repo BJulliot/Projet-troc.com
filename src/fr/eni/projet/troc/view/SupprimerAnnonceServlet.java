@@ -33,7 +33,6 @@ public class SupprimerAnnonceServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// récupérer infos article :
 		int noArticle = Integer.parseInt(request.getParameter("a"));
-		System.out.println("supprimer // id article :" + noArticle);
 		try {
 			ArticlesVendusManager.getInstance().deleteByNoArticle(noArticle);
 			request.getRequestDispatcher("/AccueilServlet").forward(request, response);

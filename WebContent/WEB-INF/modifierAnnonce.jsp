@@ -104,7 +104,7 @@
 								value="${retrait.ville}" required>
 						</div>
 					</div>
-					
+
 					<div class="col-12 d-flex justify-content-center text-center mb-3">
 						<div class="col-sm-6 p-2 bg-secondary">
 							<div class="form-group align-items-center">
@@ -123,6 +123,8 @@
 									<button type="button" class="btn btn-secondary">Annuler</button>
 								</a>
 							</div>
+						</div>
+					</div>
 				</form>
 			</div>
 		</div>
