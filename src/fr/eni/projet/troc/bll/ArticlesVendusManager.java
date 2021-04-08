@@ -75,6 +75,10 @@ public class ArticlesVendusManager {
 	public List<ArticleVendu> selectEnchereNonCommence(int idUser) throws Exception{
 		return articleVenduDAO.selectEnchereNonCommence(idUser);
 	}
+	
+	public List<ArticleVendu> selectEnchereTermine(int idUser) throws Exception{
+		return articleVenduDAO.selectEnchereTermine(idUser);
+	}
 
 	public void update(ArticleVendu articleAModifier, Retrait retrait, String motDePasseSaisi)
 			throws BusinessException {

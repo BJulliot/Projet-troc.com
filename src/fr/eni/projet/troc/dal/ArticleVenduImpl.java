@@ -308,7 +308,7 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 		List<ArticleVendu> articleVendu = new ArrayList<ArticleVendu>();
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement requete = cnx.prepareStatement(
-					"SELECT no_article, nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,pseudo,libelle,articles_vendus.no_utilisateur FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie WHERE articles_vendus.no_utilisateur = ? and date_debut_encheres <= NOW()");
+					"SELECT no_article, nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,pseudo,libelle,articles_vendus.no_utilisateur FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie WHERE articles_vendus.no_utilisateur = ? and date_debut_encheres <= NOW() AND date_fin_encheres >= NOW()");
 			requete.setInt(1, id);
 
 			ResultSet rs = requete.executeQuery();
@@ -396,4 +396,27 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 		}
 		return articleVendu;
 	}
+
+	@Override
+	public List<ArticleVendu> selectEnchereTermine(int idUser) throws Exception {
+		List<ArticleVendu> articleVendu = new ArrayList<ArticleVendu>();
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement requete = cnx.prepareStatement(
+					"SELECT no_article, nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,pseudo,libelle,articles_vendus.no_utilisateur FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie WHERE articles_vendus.no_utilisateur = ? and date_fin_encheres <= NOW()");
+			requete.setInt(1, idUser);
+
+			ResultSet rs = requete.executeQuery();
+
+			while (rs.next()) {
+				articleVendu.add(itemBuilder(rs));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return articleVendu;
+	}
+	
+	
+	
 }

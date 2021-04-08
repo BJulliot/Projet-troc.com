@@ -51,11 +51,12 @@
 						</c:forEach>
 					</select>
 					<!-- Si l'utilisateur n'est pas connecte, il ne pourra pas clique sur la checkbox, sinon il pourra cliquer et voirs les enchère qui lui appartiennent -->
+					
 					<div class="checkBoxes">
-						<label>Mes ventes</label>
-						<input type="radio">
+					
+					
+					
 						<c:choose>
-
 							<c:when test="${utilisateurEnSession == null}">
 								<label>Voir mes ventes : </label>
 								<input type="checkbox" id="voirAnnonce" name="voirAnnonce"
@@ -63,7 +64,7 @@
 							</c:when>
 							<c:otherwise>
 								<label>Voir mes ventes : </label>
-								<input type="checkbox" id="voirAnnonce" name="voirAnnonce">
+								<input class="myVente" type="checkbox" id="voirAnnonce" name="voirAnnonce">
 							</c:otherwise>
 						</c:choose>
 						
@@ -75,7 +76,18 @@
 						</c:when>
 						<c:otherwise>
 							<label>Voir mes ventes non débutées </label>
-							<input type="checkbox" id="voirVentes" name="voirVentes">
+							<input class="myVente" type="checkbox" id="voirVentes" name="voirVentes">
+						</c:otherwise>
+					</c:choose>
+					<c:choose>
+						<c:when test="${utilisateurEnSession == null}">
+							<label>Voir mes ventes terminées </label>
+							<input type="checkbox" id="voirVentesFini" name="voirVentesFini"
+								disabled="disabled">
+						</c:when>
+						<c:otherwise>
+							<label>Voir mes ventes terminées </label>
+							<input class="myVente" type="checkbox" id="voirVentesFini" name="voirVentesFini">
 						</c:otherwise>
 					</c:choose>
 					</div>
@@ -91,7 +103,6 @@
 							<input type="checkbox" id="voirEnchere" name="voirEnchere">
 						</c:otherwise>
 					</c:choose>
-					
 					
 						
 					
@@ -136,6 +147,34 @@
 
 				</c:when>
 			
+			
+			
+			<c:when test="${voirVentesFini == 'on' }">
+					<c:choose>
+						<c:when test="${empty articleVendusFini}">
+							<p>Vous n'avez aucune vente de terminées ! </p>
+						</c:when>
+						<c:otherwise>
+							<c:forEach var="articleVendusFini" items="${articleVendusFini}">
+
+
+								<%--Si le user est connecté il est redirigé vers la page de description de l'article ou il pourra faire une enchere--%>
+								<a class="lienEnchere"
+									href="<%=application.getContextPath()%>/DetailVenteServlet?a=${articleVendusFini.noArticle}">
+									<div class="card h-100 articleCase">
+										<h3 class="titreArticle">${articleVendusFini.nom}</h3>
+										<p>Prix : ${articleVendusFini.prixInitial} Points</p>
+										<p>Fin de l'enchère : ${articleVendusFini.dateFinEnchere}</p>
+										<p>Vendeur : ${articleVendusFini.pseudoUtilisateur}</p>
+									</div>
+								</a>
+
+							</c:forEach>
+						</c:otherwise>
+
+					</c:choose>
+
+				</c:when>
 			
 
 				<c:when test="${mesAnnonces == 'on' }">
@@ -446,4 +485,5 @@
 	<!-- Bootstrap core JavaScript -->
 	<%@include file="/WEB-INF/template/script.html"%>
 </body>
+
 </html>

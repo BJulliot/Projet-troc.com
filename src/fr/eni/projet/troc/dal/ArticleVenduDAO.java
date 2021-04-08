@@ -45,4 +45,6 @@ public interface ArticleVenduDAO {
 	public void deleteByNoArticle(int noArticle) throws BusinessException;
 	
 	public List<ArticleVendu> selectEnchereNonCommence(int idUser) throws Exception;
-}
+	
+	public List<ArticleVendu> selectEnchereTermine(int idUser) throws Exception;
+} 
