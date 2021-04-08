@@ -10,7 +10,7 @@ Utilisateur utilisateurEnSession = (Utilisateur) session.getAttribute("utilisate
 	class="navbar navbar-expand-md navbar-dark bg-dark fixed-top text-white justify-content-between">
 	<a class="navbar-brand"
 		href="./AccueilServlet">
-		<img src="<%=getServletContext().getContextPath()%>/images/JB_logo.png"
+		<img class="logoAccueil" src="<%=getServletContext().getContextPath()%>/images/JB_logo.png"
 		width="10%" alt="Logo" />  Jean-Bastien, Auctions&Sales</a>
 
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -21,16 +21,16 @@ Utilisateur utilisateurEnSession = (Utilisateur) session.getAttribute("utilisate
 	</button>
 
 
-	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+	<div class="collapse navbar-collapse menuSand" id="navbarSupportedContent">
 		<c:choose>
 			<c:when test="${utilisateurEnSession != null}">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="btn btn-outline-light me-2"
+					<li class="nav-item lienSand"><a class="btn btn-outline-light me-2"
 						href="./VendreArticleServlet" type="button">Vendre un objet</a></li>
-					<li class="nav-item"><a class="btn btn-outline-light me-2"
+					<li class="nav-item lienSand"><a class="btn btn-outline-light me-2"
 						href="./AfficherProfilUtilisateurServlet?u=${utilisateurEnSession.pseudo}"
 						type="button">Mon profil</a></li>
-					<li class="nav-item"><a class="btn btn-outline-light me-2"
+					<li class="nav-item lienSand"><a class="btn btn-outline-light me-2"
 						href="./DeconnectionServlet" type="button">Déconnexion</a></li>
 					<c:choose>
 						<c:when test="${utilisateurEnSession.administrateur == true}">
