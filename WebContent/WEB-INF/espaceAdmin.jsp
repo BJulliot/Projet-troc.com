@@ -134,11 +134,6 @@
 																		href="<%=application.getContextPath()%>/DetailVenteServlet?a=${article.noArticle}"><h5>${article.nom}</h5></a>
 																</div>
 															</c:when>
-															<c:otherwise>
-																<div class="list-group-item-action list-group-item-secondary">
-																	<p>Cet utilisateur n'a pas d'annonce</p>
-																</div>
-															</c:otherwise>
 														</c:choose>
 													</c:forEach>
 												</div>
