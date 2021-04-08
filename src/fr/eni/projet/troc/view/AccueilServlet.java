@@ -51,12 +51,16 @@ public class AccueilServlet extends HttpServlet {
 		String Cat = request.getParameter("Categories");
 		String search = request.getParameter("search");
 		String mesAnnonces = request.getParameter("voirAnnonce");
+		String voirEnchere = request.getParameter("voirEnchere");
 		HttpSession session = request.getSession();
 		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateurEnSession");
+	
+		
 		session.setAttribute("utilisateurEnSession", utilisateur);
 		request.setAttribute("mesAnnonces", mesAnnonces);
 		request.setAttribute("search", search);
 		request.setAttribute("Cat", Cat);
+		request.setAttribute("mesEnchere", voirEnchere);
 
 		try {
 
@@ -81,7 +85,8 @@ public class AccueilServlet extends HttpServlet {
 			List<ArticleVendu> nameArticle = ArticlesVendusManager.getInstance().getNomArticle(search);
 			request.setAttribute("nameArticle", nameArticle);
 
-			
+			List<ArticleVendu> userEnchere = ArticlesVendusManager.getInstance().getUserEnchere(utilisateur.getNoUtilisateur());
+			request.setAttribute("userEnchere", userEnchere);
 			/**
 			 * Permet de SELECT l'article en fonction du user qui a crée l'article
 			 */
