@@ -39,4 +39,6 @@ public interface ArticleVenduDAO {
 	* {@inheritDoc}
 	*/
 	void deleteBynoUtilisateur(int noUtilisateur) throws BusinessException;
+
+	public void deleteByNoArticle(int noArticle) throws BusinessException;
 }

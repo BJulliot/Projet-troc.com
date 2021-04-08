@@ -51,6 +51,11 @@ public class ArticlesVendusManager {
 	public void deleteBynoUtilisateur(int noUtilisateur) throws BusinessException {
 		articleVenduDAO.deleteBynoUtilisateur(noUtilisateur);
 	}
+	
+	public void deleteByNoArticle(String noArticle) {
+		articleVenduDAO.deleteByNoArticle(noArticle);
+		
+	}
 
 	public List<ArticleVendu> getArticleId(int idArticle) throws Exception {
 		return articleVenduDAO.selectById(idArticle);
@@ -95,5 +100,4 @@ public class ArticlesVendusManager {
 		}
 		return true;
 	}
-
 }
