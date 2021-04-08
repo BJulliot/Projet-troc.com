@@ -250,12 +250,13 @@ public class UtilisateurImpl implements UtilisateurDAO {
 
 	@Override
 	public boolean validerEmailEnBDD(String email) throws BusinessException {
+		boolean booleanValiderEmail = false;
 		try (Connection cnx = ConnectionProvider.getConnection()) {
-			PreparedStatement requete = cnx.prepareStatement("SELECT no_utilisateur FROM utilisateurs WHERE email = ?");
+			PreparedStatement requete = cnx.prepareStatement("SELECT no_utilisateur FROM utilisateurs WHERE email LIKE '%' ? '%'");
 			requete.setString(1, email);
 			ResultSet rs = requete.executeQuery();
 			if (rs.next()) {
-				return true;
+				booleanValiderEmail = true;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -263,6 +264,6 @@ public class UtilisateurImpl implements UtilisateurDAO {
 			be.addError(Errors.SUPPRESSION_UTILISATEUR_ERREUR);
 			throw be;
 		}
-		return false;
+		return booleanValiderEmail;
 	}
 }
