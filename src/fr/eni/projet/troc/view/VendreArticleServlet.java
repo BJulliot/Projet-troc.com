@@ -26,7 +26,6 @@ public class VendreArticleServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		try {
 			List<Categorie> categories = CategorieManager.getInstance().getCategorie();
 			request.setAttribute("categories", categories);
@@ -36,7 +35,6 @@ public class VendreArticleServlet extends HttpServlet {
 			session.setAttribute("utilisateurEnSession", utilisateur);
 		} catch (Exception e) {
 			e.printStackTrace();
-
 		}
 		request.getRequestDispatcher("/WEB-INF/vendreArticle.jsp").forward(request, response);
 	}
@@ -70,5 +68,4 @@ public class VendreArticleServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 	}
-
 }

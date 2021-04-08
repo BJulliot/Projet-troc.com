@@ -46,7 +46,7 @@
 
 	<!-- 	On appelle l'article en fonction du numéro d'article qu'on a recupere via l'url -->
 
-	<div class="container">
+	<div class="container col-lg-12 col-md-12 col-sm-12">
 
 		<h3>${article.nom}</h3>
 		<p>Description : ${article.description}</p>
@@ -67,10 +67,11 @@
 
 
 		<!-- 	Sert a afficher le profil de l'utilisateur -->
-		<a
-			href="<%=application.getContextPath()%>/AfficherProfilUtilisateurServlet?u=${article.pseudoUtilisateur}">
-			<p>Vendeur : ${article.pseudoUtilisateur}</p>
-		</a>
+		<p>
+			<a
+				href="<%=application.getContextPath()%>/AfficherProfilUtilisateurServlet?u=${article.pseudoUtilisateur}">
+				Vendeur : ${article.pseudoUtilisateur} </a>
+		</p>
 
 		<!-- Popose d'enchérir seulement si l'utilisateur ne possède pas l'annonce : -->
 		<c:choose>
@@ -116,67 +117,86 @@
 		</c:choose>
 
 	</div>
-	<!-- Propose d'enchérir seulement si l'utilisateur ne possède pas l'annonce : -->
-	<div class="container text-center">
-	
+
+	<!-- Afficher le gagnant de l'enchère si la date de fin d'enchere est dépassée -->
 	<c:choose>
-		<c:when
-			test="${article.pseudoUtilisateur == utilisateurEnSession.pseudo}">
-			<c:choose>
-				<c:when test="${article.dateDebutEnchere < dateDuJour}">
-					<div class="container">
-						<div class="row text-center">
-							<div class="col-12">
-								<a class="lienEnchere"
-									href="<%=application.getContextPath()%>/ModifierAnnonceServlet?a=${article.noArticle}">
-									<div class="text-center">
-										<button type="submit" class="btn btn-outline-secondary">Modifier
-											l'annonce</button>
-									</div>
-								</a>
-							</div>
-						</div>
-					</div>
-				</c:when>
-				<c:otherwise>
-					<div class="container text-center align-items-center">
-							<div class="col-8 align-items-center">
-								<div class="col-lg-18 col-md-8 col-sm-12 text-center alert alert-warning">
-									<p>Vous ne pouvez plus modifier l'annonce car les enchères ont déjà commencées. déso.</p>
-								</div>
-							</div>
-					</div>
-
-				</c:otherwise>
-			</c:choose>
-
-			<%-- <c:when test="${article.dateDebutEnchere == utilisateurEnSession.pseudo}">
-				<div class="container">
-					<div class="row text-center">
-						<div class="col-12">
-							<a class="lienEnchere"
-								href="<%=application.getContextPath()%>/ModifierAnnonceServlet?a=${article.noArticle}">
-								<div class="text-center">
-									<button type="submit" class="btn btn-outline-secondary">Modifier
-										l'annonce</button>
-								</div>
-							</a>
-						</div>
+		<c:when test="${article.dateFinEnchere < dateDuJour}">
+			<div class="container">
+				<div class="row text-center">
+					<div class="col-lg-12 col-md-12 col-sm-12 mb-2 ">
+						<h5 class="text-center">
+							L'heureux·se gagnant·e de cette annonce est <a
+								href="<%=application.getContextPath()%>/AfficherProfilUtilisateurServlet?u=${UserEnchere.pseudo}">${UserEnchere.pseudo}</a>
+						</h5>
 					</div>
 				</div>
-			</c:when> --%>
+			</div>
 		</c:when>
-	</c:choose>
+		<c:otherwise>
+		<div class="container text-center col col-lg-6 col-md-8 col-sm-12">
+		<c:choose>
+			<c:when
+				test="${article.pseudoUtilisateur == utilisateurEnSession.pseudo}">
+				<c:choose>
+					<c:when test="${article.dateDebutEnchere > dateDuJour}">
+						<div class="container">
+							<div class="row text-center">
+								<div class="col-lg-6 col-md-6 mb-2">
+									<div class="text-center">
+										<a class="lienEnchere"
+											href="<%=application.getContextPath()%>/ModifierAnnonceServlet?a=${article.noArticle}">
+											<button class="btn btn-outline-secondary">Modifier
+												l'annonce</button>
+										</a>
+									</div>
+								</div>
+								<div class="col-12 col-md-6 mb-2">
+									<form action="./SupprimerAnnonceServlet?a=${article.noArticle}"
+										method="post">
+										<div class="text-center">
+											<button class="btn btn-outline-danger" type="submit"
+												onClick='return confirmDelete()'>Supprimer
+												l'annonce</button>
+										</div>
+									</form>
+								</div>
+							</div>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="container d-flex justify-content-center">
+							<div class="col-lg-8 col-md-10 col-sm-12">
+								<div
+									class="col-lg-12 col-md-12 col-sm-12 text-center alert alert-warning">
+									<p>Vous ne pouvez plus modifier l'annonce car les enchères
+										ont déjà commencées.</p>
+								</div>
+							</div>
+						</div>
+
+					</c:otherwise>
+				</c:choose>
+			</c:when>
+		</c:choose>
 	</div>
+		</c:otherwise>
+	</c:choose>	
 
 	<!-- Bootstrap core JavaScript -->
 	<%@include file="/WEB-INF/template/script.html"%>
 </body>
-<script LANGUAGE="JavaScript">
+<script>
 	function confirmSubmit() {
 		var inputVal = document.getElementById("prixEnchere").value;
 		var agree = confirm("Voulez vous valider votre enchère de : "
 				+ inputVal + " points ? ");
+		if (agree)
+			return true;
+		else
+			return false;
+	}
+	function confirmDelete() {
+		var agree = confirm("Voulez vous supprimer votre annonce ? ");
 		if (agree)
 			return true;
 		else

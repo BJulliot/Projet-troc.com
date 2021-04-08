@@ -34,7 +34,6 @@ public class ModifierAnnonceServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// récupérer infos article :
 		String idArticle = request.getParameter("a");
-		System.out.println("modifier // id article :" + idArticle);
 
 		try {
 			ArticleVendu article = ArticlesVendusManager.getInstance().selectArticleById(Integer.parseInt(idArticle));

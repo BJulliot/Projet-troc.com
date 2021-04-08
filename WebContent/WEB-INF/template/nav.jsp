@@ -8,9 +8,10 @@ Utilisateur utilisateurEnSession = (Utilisateur) session.getAttribute("utilisate
 <!-- Navigation -->
 <nav
 	class="navbar navbar-expand-md navbar-dark bg-dark fixed-top text-white justify-content-between">
-	<img src="<%=getServletContext().getContextPath()%>/images/JB_logo.gif"
-		width="3%" alt="Logo" /> <a class="navbar-brand"
-		href="./AccueilServlet">Jean-Bastien, Auction&Sales</a>
+	<a class="navbar-brand"
+		href="./AccueilServlet">
+		<img class="logoAccueil" src="<%=getServletContext().getContextPath()%>/images/JB_logo.png"
+		width="10%" alt="Logo" />  Jean-Bastien, Auctions&Sales</a>
 
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarSupportedContent"
@@ -20,25 +21,22 @@ Utilisateur utilisateurEnSession = (Utilisateur) session.getAttribute("utilisate
 	</button>
 
 
-	<div class="collapse navbar-collapse" id="navbarSupportedContent">
+	<div class="collapse navbar-collapse menuSand" id="navbarSupportedContent">
 		<c:choose>
 			<c:when test="${utilisateurEnSession != null}">
 				<ul class="navbar-nav ml-auto">
-					<li class="nav-item active"><a
-						class="btn btn-outline-light me-2"
-						href="./AfficherEncheresServlet" type="button">Enchères</a></li>
-					<li class="nav-item"><a class="btn btn-outline-light me-2"
+					<li class="nav-item lienSand"><a class="btn btn-outline-light me-2"
 						href="./VendreArticleServlet" type="button">Vendre un objet</a></li>
-					<li class="nav-item"><a class="btn btn-outline-light me-2"
+					<li class="nav-item lienSand"><a class="btn btn-outline-light me-2"
 						href="./AfficherProfilUtilisateurServlet?u=${utilisateurEnSession.pseudo}"
 						type="button">Mon profil</a></li>
-					<li class="nav-item"><a class="btn btn-outline-light me-2"
+					<li class="nav-item lienSand"><a class="btn btn-outline-light me-2"
 						href="./DeconnectionServlet" type="button">Déconnexion</a></li>
 					<c:choose>
 						<c:when test="${utilisateurEnSession.administrateur == true}">
 						<li class="nav-item active"><a
 						class="btn btn-outline-light me-2"
-						href="./AfficherEspaceAdmin" type="button">Espace admin</a></li>
+						href="<%=application.getContextPath()%>/espaceAdmin" type="button">Espace admin</a></li>
 						</c:when>
 					</c:choose>
 				</ul>

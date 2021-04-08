@@ -91,7 +91,6 @@ public class DetailVenteServlet extends HttpServlet {
 
 		try {
 			int articleVendu = EnchereManager.getInstance().selectByIdSell(Integer.parseInt(enchereNoArticle));
-			System.out.println(enchereNoArticle);
 			em.create(enchere);
 			request.getRequestDispatcher("/AccueilServlet").forward(request, response);
 		} catch (BusinessException e) {

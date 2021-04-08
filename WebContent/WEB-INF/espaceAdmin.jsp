@@ -82,14 +82,11 @@
 
 											</td>
 
-											<td>
-												<a href="${pageContext.request.contextPath}/supprimerUtilisateur?u=${utilisateur.noUtilisateur}">
+											<td><a
+												href="${pageContext.request.contextPath}/supprimerUtilisateur?u=${utilisateur.noUtilisateur}">
 													<button type="submit" class="btn btn-outline-danger"
 														onclick="return confirm('Confirmer la suppression du compte utilisateur ${utilisateur.pseudo}?')">Supprimer</button>
-											</a>
-
-
-											</td>
+											</a></td>
 										</tr>
 
 
@@ -129,16 +126,16 @@
 															<c:when
 																test="${article.noUtilisateur == utilisateur.noUtilisateur}">
 																<div
-																	class="list-group-item-action list-group-item-secondary">
-																	<a class="lienEnchere"
-																		href="<%=application.getContextPath()%>/DetailVenteServlet?a=${article.noArticle}"><h5>${article.nom}</h5></a>
+																	class="list-group-item-action list-group-item-secondary "
+																	data-toggle="tooltip" data-placement="right"
+																	title="Voir le détail de l'annonce">
+																	<h5>
+																		<a class="lienEnchere"
+																			href="<%=application.getContextPath()%>/DetailVenteServlet?a=${article.noArticle}">
+																			${article.nom}</a>
+																	</h5>
 																</div>
 															</c:when>
-															<c:otherwise>
-																<div class="list-group-item-action list-group-item-secondary">
-																	<p>Cet utilisateur n'a pas d'annonce</p>
-																</div>
-															</c:otherwise>
 														</c:choose>
 													</c:forEach>
 												</div>

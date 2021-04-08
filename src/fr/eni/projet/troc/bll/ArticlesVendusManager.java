@@ -51,6 +51,10 @@ public class ArticlesVendusManager {
 	public void deleteBynoUtilisateur(int noUtilisateur) throws BusinessException {
 		articleVenduDAO.deleteBynoUtilisateur(noUtilisateur);
 	}
+	
+	public void deleteByNoArticle(int noArticle) throws BusinessException {
+		articleVenduDAO.deleteByNoArticle(noArticle);
+	}
 
 	public List<ArticleVendu> getArticleId(int idArticle) throws Exception {
 		return articleVenduDAO.selectById(idArticle);
@@ -59,9 +63,21 @@ public class ArticlesVendusManager {
 	public List<ArticleVendu> getArticleIdUser(int idUser) throws Exception {
 		return articleVenduDAO.selectByIdUser(idUser);
 	}
+	
+	public List<ArticleVendu> getUserEnchere(int idUser) throws Exception{
+		return articleVenduDAO.selectEnchereParticipe(idUser);
+	}
 
 	public ArticleVendu selectArticleById(int idArticle) throws Exception {
 		return articleVenduDAO.selectArticleById(idArticle);
+	}
+	
+	public List<ArticleVendu> selectEnchereNonCommence(int idUser) throws Exception{
+		return articleVenduDAO.selectEnchereNonCommence(idUser);
+	}
+	
+	public List<ArticleVendu> selectEnchereTermine(int idUser) throws Exception{
+		return articleVenduDAO.selectEnchereTermine(idUser);
 	}
 
 	public void update(ArticleVendu articleAModifier, Retrait retrait, String motDePasseSaisi)
@@ -91,5 +107,4 @@ public class ArticlesVendusManager {
 		}
 		return true;
 	}
-
 }

@@ -44,7 +44,7 @@
 				<div class="form-group row">
 					<div class="col-sm-12 col-lg-6">
 						<label for="prix">Prix initial</label> <input class="form-control"
-							type="number" id="prix" name="prix">
+							type="number" id="prix" name="prix" required="required">
 					</div>
 					<div class="col-sm-6 col-lg-3">
 						<label for="dateDebut">Début</label> <input type="date"
@@ -52,7 +52,7 @@
 					</div>
 					<div class="col-sm-6 col-lg-3">
 						<label for="dateFin">Fin</label> <input type="date"
-							class="form-control" id="dateFin" name="dateFin">
+							class="form-control" id="dateFin" name="dateFin" value="dateDebut">
 					</div>
 				</div>
 

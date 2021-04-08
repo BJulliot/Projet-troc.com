@@ -26,8 +26,8 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 
 	private static final String UPDATE_ARTICLE = "UPDATE articles_vendus SET nom_article=?, description=?, date_debut_encheres=?, date_fin_encheres=?, prix_initial=?, no_categorie=? WHERE no_article =?";
 	private static final String UPDATE_RETRAIT = "UPDATE retraits SET rue=?, code_postal=?, ville=? WHERE no_article =?";
-	private static final String DELETE_ARTICLES_BY_NO_UTILISATEUR = "DELETE FROM articles_vendus WHERE no_utilisateur = ?"
-			+ "";
+	private static final String DELETE_ARTICLES_BY_NO_UTILISATEUR = "DELETE FROM articles_vendus WHERE no_utilisateur = ?";
+	private static final String DELETE_ARTICLE_BY_NO_ARTICLE = "DELETE FROM articles_vendus WHERE no_article = ?";
 
 	public static ArticleVendu itemBuilder(ResultSet rs) throws SQLException {
 		ArticleVendu articleVendu = new ArticleVendu();
@@ -55,15 +55,14 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 	}
 
 	/**
-	 * Permet de recupere une liste de tout les articles
-	* {@inheritDoc}
+	 * Permet de recupere une liste de tout les articles {@inheritDoc}
 	 */
 	@Override
 	public List<ArticleVendu> selectAll() throws Exception {
 		List<ArticleVendu> articleVendus = new ArrayList<ArticleVendu>();
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement requete = cnx.prepareStatement(
-					"SELECT no_article, nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,pseudo,libelle, articles_vendus.no_utilisateur FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie GROUP BY articles_vendus.no_article");
+					"SELECT no_article, nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,pseudo,libelle, articles_vendus.no_utilisateur FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie  GROUP BY articles_vendus.no_article");
 
 			ResultSet rs = requete.executeQuery();
 
@@ -76,17 +75,17 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 		}
 		return articleVendus;
 	}
-	
+
 	/**
 	 * Permet de recupere une liste de tous les articles encore en vente aujourd'hui
-	* {@inheritDoc}
+	 * {@inheritDoc}
 	 */
 	@Override
 	public List<ArticleVendu> selectAllArticlesStillInSell() throws Exception {
 		List<ArticleVendu> articleVendus = new ArrayList<ArticleVendu>();
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement requete = cnx.prepareStatement(
-					"SELECT no_article, nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,pseudo,libelle, articles_vendus.no_utilisateur FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie WHERE date_fin_encheres >= NOW() GROUP BY articles_vendus.no_article");
+					"SELECT no_article, nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,pseudo,libelle, articles_vendus.no_utilisateur FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie WHERE date_fin_encheres >= NOW() AND date_debut_encheres <= NOW() GROUP BY articles_vendus.no_article");
 
 			ResultSet rs = requete.executeQuery();
 
@@ -100,17 +99,15 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 		return articleVendus;
 	}
 
-
 	/**
-	 * Liste de tous les articles en fonction de la catégorie
-	 * {@inheritDoc}
+	 * Liste de tous les articles en fonction de la catégorie {@inheritDoc}
 	 */
 	@Override
 	public List<ArticleVendu> selectByIdCat(int cateNum) throws Exception {
 		List<ArticleVendu> articleVendus = new ArrayList<ArticleVendu>();
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement requete = cnx.prepareStatement(
-					"SELECT no_article, nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,pseudo,libelle, articles_vendus.no_utilisateur FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie WHERE categories.no_categorie = ? AND date_fin_encheres >= NOW()");
+					"SELECT no_article, nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,pseudo,libelle, articles_vendus.no_utilisateur FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie WHERE categories.no_categorie = ? AND date_fin_encheres >= NOW() AND date_debut_encheres <= NOW()");
 			requete.setInt(1, cateNum);
 
 			ResultSet rs = requete.executeQuery();
@@ -135,8 +132,7 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement requete = cnx.prepareStatement(
 
-					"SELECT no_article, nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente, articles_vendus.no_utilisateur, GROUP_CONCAT(utilisateurs.pseudo SEPARATOR \" \") AS pseudo,GROUP_CONCAT(categories.libelle SEPARATOR \" \") AS libelle FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie WHERE date_fin_encheres >= NOW() AND nom_article LIKE '%' ? '%'");
-
+					"SELECT no_article, nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente, articles_vendus.no_utilisateur, GROUP_CONCAT(utilisateurs.pseudo SEPARATOR \" \") AS pseudo,GROUP_CONCAT(categories.libelle SEPARATOR \" \") AS libelle FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie WHERE date_fin_encheres >= NOW() AND date_debut_encheres <= NOW() AND nom_article LIKE '%' ? '%'");
 
 			requete.setString(1, name);
 
@@ -153,8 +149,9 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 	}
 
 	/**
-	 * {@inheritDoc}
-	 * Permet de creer un article avec le lieux de retrait en meme temps 
+	 * {@inheritDoc} Permet de creer un article avec le lieux de retrait en meme
+	 * temps
+	 * 
 	 * @throws Exception
 	 */
 	@Override
@@ -198,8 +195,7 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 	}
 
 	/**
-	 * Permet de retourne un article en fonction de l'ID de l'article
-	 * {@inheritDoc}
+	 * Permet de retourne un article en fonction de l'ID de l'article {@inheritDoc}
 	 */
 	@Override
 	public List<ArticleVendu> selectById(int id) throws Exception {
@@ -220,13 +216,11 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 		}
 		return articleVendu;
 	}
-	
-	
-	
-/**
- * Permet de recupere le prix de vente de l'article si une enchere est faite
-* {@inheritDoc}
- */
+
+	/**
+	 * Permet de recupere le prix de vente de l'article si une enchere est faite
+	 * {@inheritDoc}
+	 */
 	@Override
 	public int selectByIdSell(int id) throws BusinessException {
 		int prixVente = 0;
@@ -247,10 +241,9 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 		return prixVente;
 	}
 
-	
 	/**
 	 * Meme version que le select en fonction du numero d'article mais sans liste
-	* {@inheritDoc}
+	 * {@inheritDoc}
 	 */
 	@Override
 	public ArticleVendu selectArticleById(int idArticle) {
@@ -272,10 +265,9 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 		return articleVendu;
 	}
 
-	
 	/**
-	 * Permet d'update l'article et le retrait quand on veux modifier un article mit en vente
-	* {@inheritDoc}
+	 * Permet d'update l'article et le retrait quand on veux modifier un article mit
+	 * en vente {@inheritDoc}
 	 */
 	@Override
 	public void update(ArticleVendu articleAModifier, Retrait retrait) throws BusinessException {
@@ -309,15 +301,14 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 	}
 
 	/**
-	 * Permet de recuperer une liste d'article d'un meme utilisateur
-	* {@inheritDoc}
-	*/
+	 * Permet de recuperer une liste d'article d'un meme utilisateur {@inheritDoc}
+	 */
 	@Override
 	public List<ArticleVendu> selectByIdUser(int id) throws Exception {
 		List<ArticleVendu> articleVendu = new ArrayList<ArticleVendu>();
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement requete = cnx.prepareStatement(
-					"SELECT no_article, nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,pseudo,libelle,articles_vendus.no_utilisateur FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie WHERE articles_vendus.no_utilisateur = ?");
+					"SELECT no_article, nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,pseudo,libelle,articles_vendus.no_utilisateur FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie WHERE articles_vendus.no_utilisateur = ? and date_debut_encheres <= NOW() AND date_fin_encheres >= NOW()");
 			requete.setInt(1, id);
 
 			ResultSet rs = requete.executeQuery();
@@ -331,11 +322,10 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 		}
 		return articleVendu;
 	}
-	
+
 	/**
-	 * Permet de supprimer tous les articles d'un meme utilisateur
-	* {@inheritDoc}
-	*/
+	 * Permet de supprimer tous les articles d'un meme utilisateur {@inheritDoc}
+	 */
 	@Override
 	public void deleteBynoUtilisateur(int noUtilisateur) throws BusinessException {
 		try (Connection cnx = ConnectionProvider.getConnection()) {
@@ -349,4 +339,84 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 			throw be;
 		}
 	}
+
+	/**
+	 * Permet de supprimer l'articles en fonction de son noArticle {@inheritDoc}
+	 */
+	@Override
+	public void deleteByNoArticle(int noArticle) throws BusinessException {
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement requete = cnx.prepareStatement(DELETE_ARTICLE_BY_NO_ARTICLE);
+			requete.setInt(1, noArticle);
+			requete.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException be = new BusinessException();
+			be.addError(Errors.SUPPRESSION_ARTICLE_ERREUR);
+			throw be;
+		}
+	}
+
+	@Override
+	public List<ArticleVendu> selectEnchereParticipe(int idUser) throws Exception {
+		List<ArticleVendu> articleVendu = new ArrayList<ArticleVendu>();
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement requete = cnx.prepareStatement(
+					"SELECT DISTINCT (articles_vendus.no_article), nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,pseudo,libelle, articles_vendus.no_utilisateur,encheres.no_article,encheres.no_utilisateur,encheres.date_enchere,encheres.montant_enchere FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie INNER JOIN encheres ON encheres.no_article = articles_vendus.no_article WHERE date_fin_encheres >= NOW()and encheres.no_utilisateur = ? GROUP BY articles_vendus.no_article");
+			requete.setInt(1, idUser);
+
+			ResultSet rs = requete.executeQuery();
+
+			while (rs.next()) {
+				articleVendu.add(itemBuilder(rs));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return articleVendu;
+	}
+
+	@Override
+	public List<ArticleVendu> selectEnchereNonCommence(int idUser) throws Exception {
+		List<ArticleVendu> articleVendu = new ArrayList<ArticleVendu>();
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement requete = cnx.prepareStatement(
+					"SELECT no_article, nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,pseudo,libelle,articles_vendus.no_utilisateur FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie WHERE articles_vendus.no_utilisateur = ? and date_debut_encheres >= NOW()");
+			requete.setInt(1, idUser);
+
+			ResultSet rs = requete.executeQuery();
+
+			while (rs.next()) {
+				articleVendu.add(itemBuilder(rs));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return articleVendu;
+	}
+
+	@Override
+	public List<ArticleVendu> selectEnchereTermine(int idUser) throws Exception {
+		List<ArticleVendu> articleVendu = new ArrayList<ArticleVendu>();
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement requete = cnx.prepareStatement(
+					"SELECT no_article, nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,pseudo,libelle,articles_vendus.no_utilisateur FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie WHERE articles_vendus.no_utilisateur = ? and date_fin_encheres <= NOW()");
+			requete.setInt(1, idUser);
+
+			ResultSet rs = requete.executeQuery();
+
+			while (rs.next()) {
+				articleVendu.add(itemBuilder(rs));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return articleVendu;
+	}
+	
+	
+	
 }

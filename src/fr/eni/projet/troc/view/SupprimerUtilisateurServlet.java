@@ -31,27 +31,21 @@ public class SupprimerUtilisateurServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String servletPath = request.getServletPath();
-		System.out.println("servlet path est : " + servletPath);
 
 		if (servletPath.contains("supprimerUtilisateur")) {
 			int noUtilisateur = Integer.parseInt(request.getParameter("u"));
-			System.out.println("noUtilisateur = " + noUtilisateur);
 			try {
 				// suppresion utilisateur selon noUtilisateur :
 				UtilisateursManager.getInstance().delete(noUtilisateur);
-				System.out.println("Utilisateur " + noUtilisateur + " supprimé");
 
 				// suppresion articlesVendus selon noUtilisateur :
 				ArticlesVendusManager.getInstance().deleteBynoUtilisateur(noUtilisateur);
-				System.out.println("Articles liés à utilisateur " + noUtilisateur + " supprimés");
 
 //				// suppresion retrait selon noUtilisateur :
 //				RetraitManager.getInstance().deleteBynoUtilisateur(noUtilisateur);
-//				System.out.println("Retraits liés à utilisateur "+noUtilisateur+" supprimés");
 
 				// suppresion enchères noUtilisateur :
 				EnchereManager.getInstance().deleteBynoUtilisateur(noUtilisateur);
-				System.out.println("Enchères liées à utilisateur " + noUtilisateur + " supprimés");
 
 				// redirection vers espace admin :
 				request.getRequestDispatcher("/AfficherEspaceAdmin").forward(request, response);
@@ -78,13 +72,9 @@ public class SupprimerUtilisateurServlet extends HttpServlet {
 		// Rï¿½cupï¿½ration du numero utilisateur avant suppresion :
 		request.setCharacterEncoding("UTF-8");
 		UtilisateursManager um = UtilisateursManager.getInstance();
-		System.out.println("post delete");
-		System.out.println("numero utilisateur en session = " + utilisateur.getNoUtilisateur());
 
 		try {
 			um.delete(utilisateur.getNoUtilisateur());
-			System.out.println("supprimé");
-
 			session.invalidate();
 			request.getRequestDispatcher("/AccueilServlet").forward(request, response);
 		} catch (BusinessException e) {

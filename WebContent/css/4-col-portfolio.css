@@ -41,7 +41,7 @@ body {
 
 [role=button], a, area, button, input:not([type=range]), label, select,
 	summary, textarea {
-	border-radius: 10px;
+	border-radius: 5px;
 }
 
 .search-bar {
@@ -53,14 +53,18 @@ body {
 }
 
 .articleContenus {
-	display: inline-block;
+	display: flex;
 	margin-top : 2%;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: baseline;
 }
 
 .articleCase {
 	text-align: center;
 	border-color: black;
 	margin-bottom: 2%;
+	width: 60vh;
 }
 
 .global{
@@ -94,3 +98,29 @@ body {
 	color: inherit;
 	text-decoration: none;
 }
+
+.titreArticle{
+	text-decoration: underline;
+	font-size: 3vh;
+}
+
+
+
+
+@media all and (max-width:576px){
+	.logoAccueil{
+		display: none;
+	}
+	.menuSand{
+		text-align: center;
+	}
+	
+	.lienSand{
+		padding-top: 5%
+	}
+	.articleCase{
+		width: 45vh;
+	}
+}
+
+

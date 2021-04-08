@@ -11,15 +11,15 @@
 
 	<div class="container">
 		<c:choose>
-				<c:when test="${utilisateurEnSession.pseudo == utilisateur.pseudo}">
-					<h2 class="my-3 text-center">Votre profil</h2>
-				</c:when>
-				<c:otherwise>
-					<h2 class="my-3 text-center">Profil du vendeur</h2>
-				</c:otherwise>
-			</c:choose>
-		
-		
+			<c:when test="${utilisateurEnSession.pseudo == utilisateur.pseudo}">
+				<h2 class="my-3 text-center">Votre profil</h2>
+			</c:when>
+			<c:otherwise>
+				<h2 class="my-3 text-center">Profil du vendeur</h2>
+			</c:otherwise>
+		</c:choose>
+
+
 		<c:if test="${!empty errors}">
 			<div class="row">
 				<div class="col-lg-12 col-md-6 col-sm-6 portfolio-item">
@@ -80,12 +80,16 @@
 				</tbody>
 			</table>
 
+			<div class="form-group text-center mb-3">
+				<button class="btn btn-secondary">Crédit :
+					${utilisateurEnSession.credit}</button>
+			</div>
 
 			<c:choose>
 				<c:when test="${utilisateurEnSession.pseudo == utilisateur.pseudo}">
 					<div class="container">
 						<div class="row">
-							<div class="col-12 col-md-6 mb-2">
+							<div class="col-lg-6 col-md-6 mb-2">
 								<form action="./ModifierUtilisateurServlet" method="get">
 									<div class="text-center">
 										<button type="submit" class="btn btn-outline-secondary">Modifier
@@ -93,7 +97,7 @@
 									</div>
 								</form>
 							</div>
-							<div class="col-12 col-md-6">
+							<div class="col-lg-6 col-md-6">
 								<form action="./SupprimerUtilisateurServlet" method="post">
 									<div class="text-center">
 										<button type="submit" class="btn btn-outline-danger"

@@ -157,7 +157,7 @@ public class UtilisateursManager {
 		try {
 			if (!(utilisateurDAO.validerEmailEnBDD(email))) {
 				be.addError(Errors.REGLE_UTILISATEUR_ANCIEN_EMAIL_ERREUR);
-				result = false;
+				throw be;
 			} else {
 				result = true;
 			}

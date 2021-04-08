@@ -26,15 +26,25 @@ public interface ArticleVenduDAO {
 
 	public List<ArticleVendu> selectByIdUser(int id) throws Exception;
 
+	public List<ArticleVendu> selectEnchereParticipe(int idUser) throws Exception;
+
 	/**
 	 * Permet de recupere une liste de tous les articles encore en vente aujourd'hui
-	* {@inheritDoc}
+	 * {@inheritDoc}
 	 */
 	List<ArticleVendu> selectAllArticlesStillInSell() throws Exception;
 
 	/**
-	 * Permet de recuperer une liste d'article d'un meme utilisateur
-	* {@inheritDoc}
-	*/
+	 * Permet de recuperer une liste d'article d'un meme utilisateur {@inheritDoc}
+	 */
 	void deleteBynoUtilisateur(int noUtilisateur) throws BusinessException;
-}
+
+	/**
+	 * Permet de supprimer l'articles en fonction de son noArticle {@inheritDoc}
+	 */
+	public void deleteByNoArticle(int noArticle) throws BusinessException;
+	
+	public List<ArticleVendu> selectEnchereNonCommence(int idUser) throws Exception;
+	
+	public List<ArticleVendu> selectEnchereTermine(int idUser) throws Exception;
+} 

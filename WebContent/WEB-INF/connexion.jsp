@@ -85,6 +85,7 @@ if (cookiesTab != null) {
 				</div>
 			</div>
 		</div>
+		</div>
 
 
 		<!-- Bootstrap core JavaScript -->
