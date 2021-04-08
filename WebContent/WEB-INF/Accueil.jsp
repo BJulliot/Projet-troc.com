@@ -53,12 +53,12 @@
 					<!-- Si l'utilisateur n'est pas connecte, il ne pourra pas clique sur la checkbox, sinon il pourra cliquer et voirs les enchère qui lui appartiennent -->
 					<c:choose>
 						<c:when test="${utilisateurEnSession == null}">
-							<label>Voir mes ventes en cours : </label>
+							<label>Voir mes ventes : </label>
 							<input type="checkbox" id="voirAnnonce" name="voirAnnonce"
 								disabled="disabled">
 						</c:when>
 						<c:otherwise>
-							<label>Voir mes ventes en cours : </label>
+							<label>Voir mes ventes  : </label>
 							<input type="checkbox" id="voirAnnonce" name="voirAnnonce">
 						</c:otherwise>
 					</c:choose>
@@ -106,12 +106,6 @@
 						</c:choose>
 					</c:forEach>
 				</c:when>
-
-
-
-
-
-
 				<c:when test="${mesEnchere == 'on' }">
 					<c:forEach var="userEnchere" items="${userEnchere}">
 						<c:choose>
@@ -134,12 +128,6 @@
 						</c:choose>
 					</c:forEach>
 				</c:when>
-
-
-
-
-
-
 				<%-- Test quand on cherche par mot cle, si le nom de l'article est present on l'affiche sinon on affiche un message --%>
 				<c:when test="${not empty search}">
 					<c:choose>
