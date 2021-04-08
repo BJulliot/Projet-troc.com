@@ -67,10 +67,11 @@
 
 
 		<!-- 	Sert a afficher le profil de l'utilisateur -->
-		<a
-			href="<%=application.getContextPath()%>/AfficherProfilUtilisateurServlet?u=${article.pseudoUtilisateur}">
-			<p>Vendeur : ${article.pseudoUtilisateur}</p>
-		</a>
+		<p>
+			<a
+				href="<%=application.getContextPath()%>/AfficherProfilUtilisateurServlet?u=${article.pseudoUtilisateur}">
+				Vendeur : ${article.pseudoUtilisateur} </a>
+		</p>
 
 		<!-- Popose d'enchérir seulement si l'utilisateur ne possède pas l'annonce : -->
 		<c:choose>
@@ -118,39 +119,43 @@
 	</div>
 	<!-- Propose d'enchérir seulement si l'utilisateur ne possède pas l'annonce : -->
 	<div class="container text-center">
-	
-	<c:choose>
-		<c:when
-			test="${article.pseudoUtilisateur == utilisateurEnSession.pseudo}">
-			<c:choose>
-				<c:when test="${article.dateDebutEnchere < dateDuJour}">
-					<div class="container">
-						<div class="row text-center">
-							<div class="col-12">
-								<a class="lienEnchere"
-									href="<%=application.getContextPath()%>/ModifierAnnonceServlet?a=${article.noArticle}">
+
+		<c:choose>
+			<c:when
+				test="${article.pseudoUtilisateur == utilisateurEnSession.pseudo}">
+				<c:choose>
+					<c:when test="${article.dateDebutEnchere < dateDuJour}">
+						<div class="container">
+							<div class="row text-center">
+								<div class="col-12">
+
 									<div class="text-center">
-										<button type="submit" class="btn btn-outline-secondary">Modifier
-											l'annonce</button>
+										<a class="lienEnchere"
+											href="<%=application.getContextPath()%>/ModifierAnnonceServlet?a=${article.noArticle}">
+											<button type="submit" class="btn btn-outline-secondary">Modifier
+												l'annonce</button>
+										</a>
 									</div>
-								</a>
-							</div>
-						</div>
-					</div>
-				</c:when>
-				<c:otherwise>
-					<div class="container text-center align-items-center">
-							<div class="col-8 align-items-center">
-								<div class="col-lg-18 col-md-8 col-sm-12 text-center alert alert-warning">
-									<p>Vous ne pouvez plus modifier l'annonce car les enchères ont déjà commencées. déso.</p>
+
 								</div>
 							</div>
-					</div>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="container text-center align-items-center">
+							<div class="col-8 align-items-center">
+								<div
+									class="col-lg-18 col-md-8 col-sm-12 text-center alert alert-warning">
+									<p>Vous ne pouvez plus modifier l'annonce car les enchères
+										ont déjà commencées. déso.</p>
+								</div>
+							</div>
+						</div>
 
-				</c:otherwise>
-			</c:choose>
+					</c:otherwise>
+				</c:choose>
 
-			<%-- <c:when test="${article.dateDebutEnchere == utilisateurEnSession.pseudo}">
+				<%-- <c:when test="${article.dateDebutEnchere == utilisateurEnSession.pseudo}">
 				<div class="container">
 					<div class="row text-center">
 						<div class="col-12">
@@ -165,8 +170,8 @@
 					</div>
 				</div>
 			</c:when> --%>
-		</c:when>
-	</c:choose>
+			</c:when>
+		</c:choose>
 	</div>
 
 	<!-- Bootstrap core JavaScript -->

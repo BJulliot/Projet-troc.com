@@ -129,9 +129,10 @@
 															<c:when
 																test="${article.noUtilisateur == utilisateur.noUtilisateur}">
 																<div
-																	class="list-group-item-action list-group-item-secondary">
+																	class="list-group-item-action list-group-item-secondary " data-toggle="tooltip" data-placement="right" title="Voir le détail de l'annonce">
 																	<a class="lienEnchere"
-																		href="<%=application.getContextPath()%>/DetailVenteServlet?a=${article.noArticle}"><h5>${article.nom}</h5></a>
+																		href="<%=application.getContextPath()%>/DetailVenteServlet?a=${article.noArticle}">
+																		<h5>${article.nom}</h5></a>
 																</div>
 															</c:when>
 														</c:choose>
