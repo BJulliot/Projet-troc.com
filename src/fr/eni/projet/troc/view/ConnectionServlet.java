@@ -37,10 +37,7 @@ public class ConnectionServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		String pseudo = request.getParameter("pseudo");
 		String motDePasse = request.getParameter("motDePasse");
-		System.out.println(pseudo);
-		System.out.println(motDePasse);
 
-		System.out.println(request.getParameter("cookieConnexion"));
 
 		// Appelle a la BLL
 		try {
@@ -49,7 +46,6 @@ public class ConnectionServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 
 			// cookie qui garde le pseudo et mdp de l'utilisateur :
-			System.out.println(request.getParameter("cookieConnexion"));
 			if (request.getParameter("cookieConnexion") != null) {
 				// map des cookies
 				Cookie[] cookie = request.getCookies();

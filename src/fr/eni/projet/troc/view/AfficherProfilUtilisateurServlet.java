@@ -27,7 +27,6 @@ public class AfficherProfilUtilisateurServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String pseudo = request.getParameter("u");
-		System.out.println(pseudo);
 
 		Utilisateur utilisateur = new Utilisateur();
 		try {

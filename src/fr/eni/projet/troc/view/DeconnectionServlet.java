@@ -30,7 +30,6 @@ public class DeconnectionServlet extends HttpServlet {
 		// Tracer l'utilisateur en session avant l'invalidation
 		if (session.getAttribute("utilisateurEnSession") != null) {
 			Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateurEnSession");
-			System.out.println(utilisateur);
 		}
 		// invalidation :
 		session.invalidate();
@@ -38,10 +37,8 @@ public class DeconnectionServlet extends HttpServlet {
 		HttpSession sessionAfter = request.getSession();
 
 		// Vérifier qu'il n'est plus présent après invalidation
-		System.out.println("AFTER :");
 		if (sessionAfter.getAttribute("utilisateurEnSession") != null) {
 			Utilisateur utilisateur = (Utilisateur) sessionAfter.getAttribute("utilisateurEnSession");
-			System.out.println(utilisateur);
 		}
 
 		request.getRequestDispatcher("/AccueilServlet").forward(request, response);
