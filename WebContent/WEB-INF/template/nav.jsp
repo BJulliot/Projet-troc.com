@@ -36,7 +36,7 @@ Utilisateur utilisateurEnSession = (Utilisateur) session.getAttribute("utilisate
 						<c:when test="${utilisateurEnSession.administrateur == true}">
 						<li class="nav-item active"><a
 						class="btn btn-outline-light me-2"
-						href="./AfficherEspaceAdmin" type="button">Espace admin</a></li>
+						href="<%=application.getContextPath()%>/espaceAdmin" type="button">Espace admin</a></li>
 						</c:when>
 					</c:choose>
 				</ul>
