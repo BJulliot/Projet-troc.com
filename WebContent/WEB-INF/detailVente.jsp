@@ -117,9 +117,23 @@
 		</c:choose>
 
 	</div>
-	<!-- Propose d'enchérir seulement si l'utilisateur ne possède pas l'annonce : -->
-	<div class="container text-center col col-lg-6 col-md-8 col-sm-12">
 
+	<!-- Afficher le gagnant de l'enchère si la date de fin d'enchere est dépassée -->
+	<c:choose>
+		<c:when test="${article.dateFinEnchere < dateDuJour}">
+			<div class="container">
+				<div class="row text-center">
+					<div class="col-lg-12 col-md-12 col-sm-12 mb-2 ">
+						<h5 class="text-center">
+							L'heureux·se gagnant·e de cette annonce est <a
+								href="<%=application.getContextPath()%>/AfficherProfilUtilisateurServlet?u=${UserEnchere.pseudo}">${UserEnchere.pseudo}</a>
+						</h5>
+					</div>
+				</div>
+			</div>
+		</c:when>
+		<c:otherwise>
+		<div class="container text-center col col-lg-6 col-md-8 col-sm-12">
 		<c:choose>
 			<c:when
 				test="${article.pseudoUtilisateur == utilisateurEnSession.pseudo}">
@@ -137,13 +151,12 @@
 									</div>
 								</div>
 								<div class="col-12 col-md-6 mb-2">
-									<form
-										action="./SupprimerAnnonceServlet?a=${article.noArticle}"
+									<form action="./SupprimerAnnonceServlet?a=${article.noArticle}"
 										method="post">
 										<div class="text-center">
-												<button class="btn btn-outline-danger" type="submit"
-													onClick='return confirmDelete()'>Supprimer
-													l'annonce</button>
+											<button class="btn btn-outline-danger" type="submit"
+												onClick='return confirmDelete()'>Supprimer
+												l'annonce</button>
 										</div>
 									</form>
 								</div>
@@ -166,6 +179,12 @@
 			</c:when>
 		</c:choose>
 	</div>
+		</c:otherwise>
+	</c:choose>
+
+
+	<!-- Propose d'enchérir seulement si l'utilisateur ne possède pas l'annonce : -->
+	
 
 	<!-- Bootstrap core JavaScript -->
 	<%@include file="/WEB-INF/template/script.html"%>
