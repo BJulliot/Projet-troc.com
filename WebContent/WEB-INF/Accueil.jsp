@@ -62,6 +62,18 @@
 							<input type="checkbox" id="voirAnnonce" name="voirAnnonce">
 						</c:otherwise>
 					</c:choose>
+
+					<c:choose>
+						<c:when test="${utilisateurEnSession == null}">
+							<label>Voir les enchères auquelles je participe : </label>
+							<input type="checkbox" id="voirEnchere" name="voirEnchere"
+								disabled="disabled">
+						</c:when>
+						<c:otherwise>
+							<label>Voir les enchères auquelles je participe </label>
+							<input type="checkbox" id="voirEnchere" name="voirEnchere">
+						</c:otherwise>
+					</c:choose>
 				</div>
 				<input class="btn btn-primary" type="submit" value="Rechercher">
 
@@ -71,16 +83,16 @@
 		<div
 			class="container articleContenus col-lg-6 col-md-4 col-sm-6 portfolio-item">
 			<c:choose>
-				<%-- Si la checkbox est coche au moment du submit, on va récupere la liste des enchere du user connecte  --%>
+				<%-- Si la checkbox est coche au moment du submit, on va récupere la liste des articles du user connecte  --%>
 				<c:when test="${mesAnnonces == 'on' }">
 					<c:forEach var="articleIdUser" items="${articleIdUser}">
 						<c:choose>
-							<%-- Si le user est pas connecte, et qu'il clique pour voir un article il est redirige vers la page de connection --%>
+							<%-- Si le user est pas connecte, et qu'il clique pour voir un article il est redirige vers la page de connection--%>
 							<c:when test="${utilisateurEnSession == null}">
 								<p>Vous n'etes pas connecte !</p>
 							</c:when>
 							<c:otherwise>
-								<%-- Si le user est connecté il est redirigé vers la page de description de l'article ou il pourra faire une enchere --%>
+								<%--Si le user est connecté il est redirigé vers la page de description de l'article ou il pourra faire une enchere--%>
 								<a class="lienEnchere"
 									href="<%=application.getContextPath()%>/DetailVenteServlet?a=${articleIdUser.noArticle}">
 									<div class="card h-100 articleCase">
@@ -94,10 +106,44 @@
 						</c:choose>
 					</c:forEach>
 				</c:when>
+
+
+
+
+
+
+				<c:when test="${mesEnchere == 'on' }">
+					<c:forEach var="userEnchere" items="${userEnchere}">
+						<c:choose>
+							<%--Si le user est pas connecte, et qu'il clique pour voir un article il est redirige vers la page de connection--%>
+							<c:when test="${utilisateurEnSession == null}">
+								<p>Vous n'etes pas connecte !</p>
+							</c:when>
+							<c:otherwise>
+								<%-- Si le user est connecté il est redirigé vers la page de description de l'article ou il pourra faire une enchere--%>
+								<a class="lienEnchere"
+									href="<%=application.getContextPath()%>/DetailVenteServlet?a=${userEnchere.noArticle}">
+									<div class="card h-100 articleCase">
+										${userEnchere.nom}
+										<p>Prix : ${userEnchere.prixInitial} Points</p>
+										<p>Fin de l'enchère : ${userEnchere.dateFinEnchere}</p>
+										<p>Vendeur : ${userEnchere.pseudoUtilisateur}</p>
+									</div>
+								</a>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
+				</c:when>
+
+
+
+
+
+
 				<%-- Test quand on cherche par mot cle, si le nom de l'article est present on l'affiche sinon on affiche un message --%>
 				<c:when test="${not empty search}">
 					<c:choose>
-					
+
 						<c:when test="${fn:containsIgnoreCase(nameArticle,search)}">
 							<c:forEach var="nameArticle" items="${nameArticle}">
 								<c:choose>

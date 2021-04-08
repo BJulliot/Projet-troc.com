@@ -59,6 +59,10 @@ public class ArticlesVendusManager {
 	public List<ArticleVendu> getArticleIdUser(int idUser) throws Exception {
 		return articleVenduDAO.selectByIdUser(idUser);
 	}
+	
+	public List<ArticleVendu> getUserEnchere(int idUser) throws Exception{
+		return articleVenduDAO.selectEnchereParticipe(idUser);
+	}
 
 	public ArticleVendu selectArticleById(int idArticle) throws Exception {
 		return articleVenduDAO.selectArticleById(idArticle);
