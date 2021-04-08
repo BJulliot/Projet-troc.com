@@ -53,14 +53,18 @@ body {
 }
 
 .articleContenus {
-	display: inline-block;
+	display: flex;
 	margin-top : 2%;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	align-items: baseline;
 }
 
 .articleCase {
 	text-align: center;
 	border-color: black;
 	margin-bottom: 2%;
+	width: 60vh;
 }
 
 .global{

@@ -114,7 +114,7 @@
 		</div>
 
 		<div
-			class="container articleContenus col-lg-6 col-md-4 col-sm-6 portfolio-item">
+			class="container articleContenus portfolio-item">
 			<%-- Si la checkbox est coche au moment du submit, on va récupere la liste des articles du user connecte  --%>
 
 			<c:choose>
