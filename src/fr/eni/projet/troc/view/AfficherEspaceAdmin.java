@@ -18,7 +18,8 @@ import fr.eni.projet.troc.exception.BusinessException;
 /**
  * Servlet implementation class AfficherEspaceAdmin
  */
-@WebServlet("/AfficherEspaceAdmin")
+
+@WebServlet(name="AfficherEspaceAdmin", urlPatterns={"/espaceAdmin"})
 public class AfficherEspaceAdmin extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -56,7 +57,6 @@ public class AfficherEspaceAdmin extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
