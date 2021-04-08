@@ -26,9 +26,9 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 
 	private static final String UPDATE_ARTICLE = "UPDATE articles_vendus SET nom_article=?, description=?, date_debut_encheres=?, date_fin_encheres=?, prix_initial=?, no_categorie=? WHERE no_article =?";
 	private static final String UPDATE_RETRAIT = "UPDATE retraits SET rue=?, code_postal=?, ville=? WHERE no_article =?";
-	private static final String DELETE_ARTICLES_BY_NO_UTILISATEUR = "DELETE FROM articles_vendus WHERE no_utilisateur = ?"
-			+ "";
-
+	private static final String DELETE_ARTICLES_BY_NO_UTILISATEUR = "DELETE FROM articles_vendus WHERE no_utilisateur = ?";
+	private static final String DELETE_ARTICLES_BY_NO_ARTICLE= "DELETE FROM articles_vendus WHERE no_article = ?";
+	
 	public static ArticleVendu itemBuilder(ResultSet rs) throws SQLException {
 		ArticleVendu articleVendu = new ArticleVendu();
 		articleVendu.setNoArticle(rs.getInt("no_article"));
@@ -336,6 +336,23 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 			e.printStackTrace();
 			BusinessException be = new BusinessException();
 			be.addError(Errors.SUPPRESSION_UTILISATEUR_ERREUR);
+			throw be;
+		}
+	}
+	
+	/**
+	 * Permet de supprimer tous les articles d'un meme utilisateur {@inheritDoc}
+	 */
+	@Override
+	public void deleteByNoArticle(int noArticle) throws BusinessException {
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement requete = cnx.prepareStatement(DELETE_ARTICLES_BY_NO_ARTICLE);
+			requete.setInt(1, noArticle);
+			requete.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+			BusinessException be = new BusinessException();
+			be.addError(Errors.SUPPRESSION_ARTICLE_ERREUR);
 			throw be;
 		}
 	}

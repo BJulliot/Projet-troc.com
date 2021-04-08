@@ -124,7 +124,7 @@
 			<c:when
 				test="${article.pseudoUtilisateur == utilisateurEnSession.pseudo}">
 				<c:choose>
-					<c:when test="${article.dateDebutEnchere < dateDuJour}">
+					<c:when test="${article.dateDebutEnchere > dateDuJour}">
 						<div class="container">
 							<div class="row text-center">
 							<div class="col-lg-6 col-md-6 mb-2">
