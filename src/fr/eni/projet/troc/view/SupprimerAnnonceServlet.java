@@ -6,11 +6,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import fr.eni.projet.troc.bll.ArticlesVendusManager;
-import fr.eni.projet.troc.bll.UtilisateursManager;
-import fr.eni.projet.troc.bo.Utilisateur;
 import fr.eni.projet.troc.exception.BusinessException;
 
 /**
@@ -26,10 +23,6 @@ public class SupprimerAnnonceServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// récupérer infos article :
-				String noArticle = request.getParameter("a");
-				System.out.println("supprimer // id article :" + noArticle);
-				ArticlesVendusManager.getInstance().deleteByNoArticle(noArticle);
 	}
 
 	/**
@@ -38,23 +31,16 @@ public class SupprimerAnnonceServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
-//		// Rï¿½cupï¿½ration du numero utilisateur avant suppresion :
-//		request.setCharacterEncoding("UTF-8");
-//		UtilisateursManager um = UtilisateursManager.getInstance();
-//		System.out.println("post delete");
-//		System.out.println("numero utilisateur en session = " + utilisateur.getNoUtilisateur());
-//
-//		try {
-//			um.delete(utilisateur.getNoUtilisateur());
-//			System.out.println("supprimé");
-//
-//			session.invalidate();
-//			request.getRequestDispatcher("/AccueilServlet").forward(request, response);
-//		} catch (BusinessException e) {
-//			e.printStackTrace();
-//			request.setAttribute("errors", e.getErrors());
-//			request.getRequestDispatcher("/AfficherProfilUtilisateurServlet").forward(request, response);
-//		}
+		// récupérer infos article :
+		int noArticle = Integer.parseInt(request.getParameter("a"));
+		System.out.println("supprimer // id article :" + noArticle);
+		try {
+			ArticlesVendusManager.getInstance().deleteByNoArticle(noArticle);
+			request.getRequestDispatcher("/AccueilServlet").forward(request, response);
+		} catch (BusinessException be) {
+			be.printStackTrace();
+			request.setAttribute("errors", be.getErrors());
+			request.getRequestDispatcher("/AccueilServlet").forward(request, response);
+		}
 	}
 }

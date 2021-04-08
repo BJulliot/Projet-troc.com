@@ -127,31 +127,36 @@
 					<c:when test="${article.dateDebutEnchere > dateDuJour}">
 						<div class="container">
 							<div class="row text-center">
-							<div class="col-lg-6 col-md-6 mb-2">
+								<div class="col-lg-6 col-md-6 mb-2">
 									<div class="text-center">
 										<a class="lienEnchere"
 											href="<%=application.getContextPath()%>/ModifierAnnonceServlet?a=${article.noArticle}">
-											<button type="submit" class="btn btn-outline-secondary">Modifier
+											<button class="btn btn-outline-secondary">Modifier
 												l'annonce</button>
 										</a>
 									</div>
-									</div>
-									<div class="col-12 col-md-6 mb-2">
-									<div class="text-center">
-										<a class="lienEnchere"
-											href="<%=application.getContextPath()%>/SupprimerAnnonceServlet?a=${article.noArticle}">
-											<button type="submit" class="btn btn-outline-danger">Supprimer l'annonce</button>
-										</a>
-									</div>
-									</div>
+								</div>
+								<div class="col-12 col-md-6 mb-2">
+									<form
+										action="./SupprimerAnnonceServlet?a=${article.noArticle}"
+										method="post">
+										<div class="text-center">
+												<button class="btn btn-outline-danger" type="submit"
+													onClick='return confirmDelete()'>Supprimer
+													l'annonce</button>
+										</div>
+									</form>
+								</div>
 							</div>
 						</div>
 					</c:when>
 					<c:otherwise>
 						<div class="container d-flex justify-content-center">
 							<div class="col-lg-8 col-md-10 col-sm-12">
-								<div class="col-lg-12 col-md-12 col-sm-12 text-center alert alert-warning">
-									<p>Vous ne pouvez plus modifier l'annonce car les enchères ont déjà commencées.</p>
+								<div
+									class="col-lg-12 col-md-12 col-sm-12 text-center alert alert-warning">
+									<p>Vous ne pouvez plus modifier l'annonce car les enchères
+										ont déjà commencées.</p>
 								</div>
 							</div>
 						</div>
@@ -170,6 +175,13 @@
 		var inputVal = document.getElementById("prixEnchere").value;
 		var agree = confirm("Voulez vous valider votre enchère de : "
 				+ inputVal + " points ? ");
+		if (agree)
+			return true;
+		else
+			return false;
+	}
+	function confirmDelete() {
+		var agree = confirm("Voulez vous supprimer votre annonce ? ");
 		if (agree)
 			return true;
 		else

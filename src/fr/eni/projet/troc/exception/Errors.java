@@ -70,17 +70,17 @@ public class Errors {
 	/**
 	 * Echec la rue de l'utilisateur ne respecte pas les rï¿½gles dï¿½finies
 	 */
-	public static final String REGLE_UTILISATEUR_RUE_ERREUR = "L'adresse de l'utilisateur est obligatoire et ne doit pas dï¿½passer 30 caractères.";
+	public static final String REGLE_UTILISATEUR_RUE_ERREUR = "L'adresse de l'utilisateur est obligatoire et ne doit pas dépasser 30 caractères.";
 
 	/**
 	 * Echec le code postal de l'utilisateur ne respecte pas les rï¿½gles dï¿½finies
 	 */
-	public static final String REGLE_UTILISATEUR_CODE_POSTAL_ERREUR = "Le code postal de l'utilisateur est obligatoire et ne doit pas dï¿½passer 10 caractères.";
+	public static final String REGLE_UTILISATEUR_CODE_POSTAL_ERREUR = "Le code postal de l'utilisateur est obligatoire et ne doit pas dépasser 10 caractères.";
 
 	/**
 	 * Echec la ville de l'utilisateur ne respecte pas les rï¿½gles dï¿½finies
 	 */
-	public static final String REGLE_UTILISATEUR_VILLE_ERREUR = "La ville de l'utilisateur est obligatoire et ne doit pas dï¿½passer 50 caractères.";
+	public static final String REGLE_UTILISATEUR_VILLE_ERREUR = "La ville de l'utilisateur est obligatoire et ne doit pas dépasser 50 caractères.";
 
 	/**
 	 * Echec le mot de passe de l'utilisateur ne respecte pas les rï¿½gles

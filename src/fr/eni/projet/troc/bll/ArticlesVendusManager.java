@@ -52,9 +52,8 @@ public class ArticlesVendusManager {
 		articleVenduDAO.deleteBynoUtilisateur(noUtilisateur);
 	}
 	
-	public void deleteByNoArticle(String noArticle) {
+	public void deleteByNoArticle(int noArticle) throws BusinessException {
 		articleVenduDAO.deleteByNoArticle(noArticle);
-		
 	}
 
 	public List<ArticleVendu> getArticleId(int idArticle) throws Exception {

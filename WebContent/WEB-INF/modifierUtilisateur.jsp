@@ -130,8 +130,7 @@
 						<button type="submit" class="btn btn-secondary">Enregistrer
 							modifications</button>
 						<button type="button" href="./AccueilServlet"
-							class="btn btn-secondary"
-							onclick="return confirm('etes vous sur de vouloir supprimer${utilisateurEnSession.pseudo}')">Annuler</button>
+							class="btn btn-secondary">Annuler</button>
 					</div>
 				</form>
 			</div>
