@@ -11,15 +11,15 @@
 
 	<div class="container">
 		<c:choose>
-				<c:when test="${utilisateurEnSession.pseudo == utilisateur.pseudo}">
-					<h2 class="my-3 text-center">Votre profil</h2>
-				</c:when>
-				<c:otherwise>
-					<h2 class="my-3 text-center">Profil du vendeur</h2>
-				</c:otherwise>
-			</c:choose>
-		
-		
+			<c:when test="${utilisateurEnSession.pseudo == utilisateur.pseudo}">
+				<h2 class="my-3 text-center">Votre profil</h2>
+			</c:when>
+			<c:otherwise>
+				<h2 class="my-3 text-center">Profil du vendeur</h2>
+			</c:otherwise>
+		</c:choose>
+
+
 		<c:if test="${!empty errors}">
 			<div class="row">
 				<div class="col-lg-12 col-md-6 col-sm-6 portfolio-item">
@@ -80,6 +80,10 @@
 				</tbody>
 			</table>
 
+			<div class="form-group text-center mb-3">
+				<button class="btn btn-secondary">Crédit :
+					${utilisateurEnSession.credit}</button>
+			</div>
 
 			<c:choose>
 				<c:when test="${utilisateurEnSession.pseudo == utilisateur.pseudo}">

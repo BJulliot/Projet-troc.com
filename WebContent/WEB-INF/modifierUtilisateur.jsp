@@ -100,8 +100,7 @@
 							<div class="col-sm-12 text-center">
 								<button class="btn btn-secondary " type="button"
 									data-toggle="collapse" data-target="#changementMotDePasse"
-									aria-expanded="false" aria-controls="changementMotDePasse">Changer
-									de mot de passe?</button>
+									aria-expanded="false" aria-controls="changementMotDePasse">Changer de mot de passe?</button>
 							</div>
 
 							<div class="form-group collapse" id="changementMotDePasse">
@@ -119,11 +118,6 @@
 								</div>
 							</div>
 						</div>
-					</div>
-
-					<div class="form-group text-center mb-2">
-						<button class="btn btn-secondary">Crédit :
-							${utilisateurEnSession.credit}</button>
 					</div>
 
 					<div class="text-center mb-2">
