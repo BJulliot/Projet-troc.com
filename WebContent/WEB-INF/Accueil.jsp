@@ -52,6 +52,8 @@
 					</select>
 					<!-- Si l'utilisateur n'est pas connecte, il ne pourra pas clique sur la checkbox, sinon il pourra cliquer et voirs les enchère qui lui appartiennent -->
 					<div class="checkBoxes">
+						<label>Mes ventes</label>
+						<input type="radio">
 						<c:choose>
 
 							<c:when test="${utilisateurEnSession == null}">
@@ -64,6 +66,18 @@
 								<input type="checkbox" id="voirAnnonce" name="voirAnnonce">
 							</c:otherwise>
 						</c:choose>
+						
+						<c:choose>
+						<c:when test="${utilisateurEnSession == null}">
+							<label>Voir mes ventes non débutées </label>
+							<input type="checkbox" id="voirVentes" name="voirVentes"
+								disabled="disabled">
+						</c:when>
+						<c:otherwise>
+							<label>Voir mes ventes non débutées </label>
+							<input type="checkbox" id="voirVentes" name="voirVentes">
+						</c:otherwise>
+					</c:choose>
 					</div>
 
 					<c:choose>
@@ -77,6 +91,11 @@
 							<input type="checkbox" id="voirEnchere" name="voirEnchere">
 						</c:otherwise>
 					</c:choose>
+					
+					
+						
+					
+					
 				</div>
 				<input class="btn btn-primary" type="submit" value="Rechercher">
 
@@ -88,6 +107,36 @@
 			<%-- Si la checkbox est coche au moment du submit, on va récupere la liste des articles du user connecte  --%>
 
 			<c:choose>
+			
+			
+			<c:when test="${voirVentes == 'on' }">
+					<c:choose>
+						<c:when test="${empty enchereNonDebute}">
+							<p>Vous n'avez mis aucun article en preparation de vente !</p>
+						</c:when>
+						<c:otherwise>
+							<c:forEach var="enchereNonDebute" items="${enchereNonDebute}">
+
+
+								<%--Si le user est connecté il est redirigé vers la page de description de l'article ou il pourra faire une enchere--%>
+								<a class="lienEnchere"
+									href="<%=application.getContextPath()%>/DetailVenteServlet?a=${enchereNonDebute.noArticle}">
+									<div class="card h-100 articleCase">
+										<h3 class="titreArticle">${enchereNonDebute.nom}</h3>
+										<p>Prix : ${enchereNonDebute.prixInitial} Points</p>
+										<p>Fin de l'enchère : ${enchereNonDebute.dateFinEnchere}</p>
+										<p>Vendeur : ${enchereNonDebute.pseudoUtilisateur}</p>
+									</div>
+								</a>
+
+							</c:forEach>
+						</c:otherwise>
+
+					</c:choose>
+
+				</c:when>
+			
+			
 
 				<c:when test="${mesAnnonces == 'on' }">
 					<c:choose>

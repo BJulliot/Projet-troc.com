@@ -71,6 +71,10 @@ public class ArticlesVendusManager {
 	public ArticleVendu selectArticleById(int idArticle) throws Exception {
 		return articleVenduDAO.selectArticleById(idArticle);
 	}
+	
+	public List<ArticleVendu> selectEnchereNonCommence(int idUser) throws Exception{
+		return articleVenduDAO.selectEnchereNonCommence(idUser);
+	}
 
 	public void update(ArticleVendu articleAModifier, Retrait retrait, String motDePasseSaisi)
 			throws BusinessException {

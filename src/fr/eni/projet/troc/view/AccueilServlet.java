@@ -52,11 +52,13 @@ public class AccueilServlet extends HttpServlet {
 		String search = request.getParameter("search");
 		String mesAnnonces = request.getParameter("voirAnnonce");
 		String voirEnchere = request.getParameter("voirEnchere");
+		String voirVentes = request.getParameter("voirVentes");
 		HttpSession session = request.getSession();
 		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateurEnSession");
 	
 		
 		session.setAttribute("utilisateurEnSession", utilisateur);
+		request.setAttribute("voirVentes", voirVentes);
 		request.setAttribute("mesAnnonces", mesAnnonces);
 		request.setAttribute("search", search);
 		request.setAttribute("Cat", Cat);
@@ -93,6 +95,9 @@ public class AccueilServlet extends HttpServlet {
 			List<ArticleVendu> articleIdUser = ArticlesVendusManager.getInstance()
 					.getArticleIdUser(utilisateur.getNoUtilisateur());
 			request.setAttribute("articleIdUser", articleIdUser);
+			
+			List<ArticleVendu> enchereNonDebute = ArticlesVendusManager.getInstance().selectEnchereNonCommence(utilisateur.getNoUtilisateur());
+			request.setAttribute("enchereNonDebute", enchereNonDebute);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -43,4 +43,6 @@ public interface ArticleVenduDAO {
 	 * Permet de supprimer l'articles en fonction de son noArticle {@inheritDoc}
 	 */
 	public void deleteByNoArticle(int noArticle) throws BusinessException;
+	
+	public List<ArticleVendu> selectEnchereNonCommence(int idUser) throws Exception;
 }
