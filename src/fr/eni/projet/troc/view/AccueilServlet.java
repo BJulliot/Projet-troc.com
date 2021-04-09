@@ -54,6 +54,7 @@ public class AccueilServlet extends HttpServlet {
 		String voirEnchere = request.getParameter("voirEnchere");
 		String voirVentes = request.getParameter("voirVentes");
 		String ventesFinie = request.getParameter("voirVentesFini");
+		String enchereWin = request.getParameter("enchereWin");
 		HttpSession session = request.getSession();
 		Utilisateur utilisateur = (Utilisateur) session.getAttribute("utilisateurEnSession");
 	
@@ -65,6 +66,7 @@ public class AccueilServlet extends HttpServlet {
 		request.setAttribute("Cat", Cat);
 		request.setAttribute("mesEnchere", voirEnchere);
 		request.setAttribute("voirVentesFini", ventesFinie);
+		request.setAttribute("enchereWin", enchereWin);
 
 		try {
 
@@ -103,6 +105,9 @@ public class AccueilServlet extends HttpServlet {
 			
 			List<ArticleVendu> articleVendusFini = ArticlesVendusManager.getInstance().selectEnchereTermine(utilisateur.getNoUtilisateur());
 			request.setAttribute("articleVendusFini", articleVendusFini);
+			
+			List<ArticleVendu> enchereGagne = ArticlesVendusManager.getInstance().selectEnchereGagnee(utilisateur.getNoUtilisateur());
+			request.setAttribute("enchereGagne", enchereGagne);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

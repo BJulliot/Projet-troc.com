@@ -113,6 +113,20 @@
 								<br>
 							</c:otherwise>
 						</c:choose>
+						<c:choose>
+							<c:when test="${utilisateurEnSession == null}">
+								<label>Voir les enchères que j'ai gagnée : </label>
+								<input type="checkbox" id="enchereWin" name="enchereWin"
+									disabled="disabled">
+									<br>
+							</c:when>
+							<c:otherwise>
+								<label>Voir les enchères que j'ai gagnée :  </label>
+								<input type="checkbox" id="enchereWin" name="enchereWin">
+								<br>
+							</c:otherwise>
+						</c:choose>
+						
 
 					</div>
 
@@ -156,6 +170,40 @@
 					</c:choose>
 
 				</c:when>
+				
+				
+				
+				
+				
+				
+				<c:when test="${enchereWin == 'on' }">
+					<c:choose>
+						<c:when test="${empty enchereGagne}">
+							<p>Vous n'avez pas gagné d'enchère encore!</p>
+						</c:when>
+						<c:otherwise>
+							<c:forEach var="enchereGagne" items="${enchereGagne}">
+
+
+								<%--Si le user est connecté il est redirigé vers la page de description de l'article ou il pourra faire une enchere--%>
+								<a class="lienEnchere"
+									href="<%=application.getContextPath()%>/DetailVenteServlet?a=${enchereGagne.noArticle}">
+									<div class="card h-100 articleCase">
+										<h3 class="titreArticle">${enchereGagne.nom}</h3>
+										<p>Prix : ${enchereGagne.prixInitial} Points</p>
+										<p>Fin de l'enchère : ${enchereGagne.dateFinEnchere}</p>
+										<p>Vendeur : ${enchereGagne.pseudoUtilisateur}</p>
+									</div>
+								</a>
+
+							</c:forEach>
+						</c:otherwise>
+
+					</c:choose>
+
+				</c:when>
+				
+				
 
 
 

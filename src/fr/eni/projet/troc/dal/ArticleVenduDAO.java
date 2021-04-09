@@ -47,4 +47,6 @@ public interface ArticleVenduDAO {
 	public List<ArticleVendu> selectEnchereNonCommence(int idUser) throws Exception;
 	
 	public List<ArticleVendu> selectEnchereTermine(int idUser) throws Exception;
+	
+	public List<ArticleVendu> selectEnchereGagne(int idUser) throws Exception;
 } 
