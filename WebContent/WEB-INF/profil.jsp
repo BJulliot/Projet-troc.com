@@ -80,10 +80,16 @@
 				</tbody>
 			</table>
 
-			<div class="form-group text-center mb-3">
+			<c:choose>
+			<c:when test="${utilisateurEnSession.pseudo == utilisateur.pseudo}">
+				<div class="form-group text-center mb-3">
 				<button class="btn btn-secondary">Crédit :
-					${utilisateurEnSession.credit}</button>
+					${utilisateur.credit}</button>
 			</div>
+			</c:when>
+			<c:otherwise>
+			</c:otherwise>
+		</c:choose>
 
 			<c:choose>
 				<c:when test="${utilisateurEnSession.pseudo == utilisateur.pseudo}">

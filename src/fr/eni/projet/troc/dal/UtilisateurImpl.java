@@ -133,7 +133,6 @@ public class UtilisateurImpl implements UtilisateurDAO {
 
 			if (rs.next()) {
 				result = rs.getString("mot_de_passe");
-				System.out.println("ancien mot de passe en BDD : " + result);
 				return result;
 			} else {
 				// Utilisateur non trouv�
@@ -235,9 +234,9 @@ public class UtilisateurImpl implements UtilisateurDAO {
 		Utilisateur user = new Utilisateur();
 		try (Connection cnx = ConnectionProvider.getConnection()) {
 			PreparedStatement requete = cnx.prepareStatement(
-					"SELECT utilisateurs.pseudo,encheres.montant_enchere FROM utilisateurs INNER JOIN encheres ON encheres.no_utilisateur = utilisateurs.no_utilisateur WHERE encheres.montant_enchere=(SELECT MAX(encheres.montant_enchere) FROM encheres WHERE no_article = ?)");
+					"SELECT utilisateurs.pseudo,encheres.montant_enchere FROM utilisateurs INNER JOIN encheres ON encheres.no_utilisateur = utilisateurs.no_utilisateur WHERE encheres.montant_enchere=(SELECT MAX(encheres.montant_enchere) FROM encheres WHERE no_article = ?) and encheres.no_article=?");
 			requete.setInt(1, idArticle);
-
+			requete.setInt(2, idArticle);
 			ResultSet rs = requete.executeQuery();
 			if (rs.next()) {
 				user.setPseudo(rs.getString("pseudo"));
