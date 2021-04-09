@@ -81,10 +81,10 @@
 			<c:otherwise>
 				<form class="form-outline" action="./DetailVenteServlet"
 					method="post">
-					<label class="form-label" for="prixEnchere">Ma proposition</label>
+					<label class="form-label" for="prixEnchere">Ma proposition : </label>
 					<c:choose>
 					<c:when test="${article.dateFinEnchere < dateDuJour}">
-						<h3>Cette enchère est terminée vous avez gagné !!! </h3>
+						<h3 class="win">Cette enchère est terminée vous avez gagné !!! </h3>
 					</c:when>
 						<c:when
 							test="${utilisateurEnSession.credit le article.prixInitial || utilisateurEnSession.credit le article.prixVente}">

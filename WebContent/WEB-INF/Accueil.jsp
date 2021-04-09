@@ -61,13 +61,13 @@
 								<label>Voir mes ventes : </label>
 								<input type="checkbox" id="voirAnnonce" name="voirAnnonce"
 									disabled="disabled">
-									<br>
+								<br>
 							</c:when>
 							<c:otherwise>
 								<label>Voir mes ventes : </label>
 								<input class="myVente" type="checkbox" id="voirAnnonce"
 									name="voirAnnonce">
-									<br>
+								<br>
 							</c:otherwise>
 						</c:choose>
 
@@ -76,13 +76,13 @@
 								<label>Voir mes ventes non débutées : </label>
 								<input type="checkbox" id="voirVentes" name="voirVentes"
 									disabled="disabled">
-									<br>
+								<br>
 							</c:when>
 							<c:otherwise>
 								<label>Voir mes ventes non débutées : </label>
 								<input class="myVente" type="checkbox" id="voirVentes"
 									name="voirVentes">
-									<br>
+								<br>
 							</c:otherwise>
 						</c:choose>
 						<c:choose>
@@ -90,13 +90,13 @@
 								<label>Voir mes ventes terminées : </label>
 								<input type="checkbox" id="voirVentesFini" name="voirVentesFini"
 									disabled="disabled">
-									<br>
+								<br>
 							</c:when>
 							<c:otherwise>
 								<label>Voir mes ventes terminées : </label>
 								<input class="myVente" type="checkbox" id="voirVentesFini"
 									name="voirVentesFini">
-									<br>
+								<br>
 							</c:otherwise>
 						</c:choose>
 
@@ -105,7 +105,7 @@
 								<label>Voir les enchères auquelles je participe : </label>
 								<input type="checkbox" id="voirEnchere" name="voirEnchere"
 									disabled="disabled">
-									<br>
+								<br>
 							</c:when>
 							<c:otherwise>
 								<label>Voir les enchères auquelles je participe </label>
@@ -118,26 +118,19 @@
 								<label>Voir les enchères que j'ai gagnée : </label>
 								<input type="checkbox" id="enchereWin" name="enchereWin"
 									disabled="disabled">
-									<br>
+								<br>
 							</c:when>
 							<c:otherwise>
-								<label>Voir les enchères que j'ai gagnée :  </label>
+								<label>Voir les enchères que j'ai gagnée : </label>
 								<input type="checkbox" id="enchereWin" name="enchereWin">
 								<br>
 							</c:otherwise>
 						</c:choose>
-						
-
 					</div>
-
-
-
 				</div>
 				<input class="btn btn-primary" type="submit" value="Rechercher">
-
 			</form>
 		</div>
-
 		<div class="container articleContenus portfolio-item">
 			<%-- Si la checkbox est coche au moment du submit, on va récupere la liste des articles du user connecte  --%>
 
@@ -170,12 +163,6 @@
 					</c:choose>
 
 				</c:when>
-				
-				
-				
-				
-				
-				
 				<c:when test="${enchereWin == 'on' }">
 					<c:choose>
 						<c:when test="${empty enchereGagne}">
@@ -198,15 +185,8 @@
 
 							</c:forEach>
 						</c:otherwise>
-
 					</c:choose>
-
 				</c:when>
-				
-				
-
-
-
 				<c:when test="${voirVentesFini == 'on' }">
 					<c:choose>
 						<c:when test="${empty articleVendusFini}">

@@ -104,7 +104,9 @@ body {
 	font-size: 3vh;
 }
 
-
+.win{
+	text-align: center;
+}
 
 
 @media all and (max-width:576px){
