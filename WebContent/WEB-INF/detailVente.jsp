@@ -84,7 +84,9 @@
 					<label class="form-label" for="prixEnchere">Ma proposition : </label>
 					<c:choose>
 					<c:when test="${article.dateFinEnchere < dateDuJour}">
-						<h3 class="win">Cette enchère est terminée vous avez gagné !!! </h3>
+						<h3 class="win">Cher·e ${UserEnchere.pseudo}, cette enchère est terminée vous avez gagné !!! </h3>
+						<h5 class="win">Prenez contact avec <a
+				href="<%=application.getContextPath()%>/AfficherProfilUtilisateurServlet?u=${article.pseudoUtilisateur}">${article.pseudoUtilisateur}</a> pour convenir de l'échange.</h5>
 					</c:when>
 						<c:when
 							test="${utilisateurEnSession.credit le article.prixInitial || utilisateurEnSession.credit le article.prixVente}">
