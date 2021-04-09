@@ -27,17 +27,17 @@ public class Errors {
 	/**
 	 * Echec le nom de l'utilisateur ne respecte pas les rï¿½gles dï¿½finies
 	 */
-	public static final String REGLE_UTILISATEUR_NOM_ERREUR = "Le nom de l'utilisateur est obligatoire et ne doit pas dépasser 30 caractï¿½res.";
+	public static final String REGLE_UTILISATEUR_NOM_ERREUR = "Le nom de l'utilisateur est obligatoire et ne doit pas dépasser 30 caractères.";
 
 	/**
 	 * Echec le prï¿½nom de l'utilisateur ne respecte pas les rï¿½gles dï¿½finies
 	 */
-	public static final String REGLE_UTILISATEUR_PRENOM_ERREUR = "Le prénom de l'utilisateur est obligatoire et ne doit pas dï¿½passer 30 caractères.";
+	public static final String REGLE_UTILISATEUR_PRENOM_ERREUR = "Le prénom de l'utilisateur est obligatoire et ne doit pas dépasser 30 caractères.";
 
 	/**
 	 * Echec le pseudo de l'utilisateur ne respecte pas les rï¿½gles dï¿½finies
 	 */
-	public static final String REGLE_UTILISATEUR_PSEUDO_ERREUR = "Le pseudo de l'utilisateur est obligatoire et ne doit pas dï¿½passer 30 caractères alpha.";
+	public static final String REGLE_UTILISATEUR_PSEUDO_ERREUR = "Le pseudo de l'utilisateur est obligatoire et ne doit pas dépasser 30 caractères alpha.";
 
 	/**
 	 * Echec le mail ne respecte pas les rï¿½gles dï¿½finies
@@ -53,7 +53,7 @@ public class Errors {
 	 * Echec le mot de passe de l'utilisateur ne respecte pas les rï¿½gles
 	 * dï¿½finies
 	 */
-	public static final String REGLE_UTILISATEUR_PWD_ERREUR = "Le mot de passe doit contenir entre 8 et 12 caractï¿½res (1 chiffre, 1 majuscule, 1 caractère spécial).";
+	public static final String REGLE_UTILISATEUR_PWD_ERREUR = "Le mot de passe doit contenir entre 8 et 12 caractères (1 chiffre, 1 majuscule, 1 caractère spécial).";
 
 	/**
 	 * Echec le mot de passe de l'utilisateur ne respecte pas les rï¿½gles
