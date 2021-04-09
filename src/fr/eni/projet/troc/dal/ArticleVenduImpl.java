@@ -416,6 +416,26 @@ public class ArticleVenduImpl implements ArticleVenduDAO {
 		}
 		return articleVendu;
 	}
+
+	@Override
+	public List<ArticleVendu> selectEnchereGagne(int idUser) throws Exception {
+		List<ArticleVendu> articleVendu = new ArrayList<ArticleVendu>();
+		try (Connection cnx = ConnectionProvider.getConnection()) {
+			PreparedStatement requete = cnx.prepareStatement(
+					"SELECT DISTINCT (articles_vendus.no_article), nom_article,description,date_debut_encheres,date_fin_encheres,prix_initial,prix_vente,pseudo,libelle, articles_vendus.no_utilisateur,encheres.no_article,encheres.no_utilisateur,encheres.date_enchere,encheres.montant_enchere FROM `articles_vendus` INNER JOIN utilisateurs ON utilisateurs.no_utilisateur = articles_vendus.no_utilisateur INNER JOIN categories ON categories.no_categorie = articles_vendus.no_categorie INNER JOIN encheres ON encheres.no_article = articles_vendus.no_article WHERE date_fin_encheres <= NOW()and encheres.no_utilisateur = ? AND articles_vendus.prix_vente = encheres.montant_enchere GROUP BY articles_vendus.no_article");
+			requete.setInt(1, idUser);
+
+			ResultSet rs = requete.executeQuery();
+
+			while (rs.next()) {
+				articleVendu.add(itemBuilder(rs));
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+
+		}
+		return articleVendu;
+	}
 	
 	
 	

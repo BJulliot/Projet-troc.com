@@ -79,7 +79,10 @@ public class ArticlesVendusManager {
 	public List<ArticleVendu> selectEnchereTermine(int idUser) throws Exception{
 		return articleVenduDAO.selectEnchereTermine(idUser);
 	}
-
+	
+	public List<ArticleVendu> selectEnchereGagnee(int idUser) throws Exception{
+		return articleVenduDAO.selectEnchereGagne(idUser);
+	}
 	public void update(ArticleVendu articleAModifier, Retrait retrait, String motDePasseSaisi)
 			throws BusinessException {
 		BusinessException be = new BusinessException();
