@@ -48,9 +48,8 @@ public class ModifierUtilisateurServlet extends HttpServlet {
 		// modifierUtilisateur.jsp
 		request.setCharacterEncoding("UTF-8");
 		int noUtilisateur = utilisateur.getNoUtilisateur();
-		System.out.println("numero utilisateur : " + noUtilisateur);
 		String ancienPseudo = utilisateur.getPseudo();
-		String pseudo = request.getParameter("pseudo");
+		String nouveauPseudo = request.getParameter("pseudo");
 		String nom = request.getParameter("nom");
 		String prenom = request.getParameter("prenom");
 		String email = request.getParameter("email");
@@ -65,11 +64,11 @@ public class ModifierUtilisateurServlet extends HttpServlet {
 		
 		try {
 			UtilisateursManager um = UtilisateursManager.getInstance();
-			um.update(noUtilisateur, ancienPseudo, pseudo, nom, prenom, email, telephone, rue, codePostal, ville,
+			um.update(noUtilisateur, ancienPseudo, nouveauPseudo, nom, prenom, email, telephone, rue, codePostal, ville,
 					ancienMotDePasse, nouveauMotDePasse, confirmationMotDePasse);
 			
 			// on set les nouvelles infos à l'utilisateur en session :
-			utilisateur.setPseudo(pseudo);
+			utilisateur.setPseudo(nouveauPseudo);
 			utilisateur.setNom(nom);
 			utilisateur.setPrenom(prenom);
 			utilisateur.setEmail(email);

@@ -133,7 +133,6 @@ public class UtilisateurImpl implements UtilisateurDAO {
 
 			if (rs.next()) {
 				result = rs.getString("mot_de_passe");
-				System.out.println("ancien mot de passe en BDD : " + result);
 				return result;
 			} else {
 				// Utilisateur non trouv�

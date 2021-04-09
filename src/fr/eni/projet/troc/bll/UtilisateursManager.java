@@ -61,12 +61,12 @@ public class UtilisateursManager {
 		return utilisateurDAO.selectEnchereByPseudo(idArticle);
 	}
 
-	public void update(int noUtilisateur, String ancienPseudo, String pseudo, String nom, String prenom, String email,
+	public void update(int noUtilisateur, String ancienPseudo, String nouveauPseudo, String nom, String prenom, String email,
 			String telephone, String rue, String codePostal, String ville, String ancienMotDePasse,
 			String nouveauMotDePasse, String confirmationMotDePasse) throws BusinessException {
 		BusinessException be = new BusinessException();
 
-		validerPseudo(pseudo, be);
+		validerPseudo(nouveauPseudo, be);
 		validerNom(nom, be);
 		validerPrenom(prenom, be);
 		validerEmail(email, be);
@@ -81,14 +81,14 @@ public class UtilisateursManager {
 			isNouveauMotDePasseDifferent(ancienMotDePasse, nouveauMotDePasse, be);
 		}
 
-		isPseudoUniqueUpdate(ancienPseudo, pseudo, be);
+		isPseudoUniqueUpdate(nouveauPseudo, ancienPseudo, be);
 
 		if (!be.hasErreurs()) {
 			if ((nouveauMotDePasse.equals(""))) {
-				utilisateurDAO.update(noUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville,
+				utilisateurDAO.update(noUtilisateur, nouveauPseudo, nom, prenom, email, telephone, rue, codePostal, ville,
 						ancienMotDePasse);
 			} else if (!(nouveauMotDePasse.equals(""))) {
-				utilisateurDAO.update(noUtilisateur, pseudo, nom, prenom, email, telephone, rue, codePostal, ville,
+				utilisateurDAO.update(noUtilisateur, nouveauPseudo, nom, prenom, email, telephone, rue, codePostal, ville,
 						nouveauMotDePasse);
 			}
 		} else {
@@ -234,11 +234,11 @@ public class UtilisateursManager {
 		}
 	}
 
-	private boolean isPseudoUniqueUpdate(String pseudo, String ancienPseudo, BusinessException be)
+	private boolean isPseudoUniqueUpdate(String nouveauPseudo, String ancienPseudo, BusinessException be)
 			throws BusinessException {
-		if (pseudo.equals(ancienPseudo)) {
+		if (nouveauPseudo.equals(ancienPseudo)) {
 			return true;
-		} else if (!utilisateurDAO.isPseudoUnique(pseudo)) {
+		} else if (!utilisateurDAO.isPseudoUnique(nouveauPseudo)) {
 
 			be.addError(Errors.REGLE_UTILISATEUR_PSEUDO_ALREADY_IN_DB_ERREUR);
 			return false;
